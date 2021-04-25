@@ -2,8 +2,10 @@ package eapli.base.domain;
 
 import eapli.framework.domain.model.ValueObject;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Numero implements ValueObject, Serializable, Comparable<Numero> {
 
     private int numero;
@@ -12,10 +14,6 @@ public class Numero implements ValueObject, Serializable, Comparable<Numero> {
 
     public Numero(int numero){
         this.numero=numero;
-    }
-
-    public int Numero(){
-        return this.numero;
     }
 
     @Override

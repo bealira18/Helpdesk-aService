@@ -21,10 +21,17 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     private String localResidencia;
     private boolean ativo;
     private boolean serHumano;
+    private Passe passe;
+    private Email email;
+    private PerfilColaborador perfilColaborador;
+    private Funcao funcao;
+    private Motivo motivo;
+    private Contacto contacto;
 
     protected Colaborador(){}
 
-    public Colaborador(int numero,String nomeCurto,String nomeCompleto,Date dataNascimento,String localResidencia,boolean serHumano){
+    public Colaborador(int numero,String nomeCurto,String nomeCompleto,Date dataNascimento,String localResidencia,boolean serHumano,
+                       String passe,String email,String perfilColaborador,String funcao,String motivo,long contacto){
         this.numero=new Numero(numero);
         this.nomeCurto=nomeCurto;
         this.nomeCompleto=nomeCompleto;
@@ -32,6 +39,12 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         this.localResidencia=localResidencia;
         this.serHumano=serHumano;
         this.ativo=true;
+        this.passe=new Passe(passe);
+        this.email=new Email(email);
+        this.perfilColaborador=new PerfilColaborador(perfilColaborador);
+        this.funcao=new Funcao(funcao);
+        this.motivo=new Motivo(motivo);
+        this.contacto=new Contacto(contacto);
     }
 
     @Override

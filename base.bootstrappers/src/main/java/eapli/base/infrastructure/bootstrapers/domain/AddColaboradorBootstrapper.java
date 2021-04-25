@@ -28,9 +28,9 @@ public class AddColaboradorBootstrapper implements Action {
         }
 
         repository= PersistenceContext.repositories().colaborador();
-        Colaborador colaborador1=new Colaborador(36,"Bea","Beatriz Lira",d1,"Gaia",true);
-        Colaborador colaborador2=new Colaborador(6,"Ze","José Pereira",d2,"Porto",true);
-        Colaborador colaborador3=new Colaborador(8,"Pedro","Pedro Morais",d3,"Matosinhos",true);
+        Colaborador colaborador1=new Colaborador(36,"Bea","Beatriz Lira",d1,"Gaia",true,"ola","ui@","idk","idk","idk",181823L);
+        Colaborador colaborador2=new Colaborador(6,"Ze","José Pereira",d2,"Porto",true,"oi","oi@","idk","idk","idk",1815343L);
+        Colaborador colaborador3=new Colaborador(8,"Pedro","Pedro Morais",d3,"Matosinhos",true,"ai","ai@","idk","idk","idk",180923L);
         repository.save(colaborador1);
         repository.save(colaborador2);
         repository.save(colaborador3);
