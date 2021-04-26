@@ -6,6 +6,4 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 public interface ColaboradorRepository extends DomainRepository<Numero, Colaborador> {
 
-
-
 }
