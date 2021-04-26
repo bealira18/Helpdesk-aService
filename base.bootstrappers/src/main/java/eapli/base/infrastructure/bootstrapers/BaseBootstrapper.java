@@ -23,9 +23,7 @@
  */
 package eapli.base.infrastructure.bootstrapers;
 
-import eapli.base.infrastructure.bootstrapers.domain.AddCatalogoBootstrapper;
-import eapli.base.infrastructure.bootstrapers.domain.AddColaboradorBootstrapper;
-import eapli.base.infrastructure.bootstrapers.domain.AddEquipaBootstrapper;
+import eapli.base.infrastructure.bootstrapers.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,7 +65,9 @@ public class BaseBootstrapper implements Action {
         final Action[] actions = { new MasterUsersBootstrapper(),
         new AddColaboradorBootstrapper(),
         new AddCatalogoBootstrapper(),
-        new AddEquipaBootstrapper()};
+        new AddEquipaBootstrapper(),
+        new AddPedidoBootstrapper(),
+        new AddServicoBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();

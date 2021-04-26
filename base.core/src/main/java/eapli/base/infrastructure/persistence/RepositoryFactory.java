@@ -6,9 +6,8 @@ package eapli.base.infrastructure.persistence;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
-import eapli.base.repositories.CatalogoRepository;
-import eapli.base.repositories.ColaboradorRepository;
-import eapli.base.repositories.EquipaRepository;
+import eapli.base.domain.Pedido;
+import eapli.base.repositories.*;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 
@@ -71,4 +70,6 @@ public interface RepositoryFactory {
 	ColaboradorRepository colaborador();
 	CatalogoRepository catalogo();
 	EquipaRepository equipa();
+	PedidoRepository pedido();
+	ServicoRepository servico();
 }
