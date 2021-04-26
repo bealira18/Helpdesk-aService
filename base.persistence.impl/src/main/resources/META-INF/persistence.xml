@@ -19,6 +19,7 @@
     <class>eapli.base.domain.Equipa</class>
     <class>eapli.base.domain.Pedido</class>
     <class>eapli.base.domain.Servico</class>
+    <class>eapli.base.domain.NivelCriticidade</class>
 
     <properties>
        <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>-->

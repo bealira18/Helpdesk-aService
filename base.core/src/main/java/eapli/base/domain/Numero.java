@@ -10,7 +10,7 @@ public class Numero implements ValueObject, Serializable, Comparable<Numero> {
 
     private int numero;
 
-    protected Numero(){}
+    public Numero(){}
 
     public Numero(int numero){
         this.numero=numero;

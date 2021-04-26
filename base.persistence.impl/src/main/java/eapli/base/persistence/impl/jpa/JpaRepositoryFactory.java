@@ -71,6 +71,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	public ServicoRepository servico() {
 		return new JpaServicoRepository();
 	}
+        
+        @Override
+	public NivelCriticidadeRepository nivelCriticidade() {
+		return new JpaNivelCriticidadeRepository();
+	}
 
 	@Override
 	public TransactionalContext newTransactionalContext() {
