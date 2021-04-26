@@ -25,4 +25,6 @@ public class Numero implements ValueObject, Serializable, Comparable<Numero> {
     public String toString() {
         return "numero= "+numero;
     }
+
+
 }

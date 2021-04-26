@@ -3,7 +3,9 @@ package eapli.base.persistence.impl.jpa;
 import eapli.base.Application;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.repositories.CatalogoRepository;
 import eapli.base.repositories.ColaboradorRepository;
+import eapli.base.repositories.EquipaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.JpaAutoTxUserRepository;
@@ -52,6 +54,15 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 		return new JpaColaboradorRepository();
 	}
 
+	@Override
+	public CatalogoRepository catalogo() {
+		return new JpaCatalogoRepository();
+	}
+
+	@Override
+	public EquipaRepository equipa() {
+		return new JpaEquipaRepository();
+	}
 
 	@Override
 	public TransactionalContext newTransactionalContext() {

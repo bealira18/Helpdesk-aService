@@ -4,7 +4,9 @@ import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
+import eapli.base.repositories.CatalogoRepository;
 import eapli.base.repositories.ColaboradorRepository;
+import eapli.base.repositories.EquipaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;
@@ -49,6 +51,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
 	@Override
 	public ColaboradorRepository colaborador() {
+		return null;
+	}
+
+	@Override
+	public CatalogoRepository catalogo() {
+		return null;
+	}
+
+	@Override
+	public EquipaRepository equipa() {
 		return null;
 	}
 
