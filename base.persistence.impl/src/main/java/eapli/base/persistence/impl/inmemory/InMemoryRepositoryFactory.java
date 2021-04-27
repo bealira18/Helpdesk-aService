@@ -76,6 +76,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	public NivelCriticidadeRepository nivelCriticidade() {
 		return null;
 	}
+        
+        @Override
+	public TarefaRepository tarefa() {
+		return null;
+	}
+        
+        @Override
+	public FormularioRepository formulario() {
+		return null;
+	}
 
 	@Override
 	public SignupRequestRepository signupRequests(final TransactionalContext tx) {

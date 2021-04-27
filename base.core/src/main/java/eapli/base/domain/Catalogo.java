@@ -1,7 +1,6 @@
 package eapli.base.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
-import eapli.framework.domain.model.ValueObject;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

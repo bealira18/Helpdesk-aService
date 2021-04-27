@@ -1,7 +1,6 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
 import eapli.base.domain.Catalogo;
-import eapli.base.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.repositories.CatalogoRepository;
 import eapli.framework.actions.Action;

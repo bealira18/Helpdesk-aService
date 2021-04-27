@@ -73,4 +73,6 @@ public interface RepositoryFactory {
 	PedidoRepository pedido();
 	ServicoRepository servico();
         NivelCriticidadeRepository nivelCriticidade();
+        TarefaRepository tarefa();
+        FormularioRepository formulario();
 }

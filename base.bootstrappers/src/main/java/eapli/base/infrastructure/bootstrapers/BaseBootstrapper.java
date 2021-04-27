@@ -68,7 +68,9 @@ public class BaseBootstrapper implements Action {
         new AddEquipaBootstrapper(),
         new AddPedidoBootstrapper(),
         new AddServicoBootstrapper(),
-        new AddNivelCriticidadeBootstrapper()};
+        new AddNivelCriticidadeBootstrapper(),
+        new AddTarefaBootstrapper(),
+        new AddFormularioBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();
