@@ -1,8 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Formulario;
+import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.FormularioRepository;
+import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.framework.actions.Action;
 
 public class AddFormularioBootstrapper implements Action{

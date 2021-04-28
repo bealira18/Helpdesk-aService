@@ -14,14 +14,14 @@
     <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
 
 
-    <class>eapli.base.domain.Colaborador</class>
-    <class>eapli.base.domain.Catalogo</class>
-    <class>eapli.base.domain.Equipa</class>
-    <class>eapli.base.domain.Pedido</class>
-    <class>eapli.base.domain.Servico</class>
-    <class>eapli.base.domain.NivelCriticidade</class>
-    <class>eapli.base.domain.Tarefa</class>
-    <class>eapli.base.domain.Formulario</class>
+    <class>eapli.base.colaboradormanagement.domain.Colaborador</class>
+    <class>eapli.base.catalogomanagement.domain.Catalogo</class>
+    <class>eapli.base.equipamanagement.domain.Equipa</class>
+    <class>eapli.base.pedidomanagement.domain.Pedido</class>
+    <class>eapli.base.servicomanagement.domain.Servico</class>
+    <class>eapli.base.nivelcriticidademanagement.domain.NivelCriticidade</class>
+    <class>eapli.base.tarefamanagement.domain.Tarefa</class>
+    <class>eapli.base.formulariomanagement.domain.Formulario</class>
 
     <properties>
        <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/base"/>-->

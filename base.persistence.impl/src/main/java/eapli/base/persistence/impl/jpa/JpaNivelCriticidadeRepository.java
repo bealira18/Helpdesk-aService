@@ -5,8 +5,8 @@
  */
 package eapli.base.persistence.impl.jpa;
 
-import eapli.base.domain.NivelCriticidade;
-import eapli.base.repositories.NivelCriticidadeRepository;
+import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
+import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.framework.domain.repositories.DomainRepository;
 
 /**

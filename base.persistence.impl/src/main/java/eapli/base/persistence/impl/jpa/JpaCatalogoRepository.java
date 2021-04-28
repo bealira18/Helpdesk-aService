@@ -1,7 +1,7 @@
 package eapli.base.persistence.impl.jpa;
 
-import eapli.base.domain.Catalogo;
-import eapli.base.repositories.CatalogoRepository;
+import eapli.base.catalogomanagement.domain.Catalogo;
+import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.framework.domain.repositories.DomainRepository;
 
 public class JpaCatalogoRepository extends BasepaRepositoryBase<Catalogo, Integer, Integer> implements DomainRepository<Integer, Catalogo>, CatalogoRepository {

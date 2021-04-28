@@ -1,9 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Equipa;
-import eapli.base.domain.Servico;
+import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.ServicoRepository;
+import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.framework.actions.Action;
 
 public class AddServicoBootstrapper implements Action {

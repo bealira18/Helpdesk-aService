@@ -1,13 +1,9 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Catalogo;
+import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.CatalogoRepository;
+import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.framework.actions.Action;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class AddCatalogoBootstrapper implements Action {
 

@@ -1,8 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Colaborador;
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.ColaboradorRepository;
+import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.framework.actions.Action;
 
 import java.text.ParseException;

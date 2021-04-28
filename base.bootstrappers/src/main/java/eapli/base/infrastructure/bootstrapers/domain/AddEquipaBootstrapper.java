@@ -1,8 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Equipa;
+import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.EquipaRepository;
+import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.framework.actions.Action;
 
 public class AddEquipaBootstrapper implements Action {

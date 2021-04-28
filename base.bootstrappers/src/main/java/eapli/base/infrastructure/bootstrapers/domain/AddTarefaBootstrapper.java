@@ -1,9 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Pedido;
-import eapli.base.domain.Tarefa;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.TarefaRepository;
+import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.actions.Action;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

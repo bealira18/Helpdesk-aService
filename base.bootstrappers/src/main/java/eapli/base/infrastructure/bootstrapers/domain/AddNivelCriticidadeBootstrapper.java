@@ -5,9 +5,9 @@
  */
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.NivelCriticidade;
+import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.NivelCriticidadeRepository;
+import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.framework.actions.Action;
 
 /**

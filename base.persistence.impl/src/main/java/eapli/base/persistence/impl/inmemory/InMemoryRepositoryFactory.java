@@ -1,10 +1,17 @@
 package eapli.base.persistence.impl.inmemory;
 
+import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
+import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
+import eapli.base.equipamanagement.repository.EquipaRepository;
+import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
-import eapli.base.repositories.*;
+import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
+import eapli.base.pedidomanagement.repository.PedidoRepository;
+import eapli.base.servicomanagement.repository.ServicoRepository;
+import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.InMemoryUserRepository;

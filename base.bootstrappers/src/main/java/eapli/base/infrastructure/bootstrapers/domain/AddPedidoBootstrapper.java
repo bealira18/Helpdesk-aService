@@ -1,8 +1,8 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.domain.Pedido;
+import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.repositories.PedidoRepository;
+import eapli.base.pedidomanagement.repository.PedidoRepository;
 import eapli.framework.actions.Action;
 
 import java.text.ParseException;
