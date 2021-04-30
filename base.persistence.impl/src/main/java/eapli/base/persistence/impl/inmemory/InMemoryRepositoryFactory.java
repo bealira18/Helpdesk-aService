@@ -62,72 +62,72 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 
 	@Override
 	public ColaboradorRepository colaborador() {
-		return null;
+		return new InMemoryColaboradorRepository();
 	}
 
 	@Override
 	public CatalogoRepository catalogo() {
-		return null;
+		return new InMemoryCatalogoRepository();
 	}
 
 	@Override
 	public EquipaRepository equipa() {
-		return null;
+		return new InMemoryEquipaRepository();
 	}
 
 	@Override
 	public PedidoRepository pedido() {
-		return null;
+		return new InMemoryPedidoRepository();
 	}
 
 	@Override
 	public ServicoRepository servico() {
-		return null;
+		return new InMemoryServicoRepository();
 	}
         
         @Override
 	public NivelCriticidadeRepository nivelCriticidade() {
-		return null;
+		return new InMemoryNivelCriticidadeRepository();
 	}
         
         @Override
 	public TarefaRepository tarefa() {
-		return null;
+		return new InMemoryTarefaRepository();
 	}
         
         @Override
 	public FormularioRepository formulario() {
-		return null;
+		return new InMemoryFormularioRepository();
 	}
 
 	@Override
 	public CriteriosEspecificacaoRepository criteriosEspecificacao() {
-		return null;
+		return new InMemoryCriteriosEspecificacaoRepository();
 	}
 
 	@Override
 	public AtributoRepository atributo() {
-		return null;
+		return new InMemoryAtributoRepository();
 	}
 
 	@Override
 	public RascunhoRepository rascunho() {
-		return null;
+		return new InMemoryRascunhoRepository();
 	}
 
 	@Override
 	public HistoricoRepository historico() {
-		return null;
+		return new InMemoryHistoricoRepository();
 	}
 
 	@Override
 	public WorkflowRepository workflow() {
-		return null;
+		return new InMemoryWorkflowRepository();
 	}
 
 	@Override
 	public TipoEquipaRepository tipoEquipa() {
-		return null;
+		return new InMemoryTipoEquipaRepository();
 	}
 
 	@Override
