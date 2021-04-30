@@ -70,7 +70,13 @@ public class BaseBootstrapper implements Action {
         new AddServicoBootstrapper(),
         new AddNivelCriticidadeBootstrapper(),
         new AddTarefaBootstrapper(),
-        new AddFormularioBootstrapper()};
+        new AddFormularioBootstrapper(),
+        new AddCriteriosEspecificacaoBootstrapper(),
+        new AddAtributoBootstrapper(),
+        new AddRascunhoBootstrapper(),
+        new AddWorkflowBootstrapper(),
+        new AddHistoricoBootstrapper(),
+        new AddTipoEquipaBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();

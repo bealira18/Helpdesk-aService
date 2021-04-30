@@ -4,15 +4,21 @@
 package eapli.base.infrastructure.persistence;
 
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
+import eapli.base.catalogomanagement.repository.CriteriosEspecificacaoRepository;
 import eapli.base.clientusermanagement.repositories.ClientUserRepository;
 
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.repository.EquipaRepository;
+import eapli.base.equipamanagement.repository.TipoEquipaRepository;
+import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
+import eapli.base.pedidomanagement.repository.RascunhoRepository;
+import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
+import eapli.base.servicomanagement.repository.WorkflowRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -78,7 +84,13 @@ public interface RepositoryFactory {
 	EquipaRepository equipa();
 	PedidoRepository pedido();
 	ServicoRepository servico();
-        NivelCriticidadeRepository nivelCriticidade();
-        TarefaRepository tarefa();
-        FormularioRepository formulario();
+	NivelCriticidadeRepository nivelCriticidade();
+	TarefaRepository tarefa();
+	FormularioRepository formulario();
+	CriteriosEspecificacaoRepository criteriosEspecificacao();
+	AtributoRepository atributo();
+	RascunhoRepository rascunho();
+	WorkflowRepository workflow();
+	HistoricoRepository historico();
+	TipoEquipaRepository tipoEquipa();
 }

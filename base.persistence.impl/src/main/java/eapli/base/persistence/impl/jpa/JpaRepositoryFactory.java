@@ -1,15 +1,21 @@
 package eapli.base.persistence.impl.jpa;
 
 import eapli.base.Application;
+import eapli.base.catalogomanagement.repository.CriteriosEspecificacaoRepository;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.repository.EquipaRepository;
+import eapli.base.equipamanagement.repository.TipoEquipaRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
+import eapli.base.pedidomanagement.repository.RascunhoRepository;
+import eapli.base.pedidomanagement.repository.HistoricoRepository;
+import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
+import eapli.base.servicomanagement.repository.WorkflowRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -92,6 +98,36 @@ public class JpaRepositoryFactory implements RepositoryFactory {
          @Override
 	public FormularioRepository formulario() {
 		return new JpaFormularioRepository();
+	}
+
+	@Override
+	public CriteriosEspecificacaoRepository criteriosEspecificacao() {
+		return new JpaCriteriosEspecificacaoRepository();
+	}
+
+	@Override
+	public AtributoRepository atributo() {
+		return new JpaAtributoRepository();
+	}
+
+	@Override
+	public RascunhoRepository rascunho() {
+		return new JpaRascunhoRepository();
+	}
+
+	@Override
+	public HistoricoRepository historico() {
+		return new JpaHistoricoRepository();
+	}
+
+	@Override
+	public WorkflowRepository workflow() {
+		return new JpaWorkflowRepository();
+	}
+
+	@Override
+	public TipoEquipaRepository tipoEquipa() {
+		return new JpaTipoEquipaRepository();
 	}
 
 	@Override

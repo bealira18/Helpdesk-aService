@@ -1,17 +1,18 @@
 package eapli.base.pedidomanagement.domain;
 
 import eapli.base.colaboradormanagement.domain.Numero;
-import eapli.base.pedidomanagement.domain.EstadoPedido;
-import eapli.base.pedidomanagement.domain.Feedback;
-import eapli.base.pedidomanagement.domain.Urgencia;
+import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Rascunho implements Serializable {
+@Entity
+public class Rascunho implements AggregateRoot<Integer>, Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPedido;
     @Temporal(TemporalType.DATE)
     private Date dataLimite;
     private Urgencia urgencia;
@@ -27,5 +28,15 @@ public class Rascunho implements Serializable {
         this.estadoPedido = new EstadoPedido(estadoPedido);
         this.feedback = new Feedback(feedback);
         this.numero = new Numero(numero);
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        return false;
+    }
+
+    @Override
+    public Integer identity() {
+        return null;
     }
 }
