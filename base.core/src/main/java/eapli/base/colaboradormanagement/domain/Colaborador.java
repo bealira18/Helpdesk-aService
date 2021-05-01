@@ -48,7 +48,7 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
     private Equipa equipa;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "colaborador_numero")
     private List<Tarefa> tarefas = new ArrayList<>();
 
     protected Colaborador(){}

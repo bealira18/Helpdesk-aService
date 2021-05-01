@@ -1,6 +1,8 @@
 package eapli.base.equipamanagement.domain;
 
+import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -20,6 +22,16 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @ManyToMany(mappedBy = "", cascade = CascadeType.ALL)
     @JoinTable
     private List<Colaborador> colaboradores = new ArrayList<>();
+
+    @OneToOne
+    private CriteriosEspecificacao criteriosEspecificacao;
+
+    @OneToOne
+    private TipoEquipa tipoEquipa;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Tarefa> tarefas = new ArrayList<>();
 
     protected Equipa(){}
 

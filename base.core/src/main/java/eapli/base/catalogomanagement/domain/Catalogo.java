@@ -1,13 +1,15 @@
 package eapli.base.catalogomanagement.domain;
 
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.colaboradormanagement.domain.Numero;
+import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
+import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Catalogo implements AggregateRoot<Integer>, Serializable {
@@ -21,6 +23,21 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     private boolean ativo;
     private Numero numero;
     private Icone icone;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private List<Colaborador> colaboradores = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<CriteriosEspecificacao> criterios = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Servico> servicos = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private NivelCriticidade nivelCriticidade;
 
     protected Catalogo(){}
 

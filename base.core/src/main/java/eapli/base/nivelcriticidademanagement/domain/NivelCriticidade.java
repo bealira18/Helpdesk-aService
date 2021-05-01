@@ -1,12 +1,11 @@
 package eapli.base.nivelcriticidademanagement.domain;
 
+import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
@@ -21,6 +20,9 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
     private int tempoMaximoR;
     private Valor valor;
     private Etiqueta etiqueta;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Tarefa tarefa;
 
     protected NivelCriticidade() {
     }

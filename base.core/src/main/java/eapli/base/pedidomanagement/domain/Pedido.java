@@ -1,12 +1,17 @@
 package eapli.base.pedidomanagement.domain;
 
 import eapli.base.colaboradormanagement.domain.Numero;
+import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.servicomanagement.domain.Workflow;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Pedido implements AggregateRoot<Integer>, Serializable {
@@ -26,6 +31,20 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private Feedback feedback;
     private Numero numero;
     Calendar c = Calendar.getInstance();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Servico> servicos = new ArrayList<>();
+
+    @OneToOne
+    private Rascunho rascunho;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Formulario> formularios = new ArrayList<>();
+
+    @OneToOne
+    private Workflow workflow;
 
     protected Pedido(){}
 

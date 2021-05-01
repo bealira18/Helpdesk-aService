@@ -4,10 +4,9 @@ import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
 import eapli.framework.domain.model.AggregateRoot;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class Formulario implements AggregateRoot<Integer>, Serializable {
@@ -17,6 +16,10 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     private int id;
     private String nome;
     private Etiqueta etiqueta;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Atributo> atributos = new ArrayList<>();
     
     protected Formulario(){}
     

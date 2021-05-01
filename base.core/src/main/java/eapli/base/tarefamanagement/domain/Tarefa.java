@@ -1,16 +1,15 @@
 package eapli.base.tarefamanagement.domain;
 
+import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.nivelcriticidademanagement.domain.Tempo;
+import eapli.base.pedidomanagement.domain.Pedido;
+import eapli.base.servicomanagement.domain.Workflow;
 import eapli.framework.domain.model.AggregateRoot;
+import org.hibernate.annotations.JoinColumnOrFormula;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 public class Tarefa implements AggregateRoot<Integer>, Serializable {
@@ -25,6 +24,17 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private EstadoTarefa estadoTarefa;
     private int tempo; //Tempo
     private Prioridade prioridade;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Pedido pedido;
+
+    @OneToOne
+    private Formulario formulario;
+
+    @ManyToOne
+    @JoinColumn
+    private Workflow workflow;
     
     protected Tarefa(){}
     
