@@ -1,12 +1,12 @@
 package eapli.base.equipamanagement.domain;
 
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Equipa implements AggregateRoot<Integer>, Serializable {
@@ -16,6 +16,10 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     private int id;
     private String acronimo;
     private String designacao;
+
+    @ManyToMany(mappedBy = "", cascade = CascadeType.ALL)
+    @JoinTable
+    private List<Colaborador> colaboradores = new ArrayList<>();
 
     protected Equipa(){}
 

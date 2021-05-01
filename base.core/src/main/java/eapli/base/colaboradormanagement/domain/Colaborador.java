@@ -1,16 +1,20 @@
 package eapli.base.colaboradormanagement.domain;
 
+import eapli.base.equipamanagement.domain.Equipa;
+import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.pedidomanagement.domain.Pedido;
+import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Colaborador implements AggregateRoot<Numero>, Serializable {
+public class  Colaborador implements AggregateRoot<Numero>, Serializable {
 
     @Id
     private Numero numero;
@@ -27,6 +31,25 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     private Funcao funcao;
     private Motivo motivo;
     private Contacto contacto;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Servico servico;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pedido pedido;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pedido pedido1;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Formulario formulario;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Equipa equipa;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Tarefa> tarefas = new ArrayList<>();
 
     protected Colaborador(){}
 
