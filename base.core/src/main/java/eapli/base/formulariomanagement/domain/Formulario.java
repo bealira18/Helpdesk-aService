@@ -1,6 +1,5 @@
 package eapli.base.formulariomanagement.domain;
 
-import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
 import eapli.framework.domain.model.AggregateRoot;
 
 import java.io.Serializable;
@@ -15,7 +14,6 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
-    private Etiqueta etiqueta;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -25,7 +23,6 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     
     public Formulario(String nome, String etiqueta){
         this.nome=nome;
-        this.etiqueta= new Etiqueta(etiqueta);
     }
 
     @Override

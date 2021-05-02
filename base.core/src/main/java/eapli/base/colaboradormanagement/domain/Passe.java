@@ -1,6 +1,7 @@
 package eapli.base.colaboradormanagement.domain;
 
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -10,10 +11,38 @@ public class Passe implements ValueObject, Serializable, Comparable<Passe>{
 
     private String passe;
 
-    protected Passe(){}
+    protected Passe(){
+    }
 
-    public Passe(String passe) {
-        this.passe = passe;
+    public Passe(final String passe){
+        Preconditions.nonNull(passe);
+        if(!passeCumpreRequisitos(passe))
+            throw new IllegalArgumentException("Passe inválida");
+        this.passe=passe;
+    }
+
+    public boolean passeCumpreRequisitos(String passe){
+        boolean hasDigit = false;
+        boolean hasUpper = false;
+        boolean hasLower = false;
+        char[] chars = passe.toCharArray();
+        for(char c : chars) {
+            if (Character.isDigit(c)) {
+                hasDigit = true;
+            }
+            if (Character.isLowerCase(c)) {
+                hasLower = true;
+            }
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            }
+        }
+        if (hasDigit == true && hasLower == true && hasUpper == true){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override

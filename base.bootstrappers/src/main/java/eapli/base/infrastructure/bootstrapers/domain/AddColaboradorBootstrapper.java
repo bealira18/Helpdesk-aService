@@ -15,22 +15,11 @@ public class AddColaboradorBootstrapper implements Action {
 
     @Override
     public boolean execute() {
-        SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
-        Date d1=new Date();
-        Date d2=new Date();
-        Date d3=new Date();
-        try {
-            d1=forma.parse("18/05/2001");
-            d2=forma.parse("03/09/2006");
-            d3=forma.parse("25/11/1998");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         repository= PersistenceContext.repositories().colaborador();
-        Colaborador colaborador1=new Colaborador(36,"Bea","Beatriz Lira",d1,"Gaia",true,"ola","ui@","idk","idk","idk",181823L);
-        Colaborador colaborador2=new Colaborador(6,"Ze","José Pereira",d2,"Porto",true,"oi","oi@","idk","idk","idk",1815343L);
-        Colaborador colaborador3=new Colaborador(8,"Pedro","Pedro Morais",d3,"Matosinhos",true,"ai","ai@","idk","idk","idk",180923L);
+        Colaborador colaborador1=new Colaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"Ola56789","ui@","idk","idk","idk",181823L);
+        Colaborador colaborador2=new Colaborador(6,"Ze","José Pereira",new Date(2006/9/03),"Porto",true,"Oi123456","oi@","idk","idk","idk",1815343L);
+        Colaborador colaborador3=new Colaborador(8,"Pedro","Pedro Morais",new Date(1998/11/25),"Matosinhos",true,"Ai9qwerty","ai@","idk","idk","idk",180923L);
         repository.save(colaborador1);
         repository.save(colaborador2);
         repository.save(colaborador3);

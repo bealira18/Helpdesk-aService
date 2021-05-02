@@ -1,12 +1,17 @@
 package eapli.base.colaboradormanagement.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.ValueObject;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Embeddable
-public class PerfilColaborador implements ValueObject, Serializable, Comparable<PerfilColaborador>{
+@Entity
+public class PerfilColaborador implements Serializable, AggregateRoot<Integer> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String perfil;
 
     protected PerfilColaborador(){}
@@ -16,12 +21,12 @@ public class PerfilColaborador implements ValueObject, Serializable, Comparable<
     }
 
     @Override
-    public int compareTo(PerfilColaborador o) {
-        return 0;
+    public boolean sameAs(Object other) {
+        return false;
     }
 
     @Override
-    public String toString() {
-        return "Perfil: "+perfil;
+    public Integer identity() {
+        return null;
     }
 }

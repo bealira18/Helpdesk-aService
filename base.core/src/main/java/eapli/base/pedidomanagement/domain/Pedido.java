@@ -53,8 +53,8 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
         this.dataFim=null;
-        this.urgencia=new Urgencia(urgencia);
-        this.estadoPedido=new EstadoPedido("em aprovação");
+        this.urgencia=Urgencia.REDUZIDA;
+        this.estadoPedido=EstadoPedido.EM_APROVACAO;
         this.feedback=new Feedback(feedback);
         this.numero=new Numero(numero);
     }

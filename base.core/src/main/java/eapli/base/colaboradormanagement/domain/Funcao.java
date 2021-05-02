@@ -1,6 +1,7 @@
 package eapli.base.colaboradormanagement.domain;
 
 import eapli.framework.domain.model.ValueObject;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -9,10 +10,12 @@ import java.io.Serializable;
 public class Funcao implements ValueObject, Serializable, Comparable<Funcao>{
     private String funcao;
 
-    protected Funcao(){}
+    protected Funcao(){
+    }
 
-    public Funcao(String funcao) {
-        this.funcao = funcao;
+    public Funcao(final String funcao){
+        Preconditions.nonNull(funcao);
+        this.funcao=funcao;
     }
 
     @Override

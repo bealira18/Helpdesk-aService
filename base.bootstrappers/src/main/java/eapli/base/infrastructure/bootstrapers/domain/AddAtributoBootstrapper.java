@@ -13,9 +13,9 @@ public class AddAtributoBootstrapper implements Action {
     public boolean execute() {
 
         repository = PersistenceContext.repositories().atributo();
-        Atributo atributo1 = new Atributo("oi", "io", "xau", "uax");
-        Atributo atributo2 = new Atributo("ui", "iu", "ei", "ie");
-        Atributo atributo3 = new Atributo("ei", "ie", "benfica", "porto");
+        Atributo atributo1 = new Atributo("oi", "io", "xau", "String");
+        Atributo atributo2 = new Atributo("ui", "iu", "ei", "Integer");
+        Atributo atributo3 = new Atributo("ei", "ie", "benfica", "Float");
         repository.save(atributo1);
         repository.save(atributo2);
         repository.save(atributo3);

@@ -24,8 +24,8 @@ public class Rascunho implements AggregateRoot<Integer>, Serializable {
 
     public Rascunho(Date dataLimite, String urgencia, String estadoPedido, int feedback, int numero){
         this.dataLimite = dataLimite;
-        this.urgencia = new Urgencia(urgencia);
-        this.estadoPedido = new EstadoPedido(estadoPedido);
+        this.urgencia = Urgencia.REDUZIDA;
+        this.estadoPedido = null;
         this.feedback = new Feedback(feedback);
         this.numero = new Numero(numero);
     }

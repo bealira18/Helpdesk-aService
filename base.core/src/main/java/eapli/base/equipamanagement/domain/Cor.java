@@ -23,8 +23,6 @@ public class Cor implements ValueObject, Serializable, Comparable<Cor> {
 
     @Override
     public String toString() {
-        return "Cor{" +
-                "cor='" + cor + '\'' +
-                '}';
+        return "Cor= " + cor;
     }
 }
