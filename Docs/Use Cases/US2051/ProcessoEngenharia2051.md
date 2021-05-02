@@ -41,7 +41,7 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarCol
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Colaborador instance = new Colaborador(null,null,null,null,null,null,null,null,null,null,null,null);
+		Colaborador instance = new Colaborador(0,null,null,null,null,false,null,null,null,null,null,0);
 	}
 
 **Teste 2:** Verificar que não é possível criar uma instância da classe Colaborador com nenhum valor nulos.
