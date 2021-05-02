@@ -7,6 +7,8 @@ import eapli.framework.validations.Preconditions;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Embeddable
 public class Email implements ValueObject, Serializable, Comparable<Email>{
@@ -19,7 +21,7 @@ public class Email implements ValueObject, Serializable, Comparable<Email>{
 
     public Email(final String email){
         Preconditions.nonNull(email);
-        if(!email.contains("@"))
+        if(!verificaEmail(email))
             throw new IllegalArgumentException("Email inválido");
         this.email=email;
     }
@@ -50,4 +52,17 @@ public class Email implements ValueObject, Serializable, Comparable<Email>{
     public String toString() {
         return "Email: "+email;
     }
+
+    public boolean verificaEmail(String email){
+
+        Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+        Matcher mat = pattern.matcher(email);
+
+        if(mat.matches())
+            return true;
+        else
+            return false;
+
+    }
+
 }
