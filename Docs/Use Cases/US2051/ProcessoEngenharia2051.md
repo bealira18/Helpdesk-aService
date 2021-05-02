@@ -35,14 +35,20 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarCol
 
 *Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
 
-## 3.4. Testes 
-*Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
+## 3.4. Testes
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar que não é possível criar uma instância da classe Colaborador com todos os valores nulos.
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
+		Colaborador instance = new Colaborador(null,null,null,null,null,null,null,null,null,null,null,null);
+	}
+
+**Teste 2:** Verificar que não é possível criar uma instância da classe Colaborador com nenhum valor nulos.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Colaborador instance=new Colaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"Ola56789","ui@gmail.com",null,"idk","idk",181823L);
 	}
 
 # 4. Implementação
