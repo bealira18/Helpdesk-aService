@@ -7,6 +7,8 @@ import eapli.framework.validations.Preconditions;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Embeddable
 public class Contacto implements ValueObject, Serializable, Comparable<Contacto> {
@@ -18,6 +20,8 @@ public class Contacto implements ValueObject, Serializable, Comparable<Contacto>
     public Contacto(long contacto) {
         Preconditions.nonNull(contacto);
         Preconditions.nonNegative(contacto);
+        if(!verificaContacto(contacto))
+            throw new IllegalArgumentException("Contacto inválido");
         this.contacto = contacto;
     }
 
@@ -46,6 +50,18 @@ public class Contacto implements ValueObject, Serializable, Comparable<Contacto>
             return 1;
         }
         return -1;
+    }
+
+    public boolean verificaContacto(Long contacto){
+
+        Pattern p = Pattern.compile("9(1/2/3/6)[0-9]{7}");
+
+        // Pattern class contains matcher() method
+        // to find matching between given number
+        // and regular expression
+        Matcher m = p.matcher(contacto.toString());
+        return (m.find() && m.group().equals(contacto.toString()));
+
     }
 
     @Override

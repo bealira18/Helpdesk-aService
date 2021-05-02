@@ -27,6 +27,7 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
     private boolean serHumano;
     private Passe passe;
     private Email email;
+    //private PerfilColaborador perfilColaborador;
     private Funcao funcao;
     private Motivo motivo;
     private Contacto contacto;
@@ -64,7 +65,7 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
         this.passe=new Passe(passe);
         this.email=new Email(email);
         this.funcao=new Funcao(funcao);
-        this.motivo=new Motivo(motivo);
+        this.motivo=null;
         this.contacto=new Contacto(contacto);
     }
 

@@ -1,19 +1,18 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
+import eapli.base.colaboradormanagement.application.AdicionarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.framework.actions.Action;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddColaboradorBootstrapper implements Action {
 
-    ColaboradorRepository repository;
+    //ColaboradorRepository repository;
 
-    @Override
+    /*@Override
     public boolean execute() {
 
         repository= PersistenceContext.repositories().colaborador();
@@ -24,6 +23,17 @@ public class AddColaboradorBootstrapper implements Action {
         repository.save(colaborador2);
         repository.save(colaborador3);
         return false;
+    }*/
+
+    private final AdicionarColaboradorController controller=new AdicionarColaboradorController();
+
+    @Override
+    public boolean execute() {
+
+        controller.adicionarColaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"ui@gmail.com","idk","idk",181823L);
+        controller.adicionarColaborador(8,"Pedro","Pedro Morais",new Date(1998/11/25),"Matosinhos",true,"ai@isep.ipp.pt","idk","idk",180923L);
+
+        return true;
     }
 
 }

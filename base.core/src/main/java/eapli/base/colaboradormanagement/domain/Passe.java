@@ -16,7 +16,7 @@ public class Passe implements ValueObject, Serializable, Comparable<Passe>{
 
     public Passe(final String passe){
         Preconditions.nonNull(passe);
-        if(!passeCumpreRequisitos(passe))
+        if(!passeCumpreRequisitos(passe) || passe.toCharArray().length<8)
             throw new IllegalArgumentException("Passe inválida");
         this.passe=passe;
     }

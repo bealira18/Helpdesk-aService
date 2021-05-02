@@ -16,7 +16,6 @@ public class Motivo implements ValueObject, Serializable, Comparable<Motivo> {
     }
 
     public Motivo(final String motivo){
-        Preconditions.nonNull(motivo);
         this.motivo=motivo;
     }
 
