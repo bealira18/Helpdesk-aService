@@ -48,7 +48,7 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarCol
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Colaborador instance=new Colaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"Ola56789","ui@gmail.com",null,"idk","idk",181823L);
+		Colaborador instance=new Colaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"Ola56789",null,"idk","idk","idk",181823L);
 	}
 
 # 4. Implementação
