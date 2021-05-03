@@ -13,9 +13,9 @@ public class AddTipoEquipaBootstrapper implements Action {
     public boolean execute() {
 
         repository= PersistenceContext.repositories().tipoEquipa();
-        TipoEquipa te1=new TipoEquipa("abc","sei la");
-        TipoEquipa te2=new TipoEquipa("def","tambem nao sei");
-        TipoEquipa te3=new TipoEquipa("idk","idk");
+        TipoEquipa te1=new TipoEquipa("abc","#123456");
+        TipoEquipa te2=new TipoEquipa("def","#654321");
+        TipoEquipa te3=new TipoEquipa("idk","#qwerty");
         repository.save(te1);
         repository.save(te2);
         repository.save(te3);

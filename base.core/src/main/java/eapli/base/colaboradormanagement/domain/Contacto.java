@@ -20,7 +20,7 @@ public class Contacto implements ValueObject, Serializable, Comparable<Contacto>
     public Contacto(long contacto) {
         Preconditions.nonNull(contacto);
         Preconditions.nonNegative(contacto);
-        if(!verificaContacto(contacto))
+        if(verificaContacto(contacto))
             throw new IllegalArgumentException("Contacto inválido");
         this.contacto = contacto;
     }

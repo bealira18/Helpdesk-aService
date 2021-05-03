@@ -27,8 +27,8 @@ public class ColaboradorBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.adicionarColaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"ui@gmail.com","idk","idk",181823L);
-        controller.adicionarColaborador(8,"Pedro","Pedro Morais",new Date(1998/11/25),"Matosinhos",true,"ai@isep.ipp.pt","idk","idk",180923L);
+        controller.adicionarColaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"ui@gmail.com","idk","idk",919191991L);
+        controller.adicionarColaborador(8,"Pedro","Pedro Morais",new Date(1998/11/25),"Matosinhos",true,"ai@isep.ipp.pt","idk","idk",939393939L);
 
         return true;
     }
