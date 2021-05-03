@@ -52,7 +52,11 @@ Nada a declarar.
 
 # 5. Integração/Demonstração
 
+Como esta a funcionalidade bloqueia a implementação de outras funcionalidades, foi tratada com elevada prioridade para permitir o avanço dessas funcionalidades.
+
 # 6. Observações
+
+Nada a observar.
 
 
 
