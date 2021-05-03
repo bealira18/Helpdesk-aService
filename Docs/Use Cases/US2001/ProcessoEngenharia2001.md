@@ -7,8 +7,6 @@
 **Demo1**
 Como Gestor de Serviços de Help desk (GSH), eu pretendo criar um novo catálogo de serviços.
 
-**Demo1** Como {Ator} pretendo...
-
 Demo1.1. Adicionar catálogo
 
 Demo1.2. Editar catálogo
@@ -25,19 +23,15 @@ A interpretação feita deste requisito foi no sentido de criar uma forma de car
 
 # 3. Design
 
-Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de catálogo de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
+A forma encontrada para resolver este problema foi criar uma classe AdicionarCatalogoUI que faz uso do AdicionarCatalogoController para criar instâncias de forma a garantir as regras de negócio dadas pelo cliente.
 
 ## 3.1. Realização da Funcionalidade
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
+![AdicionarCatalogoSD](AdicionarCatalogoSD.jpg)
 
 ## 3.2. Diagrama de Classes
 
-*Nesta secção deve apresentar e descrever as principais classes envolvidas na realização da funcionalidade.*
-
-## 3.3. Padrões Aplicados
-
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
+![AdicionarCatalogoCD](AdicionarCatalogoCD.jpg)
 
 ## 3.4. Testes 
 *Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
