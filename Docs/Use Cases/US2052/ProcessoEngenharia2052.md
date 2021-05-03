@@ -20,22 +20,31 @@ Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir
 
 # 3. Design
 
+A forma encontrada para resolver este problema foi criar uma classe CriarEquipaUI que faz uso do CriarEquipaController para criar instâncias de forma a garantir as regras de negócio dadas pelo cliente.
+
 ## 3.1. Realização da Funcionalidade
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
+![CriarEquipa_SD](CriarEquipa_SD.jpg)
 
 ## 3.2. Diagrama de Classes
 
-*Nesta secção deve apresentar e descrever as principais classes envolvidas na realização da funcionalidade.*
-
-## 3.3. Padrões Aplicados
-
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
+![CriarEquipa_CD](CriarEquipa_CD.jpg)
 
 ## 3.4. Testes
+**Teste 1:** Verificar que não é possível criar uma instância da classe Equipa com todos os valores nulos.
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com todos os valores nulos.
+	@Test(expected = IllegalArgumentException.class)
+    public void nullEmTodosParametros() {
+        Equipa instance = new Equipa(null, null);
+    }
 
+**Teste 2:** Verificar que não é possível criar uma instância da classe Equipa com qualquer valor nulo.
+
+@Test(expected = IllegalArgumentException.class)
+    public void nullNumParametro() {
+        Equipa instance = new Equipa("nao null", null);
+        Equipa instance2 = new Equipa(null, "nao null");
+    }
 
 # 4. Implementação
 
