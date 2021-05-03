@@ -40,7 +40,7 @@ A forma encontrada para resolver este problema foi criar uma classe CriarEquipaU
 
 **Teste 2:** Verificar que não é possível criar uma instância da classe Equipa com qualquer valor nulo.
 
-@Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
     public void nullNumParametro() {
         Equipa instance = new Equipa("nao null", null);
         Equipa instance2 = new Equipa(null, "nao null");
