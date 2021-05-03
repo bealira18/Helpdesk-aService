@@ -1,14 +1,11 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
 import eapli.base.colaboradormanagement.application.AdicionarColaboradorController;
-import eapli.base.colaboradormanagement.domain.Colaborador;
-import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.framework.actions.Action;
 
 import java.util.Date;
 
-public class AddColaboradorBootstrapper implements Action {
+public class ColaboradorBootstrapper implements Action {
 
     //ColaboradorRepository repository;
 
@@ -37,3 +34,5 @@ public class AddColaboradorBootstrapper implements Action {
     }
 
 }
+
+

@@ -63,9 +63,9 @@ public class BaseBootstrapper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         final Action[] actions = { new MasterUsersBootstrapper(),
-        new AddColaboradorBootstrapper(),
+        new ColaboradorBootstrapper(),
         new AddCatalogoBootstrapper(),
-        new AddEquipaBootstrapper(),
+        new EquipaBootstrapper(),
         new AddPedidoBootstrapper(),
         new AddServicoBootstrapper(),
         new AddNivelCriticidadeBootstrapper(),

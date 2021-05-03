@@ -48,6 +48,7 @@ A forma encontrada para resolver este problema foi criar uma classe CriarEquipaU
 
 # 4. Implementação
 
+Nada a declarar.
 
 # 5. Integração/Demonstração
 

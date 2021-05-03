@@ -16,8 +16,8 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String acronimo;
-    private String designacao;
+    private Acronimo acronimo;
+    private Designacao designacao;
 
     @ManyToMany(mappedBy = "", cascade = CascadeType.ALL)
     @JoinTable
@@ -33,11 +33,12 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @JoinColumn
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    protected Equipa(){}
+    protected Equipa() {
+    }
 
-    public Equipa(String acronimo,String designacao){
-        this.acronimo=acronimo;
-        this.designacao=designacao;
+    public Equipa(String acronimo, String designacao) {
+        this.acronimo = new Acronimo(acronimo);
+        this.designacao = new Designacao(designacao);
     }
 
     @Override
