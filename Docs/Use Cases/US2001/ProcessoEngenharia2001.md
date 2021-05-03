@@ -56,11 +56,11 @@ Nada a declarar.
 
 # 5. Integração/Demonstração
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
+Sendo esta uma das funcionalidades com mais prioridade foi das primeiras a ser desenvolvida para que se possa dar seguimento às restantes.
 
 # 6. Observações
 
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
+Nada a observar.
 
 
 
