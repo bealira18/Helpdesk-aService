@@ -17,9 +17,9 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String titulo;
-    private String descricaoBreve;
-    private String descricaoCompleta;
+    private Titulo titulo;
+    private DescricaoBreve descricaoBreve;
+    private DescricaoCompleta descricaoCompleta;
     private boolean ativo;
     private Numero numero;
     private Icone icone;
@@ -42,12 +42,20 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     protected Catalogo(){}
 
     public Catalogo(String titulo,String descricaoBreve,String descricaoCompleta,int numero, String icone){
-        this.titulo=titulo;
-        this.descricaoBreve=descricaoBreve;
-        this.descricaoCompleta=descricaoCompleta;
+        this.titulo=new Titulo(titulo);
+        this.descricaoBreve=new DescricaoBreve(descricaoBreve);
+        this.descricaoCompleta=new DescricaoCompleta(descricaoCompleta);
         this.numero=new Numero(numero);
         this.icone=new Icone(icone);
         this.ativo=true;
+    }
+
+    @Override
+    public String toString() {
+        return "Catalogo{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                '}';
     }
 
     @Override

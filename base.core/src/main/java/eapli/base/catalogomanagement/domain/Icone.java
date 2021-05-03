@@ -6,6 +6,8 @@ import eapli.framework.validations.Preconditions;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Embeddable
 public class Icone implements ValueObject, Serializable, Comparable<Icone> {

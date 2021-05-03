@@ -70,6 +70,13 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Colaborador:\n" +
+                "numero= " + numero +
+                "\nnomeCurto= " + nomeCurto;
+    }
+
+    @Override
     public boolean sameAs(Object other) {
         return false;
     }

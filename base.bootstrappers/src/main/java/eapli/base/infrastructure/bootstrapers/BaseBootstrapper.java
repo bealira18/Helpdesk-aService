@@ -64,7 +64,7 @@ public class BaseBootstrapper implements Action {
         // declare bootstrap actions
         final Action[] actions = { new MasterUsersBootstrapper(),
         new ColaboradorBootstrapper(),
-        new AddCatalogoBootstrapper(),
+        new CatalogoBootstrapper(),
         new EquipaBootstrapper(),
         new AddPedidoBootstrapper(),
         new AddServicoBootstrapper(),
