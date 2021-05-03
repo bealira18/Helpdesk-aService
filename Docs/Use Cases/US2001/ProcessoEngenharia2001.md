@@ -1,20 +1,21 @@
-# USDemo1
+# Adicionar Catalogo
 =======================================
 
 
 # 1. Requisitos
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
-
-*Exemplo*
+**Demo1**
+Como Gestor de Serviços de Help desk (GSH), eu pretendo criar um novo catálogo de serviços.
 
 **Demo1** Como {Ator} pretendo...
 
-- Demo1.1. Blá Blá Blá ...
+Demo1.1. Adicionar catálogo
 
-- Demo1.2. Blá Blá Blá ...
+Demo1.2. Editar catálogo
 
-A interpretação feita deste requisito foi no sentido de ...
+Demo1.3. Remover catálogo
+
+A interpretação feita deste requisito foi no sentido de criar uma forma de carregar para a base de dados a informação dos catálogos. Para além disso, também é possível editar os seus dados e remover um catálogo, bem como consultar a informação sempre que necessário.
 
 # 2. Análise
 
@@ -24,9 +25,7 @@ A interpretação feita deste requisito foi no sentido de ...
 
 # 3. Design
 
-*Nesta secção a equipa deve descrever o design adotado para satisfazer a funcionalidade. Entre outros, a equipa deve apresentar diagrama(s) de realização da funcionalidade, diagrama(s) de classes, identificação de padrões aplicados e quais foram os principais testes especificados para validar a funcionalidade.*
-
-*Para além das secções sugeridas, podem ser incluídas outras.*
+Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de catálogo de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
 
 ## 3.1. Realização da Funcionalidade
 
