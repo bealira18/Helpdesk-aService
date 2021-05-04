@@ -50,4 +50,12 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     public Integer identity() {
         return null;
     }
+
+    public List<Colaborador> colaboradores(){
+        return colaboradores;
+    }
+
+    public void addColaborador(Colaborador colaborador){
+        colaboradores.add(colaborador);
+    }
 }

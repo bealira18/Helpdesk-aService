@@ -6,13 +6,13 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 
 public class CriarEquipaController {
 
-    private final EquipaRepository colaboradorRepository = PersistenceContext.repositories().equipa();
+    private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
 
     public Equipa criarEquipa(String acronimo, String designacao) {
 
         final Equipa novaEquipa = new Equipa(acronimo, designacao);
 
-        return colaboradorRepository.save(novaEquipa);
+        return equipaRepository.save(novaEquipa);
 
     }
 
