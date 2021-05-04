@@ -74,6 +74,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.numero = numero;
     }
 
+    public void mudarEstado(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @Override
     public String toString() {
         return "Catalogo:\n" +

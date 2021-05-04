@@ -2,6 +2,7 @@ package eapli.base.infrastructure.bootstrapers.domain;
 
 import eapli.base.catalogomanagement.application.AdicionarCatalogoController;
 import eapli.base.catalogomanagement.application.EditarCatalogoController;
+import eapli.base.catalogomanagement.application.RemoverCatalogoController;
 import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.colaboradormanagement.application.AdicionarColaboradorController;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -13,7 +14,8 @@ import java.util.Date;
 public class CatalogoBootstrapper implements Action {
 
     private final AdicionarCatalogoController addController=new AdicionarCatalogoController();
-    private final EditarCatalogoController editarController=new EditarCatalogoController();
+    //private final EditarCatalogoController editarController=new EditarCatalogoController();
+    //private final RemoverCatalogoController removerController=new RemoverCatalogoController();
 
     @Override
     public boolean execute() {
@@ -22,6 +24,7 @@ public class CatalogoBootstrapper implements Action {
         addController.adicionarCatalogo("Catalogo2","breve catalogo 2","descricao completa catalogo 2, deve ter muitos carateres, espero que isto chegue",36,"catalogo2.jpg");
 
         //editarController.mudarTitulo("Catalogo2","Catalogo8");
+        //removerController.removerCatalogo("Catalogo2");
 
         return true;
     }
