@@ -33,19 +33,23 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarCol
 
 ## 3.4. Testes
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Colaborador com todos os valores nulos.
+**Teste 1:** Verificar se o colaborador foi associado à equipa.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Colaborador instance = new Colaborador(0,null,null,null,null,false,null,null,null,null,null,0);
-	}
-
-**Teste 2:** Verificar que não é possível criar uma instância da classe Colaborador com nenhum valor nulos.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Colaborador instance=new Colaborador(36,"Bea","Beatriz Lira",new Date(2001/05/18),"Gaia",true,"Ola56789",null,"idk","idk","idk",181823L);
-	}
+	@Test
+    public void associarColaboradorAEquipa(){
+        Equipa equipa1 = new Equipa("kdk", "s");
+        Colaborador colab1 = new Colaborador(122, "as", "kmkm", new Date(2001/05/18), "wedd", true,"sriuf8F", "dkdsdf@gmail.com", "oi", "ok", "ok", 91812 );
+        AssociarColaboradorAEquipaController acec = new AssociarColaboradorAEquipaController();
+        boolean expected = acec.associarColaboradorAEquipa(equipa1, colab1);
+        boolean result = false;
+        for (Colaborador colab : equipa1.colaboradores()){
+            if (colab.equals(colab1)){
+                result = true;
+                break;
+            }
+        }
+        assertEquals(expected, result);
+    }
 
 # 4. Implementação
 
