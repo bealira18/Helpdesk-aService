@@ -50,12 +50,35 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.ativo=true;
     }
 
+    public Titulo obterTitulo() {
+        return titulo;
+    }
+
+    public void mudarTitulo(Titulo titulo) {
+        this.titulo = titulo;
+    }
+
+    public void mudarDescricaoBreve(DescricaoBreve descricaoBreve) {
+        this.descricaoBreve = descricaoBreve;
+    }
+
+    public void mudarDescricaoCompleta(DescricaoCompleta descricaoCompleta) {
+        this.descricaoCompleta = descricaoCompleta;
+    }
+
+    public void mudarIcone(Icone icone) {
+        this.icone = icone;
+    }
+
+    public void mudarColaboradorResponsavel(Numero numero) {
+        this.numero = numero;
+    }
+
     @Override
     public String toString() {
-        return "Catalogo{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                '}';
+        return "Catalogo:\n" +
+                "id= " + id +
+                "\ntitulo=" + titulo;
     }
 
     @Override

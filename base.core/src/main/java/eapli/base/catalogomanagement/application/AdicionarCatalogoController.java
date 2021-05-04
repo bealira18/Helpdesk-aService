@@ -13,7 +13,7 @@ public class AdicionarCatalogoController {
 
     public Catalogo adicionarCatalogo(String titulo,String descricaoBreve,String descricaoCompleta,int numero, String icone){
 
-        if(!procurarColaboradorPorNumero(numero))
+        if(!verificarColaborador(numero))
             throw new IllegalArgumentException("Colaborador inválido com numero: "+numero);
 
         final Catalogo novoCatalogo=new Catalogo(titulo,descricaoBreve,descricaoCompleta,numero,icone);
@@ -22,7 +22,7 @@ public class AdicionarCatalogoController {
 
     }
 
-    public boolean procurarColaboradorPorNumero(int numero){
+    public boolean verificarColaborador(int numero){
 
         if(colaboradorRepository.ofIdentity(new Numero(numero)).isEmpty())
             return false;
