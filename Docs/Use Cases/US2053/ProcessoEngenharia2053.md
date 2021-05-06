@@ -30,14 +30,24 @@ A forma encontrada para resolver este problema foi criar uma classe AssociarCola
 ![AssociarColaboradorAEquipa_CD](AssociarColaboradorAEquipa_CD.jpg)
 
 ## 3.4. Testes 
-*Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar se o colaborador foi associado à equipa.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+	@Test
+    public void associarColaboradorAEquipa(){
+        Equipa equipa1 = new Equipa("kdk", "s");
+        Colaborador colab1 = new Colaborador(122, "as", "kmkm", new Date(2001/05/18), "wedd", true,"sriuf8F", "dkdsdf@gmail.com", "oi", "ok", "ok", 91812 );
+        AssociarColaboradorAEquipaController acec = new AssociarColaboradorAEquipaController();
+        boolean expected = acec.associarColaboradorAEquipa(equipa1, colab1);
+        boolean result = false;
+        for (Colaborador colab : equipa1.colaboradores()){
+            if (colab.equals(colab1)){
+                result = true;
+                break;
+            }
+        }
+        assertEquals(expected, result);
+    }
 
 # 4. Implementação
 
