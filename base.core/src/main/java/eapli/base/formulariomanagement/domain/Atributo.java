@@ -14,18 +14,25 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    //fazer com que nome seja unico
     private String nome;
+    private String etiqueta;
     private String descricao;
     private String expressaoRegular;
     private TipoDadosBase tipoDadosBase;
 
     protected Atributo(){}
 
-    public Atributo(String nome, String descricao, String expressaoRegular, String tipoDadosBase){
+    public Atributo(String nome, String etiqueta, String descricao, String expressaoRegular, String tipoDadosBase){
         this.nome = nome;
+        this.etiqueta=etiqueta;
         this.descricao = descricao;
         this.expressaoRegular = expressaoRegular;
         this.tipoDadosBase = new TipoDadosBase(tipoDadosBase);
+    }
+
+    public int compareTo(String nome) {
+        return this.nome.compareTo(nome);
     }
 
     @Override
