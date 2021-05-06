@@ -42,4 +42,8 @@ public class Acronimo implements ValueObject, Serializable, Comparable<Acronimo>
             return false;
 
     }
+
+    public String stringAcronimo(){
+        return acronimo;
+    }
 }

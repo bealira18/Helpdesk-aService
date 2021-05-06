@@ -8,12 +8,12 @@ import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import java.util.Optional;
 
-public class AssociarColaboradorAEquipaController {
+public class RemoverColaboradorDeEquipaController {
 
     private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
     private final ColaboradorRepository colaboradorRepository= PersistenceContext.repositories().colaborador();
 
-    public void associarColaboradorAEquipa(String acronimo, int numero){
+    public void removerColaboradorDeEquipa(String acronimo, int numero){
         Optional<Colaborador> colaborador = colaboradorRepository.ofIdentity(new Numero(numero));
         if(colaborador.isEmpty()){
             throw new IllegalArgumentException("Não existe nenhum colaborador com o numero: " + numero);
@@ -29,17 +29,15 @@ public class AssociarColaboradorAEquipaController {
         if(equipa1 == null){
             throw new IllegalArgumentException("Não existe nenhuma equipa com o acrónimo: " + acronimo);
         }
-        associarColaboradorAEquipa(equipa1, colab1);
+        removerColaboradorDeEquipa(equipa1, colab1);
     }
 
-    public Equipa associarColaboradorAEquipa(Equipa equipa, Colaborador colaborador) {
+    public Equipa removerColaboradorDeEquipa(Equipa equipa, Colaborador colaborador) {
 
-        equipa.addColaborador(colaborador);
+        equipa.removeColaborador(colaborador);
 
         return equipaRepository.save(equipa);
 
     }
 
 }
-
-// falta a verificação do tipo de equipa, preciso que o francisco acabe a parte dele.

@@ -58,4 +58,12 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     public void addColaborador(Colaborador colaborador){
         colaboradores.add(colaborador);
     }
+
+    public Acronimo acronimo(){
+        return acronimo;
+    }
+
+    public void removeColaborador(Colaborador colaborador) {
+        colaboradores.remove(colaborador);
+    }
 }
