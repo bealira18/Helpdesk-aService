@@ -51,19 +51,27 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
         return null;
     }
 
-    public List<Colaborador> colaboradores(){
+    public List<Colaborador> colaboradores() {
         return colaboradores;
     }
 
-    public void addColaborador(Colaborador colaborador){
+    public void addColaborador(Colaborador colaborador) {
         colaboradores.add(colaborador);
     }
 
-    public Acronimo acronimo(){
+    public Acronimo acronimo() {
         return acronimo;
     }
 
     public void removeColaborador(Colaborador colaborador) {
         colaboradores.remove(colaborador);
+    }
+
+    public void mudarAcronimo(Acronimo acronimo) {
+        this.acronimo = acronimo;
+    }
+
+    public void mudarDesignacao(Designacao designacao) {
+        this.designacao = designacao;
     }
 }

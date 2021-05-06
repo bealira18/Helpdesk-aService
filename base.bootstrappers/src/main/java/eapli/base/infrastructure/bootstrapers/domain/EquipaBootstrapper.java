@@ -3,6 +3,7 @@ package eapli.base.infrastructure.bootstrapers.domain;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.application.AssociarColaboradorAEquipaController;
 import eapli.base.equipamanagement.application.CriarEquipaController;
+import eapli.base.equipamanagement.application.EditarEquipaController;
 import eapli.base.equipamanagement.application.RemoverColaboradorDeEquipaController;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -15,6 +16,7 @@ public class EquipaBootstrapper implements Action {
     private final RemoverColaboradorDeEquipaController rcec = new RemoverColaboradorDeEquipaController();
     private final ColaboradorRepository colaboradorRepository= PersistenceContext.repositories().colaborador();
     private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
+    //private final EditarEquipaController editarController=new EditarEquipaController();
 
 
     @Override
@@ -25,6 +27,7 @@ public class EquipaBootstrapper implements Action {
         acec.associarColaboradorAEquipa("EDC", 8);
         acec.associarColaboradorAEquipa("EDF", 36);
         //rcec.removerColaboradorDeEquipa("EDC", 8);
+        //editarController.mudarAcronimo("EDF","EDP");
         
         return true;
     }
