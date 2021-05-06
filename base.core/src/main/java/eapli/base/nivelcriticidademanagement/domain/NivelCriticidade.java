@@ -35,7 +35,7 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
         this.tempoMedioR = t.getTempoMedioR();
         this.tempoMaximoR = t.getTempoMaximoR();
         this.valor= new Valor(valor);
-        this.etiqueta= Etiqueta.MEDIA;
+        this.etiqueta= new Etiqueta(etiqueta);
 
     }
 

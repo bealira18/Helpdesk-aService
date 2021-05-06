@@ -24,6 +24,10 @@ public class Tempo implements ValueObject, Serializable, Comparable<Tempo> {
         Preconditions.nonNull(tempoMedioR);
         Preconditions.nonNull(tempoMaximoA);
         Preconditions.nonNull(tempoMaximoR);
+        Preconditions.nonNegative(tempoMedioA);
+        Preconditions.nonNegative(tempoMedioR);
+        Preconditions.nonNegative(tempoMaximoA);
+        Preconditions.nonNegative(tempoMaximoR);
         this.tempoMedioA=tempoMedioA;
         this.tempoMaximoA=tempoMaximoA;
         this.tempoMedioR=tempoMedioR;
