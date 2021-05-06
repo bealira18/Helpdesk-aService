@@ -21,8 +21,16 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     
     protected Formulario(){}
     
-    public Formulario(String nome, String etiqueta){
+    public Formulario(String nome){
         this.nome=nome;
+    }
+
+    public int compareTo(String nome) {
+        return this.nome.compareTo(nome);
+    }
+
+    public void addAtributo(Atributo atributo){
+        atributos.add(atributo);
     }
 
     @Override
