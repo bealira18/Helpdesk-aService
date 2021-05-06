@@ -1,26 +1,23 @@
-# USDemo1
+# Adicionar Tipo de Equipa
 =======================================
 
 
 # 1. Requisitos
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
+**Demo1**
+Como RRH, eu pretendo registar um novo tipo de equipa.
 
-*Exemplo*
+Demo1.1. Adicionar tipo de equipa
 
-**Demo1** Como {Ator} pretendo...
+Demo1.2. Editar tipo de equipa
 
-- Demo1.1. Blá Blá Blá ...
+Demo1.3. Remover tipo de equipa
 
-- Demo1.2. Blá Blá Blá ...
-
-A interpretação feita deste requisito foi no sentido de ...
+A interpretação feita deste requisito foi no sentido de criar uma forma de carregar para a base de dados a informação dos tipos de equipa. Para além disso, também é possível editar os seus dados e remover um tipo de equipa, bem como consultar a informação sempre que necessário.
 
 # 2. Análise
 
-*Neste secção a equipa deve relatar o estudo/análise/comparação que fez com o intuito de tomar as melhores opções de design para a funcionalidade bem como aplicar diagramas/artefactos de análise adequados.*
-
-*Recomenda-se que organize este conteúdo por subsecções.*
+Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de tipo de equipa de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
 
 # 3. Design
 
