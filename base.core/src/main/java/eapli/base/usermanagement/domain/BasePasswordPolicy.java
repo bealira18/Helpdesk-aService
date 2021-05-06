@@ -43,7 +43,7 @@ public class BasePasswordPolicy implements PasswordPolicy {
     /*
      * (non-Javadoc)
      *
-     * @see eapli.framework.infrastructure.authz.domain.model.PasswordPolicy#
+     * @see eapli.framework.infrastructure.authz.nivelcriticidademanagement.domain.model.PasswordPolicy#
      * meetsRequeriments(java.lang.String)
      */
     @Override

@@ -6,28 +6,28 @@
     -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-    <class>eapli.framework.infrastructure.authz.domain.model.SystemUser</class>
-    <class>eapli.framework.infrastructure.authz.domain.model.Role</class>
-    <class>eapli.framework.infrastructure.authz.domain.model.RoleSet</class>
-    <class>eapli.framework.infrastructure.authz.domain.model.RoleAssignment</class>
-    <class>eapli.base.clientusermanagement.domain.ClientUser</class>
-    <class>eapli.base.clientusermanagement.domain.SignupRequest</class>
+    <class>eapli.framework.infrastructure.authz.nivelcriticidademanagement.domain.model.SystemUser</class>
+    <class>eapli.framework.infrastructure.authz.nivelcriticidademanagement.domain.model.Role</class>
+    <class>eapli.framework.infrastructure.authz.nivelcriticidademanagement.domain.model.RoleSet</class>
+    <class>eapli.framework.infrastructure.authz.nivelcriticidademanagement.domain.model.RoleAssignment</class>
+    <class>eapli.base.clientusermanagement.nivelcriticidademanagement.domain.ClientUser</class>
+    <class>eapli.base.clientusermanagement.nivelcriticidademanagement.domain.SignupRequest</class>
 
 
-    <class>eapli.base.colaboradormanagement.domain.Colaborador</class>
-    <class>eapli.base.catalogomanagement.domain.Catalogo</class>
-    <class>eapli.base.equipamanagement.domain.Equipa</class>
-    <class>eapli.base.pedidomanagement.domain.Pedido</class>
-    <class>eapli.base.servicomanagement.domain.Servico</class>
-    <class>eapli.base.servicomanagement.domain.Workflow</class>
-    <class>eapli.base.nivelcriticidademanagement.domain.NivelCriticidade</class>
-    <class>eapli.base.tarefamanagement.domain.Tarefa</class>
-    <class>eapli.base.formulariomanagement.domain.Formulario</class>
-    <class>eapli.base.catalogomanagement.domain.CriteriosEspecificacao</class>
-    <class>eapli.base.formulariomanagement.domain.Atributo</class>
-    <class>eapli.base.pedidomanagement.domain.Rascunho</class>
-    <class>eapli.base.pedidomanagement.domain.Historico</class>
-    <class>eapli.base.equipamanagement.domain.TipoEquipa</class>
+    <class>eapli.base.colaboradormanagement.nivelcriticidademanagement.domain.Colaborador</class>
+    <class>eapli.base.catalogomanagement.nivelcriticidademanagement.domain.Catalogo</class>
+    <class>eapli.base.equipamanagement.nivelcriticidademanagement.domain.Equipa</class>
+    <class>eapli.base.pedidomanagement.nivelcriticidademanagement.domain.Pedido</class>
+    <class>eapli.base.servicomanagement.nivelcriticidademanagement.domain.Servico</class>
+    <class>eapli.base.servicomanagement.nivelcriticidademanagement.domain.Workflow</class>
+    <class>eapli.base.nivelcriticidademanagement.nivelcriticidademanagement.domain.NivelCriticidade</class>
+    <class>eapli.base.tarefamanagement.nivelcriticidademanagement.domain.Tarefa</class>
+    <class>eapli.base.formulariomanagement.nivelcriticidademanagement.domain.Formulario</class>
+    <class>eapli.base.catalogomanagement.nivelcriticidademanagement.domain.CriteriosEspecificacao</class>
+    <class>eapli.base.formulariomanagement.nivelcriticidademanagement.domain.Atributo</class>
+    <class>eapli.base.pedidomanagement.nivelcriticidademanagement.domain.Rascunho</class>
+    <class>eapli.base.pedidomanagement.nivelcriticidademanagement.domain.Historico</class>
+    <class>eapli.base.equipamanagement.nivelcriticidademanagement.domain.TipoEquipa</class>
 
 
 

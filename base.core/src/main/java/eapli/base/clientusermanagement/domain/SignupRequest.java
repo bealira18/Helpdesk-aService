@@ -48,7 +48,7 @@ import eapli.framework.validations.Preconditions;
  * <p>
  * It follows a DDD approach where all of its properties are instances of value
  * objects. This approach may seem a little more complex than just having String
- * or native type attributes but provides for real semantic of the domain and
+ * or native type attributes but provides for real semantic of the nivelcriticidademanagement.domain and
  * follows the Single Responsibility Pattern.
  *
  * @author Jorge Santos ajs@isep.ipp.pt
