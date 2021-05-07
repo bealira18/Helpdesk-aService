@@ -13,7 +13,7 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nome;
+    private Nome nome;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -22,11 +22,11 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     protected Formulario(){}
     
     public Formulario(String nome){
-        this.nome=nome;
+        this.nome=new Nome(nome);
     }
 
     public int compareTo(String nome) {
-        return this.nome.compareTo(nome);
+        return this.nome.obterNome().compareTo(nome);
     }
 
     public void addAtributo(Atributo atributo){

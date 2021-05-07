@@ -1,10 +1,13 @@
 package eapli.base.equipamanagement.domain;
 
+import eapli.base.formulariomanagement.domain.Nome;
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Descricao implements ValueObject, Serializable, Comparable<Descricao>{
 
     private String descricao;
@@ -17,6 +20,10 @@ public class Descricao implements ValueObject, Serializable, Comparable<Descrica
             throw new IllegalArgumentException("Descrição inválida");
         }
         this.descricao = descricao;
+    }
+
+    public static Descricao valueOf(final String descricao) {
+        return new Descricao(descricao);
     }
 
     @Override

@@ -1,11 +1,10 @@
 package eapli.base.formulariomanagement.domain;
 
+import eapli.base.equipamanagement.domain.Descricao;
+import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -14,25 +13,25 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //fazer com que nome seja unico
-    private String nome;
-    private String etiqueta;
-    private String descricao;
-    private String expressaoRegular;
+    @Column(unique=true)
+    private Nome nome;
+    private Etiqueta etiqueta;
+    private Descricao descricao;
+    private ExpressaoRegular expressaoRegular;
     private TipoDadosBase tipoDadosBase;
 
     protected Atributo(){}
 
     public Atributo(String nome, String etiqueta, String descricao, String expressaoRegular, String tipoDadosBase){
-        this.nome = nome;
-        this.etiqueta=etiqueta;
-        this.descricao = descricao;
-        this.expressaoRegular = expressaoRegular;
+        this.nome = new Nome(nome);
+        this.etiqueta=new Etiqueta(etiqueta);
+        this.descricao = new Descricao(descricao);
+        this.expressaoRegular = new ExpressaoRegular(expressaoRegular);
         this.tipoDadosBase = new TipoDadosBase(tipoDadosBase);
     }
 
     public int compareTo(String nome) {
-        return this.nome.compareTo(nome);
+        return this.nome.obterNome().compareTo(nome);
     }
 
     @Override

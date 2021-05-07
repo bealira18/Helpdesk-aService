@@ -1,7 +1,6 @@
 package eapli.base.formulariomanagement.application;
 
 import eapli.base.formulariomanagement.domain.Atributo;
-import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 

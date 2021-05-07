@@ -1,13 +1,10 @@
 package eapli.base.formulariomanagement.application;
 
-import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-
-import java.util.List;
 
 public class AdicionarFormularioController {
 
