@@ -43,7 +43,7 @@ import eapli.framework.validations.Preconditions;
 /**
  * the controller for the use case "Accept or refuse signup request"
  *
- * this implementation makes use of nivelcriticidademanagement.domain events to (1) follow the rule that
+ * this implementation makes use of domain events to (1) follow the rule that
  * one controller should only modify one aggregate, and (2) notify other parts
  * of the system to react accordingly. For an alternative transactional approach
  * see {@link AcceptRefuseSignupRequestControllerTxImpl}

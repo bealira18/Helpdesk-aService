@@ -40,7 +40,7 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  * are instances of value objects. A Client User references a System User
  *
  * This approach may seem a little more complex than just having String or
- * native type attributes but provides for real semantic of the nivelcriticidademanagement.domain and
+ * native type attributes but provides for real semantic of the domain and
  * follows the Single Responsibility Pattern
  *
  * @author Jorge Santos ajs@isep.ipp.pt

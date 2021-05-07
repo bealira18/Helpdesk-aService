@@ -73,7 +73,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
      *
      * @see eapli.base.clientusermanagement.application.
      * AcceptRefuseSignupRequestController#acceptSignupRequest(eapli.base.
-     * clientusermanagement.nivelcriticidademanagement.domain.SignupRequest)
+     * clientusermanagement.domain.SignupRequest)
      */
     @Override
     public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
@@ -124,7 +124,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl
      *
      * @see eapli.base.clientusermanagement.application.
      * AcceptRefuseSignupRequestController#refuseSignupRequest(eapli.base.
-     * clientusermanagement.nivelcriticidademanagement.domain.SignupRequest)
+     * clientusermanagement.domain.SignupRequest)
      */
     @Override
     public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest) {

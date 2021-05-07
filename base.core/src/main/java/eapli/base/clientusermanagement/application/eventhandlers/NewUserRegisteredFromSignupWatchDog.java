@@ -37,7 +37,7 @@ public class NewUserRegisteredFromSignupWatchDog implements EventHandler {
      * (non-Javadoc)
      *
      * @see eapli.framework.nivelcriticidademanagement.domain.events.EventHandler#onEvent(eapli.framework.
-     * nivelcriticidademanagement.domain. events.DomainEvent)
+     * domain. events.DomainEvent)
      */
     @Override
     public void onEvent(final DomainEvent domainevent) {
