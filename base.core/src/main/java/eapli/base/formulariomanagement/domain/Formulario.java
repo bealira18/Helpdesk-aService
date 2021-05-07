@@ -33,6 +33,14 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
         atributos.add(atributo);
     }
 
+    public void removeAtributo(Atributo atributo){
+        atributos.remove(atributo);
+    }
+
+    public void mudarNome(Nome nome) {
+        this.nome = nome;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;

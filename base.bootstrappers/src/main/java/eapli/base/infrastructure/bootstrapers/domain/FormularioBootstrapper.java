@@ -2,6 +2,7 @@ package eapli.base.infrastructure.bootstrapers.domain;
 
 import eapli.base.formulariomanagement.application.AdicionarAtributoController;
 import eapli.base.formulariomanagement.application.AdicionarFormularioController;
+import eapli.base.formulariomanagement.application.AssociarAtributoAFormularioController;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ public class FormularioBootstrapper implements Action{
     
     private final AdicionarFormularioController addFormularioController=new AdicionarFormularioController();
     private final AdicionarAtributoController addAtributoController=new AdicionarAtributoController();
+    private final AssociarAtributoAFormularioController associarAtributoAFormularioController=new AssociarAtributoAFormularioController();
 
     /*@Override
     public boolean execute() {
@@ -36,9 +38,9 @@ public class FormularioBootstrapper implements Action{
         addAtributoController.adicionarAtributo("atributo2","etiqueta2","descricao2","expressao regular2","Integer");
         addAtributoController.adicionarAtributo("atributo3","etiqueta3","descricao3","expressao regular3","String");
 
-        addFormularioController.associarAtributoAFormulario("Formulario1","atributo1");
-        addFormularioController.associarAtributoAFormulario("Formulario1","atributo2");
-        addFormularioController.associarAtributoAFormulario("Formulario2","atributo3");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","atributo1");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","atributo2");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario2","atributo3");
 
         return true;
     }

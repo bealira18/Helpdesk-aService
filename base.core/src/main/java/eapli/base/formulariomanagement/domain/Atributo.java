@@ -30,6 +30,26 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
         this.tipoDadosBase = new TipoDadosBase(tipoDadosBase);
     }
 
+    public void mudarNome(Nome nome) {
+        this.nome = nome;
+    }
+
+    public void mudarEtiqueta(Etiqueta etiqueta) {
+        this.etiqueta = etiqueta;
+    }
+
+    public void mudarDescricao(Descricao descricao) {
+        this.descricao = descricao;
+    }
+
+    public void mudarExpressaoRegular(ExpressaoRegular expressaoRegular) {
+        this.expressaoRegular = expressaoRegular;
+    }
+
+    public void mudarTipoDadosBase(TipoDadosBase tipoDadosBase) {
+        this.tipoDadosBase = tipoDadosBase;
+    }
+
     public int compareTo(String nome) {
         return this.nome.obterNome().compareTo(nome);
     }
