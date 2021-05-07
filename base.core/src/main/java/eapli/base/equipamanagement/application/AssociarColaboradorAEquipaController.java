@@ -26,9 +26,17 @@ public class AssociarColaboradorAEquipaController {
                 equipa1 = e;
             }
         }
+        int idTipoEquipa = equipa1.tipoDeEquipa().obterId();
         if(equipa1 == null){
             throw new IllegalArgumentException("Não existe nenhuma equipa com o acrónimo: " + acronimo);
         }
+        //for (Equipa e : equipas){
+        //    if(e.tipoDeEquipa().obterId()==idTipoEquipa){
+        //        if(e.colaboradores().contains(colab1)){
+        //            throw new IllegalArgumentException("O colaborador"+ colab1 +" nao pode ser adicionado a esta equipa porque já pertence a outra equipa do mesmo tipo.");
+        //        }
+        //    }
+        //}
         associarColaboradorAEquipa(equipa1, colab1);
     }
 
@@ -41,5 +49,3 @@ public class AssociarColaboradorAEquipaController {
     }
 
 }
-
-// falta a verificação do tipo de equipa, preciso que o francisco acabe a parte dele.

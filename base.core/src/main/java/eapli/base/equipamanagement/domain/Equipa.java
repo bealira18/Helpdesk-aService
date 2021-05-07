@@ -77,6 +77,10 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
         colaboradores.remove(colaborador);
     }
 
+    public TipoEquipa tipoDeEquipa(){
+        return tipoEquipa;
+    }
+
     public void mudarAcronimo(Acronimo acronimo) {
         this.acronimo = acronimo;
     }

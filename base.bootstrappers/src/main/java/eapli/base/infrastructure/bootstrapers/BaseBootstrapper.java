@@ -66,6 +66,9 @@ public class BaseBootstrapper implements Action {
         new ColaboradorBootstrapper(),
         new CatalogoBootstrapper(),
         new EquipaBootstrapper(),
+        new TipoEquipaBootstrapper(),
+        new AssociarTipoEquipaAEquipaBootstrapper(),
+        new AssociarColaboradorAEquipaBootstrapper(),
         new AddPedidoBootstrapper(),
         new AddServicoBootstrapper(),
         new NivelCriticidadeBootstrapper(),
@@ -74,8 +77,7 @@ public class BaseBootstrapper implements Action {
         new AddCriteriosEspecificacaoBootstrapper(),
         new AddRascunhoBootstrapper(),
         new AddWorkflowBootstrapper(),
-        new AddHistoricoBootstrapper(),
-        new TipoEquipaBootstrapper()};
+        new AddHistoricoBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();

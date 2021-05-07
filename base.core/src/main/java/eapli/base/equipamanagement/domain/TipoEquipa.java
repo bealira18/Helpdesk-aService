@@ -27,6 +27,10 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
         this.cor = new Cor(cor);
     }
 
+    public int obterId(){
+        return id;
+    }
+
     public int compareTo(String nome) {
         return this.nome.obterNome().compareTo(nome);
     }
