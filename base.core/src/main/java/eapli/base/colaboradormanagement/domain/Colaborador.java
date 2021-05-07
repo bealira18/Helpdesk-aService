@@ -91,6 +91,10 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         return this.nomeCompleto;
     }
 
+    public Numero obterNumero(){
+        return numero;
+    }
+
     public void mudarNomeCurto(String nomeCurto) {
         this.nomeCurto = nomeCurto;
     }
@@ -117,5 +121,9 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     
     public void mudarContacto(Contacto contacto) {
         this.contacto = contacto;
+    }
+
+    public void mudarEstado(Boolean bool){
+        this.ativo = bool;
     }
 }

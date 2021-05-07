@@ -25,6 +25,10 @@ public class Numero implements ValueObject, Serializable, Comparable<Numero> {
         return new Numero(numero);
     }
 
+    public int obterNumero(){
+        return numero;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
