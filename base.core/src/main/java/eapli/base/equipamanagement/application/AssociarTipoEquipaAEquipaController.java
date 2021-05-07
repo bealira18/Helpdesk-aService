@@ -6,7 +6,7 @@ import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.equipamanagement.repository.TipoEquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
-public class AssociarTipoEquipaAEquipa {
+public class AssociarTipoEquipaAEquipaController {
 
     private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
     private final TipoEquipaRepository tipoEquipaRepository= PersistenceContext.repositories().tipoEquipa();

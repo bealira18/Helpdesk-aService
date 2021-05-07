@@ -29,9 +29,9 @@ public class AddPedidoBootstrapper implements Action {
         }
 
         repository= PersistenceContext.repositories().pedido();
-        Pedido pedido1=new Pedido(d1,"urgente",5,6);
-        Pedido pedido2=new Pedido(d2,"urgente",5,6);
-        Pedido pedido3=new Pedido(d3,"urgente",5,6);
+        Pedido pedido1=new Pedido(d1,"urgente",5,8);
+        Pedido pedido2=new Pedido(d2,"urgente",5,8);
+        Pedido pedido3=new Pedido(d3,"urgente",5,8);
         repository.save(pedido1);
         repository.save(pedido2);
         repository.save(pedido3);

@@ -1,12 +1,12 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
 
-import eapli.base.equipamanagement.application.AssociarTipoEquipaAEquipa;
+import eapli.base.equipamanagement.application.AssociarTipoEquipaAEquipaController;
 import eapli.framework.actions.Action;
 
 public class AssociarTipoEquipaAEquipaBootstrapper implements Action {
 
-    private final AssociarTipoEquipaAEquipa associarController=new AssociarTipoEquipaAEquipa();
+    private final AssociarTipoEquipaAEquipaController associarController=new AssociarTipoEquipaAEquipaController();
 
     @Override
     public boolean execute() {

@@ -25,10 +25,10 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
         this.cor = new Cor(cor);
     }
 
-<<<<<<< HEAD
-    public int obterId(){
+    public int obterId() {
         return id;
-=======
+    }
+
     public void mudarNome(Nome nome) {
         this.nome = nome;
     }
@@ -39,7 +39,6 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
 
     public void mudarCor(Cor cor) {
         this.cor = cor;
->>>>>>> ef9351a5e87d740870287b5fe07e339e95bc549f
     }
 
     public int compareTo(String nome) {

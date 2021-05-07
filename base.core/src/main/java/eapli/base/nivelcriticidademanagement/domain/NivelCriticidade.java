@@ -21,9 +21,6 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
     private Valor valor;
     private Etiqueta etiqueta;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Tarefa tarefa;
-
     protected NivelCriticidade() {
     }
 

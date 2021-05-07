@@ -4,6 +4,7 @@ import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -29,12 +30,11 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private Urgencia urgencia;
     private EstadoPedido estadoPedido;
     private Feedback feedback;
-    private Numero numero;
+    private Numero solicitante;
     Calendar c = Calendar.getInstance();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Servico> servicos = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Servico servico;
 
     @OneToOne
     private Rascunho rascunho;
@@ -46,9 +46,13 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Workflow workflow;
 
+    @OneToMany
+    @JoinColumn
+    private List<Tarefa> tarefas = new ArrayList<>();
+
     protected Pedido(){}
 
-    public Pedido(Date dataLimite,String urgencia,int feedback,int numero){
+    public Pedido(Date dataLimite,String urgencia,int feedback,int numeroS){
         this.ano=c.getTime().getYear();
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
@@ -56,7 +60,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         this.urgencia=Urgencia.REDUZIDA;
         this.estadoPedido=EstadoPedido.EM_APROVACAO;
         this.feedback=new Feedback(feedback);
-        this.numero=new Numero(numero);
+        this.solicitante=new Numero(numeroS);
     }
 
     @Override

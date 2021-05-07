@@ -1,6 +1,7 @@
 package eapli.base.tarefamanagement.domain;
 
 import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
 import eapli.base.nivelcriticidademanagement.domain.Tempo;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.servicomanagement.domain.Workflow;
@@ -25,16 +26,15 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private int tempo; //Tempo
     private Prioridade prioridade;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Pedido pedido;
-
     @OneToOne
     private Formulario formulario;
 
     @ManyToOne
     @JoinColumn
     private Workflow workflow;
+
+    @OneToOne
+    private NivelCriticidade nivelCriticidade;
     
     protected Tarefa(){}
     
