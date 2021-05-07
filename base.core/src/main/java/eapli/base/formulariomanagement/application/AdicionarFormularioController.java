@@ -19,45 +19,6 @@ public class AdicionarFormularioController {
 
     }
 
-    public Formulario associarAtributoAFormulario(String nomeFormulario,String nomeAtributo){
 
-        Formulario f=verificarFormulario(nomeFormulario);
-        Atributo a=verificarAtributo(nomeAtributo);
-
-        if(f==null)
-            throw new IllegalArgumentException("Formulario inválido com nome: "+nomeFormulario);
-
-        if(a==null)
-            throw new IllegalArgumentException("Atributo inválido com nome: "+nomeAtributo);
-
-        f.addAtributo(a);
-
-        return formularioRepository.save(f);
-
-    }
-
-    public Formulario verificarFormulario(String nomeFormulario){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.compareTo(nomeFormulario)==0)
-                return f;
-        }
-
-        return null;
-    }
-
-    public Atributo verificarAtributo(String nomeAtributo){
-
-        Iterable<Atributo> atributos=atributoRepository.findAll();
-
-        for(Atributo a : atributos){
-            if(a.compareTo(nomeAtributo)==0)
-                return a;
-        }
-
-        return null;
-    }
 
 }
