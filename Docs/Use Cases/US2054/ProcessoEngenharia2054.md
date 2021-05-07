@@ -34,12 +34,20 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarTip
 ## 3.4. Testes 
 *Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar que não é possível criar uma instância da classe TipoEquipa com todos os valores nulos.
 
 	@Test(expected = IllegalArgumentException.class)
 		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
+		TipoEquipa instance = new TipoEquipa(null,null);
 	}
+
+**Teste 2:** Verificar que não é possível criar uma instância da classe TipoEquipa com nenhum valor nulo.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		TipoEquipa instance=new TipoEquipa("descricao",null);
+	}
+
 
 # 4. Implementação
 
