@@ -17,6 +17,7 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private boolean ativo;
+    @Column(unique=true)
     private Acronimo acronimo;
     private Designacao designacao;
 
