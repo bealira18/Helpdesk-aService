@@ -7,12 +7,12 @@ public class TipoEquipaTeste {
 
     @Test(expected = IllegalArgumentException.class)
     public void nullEmTodosParametros() {
-        TipoEquipa instance = new TipoEquipa(null, null);
+        TipoEquipa instance = new TipoEquipa(null, null,null);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void nullNumParametro() {
-        TipoEquipa instance1 = new TipoEquipa("Equipa", null);
-        TipoEquipa instance2 = new TipoEquipa(null, "#000000");
+        TipoEquipa instance1 = new TipoEquipa("Equipa", null,null);
+        TipoEquipa instance2 = new TipoEquipa(null, "#000000",null);
     }
 }

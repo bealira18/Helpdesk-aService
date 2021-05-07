@@ -8,9 +8,9 @@ public class AdicionarTipoEquipaController {
 
     private final TipoEquipaRepository tipoEquipaRepository= PersistenceContext.repositories().tipoEquipa();
 
-    public TipoEquipa adicionarTipoEquipa(String descricao, String cor){
+    public TipoEquipa adicionarTipoEquipa(String nome,String descricao, String cor){
 
-        final TipoEquipa tipoEquipa=new TipoEquipa(descricao,cor);
+        final TipoEquipa tipoEquipa=new TipoEquipa(nome,descricao,cor);
 
         return tipoEquipaRepository.save(tipoEquipa);
 

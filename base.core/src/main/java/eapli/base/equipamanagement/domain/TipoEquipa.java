@@ -1,5 +1,6 @@
 package eapli.base.equipamanagement.domain;
 
+import eapli.base.formulariomanagement.domain.Nome;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.Entity;
@@ -14,14 +15,20 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private Nome nome;
     private String descricao;
     private Cor cor;
 
     protected TipoEquipa(){}
 
-    public TipoEquipa(String descricao, String cor){
+    public TipoEquipa(String nome,String descricao, String cor){
+        this.nome=new Nome(nome);
         this.descricao = descricao;
         this.cor = new Cor(cor);
+    }
+
+    public int compareTo(String nome) {
+        return this.nome.obterNome().compareTo(nome);
     }
 
     @Override
