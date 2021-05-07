@@ -57,8 +57,16 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
         return colaboradores;
     }
 
+    public int compareTo(String acronimo) {
+        return this.acronimo.obterAcronimo().compareTo(acronimo);
+    }
+
     public void addColaborador(Colaborador colaborador) {
         colaboradores.add(colaborador);
+    }
+
+    public void definirTipoEquipa(TipoEquipa tipoEquipa) {
+        this.tipoEquipa = tipoEquipa;
     }
 
     public Acronimo acronimo() {

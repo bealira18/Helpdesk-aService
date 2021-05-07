@@ -21,6 +21,10 @@ public class Acronimo implements ValueObject, Serializable, Comparable<Acronimo>
         this.acronimo=acronimo;
     }
 
+    public String obterAcronimo() {
+        return acronimo;
+    }
+
     @Override
     public int compareTo(Acronimo o) {
         return 0;
