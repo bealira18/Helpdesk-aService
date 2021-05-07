@@ -5,6 +5,7 @@ import eapli.base.equipamanagement.application.AssociarColaboradorAEquipaControl
 import eapli.base.equipamanagement.application.CriarEquipaController;
 import eapli.base.equipamanagement.application.EditarEquipaController;
 import eapli.base.equipamanagement.application.RemoverColaboradorDeEquipaController;
+import eapli.base.equipamanagement.application.RemoverEquipaController;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
@@ -14,10 +15,10 @@ public class EquipaBootstrapper implements Action {
     private final CriarEquipaController controller = new CriarEquipaController();
     private final AssociarColaboradorAEquipaController acec = new AssociarColaboradorAEquipaController();
     private final RemoverColaboradorDeEquipaController rcec = new RemoverColaboradorDeEquipaController();
-    private final ColaboradorRepository colaboradorRepository= PersistenceContext.repositories().colaborador();
+    private final ColaboradorRepository colaboradorRepository = PersistenceContext.repositories().colaborador();
     private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
     //private final EditarEquipaController editarController=new EditarEquipaController();
-
+    //private final RemoverEquipaController removerController=new RemoverEquipaController();
 
     @Override
     public boolean execute() {
@@ -27,8 +28,8 @@ public class EquipaBootstrapper implements Action {
         acec.associarColaboradorAEquipa("EDC", 8);
         acec.associarColaboradorAEquipa("EDF", 36);
         //rcec.removerColaboradorDeEquipa("EDC", 8);
-        //editarController.mudarAcronimo("EDF","EDP");
-        
+        //editarController.mudarAcronimo("EDC","EDP");
+        //removerController.removerEquipa("EDF");
         return true;
     }
 }

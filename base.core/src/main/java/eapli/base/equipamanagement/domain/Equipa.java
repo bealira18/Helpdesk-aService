@@ -16,6 +16,7 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private boolean ativo;
     private Acronimo acronimo;
     private Designacao designacao;
 
@@ -39,6 +40,7 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     public Equipa(String acronimo, String designacao) {
         this.acronimo = new Acronimo(acronimo);
         this.designacao = new Designacao(designacao);
+        this.ativo = true;
     }
 
     @Override
@@ -73,5 +75,9 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
 
     public void mudarDesignacao(Designacao designacao) {
         this.designacao = designacao;
+    }
+
+    public void mudarEstado(boolean ativo) {
+        this.ativo = ativo;
     }
 }
