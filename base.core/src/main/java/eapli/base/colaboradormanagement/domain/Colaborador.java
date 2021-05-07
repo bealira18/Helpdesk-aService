@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class  Colaborador implements AggregateRoot<Numero>, Serializable {
+public class Colaborador implements AggregateRoot<Numero>, Serializable {
 
     @Id
     private Numero numero;
@@ -51,29 +51,30 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
     @JoinColumn(name = "colaborador_numero")
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    protected Colaborador(){}
+    protected Colaborador() {
+    }
 
-    public Colaborador(int numero,String nomeCurto,String nomeCompleto,Date dataNascimento,String localResidencia,boolean serHumano,
-                       String passe,String email,String perfilColaborador,String funcao,String motivo,long contacto){
-        this.numero=new Numero(numero);
-        this.nomeCurto=nomeCurto;
-        this.nomeCompleto=nomeCompleto;
-        this.dataNascimento=dataNascimento;
-        this.localResidencia=localResidencia;
-        this.serHumano=serHumano;
-        this.ativo=true;
-        this.passe=new Passe(passe);
-        this.email=new Email(email);
-        this.funcao=new Funcao(funcao);
-        this.motivo=null;
-        this.contacto=new Contacto(contacto);
+    public Colaborador(int numero, String nomeCurto, String nomeCompleto, Date dataNascimento, String localResidencia, boolean serHumano,
+            String passe, String email, String perfilColaborador, String funcao, String motivo, long contacto) {
+        this.numero = new Numero(numero);
+        this.nomeCurto = nomeCurto;
+        this.nomeCompleto = nomeCompleto;
+        this.dataNascimento = dataNascimento;
+        this.localResidencia = localResidencia;
+        this.serHumano = serHumano;
+        this.ativo = true;
+        this.passe = new Passe(passe);
+        this.email = new Email(email);
+        this.funcao = new Funcao(funcao);
+        this.motivo = null;
+        this.contacto = new Contacto(contacto);
     }
 
     @Override
     public String toString() {
-        return "Colaborador:\n" +
-                "numero= " + numero +
-                "\nnomeCurto= " + nomeCurto;
+        return "Colaborador:\n"
+                + "numero= " + numero
+                + "\nnomeCurto= " + nomeCurto;
     }
 
     @Override
@@ -84,5 +85,37 @@ public class  Colaborador implements AggregateRoot<Numero>, Serializable {
     @Override
     public Numero identity() {
         return null;
+    }
+
+    public String obterNomeCompleto() {
+        return this.nomeCompleto;
+    }
+
+    public void mudarNomeCurto(String nomeCurto) {
+        this.nomeCurto = nomeCurto;
+    }
+
+    public void mudarNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public void mudarLocalResidencia(String localResiencia) {
+        this.localResidencia = localResiencia;
+    }
+
+    public void mudarPasse(Passe passe) {
+        this.passe = passe;
+    }
+
+    public void mudarEmail(Email email) {
+        this.email = email;
+    }
+
+    public void mudarFuncao(Funcao funcao) {
+        this.funcao = funcao;
+    }
+    
+    public void mudarContacto(Contacto contacto) {
+        this.contacto = contacto;
     }
 }
