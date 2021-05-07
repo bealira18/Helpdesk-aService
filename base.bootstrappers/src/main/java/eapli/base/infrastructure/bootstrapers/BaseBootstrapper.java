@@ -75,7 +75,7 @@ public class BaseBootstrapper implements Action {
         new AddRascunhoBootstrapper(),
         new AddWorkflowBootstrapper(),
         new AddHistoricoBootstrapper(),
-        new AddTipoEquipaBootstrapper()};
+        new TipoEquipaBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();
