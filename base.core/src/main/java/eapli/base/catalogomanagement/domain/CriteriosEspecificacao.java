@@ -1,18 +1,13 @@
 package eapli.base.catalogomanagement.domain;
 
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.framework.domain.model.AggregateRoot;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 @Entity
 public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integer> {
@@ -23,8 +18,8 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     private int idCatalogo;
     private boolean ativo;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
     private List<Equipa> equipas = new ArrayList<>();
 
     public CriteriosEspecificacao() {
@@ -46,8 +41,24 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
         return null;
     }
 
+    public int obterId(){
+        return id;
+    }
+
     public int obterIdCatalogo() {
         return this.idCatalogo;
+    }
+
+    public void addEquipa(Equipa equipa){
+        equipas.add(equipa);
+    }
+
+    public void removerEquipa(Equipa equipa){
+        equipas.remove(equipa);
+    }
+
+    public List<Equipa> equipas() {
+        return equipas;
     }
 
     public void mudarIdCatalogo(int idCatalogo) {
