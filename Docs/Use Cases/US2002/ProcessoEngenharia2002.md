@@ -45,3 +45,15 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarSer
 		public void ensureNullIsNotAllowed() {
 		Servico instance=new Servico("TituloExemplo","Exemplo","Exemplo de um Título","exemplo,título","titExemplo.jpg");
 	}
+
+# 4. Implementação
+
+Nada a declarar
+
+# 5. Integração/Demonstração
+
+Sendo esta uma funcionalidade que bloquia outras funcionalidades, foi tratada com alguma prioridade para que seja possível a progressão.
+
+# 6. Observações
+
+Nada a observar
