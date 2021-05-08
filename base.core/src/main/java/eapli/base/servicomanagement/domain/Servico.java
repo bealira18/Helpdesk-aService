@@ -41,8 +41,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Workflow workflow;
 
-
-
     protected Servico(){}
 
     public Servico(String titulo,String descricaoBreve,String descricaoCompleta,String palavrasChave,String icone){
