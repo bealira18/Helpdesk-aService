@@ -21,6 +21,7 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int idCatalogo;
+    private boolean ativo;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -32,6 +33,7 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
 
     public CriteriosEspecificacao(int idCatalogo) {
         this.idCatalogo = idCatalogo;
+        this.ativo = true;
     }
 
     @Override
@@ -50,5 +52,9 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
 
     public void mudarIdCatalogo(int idCatalogo) {
         this.idCatalogo = idCatalogo;
+    }
+    
+     public void mudarEstado(Boolean ativo){
+        this.ativo = ativo;
     }
 }
