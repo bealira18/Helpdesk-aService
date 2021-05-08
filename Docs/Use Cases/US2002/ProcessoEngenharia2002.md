@@ -29,3 +29,19 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarSer
 ## 3.2. Diagrama de Classes
 
 ![AdicionarServico_CD](AdicionarServico_CD.jpg)
+
+## 3.4. Testes
+
+**Teste 1:** Verificar que não é possível criar uma instância da classe Servico com todos os valores nulos.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Servico instance = new Servico(null,null,null,null,null);
+	}
+
+**Teste 2:** Verificar que não é possível criar uma instância da classe Servico com nenhum valor nulo.
+
+	@Test(expected = IllegalArgumentException.class)
+		public void ensureNullIsNotAllowed() {
+		Servico instance=new Servico("TituloExemplo","Exemplo","Exemplo de um Título","exemplo,título","titExemplo.jpg");
+	}
