@@ -41,14 +41,15 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Workflow workflow;
 
-    protected Servico(){}
+    protected Servico() {
+    }
 
-    public Servico(String titulo,String descricaoBreve,String descricaoCompleta,String palavrasChave,String icone){
-        this.titulo=titulo;
-        this.descricaoBreve=descricaoBreve;
-        this.descricaoCompleta=descricaoCompleta;
-        this.palavrasChave=palavrasChave;
-        this.icone=new Icone(icone);
+    public Servico(String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
+        this.titulo = titulo;
+        this.descricaoBreve = descricaoBreve;
+        this.descricaoCompleta = descricaoCompleta;
+        this.palavrasChave = palavrasChave;
+        this.icone = new Icone(icone);
     }
 
     @Override
@@ -59,5 +60,29 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Override
     public Integer identity() {
         return null;
+    }
+
+    public String obterTitulo() {
+        return this.titulo;
+    }
+
+    public void mudarTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+    
+    public void mudarDescricaoBreve(String descricaoBreve) {
+        this.descricaoBreve = descricaoBreve;
+    }
+    
+    public void mudarDescricaoCompleta(String descricaoCompleta) {
+        this.descricaoCompleta = descricaoCompleta;
+    }
+    
+     public void mudarPalavrasChave(String palavrasChave) {
+        this.palavrasChave = palavrasChave;
+    }
+     
+     public void mudarIcone(Icone icone) {
+        this.icone = icone;
     }
 }
