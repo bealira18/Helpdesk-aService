@@ -30,10 +30,6 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<CriteriosEspecificacao> criterios = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
     private List<Servico> servicos = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -58,6 +54,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         return titulo;
     }
 
+    public int obterId(){
+        return id;
+    }
+
     public void mudarTitulo(Titulo titulo) {
         this.titulo = titulo;
     }
@@ -70,6 +70,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.descricaoCompleta = descricaoCompleta;
     }
 
+    public void mudarCriteriosEspecificacao(CriteriosEspecificacao ce){
+        this.criteriosEspecificaçao = ce;
+    }
+
     public void mudarIcone(Icone icone) {
         this.icone = icone;
     }
@@ -80,6 +84,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
 
     public void mudarEstado(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public CriteriosEspecificacao obterCriteriosEspecificacao(){
+        return criteriosEspecificaçao;
     }
 
     @Override

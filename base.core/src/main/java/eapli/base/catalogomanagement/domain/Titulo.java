@@ -24,6 +24,10 @@ public class Titulo implements ValueObject, Serializable, Comparable<Titulo>{
         return new Titulo(titulo);
     }
 
+    public String obterTitulo(){
+        return titulo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
