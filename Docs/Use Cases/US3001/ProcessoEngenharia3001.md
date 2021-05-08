@@ -1,26 +1,19 @@
-# USDemo1
+# Listar Catálogos e Serviços
 =======================================
 
 
 # 1. Requisitos
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
+**Demo1**
+Como utilizador da aplicação, eu pretendo proceder à de todos os catálogos e, consequentemente, de todos os serviços que posso solicitar.
 
-*Exemplo*
+Demo1.1. Listar catálogos e serviços
 
-**Demo1** Como {Ator} pretendo...
-
-- Demo1.1. Blá Blá Blá ...
-
-- Demo1.2. Blá Blá Blá ...
-
-A interpretação feita deste requisito foi no sentido de ...
+A interpretação feita deste requisito foi no sentido de criar uma forma de pesquisar/consultar a informação dos catálogos e serviços disponíveis para solicitação para um determinado utilizador através da base de dados.
 
 # 2. Análise
 
-*Neste secção a equipa deve relatar o estudo/análise/comparação que fez com o intuito de tomar as melhores opções de design para a funcionalidade bem como aplicar diagramas/artefactos de análise adequados.*
-
-*Recomenda-se que organize este conteúdo por subsecções.*
+Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de colaboradores de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
 
 # 3. Design
 
