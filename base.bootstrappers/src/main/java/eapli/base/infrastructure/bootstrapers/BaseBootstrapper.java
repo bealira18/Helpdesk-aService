@@ -70,7 +70,7 @@ public class BaseBootstrapper implements Action {
         new AssociarTipoEquipaAEquipaBootstrapper(),
         new AssociarColaboradorAEquipaBootstrapper(),
         new AddPedidoBootstrapper(),
-        new AddServicoBootstrapper(),
+        new ServicoBootstrapper(),
         new NivelCriticidadeBootstrapper(),
         new AddTarefaBootstrapper(),
         new FormularioBootstrapper(),

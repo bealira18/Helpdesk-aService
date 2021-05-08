@@ -1,5 +1,6 @@
 package eapli.base.colaboradormanagement.domain;
 
+import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.pedidomanagement.domain.Pedido;
@@ -51,6 +52,9 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     @JoinColumn(name = "colaborador_numero")
     private List<Tarefa> tarefas = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Catalogo catalogo;
+    
     protected Colaborador() {
     }
 
