@@ -2,9 +2,6 @@ package eapli.base.colaboradormanagement.application;
 
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
-import eapli.base.equipamanagement.domain.Acronimo;
-import eapli.base.equipamanagement.domain.Equipa;
-import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 public class RemoverColaboradorController {

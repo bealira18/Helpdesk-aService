@@ -30,6 +30,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     private boolean automatico;
     private boolean completo;
     private Icone icone;
+    private boolean ativo;
 
     @OneToOne
     private NivelCriticidade nivelCriticidade;
@@ -50,6 +51,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         this.descricaoCompleta = descricaoCompleta;
         this.palavrasChave = palavrasChave;
         this.icone = new Icone(icone);
+        this.ativo = true;
     }
 
     @Override
@@ -69,20 +71,24 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     public void mudarTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
+
     public void mudarDescricaoBreve(String descricaoBreve) {
         this.descricaoBreve = descricaoBreve;
     }
-    
+
     public void mudarDescricaoCompleta(String descricaoCompleta) {
         this.descricaoCompleta = descricaoCompleta;
     }
-    
-     public void mudarPalavrasChave(String palavrasChave) {
+
+    public void mudarPalavrasChave(String palavrasChave) {
         this.palavrasChave = palavrasChave;
     }
-     
-     public void mudarIcone(Icone icone) {
+
+    public void mudarIcone(Icone icone) {
         this.icone = icone;
+    }
+    
+    public void mudarEstado(boolean ativo) {
+        this.ativo = ativo;
     }
 }
