@@ -43,4 +43,12 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     public Integer identity() {
         return null;
     }
+
+    public int obterIdCatalogo() {
+        return this.idCatalogo;
+    }
+
+    public void mudarIdCatalogo(int idCatalogo) {
+        this.idCatalogo = idCatalogo;
+    }
 }
