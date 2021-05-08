@@ -39,15 +39,19 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private NivelCriticidade nivelCriticidade;
 
-    protected Catalogo(){}
+    @OneToOne(cascade = CascadeType.ALL)
+    private CriteriosEspecificacao criteriosEspecificaçao;
 
-    public Catalogo(String titulo,String descricaoBreve,String descricaoCompleta,int numero, String icone){
-        this.titulo=new Titulo(titulo);
-        this.descricaoBreve=new DescricaoBreve(descricaoBreve);
-        this.descricaoCompleta=new DescricaoCompleta(descricaoCompleta);
-        this.numero=new Numero(numero);
-        this.icone=new Icone(icone);
-        this.ativo=true;
+    protected Catalogo() {
+    }
+
+    public Catalogo(String titulo, String descricaoBreve, String descricaoCompleta, int numero, String icone) {
+        this.titulo = new Titulo(titulo);
+        this.descricaoBreve = new DescricaoBreve(descricaoBreve);
+        this.descricaoCompleta = new DescricaoCompleta(descricaoCompleta);
+        this.numero = new Numero(numero);
+        this.icone = new Icone(icone);
+        this.ativo = true;
     }
 
     public Titulo obterTitulo() {
@@ -80,9 +84,9 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
 
     @Override
     public String toString() {
-        return "Catalogo:\n" +
-                "id= " + id +
-                "\ntitulo=" + titulo;
+        return "Catalogo:\n"
+                + "id= " + id
+                + "\ntitulo=" + titulo;
     }
 
     @Override
