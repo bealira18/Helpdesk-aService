@@ -23,12 +23,16 @@
  */
 package eapli.base.app.backoffice.console.presentation;
 
-import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
+import eapli.base.app.backoffice.console.presentation.colaborador.AddColaboradorAction;
+import eapli.base.app.backoffice.console.presentation.colaborador.AssociarColaboradorAEquipaAction;
+import eapli.base.app.backoffice.console.presentation.colaborador.ListarColaboradorAction;
+import eapli.base.app.backoffice.console.presentation.colaborador.PesquisarColaboradorAction;
+import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -63,45 +67,55 @@ public class MainMenu extends AbstractUI {
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
 
-    // DISH TYPES
-    private static final int DISH_TYPE_REGISTER_OPTION = 1;
-    private static final int DISH_TYPE_LIST_OPTION = 2;
-    private static final int DISH_TYPE_CHANGE_OPTION = 3;
-    private static final int DISH_TYPE_ACTIVATE_DEACTIVATE_OPTION = 4;
+    //Colaboradores
+    private static final int ADICIONAR_COLABORADOR_OPTION = 1;
+    private static final int EDITAR_COLABORADOR_OPTION = 2;
+    private static final int DESATIVAR_COLABORADOR_OPTION = 3;
+    private static final int LISTAR_COLABORADORES_OPTION = 4;
+    private static final int PESQUISAR_COLABORADOR_OPTION = 5;
+    private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 6;
 
-    // DISHES
-    private static final int DISH_REGISTER_OPTION = 5;
-    private static final int DISH_LIST_OPTION = 6;
-    private static final int DISH_REGISTER_DTO_OPTION = 7;
-    private static final int DISH_LIST_DTO_OPTION = 8;
-    private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
-    private static final int DISH_CHANGE_OPTION = 10;
+    //Catalogos
+    private static final int ADICIONAR_CATALOGO_OPTION = 1;
+    private static final int EDITAR_CATALOGO_OPTION = 2;
+    private static final int DESATIVAR_CATALOGO_OPTION = 3;
+    private static final int LISTAR_CATALOGO_OPTION = 4;
+    private static final int PESQUISAR_CATALOGO_OPTION = 5;
+    private static final int ASSOCIAR_CATALOGO_A_EQUIPA_OPTION = 6;
 
-    // DISH PROPERTIES
-    private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
-    private static final int CHANGE_DISH_PRICE_OPTION = 2;
+    //Serviços
+    private static final int ADICIONAR_SERVICO_OPTION = 1;
+    private static final int EDITAR_SERVICO_OPTION = 2;
+    private static final int DESATIVAR_SERVICO_OPTION = 3;
+    private static final int LISTAR_SERVICO_OPTION = 4;
+    private static final int PESQUISAR_SERVICO_OPTION = 5;
+    private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 6;
 
-    // MATERIALS
-    private static final int MATERIAL_REGISTER_OPTION = 1;
-    private static final int MATERIAL_LIST_OPTION = 2;
+    //Equipa
+    private static final int ADICIONAR_EQUIPA_OPTION = 1;
+    private static final int EDITAR_EQUIPA_OPTION = 2;
+    private static final int DESATIVAR_EQUIPA_OPTION = 3;
+    private static final int LISTAR_EQUIPA_OPTION = 4;
+    private static final int PESQUISAR_EQUIPA_OPTION = 5;
+    private static final int ADICIONAR_COLABORADOR_A_EQUIPA_OPTION = 6;
+    private static final int ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION = 7;
 
-    // REPORTING
-    private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
-    private static final int REPORTING_HIGH_CALORIES_DISHES_OPTION = 2;
-    private static final int REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION = 3;
-
-    // MEALS
-    private static final int LIST_MEALS_OPTION = 1;
-    private static final int MEAL_REGISTER_OPTION = 2;
+    //Tipo de Equipa
+    private static final int ADICIONAR_TIPOEQUIPA_OPTION = 1;
+    private static final int EDITAR_TIPOEQUIPA_OPTION = 2;
+    private static final int DESATIVAR_TIPOEQUIPA_OPTION = 3;
+    private static final int LISTAR_TIPOEQUIPA_OPTION = 4;
+    private static final int PESQUISAR_TIPOEQUIPA_OPTION = 5;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
     private static final int SETTINGS_OPTION = 4;
-    private static final int DISH_OPTION = 5;
-    private static final int TRACEABILITY_OPTION = 6;
-    private static final int MEALS_OPTION = 7;
-    private static final int REPORTING_DISHES_OPTION = 8;
+    private static final int COLABORADORES_OPTION = 5;
+    private static final int CATALOGOS_OPTION = 6;
+    private static final int SERVICOS_OPTION = 7;
+    private static final int EQUIPA_OPTION = 8;
+    private static final int TIPOEQUIPA_OPTION = 9;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -152,6 +166,11 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
 
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
+            final Menu colaboradoresMenu=buildColaboradoresMenu();
+            mainMenu.addSubMenu(COLABORADORES_OPTION,colaboradoresMenu);
+        }
+
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
@@ -184,6 +203,17 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
+    private Menu buildColaboradoresMenu(){
+        final Menu menu = new Menu("Colaboradores >");
+
+        menu.addItem(ADICIONAR_COLABORADOR_OPTION,"Adicionar colaborador", new AddColaboradorAction());
+        menu.addItem(LISTAR_COLABORADORES_OPTION,"Listar colaboradores",new ListarColaboradorAction());
+        menu.addItem(PESQUISAR_COLABORADOR_OPTION,"Pesquisar colaborador por numero",new PesquisarColaboradorAction());
+        menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
+
+
+        return menu;
+    }
 
 
 

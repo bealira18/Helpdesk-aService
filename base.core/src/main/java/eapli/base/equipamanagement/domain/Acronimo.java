@@ -2,10 +2,11 @@ package eapli.base.equipamanagement.domain;
 
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
+
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.persistence.Embeddable;
 
 @Embeddable
 public class Acronimo implements ValueObject, Serializable, Comparable<Acronimo> {
@@ -27,7 +28,7 @@ public class Acronimo implements ValueObject, Serializable, Comparable<Acronimo>
 
     @Override
     public int compareTo(Acronimo o) {
-        return 0;
+        return this.acronimo.compareTo(o.acronimo);
     }
 
     @Override
