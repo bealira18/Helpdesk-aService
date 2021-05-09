@@ -54,12 +54,12 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Catalogo catalogo;
-    
+
     protected Colaborador() {
     }
 
     public Colaborador(int numero, String nomeCurto, String nomeCompleto, Date dataNascimento, String localResidencia, boolean serHumano,
-            String passe, String email, String perfilColaborador, String funcao, String motivo, long contacto) {
+                       String email, String perfilColaborador, String funcao, long contacto) {
         this.numero = new Numero(numero);
         this.nomeCurto = nomeCurto;
         this.nomeCompleto = nomeCompleto;
@@ -67,7 +67,6 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         this.localResidencia = localResidencia;
         this.serHumano = serHumano;
         this.ativo = true;
-        this.passe = new Passe(passe);
         this.email = new Email(email);
         this.funcao = new Funcao(funcao);
         this.motivo = null;
@@ -77,7 +76,7 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     @Override
     public String toString() {
         return "Colaborador:\n"
-                + "numero= " + numero
+                + numero
                 + "\nnomeCurto= " + nomeCurto;
     }
 
@@ -122,7 +121,7 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     public void mudarFuncao(Funcao funcao) {
         this.funcao = funcao;
     }
-    
+
     public void mudarContacto(Contacto contacto) {
         this.contacto = contacto;
     }

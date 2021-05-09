@@ -93,4 +93,11 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     public void mudarEstado(boolean ativo) {
         this.ativo = ativo;
     }
+
+    @Override
+    public String toString() {
+        return "Equipa:\n" +
+                acronimo + "\n" +
+                designacao;
+    }
 }

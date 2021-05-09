@@ -50,6 +50,14 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
     }
 
     @Override
+    public String toString() {
+        return "TipoEquipa:\n" +
+                nome + "\n" +
+                descricao + "\n" +
+                cor;
+    }
+
+    @Override
     public boolean sameAs(Object other) {
         return false;
     }
