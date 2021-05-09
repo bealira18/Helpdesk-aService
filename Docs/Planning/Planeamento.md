@@ -16,13 +16,20 @@ O grupo de trabalho é constituído pelo estudantes identificados na tabela segu
 
 A distribuição de requisitos/funcionalidades ao longo do período de desenvolvimento do projeto pelos elementos do grupo de trabalho realizou-se conforme descrito na tabela seguinte.
 
-| Aluno Nr.	                | Sprint B                | Sprint C | Sprint D |
+| Aluno Nr.	                    | Sprint B                | Sprint C | Sprint D |
 |-------------------------------|-------------------------|----------|----------|
-| [**1181626**](/Docs/1181626/) | [US2051](/Docs/US2051)  | 
 | [**1190617**](/Docs/1190617/) | [US2051](/Docs/US2051)  |
 | [**1200607**](/Docs/1200607/) | [US2051](/Docs/US2051)  |
 | [**1200615**](/Docs/1200615/) | [US2051](/Docs/US2051)  | 
 | [**1200615**](/Docs/1200615/) | [US2052](/Docs/US2052)  | 
-| [**1181626**](/Docs/1181626/) | [US2054](/Docs/US2054)  |
+| [**1200607**](/Docs/1181626/) | [US2054](/Docs/US2054)  |
 | [**1190617**](/Docs/1190617/) | [US2053](/Docs/US2053)  |
 | [**1200607**](/Docs/1200607/) | [US2001](/Docs/US2001)  |
+| [**1200607**](/Docs/1200607/) | [US2002](/Docs/US2002)  |
+| [**1200615**](/Docs/1200615/) | [US2002](/Docs/US2002)  |
+| [**1190617**](/Docs/1190617/) | [US2002](/Docs/US2002)  |
+| [**1190617**](/Docs/1190617/) | [US3001](/Docs/US3001)  |
+| [**1190617**](/Docs/1190617/) | [US2010](/Docs/US2010)  |
+| [**1200607**](/Docs/1200607/) | [US2101](/Docs/US2101)  |
+| [**1200607**](/Docs/1200607/) | [US2103](/Docs/US2103)  |
+| [**1200615**](/Docs/1200615/) | [US9001](/Docs/US9001)  |
