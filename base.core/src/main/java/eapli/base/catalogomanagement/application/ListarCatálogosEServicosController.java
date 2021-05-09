@@ -9,6 +9,7 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListarCatálogosEServicosController {
@@ -26,7 +27,7 @@ public class ListarCatálogosEServicosController {
             for (Equipa e : equipas) {
                 List<Colaborador> colaboradores = e.colaboradores();
                 for (Colaborador colab : colaboradores) {
-                    if (colab.obterNumero().obterNumero() == numeroColaborador) {
+                    if (colab.obterNumero().compararNum(numeroColaborador)) {
                         c.mudarApresentar(true);
                     }
                 }

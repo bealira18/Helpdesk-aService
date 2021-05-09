@@ -5,6 +5,7 @@ import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.repository.ServicoRepository;
+import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.application.ApplicationService;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -18,13 +19,13 @@ public class ListarCatalogosEServicosService {
 
 
     public Iterable<Catalogo> listarCatalogos() {
-        //authz.ensureAuthenticatedUserHasAnyOf(CafeteriaRoles.POWER_USER, CafeteriaRoles.MENU_MANAGER);
+        authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER);
 
         return this.catalogoRepository.listarCatalogos();
     }
 
     public Iterable<Servico> listarServicos(){
-        //authz.ensureAuthenticatedUserHasAnyOf(CafeteriaRoles.POWER_USER, CafeteriaRoles.MENU_MANAGER);
+        authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER);
 
         return this.servicoRepository.listarServicos();
     }
