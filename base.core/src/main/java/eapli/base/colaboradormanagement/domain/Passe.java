@@ -21,6 +21,10 @@ public class Passe implements ValueObject, Serializable, Comparable<Passe>{
         this.passe=passe;
     }
 
+    public String obterPasse(){
+        return passe;
+    }
+
     public boolean passeCumpreRequisitos(String passe){
         boolean hasDigit = false;
         boolean hasUpper = false;

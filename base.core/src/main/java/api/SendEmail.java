@@ -11,7 +11,7 @@ public class SendEmail {
     public SendEmail() {
     }
 
-    public void sendEmail(String recipient, String subject, String body) {
+    public static void sendEmail(String recipient, String subject, String body) {
         //provide recipient's email ID
         String to = recipient;
 
@@ -43,7 +43,7 @@ public class SendEmail {
         });
 
         try {
-            
+
             //create a MimeMessage object
             Message message = new MimeMessage(session);
 
