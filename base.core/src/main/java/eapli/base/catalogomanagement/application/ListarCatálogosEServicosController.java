@@ -18,7 +18,7 @@ public class ListarCatálogosEServicosController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final ListarCatalogosEServicosService service = new ListarCatalogosEServicosService();
 
-    public Iterable<Catalogo> listarCatálogos(int numeroColaborador) {
+    /*public Iterable<Catalogo> listarCatálogos(int numeroColaborador) {
 
         Iterable<Catalogo> catalogos = catalogoRepository.findAll();
         for (Catalogo c : catalogos) {
@@ -65,5 +65,37 @@ public class ListarCatálogosEServicosController {
                 s.mudarApresentar(false);
             }
         }
+    }*/
+
+    public List<Catalogo> listarCatálogos(int numeroColaborador) {
+
+        List<Catalogo> catalogosDisponiveis = new ArrayList<>();
+
+        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
+        for (Catalogo c : catalogos) {
+            CriteriosEspecificacao ce = c.obterCriteriosEspecificacao();
+            List<Equipa> equipas = ce.equipas();
+            for (Equipa e : equipas) {
+                List<Colaborador> colaboradores = e.colaboradores();
+                for (Colaborador colab : colaboradores) {
+                    if (colab.obterNumero().obterNumero() == numeroColaborador) {
+                        catalogosDisponiveis.add(c);
+                    }
+                }
+            }
+        }
+        return catalogosDisponiveis;
+    }
+
+    public List<Servico> listarServicos(){
+        List<Catalogo> catalogosDisponiveis = new ArrayList<>();
+        List<Servico> servicosDisponiveis = new ArrayList<>();
+        for(Catalogo c : catalogosDisponiveis){
+            List<Servico> servicos = c.servicos();
+            for(Servico s : servicos) {
+                servicosDisponiveis.add(s);
+            }
+        }
+        return servicosDisponiveis;
     }
 }
