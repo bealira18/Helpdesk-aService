@@ -29,6 +29,10 @@ public class TipoEquipa implements AggregateRoot<Integer>, Serializable {
         return id;
     }
 
+    public Nome obterNome(){
+        return nome;
+    }
+
     public void mudarNome(Nome nome) {
         this.nome = nome;
     }
