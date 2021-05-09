@@ -15,7 +15,6 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int idCatalogo;
     private boolean ativo;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -23,12 +22,7 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     private List<Equipa> equipas = new ArrayList<>();
 
     public CriteriosEspecificacao() {
-
-    }
-
-    public CriteriosEspecificacao(int idCatalogo) {
-        this.idCatalogo = idCatalogo;
-        this.ativo = true;
+        this.ativo=true;
     }
 
     @Override
@@ -45,10 +39,6 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
         return id;
     }
 
-    public int obterIdCatalogo() {
-        return this.idCatalogo;
-    }
-
     public void addEquipa(Equipa equipa){
         equipas.add(equipa);
     }
@@ -60,12 +50,12 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     public List<Equipa> equipas() {
         return equipas;
     }
-
-    public void mudarIdCatalogo(int idCatalogo) {
-        this.idCatalogo = idCatalogo;
-    }
     
      public void mudarEstado(Boolean ativo){
         this.ativo = ativo;
+    }
+
+    public List<Equipa> obterEquipas() {
+        return equipas;
     }
 }

@@ -2,7 +2,6 @@ package eapli.base.app.backoffice.console.presentation.tipoEquipa;
 
 import eapli.base.equipamanagement.application.ListarTiposEquipaController;
 import eapli.base.equipamanagement.application.PesquisarTipoEquipaController;
-import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.equipamanagement.domain.TipoEquipa;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;

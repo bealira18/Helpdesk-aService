@@ -18,7 +18,7 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
         Preconditions.nonNull(descricaoCompleta);
         if(descricaoCompleta.toCharArray().length>200)
             throw new IllegalArgumentException("Descricao muito grande");
-        if(descricaoCompleta.toCharArray().length<50)
+        if(descricaoCompleta.toCharArray().length<10)
             throw new IllegalArgumentException("Descricao muito pequena");
         this.descricaoCompleta=descricaoCompleta;
     }
