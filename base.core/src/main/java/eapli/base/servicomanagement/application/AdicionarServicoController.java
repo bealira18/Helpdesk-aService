@@ -12,7 +12,7 @@ public class AdicionarServicoController {
 
         final Servico novoServico = new Servico(titulo, descricaoBreve, descricaoCompleta, palavrasChave, icone);
 
-        if (novoServico.obterTitulo()!=null || novoServico.obterDescricaoBreve()!=null || novoServico.obterDescricaoCompleta()!=null || novoServico.obterPalavrasChave()!=null || novoServico.obterIcone().obterIcone()!=null){
+        if (!novoServico.obterTitulo().isEmpty() && !novoServico.obterDescricaoBreve().isEmpty() && !novoServico.obterDescricaoCompleta().isEmpty() && !novoServico.obterPalavrasChave().isEmpty() && !novoServico.obterIcone().obterIcone().isEmpty()){
             novoServico.mudarCompleto(true);
             novoServico.mudarEstado(true);
         }
