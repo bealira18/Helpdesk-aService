@@ -115,8 +115,8 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @Override
     public String toString() {
         return "Catalogo:\n"
-                + "id= " + id
-                + "\ntitulo=" + titulo;
+                + titulo +"\n"
+                + descricaoBreve;
     }
 
     @Override

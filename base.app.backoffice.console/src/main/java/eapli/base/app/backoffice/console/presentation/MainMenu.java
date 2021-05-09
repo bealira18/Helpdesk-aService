@@ -28,6 +28,9 @@ import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.base.app.backoffice.console.presentation.catalogo.AddCatalogoAction;
+import eapli.base.app.backoffice.console.presentation.catalogo.AssociarEquipaACatalogoAction;
+import eapli.base.app.backoffice.console.presentation.catalogo.ListarCatalogoAction;
+import eapli.base.app.backoffice.console.presentation.catalogo.PesquisarCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.AddColaboradorAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.AssociarColaboradorAEquipaAction;
@@ -181,11 +184,11 @@ public class MainMenu extends AbstractUI {
             final Menu equipasMenu=buildEquipasMenu();
             mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
 
-            final Menu tipoEquipaMenu=buildTipoEquipaMenu();
-            mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
-
             final Menu catalogoMenu=buildCatalogoMenu();
             mainMenu.addSubMenu(CATALOGOS_OPTION,catalogoMenu);
+
+            final Menu tipoEquipaMenu=buildTipoEquipaMenu();
+            mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -257,7 +260,11 @@ public class MainMenu extends AbstractUI {
     private Menu buildCatalogoMenu(){
         final Menu menu=new Menu("Catalogos >");
 
-        menu.addItem(ADICIONAR_CATALOGO_OPTION,"Adicionar Catalogo",new AddCatalogoAction());
+        menu.addItem(ADICIONAR_CATALOGO_OPTION,"Adicionar catalogo",new AddCatalogoAction());
+        menu.addItem(LISTAR_CATALOGO_OPTION,"Listar catalogos",new ListarCatalogoAction());
+        menu.addItem(PESQUISAR_CATALOGO_OPTION,"Pesquisar catalogo por titulo",new PesquisarCatalogoAction());
+        menu.addItem(ASSOCIAR_CATALOGO_A_EQUIPA_OPTION,"Associar equipa a catalogo",new AssociarEquipaACatalogoAction());
+
 
         return menu;
     }

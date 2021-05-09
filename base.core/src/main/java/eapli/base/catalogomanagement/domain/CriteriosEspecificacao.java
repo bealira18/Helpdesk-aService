@@ -54,4 +54,8 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
      public void mudarEstado(Boolean ativo){
         this.ativo = ativo;
     }
+
+    public List<Equipa> obterEquipas() {
+        return equipas;
+    }
 }
