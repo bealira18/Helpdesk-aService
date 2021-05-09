@@ -40,6 +40,9 @@ import eapli.base.app.backoffice.console.presentation.equipa.AddEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.AssociarTipoEquipaAEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.ListarEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.PesquisarEquipaAction;
+import eapli.base.app.backoffice.console.presentation.servico.AddServicoAction;
+import eapli.base.app.backoffice.console.presentation.servico.ListarServicoAction;
+import eapli.base.app.backoffice.console.presentation.servico.PesquisarServicoAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
@@ -187,6 +190,9 @@ public class MainMenu extends AbstractUI {
             final Menu catalogoMenu=buildCatalogoMenu();
             mainMenu.addSubMenu(CATALOGOS_OPTION,catalogoMenu);
 
+            final Menu servicoMenu=buildServicoMenu();
+            mainMenu.addSubMenu(SERVICOS_OPTION,servicoMenu);
+
             final Menu tipoEquipaMenu=buildTipoEquipaMenu();
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
         }
@@ -265,6 +271,16 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PESQUISAR_CATALOGO_OPTION,"Pesquisar catalogo por titulo",new PesquisarCatalogoAction());
         menu.addItem(ASSOCIAR_CATALOGO_A_EQUIPA_OPTION,"Associar equipa a catalogo",new AssociarEquipaACatalogoAction());
 
+
+        return menu;
+    }
+
+    private Menu buildServicoMenu(){
+        final Menu menu=new Menu("serviços >");
+
+        menu.addItem(ADICIONAR_SERVICO_OPTION,"Adicionar serviço",new AddServicoAction());
+        menu.addItem(LISTAR_SERVICO_OPTION,"Listar serviços ativos",new ListarServicoAction());
+        menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por nome",new PesquisarServicoAction());
 
         return menu;
     }

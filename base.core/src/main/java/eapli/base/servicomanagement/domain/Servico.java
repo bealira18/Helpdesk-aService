@@ -17,6 +17,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique=true)
     private String titulo;
     private String descricaoBreve;
     private String descricaoCompleta;
@@ -89,6 +90,14 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         return apresentar;
     }
 
+    public boolean estaCompleto() {
+        return completo;
+    }
+
+    public boolean estaAtivo() {
+        return ativo;
+    }
+
     public void mudarApresentar(boolean apresentar){
         this.apresentar = apresentar;
     }
@@ -119,5 +128,13 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
 
     public void mudarCompleto(boolean completo){
         this.completo = completo;
+    }
+
+    @Override
+    public String toString() {
+        return "Servico:\n" +
+                "titulo= " + titulo +
+                "\ndescricaoBreve= " + descricaoBreve +
+                "\npalavrasChave= " + palavrasChave;
     }
 }
