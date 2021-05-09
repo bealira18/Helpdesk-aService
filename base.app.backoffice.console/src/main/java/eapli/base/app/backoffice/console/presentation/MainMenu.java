@@ -27,6 +27,7 @@ import eapli.base.Application;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
+import eapli.base.app.backoffice.console.presentation.catalogo.AddCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.AddColaboradorAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.AssociarColaboradorAEquipaAction;
@@ -182,6 +183,9 @@ public class MainMenu extends AbstractUI {
 
             final Menu tipoEquipaMenu=buildTipoEquipaMenu();
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
+
+            final Menu catalogoMenu=buildCatalogoMenu();
+            mainMenu.addSubMenu(CATALOGOS_OPTION,catalogoMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -248,6 +252,14 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PESQUISAR_TIPOEQUIPA_OPTION,"Pesquisar tipo de equipa por nome",new PesquisarTipoEquipaAction());
 
        return menu;
+    }
+
+    private Menu buildCatalogoMenu(){
+        final Menu menu=new Menu("Catalogos >");
+
+        menu.addItem(ADICIONAR_CATALOGO_OPTION,"Adicionar Catalogo",new AddCatalogoAction());
+
+        return menu;
     }
 
 }

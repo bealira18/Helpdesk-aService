@@ -17,6 +17,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique=true)
     private Titulo titulo;
     private DescricaoBreve descricaoBreve;
     private DescricaoCompleta descricaoCompleta;
@@ -39,7 +40,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private CriteriosEspecificacao criteriosEspecificaçao;
 
-    protected Catalogo() {
+    public Catalogo() {
     }
 
     public Catalogo(String titulo, String descricaoBreve, String descricaoCompleta, int numero, String icone) {

@@ -8,7 +8,7 @@ public class RemoverCriteriosEspecificacaoController {
 
     private final CriteriosEspecificacaoRepository criteriosEspecificacaoRepository = PersistenceContext.repositories().criteriosEspecificacao();
 
-    public CriteriosEspecificacao procurarCriteriosEspecificacaoPorIdCatalogo(int idCatalogo) {
+    /*public CriteriosEspecificacao procurarCriteriosEspecificacaoPorIdCatalogo(int idCatalogo) {
 
         Iterable<CriteriosEspecificacao> criterios = criteriosEspecificacaoRepository.findAll();
 
@@ -33,6 +33,6 @@ public class RemoverCriteriosEspecificacaoController {
         }
 
         criteriosEspecificacaoRepository.save(criteriosEspecificacao);
-    }
+    }*/
 
 }

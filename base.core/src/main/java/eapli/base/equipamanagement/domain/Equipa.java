@@ -35,7 +35,7 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     @JoinColumn
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    protected Equipa() {
+    public Equipa() {
     }
 
     public Equipa(String acronimo, String designacao) {
