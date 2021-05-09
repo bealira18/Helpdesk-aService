@@ -49,6 +49,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     }
 
     public Servico(String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
+        Preconditions.nonNull(titulo);
         this.titulo = titulo;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;

@@ -34,10 +34,7 @@ import eapli.base.app.backoffice.console.presentation.catalogo.PesquisarCatalogo
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
-import eapli.base.app.backoffice.console.presentation.servico.AddServicoAction;
-import eapli.base.app.backoffice.console.presentation.servico.AssociarServicoACatalogoAction;
-import eapli.base.app.backoffice.console.presentation.servico.ListarServicoAction;
-import eapli.base.app.backoffice.console.presentation.servico.PesquisarServicoAction;
+import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
@@ -78,45 +75,46 @@ public class MainMenu extends AbstractUI {
 
     //Colaboradores
     private static final int ADICIONAR_COLABORADOR_OPTION = 1;
-    private static final int EDITAR_COLABORADOR_OPTION = 2;
-    private static final int DESATIVAR_COLABORADOR_OPTION = 3;
-    private static final int LISTAR_COLABORADORES_OPTION = 4;
-    private static final int PESQUISAR_COLABORADOR_OPTION = 5;
-    private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 6;
-    private static final int LISTAR_CATALOGOS_SERVICOS=7;
+    private static final int LISTAR_COLABORADORES_OPTION = 2;
+    private static final int PESQUISAR_COLABORADOR_OPTION = 3;
+    private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 4;
+    private static final int LISTAR_CATALOGOS_SERVICOS=5;
+    private static final int EDITAR_COLABORADOR_OPTION = 6;
+    private static final int DESATIVAR_COLABORADOR_OPTION = 7;
 
     //Catalogos
     private static final int ADICIONAR_CATALOGO_OPTION = 1;
-    private static final int EDITAR_CATALOGO_OPTION = 2;
-    private static final int DESATIVAR_CATALOGO_OPTION = 3;
-    private static final int LISTAR_CATALOGO_OPTION = 4;
-    private static final int PESQUISAR_CATALOGO_OPTION = 5;
-    private static final int ASSOCIAR_CATALOGO_A_EQUIPA_OPTION = 6;
+    private static final int LISTAR_CATALOGO_OPTION = 2;
+    private static final int PESQUISAR_CATALOGO_OPTION = 3;
+    private static final int ASSOCIAR_CATALOGO_A_EQUIPA_OPTION = 4;
+    private static final int EDITAR_CATALOGO_OPTION = 5;
+    private static final int DESATIVAR_CATALOGO_OPTION = 6;
 
     //Serviços
     private static final int ADICIONAR_SERVICO_OPTION = 1;
-    private static final int EDITAR_SERVICO_OPTION = 2;
-    private static final int DESATIVAR_SERVICO_OPTION = 3;
-    private static final int LISTAR_SERVICO_OPTION = 4;
-    private static final int PESQUISAR_SERVICO_OPTION = 5;
-    private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 6;
+    private static final int LISTAR_SERVICO_OPTION = 2;
+    private static final int PESQUISAR_SERVICO_OPTION = 3;
+    private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 4;
+    private static final int ACABAR_SERVICO_OPTION=5;
+    private static final int EDITAR_SERVICO_OPTION = 6;
+    private static final int DESATIVAR_SERVICO_OPTION = 7;
 
     //Equipa
     private static final int ADICIONAR_EQUIPA_OPTION = 1;
-    private static final int EDITAR_EQUIPA_OPTION = 2;
-    private static final int DESATIVAR_EQUIPA_OPTION = 3;
-    private static final int LISTAR_EQUIPA_OPTION = 4;
-    private static final int PESQUISAR_EQUIPA_OPTION = 5;
-    private static final int ADICIONAR_COLABORADOR_A_EQUIPA_OPTION = 6;
-    private static final int ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION = 7;
-    private static final int LISTAR_COLABORADORES_DE_EQUIPA_OPTION=8;
+    private static final int LISTAR_EQUIPA_OPTION = 2;
+    private static final int PESQUISAR_EQUIPA_OPTION = 3;
+    private static final int ADICIONAR_COLABORADOR_A_EQUIPA_OPTION = 4;
+    private static final int ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION = 5;
+    private static final int LISTAR_COLABORADORES_DE_EQUIPA_OPTION=6;
+    private static final int EDITAR_EQUIPA_OPTION = 7;
+    private static final int DESATIVAR_EQUIPA_OPTION = 8;
 
     //Tipo de Equipa
     private static final int ADICIONAR_TIPOEQUIPA_OPTION = 1;
-    private static final int EDITAR_TIPOEQUIPA_OPTION = 2;
-    private static final int DESATIVAR_TIPOEQUIPA_OPTION = 3;
-    private static final int LISTAR_TIPOEQUIPA_OPTION = 4;
-    private static final int PESQUISAR_TIPOEQUIPA_OPTION = 5;
+    private static final int LISTAR_TIPOEQUIPA_OPTION = 2;
+    private static final int PESQUISAR_TIPOEQUIPA_OPTION = 3;
+    private static final int EDITAR_TIPOEQUIPA_OPTION = 4;
+    private static final int DESATIVAR_TIPOEQUIPA_OPTION = 5;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -181,14 +179,14 @@ public class MainMenu extends AbstractUI {
             final Menu colaboradoresMenu=buildColaboradoresMenu();
             mainMenu.addSubMenu(COLABORADORES_OPTION,colaboradoresMenu);
 
-            final Menu equipasMenu=buildEquipasMenu();
-            mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
-
             final Menu catalogoMenu=buildCatalogoMenu();
             mainMenu.addSubMenu(CATALOGOS_OPTION,catalogoMenu);
 
             final Menu servicoMenu=buildServicoMenu();
             mainMenu.addSubMenu(SERVICOS_OPTION,servicoMenu);
+
+            final Menu equipasMenu=buildEquipasMenu();
+            mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
 
             final Menu tipoEquipaMenu=buildTipoEquipaMenu();
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
@@ -234,7 +232,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PESQUISAR_COLABORADOR_OPTION,"Pesquisar colaborador por numero",new PesquisarColaboradorAction());
         menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
         menu.addItem(LISTAR_CATALOGOS_SERVICOS,"Listar catalogo e serviços a que um utilizador tem acesso",new ListarCatalogosEServicoAction());
-
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
@@ -248,6 +246,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ADICIONAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
         menu.addItem(ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION,"Associar tipo de equipa a equipa",new AssociarTipoEquipaAEquipaAction());
         menu.addItem(LISTAR_COLABORADORES_DE_EQUIPA_OPTION,"Listar colaboradores de uma equipa",new ListarColaboradoresDeEquipaAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
@@ -258,6 +257,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ADICIONAR_TIPOEQUIPA_OPTION,"Adicionar tipo de equipa",new AddTipoEquipaAction());
         menu.addItem(LISTAR_TIPOEQUIPA_OPTION,"Listar tipos de equipa",new ListarTipoEquipaAction());
         menu.addItem(PESQUISAR_TIPOEQUIPA_OPTION,"Pesquisar tipo de equipa por nome",new PesquisarTipoEquipaAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
        return menu;
     }
@@ -269,7 +269,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(LISTAR_CATALOGO_OPTION,"Listar catalogos",new ListarCatalogoAction());
         menu.addItem(PESQUISAR_CATALOGO_OPTION,"Pesquisar catalogo por titulo",new PesquisarCatalogoAction());
         menu.addItem(ASSOCIAR_CATALOGO_A_EQUIPA_OPTION,"Associar equipa a catalogo",new AssociarEquipaACatalogoAction());
-
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
@@ -281,6 +281,8 @@ public class MainMenu extends AbstractUI {
         menu.addItem(LISTAR_SERVICO_OPTION,"Listar serviços ativos",new ListarServicoAction());
         menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por nome",new PesquisarServicoAction());
         menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION,"Associar serviço a catalogo",new AssociarServicoACatalogoAction());
+        menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
