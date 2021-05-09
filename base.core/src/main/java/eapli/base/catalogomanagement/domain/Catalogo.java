@@ -67,6 +67,14 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         return servicos;
     }
 
+    public void addServico(Servico servico){
+        servicos.add(servico);
+    }
+
+    public void removerServico(Servico servico){
+        servicos.remove(servico);
+    }
+
     public void mudarTitulo(Titulo titulo) {
         this.titulo = titulo;
     }
