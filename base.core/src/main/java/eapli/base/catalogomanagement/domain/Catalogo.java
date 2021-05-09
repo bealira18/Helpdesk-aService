@@ -23,6 +23,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     private boolean ativo;
     private Numero numero;
     private Icone icone;
+    private boolean apresentar = false;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable
@@ -58,6 +59,14 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         return id;
     }
 
+    public boolean obterApresentar(){
+        return apresentar;
+    }
+
+    public List<Servico> servicos(){
+        return servicos;
+    }
+
     public void mudarTitulo(Titulo titulo) {
         this.titulo = titulo;
     }
@@ -84,6 +93,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
 
     public void mudarEstado(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public void mudarApresentar(boolean apresentar){
+        this.apresentar = apresentar;
     }
 
     public CriteriosEspecificacao obterCriteriosEspecificacao(){

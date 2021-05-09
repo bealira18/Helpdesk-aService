@@ -1,5 +1,6 @@
 package eapli.base.persistence.impl.inmemory;
 
+import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -8,5 +9,10 @@ public class InMemoryServicoRepository extends InMemoryDomainRepository<Servico,
 
     static {
         InMemoryInitializer.init();
+    }
+
+    @Override
+    public Iterable<Servico> listarServicos() {
+        return match(Servico::obterApresentar);
     }
 }

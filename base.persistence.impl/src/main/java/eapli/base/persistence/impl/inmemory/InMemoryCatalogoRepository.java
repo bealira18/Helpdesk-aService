@@ -9,4 +9,9 @@ public class InMemoryCatalogoRepository extends InMemoryDomainRepository<Catalog
     static {
         InMemoryInitializer.init();
     }
+
+    @Override
+    public Iterable<Catalogo> listarCatalogos() {
+        return match(Catalogo::obterApresentar);
+    }
 }

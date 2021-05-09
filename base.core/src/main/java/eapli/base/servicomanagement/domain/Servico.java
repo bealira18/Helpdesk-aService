@@ -31,6 +31,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     private boolean completo;
     private Icone icone;
     private boolean ativo;
+    private boolean apresentar = false;
 
     @OneToOne
     private NivelCriticidade nivelCriticidade;
@@ -66,6 +67,14 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
 
     public String obterTitulo() {
         return this.titulo;
+    }
+
+    public boolean obterApresentar(){
+        return apresentar;
+    }
+
+    public void mudarApresentar(boolean apresentar){
+        this.apresentar = apresentar;
     }
 
     public void mudarTitulo(String titulo) {
