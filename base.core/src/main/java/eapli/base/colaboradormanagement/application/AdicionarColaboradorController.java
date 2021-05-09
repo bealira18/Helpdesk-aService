@@ -1,5 +1,6 @@
 package eapli.base.colaboradormanagement.application;
 
+import api.SendEmail;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.colaboradormanagement.domain.Passe;
@@ -21,6 +22,9 @@ public class AdicionarColaboradorController {
         final Colaborador novoColaborador=new Colaborador(numero,nomeCurto,nomeCompleto,dataNascimento,localResidencia,serHumano,email,perfilColaborador,funcao,contacto);
 
         novoColaborador.mudarPasse(new Passe(gerarPasse()));
+        String subject = "Registo no sistema";
+        String body = String.format("Você registou-se com sucesso no nosso sistema e a sua password é %s", novoColaborador.obterPasse().obterPasse());
+        SendEmail.sendEmail(novoColaborador.obterEmail().obterEmail(), subject, body);
 
         return colaboradorRepository.save(novoColaborador);
 

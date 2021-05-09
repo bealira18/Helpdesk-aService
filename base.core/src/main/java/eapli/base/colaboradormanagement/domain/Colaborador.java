@@ -98,6 +98,14 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         return numero;
     }
 
+    public Email obterEmail(){
+        return email;
+    }
+
+    public Passe obterPasse(){
+        return passe;
+    }
+
     public void mudarNomeCurto(String nomeCurto) {
         this.nomeCurto = nomeCurto;
     }
