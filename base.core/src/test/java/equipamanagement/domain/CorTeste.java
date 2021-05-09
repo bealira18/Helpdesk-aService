@@ -7,11 +7,7 @@ public class CorTeste {
     
        @Test(expected = IllegalArgumentException.class)
     public void regraCor() {
-        Cor cor=new Cor("naocor");
+        Cor cor=new Cor(null);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void regraCor2() {
-        Cor cor=new Cor("#0000");
-    }
 }

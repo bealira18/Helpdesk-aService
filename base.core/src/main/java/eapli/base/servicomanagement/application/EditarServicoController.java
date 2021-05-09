@@ -33,6 +33,8 @@ public class EditarServicoController {
             servico.mudarTitulo(tituloNovo);
         }
 
+        verificarCompleto(servico);
+
         servicoRepository.save(servico);
     }
     
@@ -45,6 +47,8 @@ public class EditarServicoController {
         } else {
             servico.mudarDescricaoBreve(descricaoBreve);
         }
+
+        verificarCompleto(servico);
 
         servicoRepository.save(servico);
     }
@@ -59,6 +63,8 @@ public class EditarServicoController {
             servico.mudarDescricaoCompleta(descricaoCompleta);
         }
 
+        verificarCompleto(servico);
+
         servicoRepository.save(servico);
     }
      
@@ -71,6 +77,8 @@ public class EditarServicoController {
         } else {
             servico.mudarPalavrasChave(palavrasChave);
         }
+
+        verificarCompleto(servico);
 
         servicoRepository.save(servico);
     }
@@ -85,6 +93,15 @@ public class EditarServicoController {
             servico.mudarIcone(new Icone(novoIcone));
         }
 
+        verificarCompleto(servico);
+
         servicoRepository.save(servico);
+    }
+
+    public void verificarCompleto(Servico servico){
+        if (servico.obterTitulo()!=null || servico.obterDescricaoBreve()!=null || servico.obterDescricaoCompleta()!=null || servico.obterPalavrasChave()!=null || servico.obterIcone().obterIcone()!=null){
+            servico.mudarCompleto(true);
+            servico.mudarEstado(true);
+        }
     }
 }

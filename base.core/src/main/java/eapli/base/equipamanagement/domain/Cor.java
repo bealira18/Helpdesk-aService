@@ -17,8 +17,6 @@ public class Cor implements ValueObject, Serializable, Comparable<Cor> {
 
     public Cor(final String cor){
         Preconditions.nonNull(cor);
-        if(!verificaCor(cor))
-            throw new IllegalArgumentException("Cor inválida");
         this.cor=cor;
     }
 
@@ -31,16 +29,5 @@ public class Cor implements ValueObject, Serializable, Comparable<Cor> {
     public String toString() {
         return "Cor= " + cor;
     }
-    
-      public boolean verificaCor(String cor){
 
-        Pattern pattern = Pattern.compile("#[a-z0-9]{6}");
-        Matcher mat = pattern.matcher(cor);
-
-        if(mat.matches())
-            return true;
-        else
-            return false;
-
-    }
 }
