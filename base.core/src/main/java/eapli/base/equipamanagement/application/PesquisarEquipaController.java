@@ -15,7 +15,7 @@ public class PesquisarEquipaController {
         Equipa equipa=null;
 
         for(Equipa e : equipas){
-            if(e.acronimo().toString().equals(acronimo))
+            if(e.acronimo().comparar(acronimo)==0)
                 equipa=e;
         }
         return equipa;
