@@ -28,14 +28,8 @@ A forma encontrada para resolver este problema foi criar uma classe ListarCatalo
 ![ListarCatalogosEServicos_CD](ListarCatalogosEServicos_CD.jpg)
 
 ## 3.4. Testes 
-*Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
-
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+Nada a apresentar.
 
 # 4. Implementação
 
