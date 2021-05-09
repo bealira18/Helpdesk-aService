@@ -17,29 +17,41 @@ public class ListarCatálogosEServicosController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final ListarCatalogosEServicosService service = new ListarCatalogosEServicosService();
 
-    public void listarCatálogosEServicos(int numeroColaborador){
+    public Iterable<Catalogo> listarCatálogos(int numeroColaborador) {
 
         Iterable<Catalogo> catalogos = catalogoRepository.findAll();
-        for(Catalogo c : catalogos){
+        for (Catalogo c : catalogos) {
             CriteriosEspecificacao ce = c.obterCriteriosEspecificacao();
             List<Equipa> equipas = ce.equipas();
-            for (Equipa e : equipas){
+            for (Equipa e : equipas) {
                 List<Colaborador> colaboradores = e.colaboradores();
-                for (Colaborador colab : colaboradores){
-                    if (colab.obterNumero().obterNumero() == numeroColaborador){
+                for (Colaborador colab : colaboradores) {
+                    if (colab.obterNumero().obterNumero() == numeroColaborador) {
                         c.mudarApresentar(true);
-                        List<Servico> servicos = c.servicos();
-                        for (Servico s : servicos){
-                            s.mudarApresentar(true);
-                        }
                     }
                 }
             }
         }
+        return service.listarCatalogos();
+    }
 
-        service.listarCatalogos();
-        service.listarServicos();
+    public Iterable<Servico> listarServicos() {
 
+        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
+        for (Catalogo c : catalogos) {
+            if (c.obterApresentar() == true) {
+                List<Servico> servicos = c.servicos();
+                for (Servico s : servicos) {
+                    s.mudarApresentar(true);
+                }
+            }
+        }
+
+        return service.listarServicos();
+    }
+
+    public void mudarApresentarCatalogosEServicos() {
+        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
         for (Catalogo c : catalogos){
             if (c.obterApresentar() == true){
                 c.mudarApresentar(false);
@@ -52,6 +64,5 @@ public class ListarCatálogosEServicosController {
                 s.mudarApresentar(false);
             }
         }
-
     }
 }
