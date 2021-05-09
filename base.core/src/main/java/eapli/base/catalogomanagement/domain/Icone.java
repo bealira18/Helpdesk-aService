@@ -27,6 +27,10 @@ public class Icone implements ValueObject, Serializable, Comparable<Icone> {
         return new Icone(icone);
     }
 
+    public String obterIcone(){
+        return icone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

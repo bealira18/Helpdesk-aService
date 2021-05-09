@@ -12,6 +12,11 @@ public class AdicionarServicoController {
 
         final Servico novoServico = new Servico(titulo, descricaoBreve, descricaoCompleta, palavrasChave, icone);
 
+        if (novoServico.obterTitulo()!=null || novoServico.obterDescricaoBreve()!=null || novoServico.obterDescricaoCompleta()!=null || novoServico.obterPalavrasChave()!=null || novoServico.obterIcone().obterIcone()!=null){
+            novoServico.mudarCompleto(true);
+            novoServico.mudarEstado(true);
+        }
+
         return servicoRepository.save(novoServico);
 
     }

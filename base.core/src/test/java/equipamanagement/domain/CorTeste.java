@@ -9,5 +9,5 @@ public class CorTeste {
     public void regraCor() {
         Cor cor=new Cor(null);
     }
-    
+
 }

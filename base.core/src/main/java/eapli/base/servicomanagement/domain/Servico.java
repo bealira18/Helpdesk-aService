@@ -4,6 +4,7 @@ import eapli.base.catalogomanagement.domain.Icone;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
 import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,9 +29,9 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     private boolean Aprovado;
     @Transient
     private boolean automatico;
-    private boolean completo;
+    private boolean completo = false;
     private Icone icone;
-    private boolean ativo;
+    private boolean ativo = false;
     private boolean apresentar = false;
 
     @OneToOne
@@ -52,7 +53,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         this.descricaoCompleta = descricaoCompleta;
         this.palavrasChave = palavrasChave;
         this.icone = new Icone(icone);
-        this.ativo = true;
     }
 
     @Override
@@ -67,6 +67,22 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
 
     public String obterTitulo() {
         return this.titulo;
+    }
+
+    public String obterDescricaoBreve(){
+        return descricaoBreve;
+    }
+
+    public String obterDescricaoCompleta(){
+        return descricaoCompleta;
+    }
+
+    public String obterPalavrasChave(){
+        return palavrasChave;
+    }
+
+    public Icone obterIcone(){
+        return icone;
     }
 
     public boolean obterApresentar(){
@@ -99,5 +115,9 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     
     public void mudarEstado(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public void mudarCompleto(boolean completo){
+        this.completo = completo;
     }
 }
