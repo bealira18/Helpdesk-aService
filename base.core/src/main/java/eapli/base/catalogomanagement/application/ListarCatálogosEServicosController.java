@@ -27,7 +27,7 @@ public class ListarCatálogosEServicosController {
             for (Equipa e : equipas) {
                 List<Colaborador> colaboradores = e.colaboradores();
                 for (Colaborador colab : colaboradores) {
-                    if (colab.obterNumero().obterNumero() == numeroColaborador) {
+                    if (colab.obterNumero().compararNum(numeroColaborador)) {
                         c.mudarApresentar(true);
                     }
                 }
