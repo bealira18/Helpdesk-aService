@@ -45,8 +45,6 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
         for(Servico s : servicos)
             System.out.println(s.toString()+"\n");
 
-        controller.mudarApresentarCatalogosEServicos();
-
         return true;
     }
 
