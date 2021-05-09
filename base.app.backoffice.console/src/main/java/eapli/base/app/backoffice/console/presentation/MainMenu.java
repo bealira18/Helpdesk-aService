@@ -32,15 +32,10 @@ import eapli.base.app.backoffice.console.presentation.catalogo.AssociarEquipaACa
 import eapli.base.app.backoffice.console.presentation.catalogo.ListarCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.catalogo.PesquisarCatalogoAction;
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
-import eapli.base.app.backoffice.console.presentation.colaborador.AddColaboradorAction;
-import eapli.base.app.backoffice.console.presentation.colaborador.AssociarColaboradorAEquipaAction;
-import eapli.base.app.backoffice.console.presentation.colaborador.ListarColaboradorAction;
-import eapli.base.app.backoffice.console.presentation.colaborador.PesquisarColaboradorAction;
-import eapli.base.app.backoffice.console.presentation.equipa.AddEquipaAction;
-import eapli.base.app.backoffice.console.presentation.equipa.AssociarTipoEquipaAEquipaAction;
-import eapli.base.app.backoffice.console.presentation.equipa.ListarEquipaAction;
-import eapli.base.app.backoffice.console.presentation.equipa.PesquisarEquipaAction;
+import eapli.base.app.backoffice.console.presentation.colaborador.*;
+import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.servico.AddServicoAction;
+import eapli.base.app.backoffice.console.presentation.servico.AssociarServicoACatalogoAction;
 import eapli.base.app.backoffice.console.presentation.servico.ListarServicoAction;
 import eapli.base.app.backoffice.console.presentation.servico.PesquisarServicoAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
@@ -88,6 +83,7 @@ public class MainMenu extends AbstractUI {
     private static final int LISTAR_COLABORADORES_OPTION = 4;
     private static final int PESQUISAR_COLABORADOR_OPTION = 5;
     private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 6;
+    private static final int LISTAR_CATALOGOS_SERVICOS=7;
 
     //Catalogos
     private static final int ADICIONAR_CATALOGO_OPTION = 1;
@@ -113,6 +109,7 @@ public class MainMenu extends AbstractUI {
     private static final int PESQUISAR_EQUIPA_OPTION = 5;
     private static final int ADICIONAR_COLABORADOR_A_EQUIPA_OPTION = 6;
     private static final int ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION = 7;
+    private static final int LISTAR_COLABORADORES_DE_EQUIPA_OPTION=8;
 
     //Tipo de Equipa
     private static final int ADICIONAR_TIPOEQUIPA_OPTION = 1;
@@ -236,6 +233,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(LISTAR_COLABORADORES_OPTION,"Listar colaboradores",new ListarColaboradorAction());
         menu.addItem(PESQUISAR_COLABORADOR_OPTION,"Pesquisar colaborador por numero",new PesquisarColaboradorAction());
         menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
+        menu.addItem(LISTAR_CATALOGOS_SERVICOS,"Listar catalogo e serviços a que um utilizador tem acesso",new ListarCatalogosEServicoAction());
 
 
         return menu;
@@ -249,6 +247,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PESQUISAR_EQUIPA_OPTION,"Pesquisar equipa por acronimo",new PesquisarEquipaAction());
         menu.addItem(ADICIONAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
         menu.addItem(ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION,"Associar tipo de equipa a equipa",new AssociarTipoEquipaAEquipaAction());
+        menu.addItem(LISTAR_COLABORADORES_DE_EQUIPA_OPTION,"Listar colaboradores de uma equipa",new ListarColaboradoresDeEquipaAction());
 
         return menu;
     }
@@ -281,6 +280,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ADICIONAR_SERVICO_OPTION,"Adicionar serviço",new AddServicoAction());
         menu.addItem(LISTAR_SERVICO_OPTION,"Listar serviços ativos",new ListarServicoAction());
         menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por nome",new PesquisarServicoAction());
+        menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION,"Associar serviço a catalogo",new AssociarServicoACatalogoAction());
 
         return menu;
     }
