@@ -17,7 +17,7 @@ public class ListarColaboradoresEquipaController {
         Equipa equipa = null;
 
         for(Equipa e : equipas){
-            if(e.acronimo().stringAcronimo().equalsIgnoreCase(acronimo)){
+            if(e.compareTo(acronimo)==0){
                 equipa = e;
             }
         }
