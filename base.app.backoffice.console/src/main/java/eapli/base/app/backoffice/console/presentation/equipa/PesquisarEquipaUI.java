@@ -27,8 +27,8 @@ public class PesquisarEquipaUI extends AbstractUI {
 
         String acronimo= Console.readLine("Acronimo pretendido: ");
 
-        /*while(controller.procurarEquipaPorAcronimo(acronimo)==null)
-            acronimo= Console.readLine("Acronimo pretendido: ");*/
+        while(controller.procurarEquipaPorAcronimo(acronimo)==null)
+            acronimo= Console.readLine("Acronimo pretendido: ");
 
         try{
             Equipa equipa=controller.procurarEquipaPorAcronimo(acronimo);

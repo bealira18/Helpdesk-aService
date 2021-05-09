@@ -26,7 +26,7 @@ public class ListarEquipaUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Adicionar Equipa";
+        return "Listar Equipas";
     }
 
 }

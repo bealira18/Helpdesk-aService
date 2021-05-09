@@ -36,6 +36,9 @@ import eapli.base.app.backoffice.console.presentation.equipa.AddEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.AssociarTipoEquipaAEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.ListarEquipaAction;
 import eapli.base.app.backoffice.console.presentation.equipa.PesquisarEquipaAction;
+import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
+import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
+import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -176,6 +179,9 @@ public class MainMenu extends AbstractUI {
 
             final Menu equipasMenu=buildEquipasMenu();
             mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
+
+            final Menu tipoEquipaMenu=buildTipoEquipaMenu();
+            mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -234,5 +240,14 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
+    private Menu buildTipoEquipaMenu(){
+        final Menu menu=new Menu("Tipos de Equipa >");
+
+        menu.addItem(ADICIONAR_TIPOEQUIPA_OPTION,"Adicionar tipo de equipa",new AddTipoEquipaAction());
+        menu.addItem(LISTAR_TIPOEQUIPA_OPTION,"Listar tipos de equipa",new ListarTipoEquipaAction());
+        menu.addItem(PESQUISAR_TIPOEQUIPA_OPTION,"Pesquisar tipo de equipa por nome",new PesquisarTipoEquipaAction());
+
+       return menu;
+    }
 
 }
