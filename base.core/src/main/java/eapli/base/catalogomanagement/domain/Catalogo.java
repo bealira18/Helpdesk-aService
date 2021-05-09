@@ -5,6 +5,7 @@ import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.domain.model.AggregateRoot;
+import eapli.framework.validations.Preconditions;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -48,6 +49,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.descricaoBreve = new DescricaoBreve(descricaoBreve);
         this.descricaoCompleta = new DescricaoCompleta(descricaoCompleta);
         this.numero = new Numero(numero);
+        Preconditions.nonNull(icone);
         this.icone = new Icone(icone);
         this.ativo = true;
     }
