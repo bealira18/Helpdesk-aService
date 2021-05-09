@@ -25,6 +25,8 @@ public class AssociarColaboradorAEquipaUI extends AbstractUI {
 
         if(colaboradores!=null)
             System.out.println("Colaboradores possiveis:\n");
+        else
+            System.out.println("Ainda não existem colaboradores");
 
         for(Colaborador c : colaboradores){
             System.out.println(c.toString());
@@ -34,6 +36,8 @@ public class AssociarColaboradorAEquipaUI extends AbstractUI {
 
         if(equipas!=null)
             System.out.println("\nEquipas possiveis:\n");
+        else
+            System.out.println("Ainda não existem equipas");
 
         for(Equipa e : equipas){
             System.out.println(e.toString());
@@ -50,6 +54,7 @@ public class AssociarColaboradorAEquipaUI extends AbstractUI {
             acronimo=Console.readLine("Acronimo pretendido: ");
 
         try{
+            controller.associarColaboradorAEquipa(acronimo,num);
             System.out.println("Adicionado com sucesso");
         }catch (Exception e) {
             e.printStackTrace();

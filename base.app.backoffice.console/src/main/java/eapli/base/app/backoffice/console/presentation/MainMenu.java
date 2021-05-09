@@ -32,6 +32,10 @@ import eapli.base.app.backoffice.console.presentation.colaborador.AddColaborador
 import eapli.base.app.backoffice.console.presentation.colaborador.AssociarColaboradorAEquipaAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.ListarColaboradorAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.PesquisarColaboradorAction;
+import eapli.base.app.backoffice.console.presentation.equipa.AddEquipaAction;
+import eapli.base.app.backoffice.console.presentation.equipa.AssociarTipoEquipaAEquipaAction;
+import eapli.base.app.backoffice.console.presentation.equipa.ListarEquipaAction;
+import eapli.base.app.backoffice.console.presentation.equipa.PesquisarEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -169,6 +173,9 @@ public class MainMenu extends AbstractUI {
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
             final Menu colaboradoresMenu=buildColaboradoresMenu();
             mainMenu.addSubMenu(COLABORADORES_OPTION,colaboradoresMenu);
+
+            final Menu equipasMenu=buildEquipasMenu();
+            mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -215,7 +222,17 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
+    private Menu buildEquipasMenu(){
+        final Menu menu=new Menu("Equipas >");
 
+        menu.addItem(ADICIONAR_EQUIPA_OPTION,"Adicionar equipa",new AddEquipaAction());
+        menu.addItem(LISTAR_EQUIPA_OPTION,"Listar equipas",new ListarEquipaAction());
+        menu.addItem(PESQUISAR_EQUIPA_OPTION,"Pesquisar equipa por acronimo",new PesquisarEquipaAction());
+        menu.addItem(ADICIONAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
+        menu.addItem(ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION,"Associar tipo de equipa a equipa",new AssociarTipoEquipaAEquipaAction());
+
+        return menu;
+    }
 
 
 }
