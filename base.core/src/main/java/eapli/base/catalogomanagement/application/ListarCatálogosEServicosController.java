@@ -87,8 +87,8 @@ public class ListarCatálogosEServicosController {
         return catalogosDisponiveis;
     }
 
-    public List<Servico> listarServicos(){
-        List<Catalogo> catalogosDisponiveis = new ArrayList<>();
+    public List<Servico> listarServicosDeCatalogo(int numero){
+        List<Catalogo> catalogosDisponiveis = listarCatálogos(numero);
         List<Servico> servicosDisponiveis = new ArrayList<>();
         for(Catalogo c : catalogosDisponiveis){
             List<Servico> servicos = c.servicos();

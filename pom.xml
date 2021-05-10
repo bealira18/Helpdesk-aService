@@ -28,6 +28,15 @@
         <module>base.persistence.impl</module>
     </modules>
 
+    <repositories>
+        <!--other repositories if any-->
+        <repository>
+            <id>project.local</id>
+            <name>project</name>
+            <url>file://${user.home}/.m2/repository</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>com.sun.mail</groupId>
@@ -79,10 +88,5 @@
         </dependencies>
     </dependencyManagement>
 
-    <repositories>
-        <repository>
-            <id>bintray-pagsousa-eapli</id>
-            <url>http://dl.bintray.com/pagsousa/eapli</url>
-        </repository>
-    </repositories>
+
 </project>

@@ -8,7 +8,6 @@ import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
 
 public class ListarCatalogoEServicoUI extends AbstractUI {
 
@@ -31,7 +30,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
         int numero= Console.readInteger("\nNumero pretendido: ");
 
         while(controllerpesqcol.procurarColaboradorPorNumero(numero)==null)
-            numero=Console.readInteger("Titulo serviço pretendido: ");
+            numero=Console.readInteger("Titulo colaborador pretendido: ");
 
         Iterable<Catalogo> catalogos=controller.listarCatálogos(numero);
 
@@ -40,7 +39,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
         for(Catalogo c : catalogos)
             System.out.println(c.toString()+"\n");
 
-        Iterable<Servico> servicos=controller.listarServicos();
+        Iterable<Servico> servicos=controller.listarServicosDeCatalogo(numero);
 
         for(Servico s : servicos)
             System.out.println(s.toString()+"\n");
@@ -50,7 +49,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Catalogos e serviços que um colaborador tem acesso";
+        return "Catalogos que um colaborador tem acesso";
     }
 
 }

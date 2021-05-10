@@ -96,8 +96,9 @@ public class MainMenu extends AbstractUI {
     private static final int PESQUISAR_SERVICO_OPTION = 3;
     private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 4;
     private static final int ACABAR_SERVICO_OPTION=5;
-    private static final int EDITAR_SERVICO_OPTION = 6;
-    private static final int DESATIVAR_SERVICO_OPTION = 7;
+    private static final int LISTAR_SERVICOS_CATALOGO=6;
+    private static final int EDITAR_SERVICO_OPTION = 7;
+    private static final int DESATIVAR_SERVICO_OPTION = 8;
 
     //Equipa
     private static final int ADICIONAR_EQUIPA_OPTION = 1;
@@ -282,6 +283,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por nome",new PesquisarServicoAction());
         menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION,"Associar serviço a catalogo",new AssociarServicoACatalogoAction());
         menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
+        menu.addItem(LISTAR_SERVICOS_CATALOGO,"Listar serviços de um catalogo",new ListarServicosDeCatalogoAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
