@@ -30,17 +30,10 @@ public class ListarServicosDeCatalogoController {
 
     public List<Servico> listarServicosCatalogo(String titulo){
 
-        Iterable<Servico> todosServicos=servicoRepository.findAll();
-
-        List<Servico> retServicos=new ArrayList<>();
-
         Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
 
-        for(Servico s : todosServicos){
-            if(catalogo.servicos().contains(s))
-                retServicos.add(s);
-        }
-        return retServicos;
-    }
+        List<Servico> servicos =catalogo.servicos();
 
+        return servicos;
+    }
 }

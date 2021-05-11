@@ -41,10 +41,10 @@ public class AssociarServicoACatalogoController {
             throw new IllegalArgumentException("Não existe nenhum serviço com o título: " + tituloServico);
         }
 
-        associarServicoACatalogo(c1, s1);
+        associacao(c1, s1);
     }
 
-    public Catalogo associarServicoACatalogo(Catalogo catalogo, Servico servico) {
+    public Catalogo associacao(Catalogo catalogo, Servico servico) {
 
         catalogo.addServico(servico);
 

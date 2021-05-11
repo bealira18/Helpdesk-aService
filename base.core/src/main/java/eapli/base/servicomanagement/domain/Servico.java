@@ -131,6 +131,10 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         this.completo = completo;
     }
 
+    public int compareTo(String titulo) {
+        return this.titulo.compareTo(titulo);
+    }
+
     @Override
     public String toString() {
         return "Servico:\n" +
