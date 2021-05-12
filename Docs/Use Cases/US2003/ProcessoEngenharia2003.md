@@ -15,21 +15,15 @@ Com o intuito de facilitar e ajudar o colaborador são mostrados todos os servi�
 
 # 3. Design
 
-*Nesta secção a equipa deve descrever o design adotado para satisfazer a funcionalidade. Entre outros, a equipa deve apresentar diagrama(s) de realização da funcionalidade, diagrama(s) de classes, identificação de padrões aplicados e quais foram os principais testes especificados para validar a funcionalidade.*
-
-*Para além das secções sugeridas, podem ser incluídas outras.*
+A forma encontrada para resolver este problema foi criar uma classe ContinuarServicoUI que faz uso do EditarServicoController para acabar ou apenas adicionar informação a um serviço que ainda não está completo.
 
 ## 3.1. Realização da Funcionalidade
 
-*Nesta secção deve apresentar e descrever o fluxo/sequência que permite realizar a funcionalidade.*
+![ContinuarServico](ContinuarServicoSD.jpg)
 
 ## 3.2. Diagrama de Classes
 
-*Nesta secção deve apresentar e descrever as principais classes envolvidas na realização da funcionalidade.*
-
-## 3.3. Padrões Aplicados
-
-*Nesta secção deve apresentar e explicar quais e como foram os padrões de design aplicados e as melhores práticas.*
+![ContinuarServico](ContinuarServicoCD.jpg)
 
 ## 3.4. Testes 
 *Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
