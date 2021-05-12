@@ -1,6 +1,7 @@
 package servicomanagement.domain;
 
 import eapli.base.servicomanagement.domain.Servico;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ServicoTeste {
@@ -16,6 +17,15 @@ public class ServicoTeste {
         Servico instance3=new Servico("Título", "Tít", null, "exemplo, titulo", "tituloExemplo.jpg");
         Servico instance4=new Servico("Título", "Tít", "TítuloExemplo", null, "tituloExemplo.jpg");
         Servico instance5=new Servico("Título", "Tít", "TítuloExemplo", "exemplo, titulo", null);
+    }
+
+    @Test
+    public void servicoInacabado(){
+
+        Servico instance=new Servico("titulo", "", "", "exemplo", "tituloExemplo.jpg");
+
+        Assert.assertFalse(instance.estaAtivo());
+
     }
 
 }

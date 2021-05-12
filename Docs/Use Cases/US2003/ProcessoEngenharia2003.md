@@ -28,18 +28,20 @@ A forma encontrada para resolver este problema foi criar uma classe ContinuarSer
 ## 3.4. Testes 
 *Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar que é possível deixar um serviço inacabado.
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+	@Test
+    public void servicoInacabado(){
+
+        Servico instance=new Servico("titulo", "", "", "exemplo", "tituloExemplo.jpg");
+
+        Assert.assertFalse(instance.estaAtivo());
+
+    }
 
 # 4. Implementação
 
-*Nesta secção a equipa deve providenciar, se necessário, algumas evidências de que a implementação está em conformidade com o design efetuado. Para além disso, deve mencionar/descrever a existência de outros ficheiros (e.g. de configuração) relevantes e destacar commits relevantes;*
-
-*Recomenda-se que organize este conteúdo por subsecções.*
+Nada a declarar.
 
 # 5. Integração/Demonstração
 
