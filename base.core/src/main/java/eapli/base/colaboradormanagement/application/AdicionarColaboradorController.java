@@ -17,7 +17,7 @@ public class AdicionarColaboradorController {
     private final ColaboradorRepository colaboradorRepository= PersistenceContext.repositories().colaborador();
 
     public Colaborador adicionarColaborador(int numero, String nomeCurto, String nomeCompleto, Date dataNascimento, String localResidencia, boolean serHumano,
-                                            String email, String perfilColaborador, String funcao, long contacto){
+                                            String email, String perfilColaborador, String funcao, String contacto){
 
         final Colaborador novoColaborador=new Colaborador(numero,nomeCurto,nomeCompleto,dataNascimento,localResidencia,serHumano,email,perfilColaborador,funcao,contacto);
 

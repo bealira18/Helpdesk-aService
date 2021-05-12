@@ -1,6 +1,8 @@
 package eapli.base.app.backoffice.console.presentation.colaborador;
 
 import eapli.base.colaboradormanagement.application.AdicionarColaboradorController;
+import eapli.base.colaboradormanagement.domain.Contacto;
+import eapli.base.colaboradormanagement.domain.Email;
 import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
@@ -30,7 +32,7 @@ public class AddColaboradorUI extends AbstractUI {
 
         final String nomeCurto=Console.readLine("Nome curto: ");
         final String nomeLongo=Console.readLine("Nome longo: ");
-        final Date dataNascimento=Console.readDate("Data de nascimento: ");
+        final Date dataNascimento=Console.readDate("Data de nascimento (yyyy/mm/dd): ");
         final String localResidencia=Console.readLine("Local residencia: ");
         int humano=Console.readInteger("1- empresa, 0- colaborador: ");
 
@@ -43,10 +45,24 @@ public class AddColaboradorUI extends AbstractUI {
         else
             serHumano=true;
 
-        final String email=Console.readLine("Email: ");
+        String email=Console.readLine("Email: ");
+
+        Email em=new Email(email);
+        while(!em.verificaEmail(em.obterEmail())){
+            email=Console.readLine("Email: ");
+            em.mudarEmail(email);
+        }
+
         final String perfilColaborador=Console.readLine("Perfil do colaborador: ");
         final String funcao=Console.readLine("Função: ");
-        final Long contacto=Console.readLong("Contacto de telemóvel: ");
+
+        String contacto=Console.readLine("Contacto de telemóvel: ");
+
+        Contacto c=new Contacto(contacto);
+        while(!c.verificaContacto(c.obterContacto())){
+            contacto=Console.readLine("Contacto de telemóvel: ");
+            c.mudarContacto(contacto);
+        }
 
         try {
             this.controller.adicionarColaborador(num,nomeCurto,nomeLongo,dataNascimento,localResidencia,serHumano,email,perfilColaborador,funcao,contacto);

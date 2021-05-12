@@ -12,20 +12,19 @@ import java.util.regex.Pattern;
 
 @Embeddable
 public class Contacto implements ValueObject, Serializable, Comparable<Contacto> {
-    private long contacto;
+    private String contacto;
 
     protected Contacto(){
     }
 
-    public Contacto(long contacto) {
-        Preconditions.nonNull(contacto);
-        Preconditions.nonNegative(contacto);
-        if(verificaContacto(contacto))
-            throw new IllegalArgumentException("Contacto inválido");
+    public Contacto(String contacto) {
+        //Preconditions.nonNull(contacto);
+        //if(!verificaContacto(contacto))
+        //    throw new IllegalArgumentException("Contacto inválido");
         this.contacto = contacto;
     }
 
-    public static Contacto valueOf(final Long contacto) {
+    public static Contacto valueOf(final String contacto) {
         return new Contacto(contacto);
     }
 
@@ -44,24 +43,33 @@ public class Contacto implements ValueObject, Serializable, Comparable<Contacto>
 
     @Override
     public int compareTo(Contacto o) {
-        if(this.contacto==o.contacto)
-            return 0;
-        else if(this.contacto>o.contacto){
-            return 1;
-        }
-        return -1;
+        return this.contacto.compareTo(o.contacto);
     }
 
-    public boolean verificaContacto(Long contacto){
+    public String obterContacto() {
+        return contacto;
+    }
 
-        Pattern p = Pattern.compile("9(1/2/3/6)[0-9]{7}");
+    public void mudarContacto(String contacto) {
+        this.contacto = contacto;
+    }
+
+    public boolean verificaContacto(String contacto){
+
+        if(contacto.isEmpty())
+            return false;
+
+        Pattern p = Pattern.compile("(9[1236][0-9]) ?([0-9]{3}) ?([0-9]{3})");
 
         // Pattern class contains matcher() method
         // to find matching between given number
         // and regular expression
-        Matcher m = p.matcher(contacto.toString());
-        return (m.find() && m.group().equals(contacto.toString()));
+        Matcher m = p.matcher(contacto);
 
+        if(m.matches())
+            return true;
+        else
+            return false;
     }
 
     @Override

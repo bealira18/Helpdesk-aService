@@ -60,9 +60,11 @@ public class AssociarEquipaACatalogoUI extends AbstractUI {
         boolean temEquipasParaAdicionar=false;
 
         for(Equipa e : equipas){
-            if(equipasCE.contains(e)){
-                System.out.println(e.acronimo()+"\n");
-                temEquipasParaAdicionar=true;
+            for(Equipa eq : equipasCE){
+                if(e.acronimo().compareTo(eq.acronimo())!=0){
+                    System.out.println(e.acronimo()+"\n");
+                    temEquipasParaAdicionar=true;
+                }
             }
         }
 
@@ -89,6 +91,8 @@ public class AssociarEquipaACatalogoUI extends AbstractUI {
         }else{
             System.out.println("não tem equipas para adicionar");
         }
+
+        System.out.println("Associado com sucesso!\n");
 
         return true;
     }

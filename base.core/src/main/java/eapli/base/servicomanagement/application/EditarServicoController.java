@@ -99,7 +99,7 @@ public class EditarServicoController {
     }
 
     public void verificarCompleto(Servico servico){
-        if (servico.obterTitulo()!=null || servico.obterDescricaoBreve()!=null || servico.obterDescricaoCompleta()!=null || servico.obterPalavrasChave()!=null || servico.obterIcone().obterIcone()!=null){
+        if (!servico.obterTitulo().isEmpty() && !servico.obterDescricaoBreve().isEmpty() && !servico.obterDescricaoCompleta().isEmpty() && !servico.obterPalavrasChave().isEmpty() && !servico.obterIcone().obterIcone().isEmpty()){
             servico.mudarCompleto(true);
             servico.mudarEstado(true);
         }

@@ -98,6 +98,7 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     public String toString() {
         return "Equipa:\n" +
                 acronimo + "\n" +
-                designacao;
+                designacao + "\n" +
+                "Tipo da Equipa:\n" + tipoEquipa.obterNome();
     }
 }

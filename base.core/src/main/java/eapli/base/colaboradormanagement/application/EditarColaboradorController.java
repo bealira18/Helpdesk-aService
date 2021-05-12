@@ -104,7 +104,7 @@ public class EditarColaboradorController {
         colaboradorRepository.save(colaborador);
     }
 
-    public void mudarContacto(String nomeCompleto, long novoContacto) {
+    public void mudarContacto(String nomeCompleto, String novoContacto) {
 
         Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
 

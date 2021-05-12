@@ -25,6 +25,8 @@ public class AddServicoUI extends AbstractUI {
             e.printStackTrace();
         }
 
+        System.out.println("\nAdicionado com sucesso!");
+
         return true;
 
     }

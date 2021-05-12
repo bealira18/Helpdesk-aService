@@ -7,17 +7,12 @@ public class ContactoTeste {
 
     @Test(expected = IllegalArgumentException.class)
     public void regraContacto1() {
-        Contacto contacto=new Contacto(123L);
+        Contacto contacto=new Contacto("123");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void regraContacto2() {
-        Contacto contacto=new Contacto(-912345678);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void regraContacto3() {
-        Contacto contacto=new Contacto(952345678);
+        Contacto contacto=new Contacto("952345678");
     }
 
 }

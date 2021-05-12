@@ -15,14 +15,14 @@ public class Email implements ValueObject, Serializable, Comparable<Email>{
 
     private String email;
 
-    protected Email(){
+    public Email(){
 
     }
 
-    public Email(final String email){
-        Preconditions.nonNull(email);
-        if(!verificaEmail(email))
-            throw new IllegalArgumentException("Email inválido");
+    public Email(String email){
+        //Preconditions.nonNull(email);
+        //if(!verificaEmail(email) && email.isEmpty())
+        //    throw new IllegalArgumentException("Email inválido");
         this.email=email;
     }
 
@@ -59,6 +59,9 @@ public class Email implements ValueObject, Serializable, Comparable<Email>{
 
     public boolean verificaEmail(String email){
 
+        if(email.isEmpty())
+            return false;
+
         Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
         Matcher mat = pattern.matcher(email);
 
@@ -69,4 +72,7 @@ public class Email implements ValueObject, Serializable, Comparable<Email>{
 
     }
 
+    public void mudarEmail(String email) {
+        this.email = email;
+    }
 }

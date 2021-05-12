@@ -59,7 +59,7 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     }
 
     public Colaborador(int numero, String nomeCurto, String nomeCompleto, Date dataNascimento, String localResidencia, boolean serHumano,
-                       String email, String perfilColaborador, String funcao, long contacto) {
+                       String email, String perfilColaborador, String funcao, String contacto) {
         this.numero = new Numero(numero);
         this.nomeCurto = nomeCurto;
         this.nomeCompleto = nomeCompleto;
