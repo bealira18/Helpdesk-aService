@@ -45,11 +45,10 @@ Nada a declarar.
 
 # 5. Integração/Demonstração
 
-*Nesta secção a equipa deve descrever os esforços realizados no sentido de integrar a funcionalidade desenvolvida com as restantes funcionalidades do sistema.*
+Esta funcionalidade só dependia de uma implementada no sprint anterior, portanto, foi facilmente desenvolvida.
 
 # 6. Observações
 
-*Nesta secção sugere-se que a equipa apresente uma perspetiva critica sobre o trabalho desenvolvido apontando, por exemplo, outras alternativas e ou trabalhos futuros relacionados.*
-
+Nada a declarar.
 
 
