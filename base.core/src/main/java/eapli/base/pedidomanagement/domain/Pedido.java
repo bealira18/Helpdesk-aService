@@ -53,14 +53,18 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
 
     protected Pedido(){}
 
-    public Pedido(Date dataLimite,String urgencia,int feedback,int numeroS, int numeroD){
+    public Pedido(Date dataLimite,String urgencia,int numeroS, int numeroD){
         this.ano=c.getTime().getYear();
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
         this.dataFim=null;
-        this.urgencia=Urgencia.REDUZIDA;
+        if(urgencia.equals("reduzida"))
+            this.urgencia=Urgencia.REDUZIDA;
+        if(urgencia.equals("moderada"))
+            this.urgencia=Urgencia.MODERADA;
+        if(urgencia.equals("urgente"))
+            this.urgencia=Urgencia.URGENTE;
         this.estadoPedido=EstadoPedido.EM_APROVACAO;
-        this.feedback=new Feedback(feedback);
         NumeroParaPedido numeros = new NumeroParaPedido(numeroS, numeroD);
         this.numeroS = numeros.numeroSolicitante();
         this.numeroD = numeros.numeroDestinatario();
