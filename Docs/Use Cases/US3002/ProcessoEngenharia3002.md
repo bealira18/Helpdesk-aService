@@ -1,26 +1,21 @@
-# USDemo1
+# Solicitar serviço
 =======================================
 
 
 # 1. Requisitos
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
+**Demo1**
+Como utilizador, eu pretendo solicitar um serviço do catálogo de serviços que me é disponibilizado.
 
-*Exemplo*
+- Demo1.1. Pretendo iniciar a solicitação de um serviço mas deixá-lo inacabado, de modo a proceder à solicitação do mesmo mais tarde.
 
-**Demo1** Como {Ator} pretendo...
+- Demo1.2. Pretendo finalizar a solicitação de um serviço já iniciado.
 
-- Demo1.1. Blá Blá Blá ...
-
-- Demo1.2. Blá Blá Blá ...
-
-A interpretação feita deste requisito foi no sentido de ...
+A interpretação feita deste requisito foi no sentido de criar uma forma de carregar para a base de dados a informação dos pedidos, de modo a que estes possam ficar inacabados e completos mais tarde.
 
 # 2. Análise
 
-*Neste secção a equipa deve relatar o estudo/análise/comparação que fez com o intuito de tomar as melhores opções de design para a funcionalidade bem como aplicar diagramas/artefactos de análise adequados.*
-
-*Recomenda-se que organize este conteúdo por subsecções.*
+Para esta funcionalidade vão ser apresentados os serviços a que o colaborador tem acesso para que depois este possa escolher um para realizar um pedido.
 
 # 3. Design
 
