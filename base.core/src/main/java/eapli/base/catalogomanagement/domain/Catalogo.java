@@ -110,6 +110,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.apresentar = apresentar;
     }
 
+    public void mudarNivelCriticidade(NivelCriticidade nc) {
+        this.nivelCriticidade = nc;
+    }
+
     public CriteriosEspecificacao obterCriteriosEspecificacao(){
         return criteriosEspecificaçao;
     }

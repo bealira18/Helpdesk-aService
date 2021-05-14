@@ -36,6 +36,10 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
 
     }
 
+    public String obterObjetivo(){
+        return objetivo;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;
