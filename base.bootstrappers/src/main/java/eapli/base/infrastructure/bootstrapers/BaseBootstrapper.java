@@ -76,7 +76,7 @@ public class BaseBootstrapper implements Action {
         new AssociarServicoACatalogoBootstrapper(),
 
 
-        //new AddPedidoBootstrapper(),
+        new AddPedidoBootstrapper(),
         new NivelCriticidadeBootstrapper(),
         new AssociarNivelCriticidadeACatalogoBootstrapper(),
         new TarefaBootstrapper(),

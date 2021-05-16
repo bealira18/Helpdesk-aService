@@ -29,7 +29,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private Date dataFim;
     private Urgencia urgencia;
     private EstadoPedido estadoPedido;
-    private Feedback feedback;
+    //private Feedback feedback;
     private int numeroS;
     private int numeroD;
     Calendar c = Calendar.getInstance();
@@ -57,7 +57,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         this.ano=c.getTime().getYear();
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
-        this.dataFim=null;
+        //this.dataFim=null;
         if(urgencia.equals("reduzida"))
             this.urgencia=Urgencia.REDUZIDA;
         if(urgencia.equals("moderada"))
@@ -68,6 +68,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         NumeroParaPedido numeros = new NumeroParaPedido(numeroS, numeroD);
         this.numeroS = numeros.numeroSolicitante();
         this.numeroD = numeros.numeroDestinatario();
+        //this.feedback=null;
     }
 
     @Override

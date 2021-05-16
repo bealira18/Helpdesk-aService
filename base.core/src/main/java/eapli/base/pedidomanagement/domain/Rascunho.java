@@ -17,17 +17,23 @@ public class Rascunho implements AggregateRoot<Integer>, Serializable {
     private Date dataLimite;
     private Urgencia urgencia;
     private EstadoPedido estadoPedido;
-    private Feedback feedback;
-    private Numero numero;
+    private int numeroS;
+    private int numeroD;
 
     protected Rascunho(){}
 
-    public Rascunho(Date dataLimite, String urgencia, String estadoPedido, int feedback, int numero){
+    public Rascunho(Date dataLimite,String urgencia,int numeroS,int numeroD){
         this.dataLimite = dataLimite;
-        this.urgencia = Urgencia.REDUZIDA;
-        this.estadoPedido = null;
-        this.feedback = new Feedback(feedback);
-        this.numero = new Numero(numero);
+        if(urgencia.equals("reduzida"))
+            this.urgencia=Urgencia.REDUZIDA;
+        if(urgencia.equals("moderada"))
+            this.urgencia=Urgencia.MODERADA;
+        if(urgencia.equals("urgente"))
+            this.urgencia=Urgencia.URGENTE;
+        this.estadoPedido = EstadoPedido.NAO_SUBMETIDO;
+        NumeroParaPedido numeros = new NumeroParaPedido(numeroS, numeroD);
+        this.numeroS = numeros.numeroSolicitante();
+        this.numeroD = numeros.numeroDestinatario();
     }
 
     @Override

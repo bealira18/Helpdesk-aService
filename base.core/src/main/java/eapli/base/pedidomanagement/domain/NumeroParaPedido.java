@@ -19,8 +19,8 @@ public class NumeroParaPedido implements ValueObject, Serializable, Comparable<N
     }
 
     public NumeroParaPedido(int numeroS, int numeroD) {
-        Preconditions.nonNull(numeroS);
-        Preconditions.nonNull(numeroD);
+        //Preconditions.nonNull(numeroS);
+        //Preconditions.nonNull(numeroD);
         Preconditions.nonNegative(numeroS);
         Preconditions.nonNegative(numeroD);
         this.destinatario = numeroD;

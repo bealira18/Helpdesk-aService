@@ -29,13 +29,13 @@ public class AddRascunhoBootstrapper implements Action {
         }
 
         repository= PersistenceContext.repositories().rascunho();
-        Rascunho rascunho1=new Rascunho(d1,"urgente","5",5, 3);
-        Rascunho rascunho2=new Rascunho(d2,"urgente","5",5, 4);
-        Rascunho rascunho3=new Rascunho(d3,"urgente","5",5, 56);
+        Rascunho rascunho1=new Rascunho(d1,"urgente", 3,1);
+        Rascunho rascunho2=new Rascunho(d2,"urgente", 4,1);
+        Rascunho rascunho3=new Rascunho(d3,"urgente", 36,36);
         repository.save(rascunho1);
         repository.save(rascunho2);
         repository.save(rascunho3);
-        return false;
+        return true;
     }
 
 }

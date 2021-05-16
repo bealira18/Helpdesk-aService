@@ -1,6 +1,5 @@
 package eapli.base.pedidomanagement.domain;
 
-import eapli.base.colaboradormanagement.domain.Contacto;
 import eapli.framework.domain.model.ValueObject;
 import eapli.framework.validations.Preconditions;
 
@@ -17,7 +16,7 @@ public class Feedback implements ValueObject, Serializable, Comparable<Feedback>
     }
 
     public Feedback(int feedback) {
-        Preconditions.nonNull(feedback);
+        //Preconditions.nonNull(feedback);
         Preconditions.nonNegative(feedback);
         if(feedback>5)
             throw new IllegalArgumentException("Numero fora do limite");
