@@ -36,12 +36,16 @@ A forma encontrada para resolver este problema foi criar uma classe AdicionarPed
 ## 3.4. Testes 
 *Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar que se pode deixar um pedido em modo rascunho (inacabado).
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
-	}
+	@Test
+    public void pedidoInacabado(){
+
+        Rascunho instance=new Rascunho(null,null,1,1);
+
+        Assert.assertEquals(instance.obterEstado(),0);
+
+    }
 
 # 4. Implementação
 
