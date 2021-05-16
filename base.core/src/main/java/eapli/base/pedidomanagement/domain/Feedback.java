@@ -1,7 +1,6 @@
 package eapli.base.pedidomanagement.domain;
 
 import eapli.framework.domain.model.ValueObject;
-import eapli.framework.validations.Preconditions;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -16,8 +15,6 @@ public class Feedback implements ValueObject, Serializable, Comparable<Feedback>
     }
 
     public Feedback(int feedback) {
-        //Preconditions.nonNull(feedback);
-        Preconditions.nonNegative(feedback);
         if(feedback>5)
             throw new IllegalArgumentException("Numero fora do limite");
         this.feedback = feedback;

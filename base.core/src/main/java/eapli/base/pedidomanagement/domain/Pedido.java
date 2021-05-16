@@ -29,9 +29,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private Date dataFim;
     private Urgencia urgencia;
     private EstadoPedido estadoPedido;
-    //private Feedback feedback;
+    private Feedback feedback;
     private int numeroS;
     private int numeroD;
+    @Transient
     Calendar c = Calendar.getInstance();
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -53,7 +54,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
 
     protected Pedido(){}
 
-    public Pedido(Date dataLimite,String urgencia,int numeroS, int numeroD){
+    public Pedido(Date dataLimite,String urgencia,int numeroS, int numeroD,int feedback){
         this.ano=c.getTime().getYear();
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
@@ -68,7 +69,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         NumeroParaPedido numeros = new NumeroParaPedido(numeroS, numeroD);
         this.numeroS = numeros.numeroSolicitante();
         this.numeroD = numeros.numeroDestinatario();
-        //this.feedback=null;
+        this.feedback=new Feedback(feedback);
     }
 
     @Override
