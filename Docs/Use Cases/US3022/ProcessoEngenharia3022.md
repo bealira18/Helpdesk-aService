@@ -16,3 +16,19 @@ A interpretação feita deste requisito foi no sentido de criar uma forma de con
 # 2. Análise
 
 Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de Tarefas de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
+
+# 3. Design
+
+A forma encontrada para resolver este problema foi criar as classes ReivindicarTarefaUI e ConsultarTarefaUI que fazem uso dos controllers ReivindicarTarefaController e ConsultarTarefaController para criarem instâncias de forma a garantir as regras de negócio dadas pelo cliente.
+
+## 3.1. Realização da Funcionalidade
+
+![ConsultarTarefaPendente_SD](ConsultarTarefaPendente_SD.jpg)
+
+![ReivindicarTarefaPendente_SD](ReivindicarTarefaPendente_SD.jpg)
+
+## 3.2. Diagrama de Classes
+
+![ConsultarTarefaPendente_CD](ConsultarTarefaPendente_CD.jpg)
+
+![ReivindicarTarefaPendente_CD](ReivindicarTarefaPendente_CD.jpg)
