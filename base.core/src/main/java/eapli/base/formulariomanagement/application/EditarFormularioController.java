@@ -28,7 +28,7 @@ public class EditarFormularioController {
         if(formulario==null){
             throw new IllegalArgumentException("Formulario inválido com nome: "+nomeAtual);
         }else{
-            formulario.mudarNome(new Nome(nomeNovo));
+            formulario.mudarNome(nomeNovo);
         }
 
         formularioRepository.save(formulario);

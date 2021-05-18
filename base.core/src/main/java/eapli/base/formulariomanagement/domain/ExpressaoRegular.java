@@ -15,7 +15,6 @@ public class ExpressaoRegular implements ValueObject, Serializable, Comparable<E
     protected ExpressaoRegular(){}
 
     public ExpressaoRegular(final String expressaoRegular){
-        Preconditions.nonNull(expressaoRegular);
         if(expressaoRegular.toCharArray().length>50)
             throw new IllegalArgumentException("Expressao Regular muito extensa");
         this.expressaoRegular=expressaoRegular;
@@ -23,6 +22,10 @@ public class ExpressaoRegular implements ValueObject, Serializable, Comparable<E
 
     public static ExpressaoRegular valueOf(final String expressaoRegular) {
         return new ExpressaoRegular(expressaoRegular);
+    }
+
+    public String obterExpressaoRegular() {
+        return expressaoRegular;
     }
 
     @Override

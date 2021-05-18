@@ -13,7 +13,10 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Nome nome;
+    //private Nome nome;
+    private String nome;
+    private boolean completo = false;
+    private boolean ativo = false;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -22,11 +25,11 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     protected Formulario(){}
     
     public Formulario(String nome){
-        this.nome=new Nome(nome);
+        this.nome=nome;
     }
 
     public int compareTo(String nome) {
-        return this.nome.obterNome().compareTo(nome);
+        return this.nome.compareTo(nome);
     }
 
     public void addAtributo(Atributo atributo){
@@ -37,8 +40,32 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
         atributos.remove(atributo);
     }
 
-    public void mudarNome(Nome nome) {
+    public void mudarNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean estaCompleto() {
+        return completo;
+    }
+
+    public boolean estaAtivo() {
+        return ativo;
+    }
+
+    public void mudarCompleto(boolean completo) {
+        this.completo = completo;
+    }
+
+    public void mudarAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String obterNome() {
+        return nome;
+    }
+
+    public List<Atributo> obterAtributos() {
+        return atributos;
     }
 
     @Override

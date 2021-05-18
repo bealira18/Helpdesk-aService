@@ -12,9 +12,11 @@ public class AdicionarServicoController {
 
         final Servico novoServico = new Servico(cod,titulo, descricaoBreve, descricaoCompleta, palavrasChave, icone);
 
-        if (!novoServico.obterTitulo().isEmpty() && !novoServico.obterDescricaoBreve().isEmpty() && !novoServico.obterDescricaoCompleta().isEmpty() && !novoServico.obterPalavrasChave().isEmpty() && !novoServico.obterIcone().obterIcone().isEmpty() && novoServico.obterFormulario()!=null && novoServico.obterWorkflow()!=null){
-            novoServico.mudarCompleto(true);
-            novoServico.mudarEstado(true);
+        if (!novoServico.obterTitulo().isEmpty() && !novoServico.obterDescricaoBreve().isEmpty() && !novoServico.obterDescricaoCompleta().isEmpty() && !novoServico.obterPalavrasChave().isEmpty() && !novoServico.obterIcone().obterIcone().isEmpty() && novoServico.obterFormulario()!=null /*&& novoServico.obterWorkflow()!=null*/){
+            if(novoServico.obterFormulario().estaCompleto()) {
+                novoServico.mudarCompleto(true);
+                novoServico.mudarEstado(true);
+            }
         }
 
         return servicoRepository.save(novoServico);

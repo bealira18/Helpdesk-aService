@@ -17,10 +17,13 @@ public class TipoDadosBase implements ValueObject, Serializable, Comparable<Tipo
     }
 
     public TipoDadosBase(final String tipoDadosBase){
-        Preconditions.nonNull(tipoDadosBase);
         if(!tipoDadosBase.equals("String") && !tipoDadosBase.equals("Integer") && !tipoDadosBase.equals("Char") && !tipoDadosBase.equals("Boolean") && !tipoDadosBase.equals("Short") && !tipoDadosBase.equals("Double") && !tipoDadosBase.equals("Float"))
             throw new IllegalArgumentException("Formato inválido");
         this.tipoDadosBase=tipoDadosBase;
+    }
+
+    public String obterTipoDadosBase() {
+        return tipoDadosBase;
     }
 
     public static TipoDadosBase valueOf(final String tipoDadosBase) {

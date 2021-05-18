@@ -9,7 +9,6 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 public class AdicionarFormularioController {
 
     private final FormularioRepository formularioRepository= PersistenceContext.repositories().formulario();
-    private final AtributoRepository atributoRepository= PersistenceContext.repositories().atributo();
 
     public Formulario adicionarFormulario(String nome){
 

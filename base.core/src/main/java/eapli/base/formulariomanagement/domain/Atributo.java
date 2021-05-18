@@ -1,7 +1,5 @@
 package eapli.base.formulariomanagement.domain;
 
-import eapli.base.equipamanagement.domain.Descricao;
-import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -14,31 +12,33 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(unique=true)
-    private Nome nome;
-    private Etiqueta etiqueta;
-    private Descricao descricao;
+    private String nome;
+    private String etiqueta;
+    private String descricao;
     private ExpressaoRegular expressaoRegular;
     private TipoDadosBase tipoDadosBase;
+    private boolean completo = false;
+    private boolean ativo = false;
 
     protected Atributo(){}
 
     public Atributo(String nome, String etiqueta, String descricao, String expressaoRegular, String tipoDadosBase){
-        this.nome = new Nome(nome);
-        this.etiqueta=new Etiqueta(etiqueta);
-        this.descricao = new Descricao(descricao);
+        this.nome =nome;
+        this.etiqueta=etiqueta;
+        this.descricao =descricao;
         this.expressaoRegular = new ExpressaoRegular(expressaoRegular);
         this.tipoDadosBase = new TipoDadosBase(tipoDadosBase);
     }
 
-    public void mudarNome(Nome nome) {
+    public void mudarNome(String nome) {
         this.nome = nome;
     }
 
-    public void mudarEtiqueta(Etiqueta etiqueta) {
+    public void mudarEtiqueta(String etiqueta) {
         this.etiqueta = etiqueta;
     }
 
-    public void mudarDescricao(Descricao descricao) {
+    public void mudarDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -50,8 +50,40 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
         this.tipoDadosBase = tipoDadosBase;
     }
 
+    public void mudarCompleto(boolean completo) {
+        this.completo = completo;
+    }
+
+    public void mudarAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String obterNome() {
+        return nome;
+    }
+
+    public String obterEtiqueta() {
+        return etiqueta;
+    }
+
+    public String obterDescricao() {
+        return descricao;
+    }
+
+    public ExpressaoRegular obterExpressaoRegular() {
+        return expressaoRegular;
+    }
+
+    public TipoDadosBase obterTipoDadosBase() {
+        return tipoDadosBase;
+    }
+
+    public boolean obterCompleto() {
+        return completo;
+    }
+
     public int compareTo(String nome) {
-        return this.nome.obterNome().compareTo(nome);
+        return this.nome.compareTo(nome);
     }
 
     @Override

@@ -15,7 +15,6 @@ public class Nome implements ValueObject, Serializable, Comparable<Nome>{
     protected Nome(){}
 
     public Nome(final String nome){
-        Preconditions.nonNull(nome);
         if(nome.toCharArray().length>50)
             throw new IllegalArgumentException("Nome muito extenso");
         this.nome=nome;

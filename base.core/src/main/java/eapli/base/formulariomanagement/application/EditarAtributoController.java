@@ -34,7 +34,7 @@ public class EditarAtributoController {
         if(atributo==null){
             throw new IllegalArgumentException("Atributo inválido com nome: "+nomeAtual);
         }else{
-            atributo.mudarNome(new Nome(nomeNovo));
+            atributo.mudarNome(nomeNovo);
         }
 
         atributoRepository.save(atributo);
@@ -47,7 +47,7 @@ public class EditarAtributoController {
         if(atributo==null){
             throw new IllegalArgumentException("Atributo inválido com nome: "+nome);
         }else{
-            atributo.mudarEtiqueta(new Etiqueta(etiqueta));
+            atributo.mudarEtiqueta(etiqueta);
         }
 
         atributoRepository.save(atributo);
@@ -60,7 +60,7 @@ public class EditarAtributoController {
         if(atributo==null){
             throw new IllegalArgumentException("Atributo inválido com nome: "+nome);
         }else{
-            atributo.mudarDescricao(new Descricao(descricao));
+            atributo.mudarDescricao(descricao);
         }
 
         atributoRepository.save(atributo);

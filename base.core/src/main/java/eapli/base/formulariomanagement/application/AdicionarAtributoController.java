@@ -12,6 +12,11 @@ public class AdicionarAtributoController {
 
         final Atributo atributo=new Atributo(nome,etiqueta,descricao,expressaoRegular,tipoDadosBase);
 
+        if(!atributo.obterNome().isEmpty() && !atributo.obterEtiqueta().isEmpty() && !atributo.obterDescricao().isEmpty() && !atributo.obterExpressaoRegular().obterExpressaoRegular().isEmpty() && !atributo.obterTipoDadosBase().obterTipoDadosBase().isEmpty()){
+            atributo.mudarAtivo(true);
+            atributo.mudarCompleto(true);
+        }
+
         return atributoRepository.save(atributo);
 
     }
