@@ -105,8 +105,12 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         return ativo;
     }
 
-    public void mudarApresentar(boolean apresentar){
-        this.apresentar = apresentar;
+    public Formulario obterFormulario() {
+        return formulario;
+    }
+
+    public Workflow obterWorkflow() {
+        return workflow;
     }
 
     public void mudarTitulo(String titulo) {
