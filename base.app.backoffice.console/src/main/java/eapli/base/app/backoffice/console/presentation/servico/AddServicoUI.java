@@ -13,6 +13,7 @@ public class AddServicoUI extends AbstractUI {
     @Override
     protected boolean doShow(){
 
+        final String cod= Console.readLine("Codigo unico: ");
         final String titulo= Console.readLine("Titulo: ");
         final String descricaobreve= Console.readLine("Descricao Breve: ");
         final String descricaocompleta= Console.readLine("Descricao Completa: ");
@@ -20,7 +21,7 @@ public class AddServicoUI extends AbstractUI {
         final String icone= Console.readLine("Icone: ");
 
         try{
-            controller.adicionarServico(titulo,descricaobreve,descricaocompleta,palavrasChave,icone);
+            controller.adicionarServico(cod,titulo,descricaobreve,descricaocompleta,palavrasChave,icone);
         }catch (Exception e) {
             e.printStackTrace();
         }

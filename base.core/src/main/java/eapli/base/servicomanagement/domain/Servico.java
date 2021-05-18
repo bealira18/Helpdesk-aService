@@ -18,6 +18,8 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(unique=true)
+    private String cod;
+    @Column(unique=true)
     private String titulo;
     private String descricaoBreve;
     private String descricaoCompleta;
@@ -38,9 +40,12 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private NivelCriticidade nivelCriticidade;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    /*@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Formulario> formularios = new ArrayList<>();
+    private List<Formulario> formularios = new ArrayList<>();*/
+
+    @OneToOne
+    private Formulario formulario;
 
     @OneToOne
     private Workflow workflow;
@@ -48,8 +53,9 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     protected Servico() {
     }
 
-    public Servico(String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
+    public Servico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
         Preconditions.nonNull(titulo);
+        this.cod=cod;
         this.titulo = titulo;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;
