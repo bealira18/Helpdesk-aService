@@ -30,50 +30,63 @@ public class AddServicoUI extends AbstractUI {
         final String descricaocompleta= Console.readLine("Descricao Completa: ");
         final String palavrasChave= Console.readLine("Palavras chave: ");
         final String icone= Console.readLine("Icone: ");
+        int automatico=Console.readInteger("0-Automatico\n1-Manual");
+
+        while(automatico!=0 && automatico!=1)
+            automatico=Console.readInteger("0-Automatico\n1-Manual");
+
+        boolean automa;
+
+        if(automatico==0)
+            automa=true;
+        else
+            automa=false;
 
         Servico s=new Servico();
 
         try{
-            s=controller.adicionarServico(cod,titulo,descricaobreve,descricaocompleta,palavrasChave,icone);
+            s=controller.adicionarServico(cod,titulo,descricaobreve,descricaocompleta,palavrasChave,icone,automa);
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("\nAdicionar formulario ao serviço:\n");
+        if(!automa) {
+            System.out.println("\nAdicionar formulario ao serviço:\n");
 
-        final String nomeForm= Console.readLine("Nome do Formulario: ");
+            final String nomeForm = Console.readLine("Nome do Formulario: ");
 
-        Formulario f = new Formulario();
+            Formulario f = new Formulario();
 
-        try{
-            f=controllerForm.adicionarFormulario(nomeForm);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        controllerAss.associarFormularioAServicoComIdF(f.obterId(),s.obterId());
-
-        int aux=Console.readInteger("Adicionar atributos ao formulario?\n0-não\n1-sim");
-
-        while(aux==1){
-            //tornar nome obrigatorio
-            final String nomeAtributo= Console.readLine("Nome Atributo: ");
-            final String etiqueta= Console.readLine("Etiqueta: ");
-            final String descricao= Console.readLine("Descricao: ");
-            final String expressao= Console.readLine("Expressao Regular: ");
-            final String tipoDadosBase= Console.readLine("Tipo Dados Base: ");
-
-            Atributo a=new Atributo();
-
-            try{
-                a=controllerAtr.adicionarAtributo(nomeAtributo,etiqueta,descricao,expressao,tipoDadosBase);
-            }catch (Exception e) {
+            try {
+                f = controllerForm.adicionarFormulario(nomeForm);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            controllerAssAtrForm.associarAtributoAFormularioIds(f.obterId(),a.obterId());
+            controllerAss.associarFormularioAServicoComIdF(f.obterId(), s.obterId());
 
-            aux=Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
+            int aux = Console.readInteger("Adicionar atributos ao formulario?\n0-não\n1-sim");
+
+            while (aux == 1) {
+                //tornar nome obrigatorio
+                final String nomeAtributo = Console.readLine("Nome Atributo: ");
+                final String etiqueta = Console.readLine("Etiqueta: ");
+                final String descricao = Console.readLine("Descricao: ");
+                final String expressao = Console.readLine("Expressao Regular: ");
+                final String tipoDadosBase = Console.readLine("Tipo Dados Base: ");
+
+                Atributo a = new Atributo();
+
+                try {
+                    a = controllerAtr.adicionarAtributo(nomeAtributo, etiqueta, descricao, expressao, tipoDadosBase);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                controllerAssAtrForm.associarAtributoAFormularioIds(f.obterId(), a.obterId());
+
+                aux = Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
+            }
         }
 
         System.out.println("\nServiço adicionado com sucesso!");

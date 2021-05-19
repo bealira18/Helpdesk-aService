@@ -8,9 +8,9 @@ public class AdicionarServicoController {
 
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
 
-    public Servico adicionarServico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
+    public Servico adicionarServico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone,boolean automatico) {
 
-        final Servico novoServico = new Servico(cod,titulo, descricaoBreve, descricaoCompleta, palavrasChave, icone);
+        final Servico novoServico = new Servico(cod,titulo, descricaoBreve, descricaoCompleta, palavrasChave, icone,automatico);
 
         if (!novoServico.obterTitulo().isEmpty() && !novoServico.obterDescricaoBreve().isEmpty() && !novoServico.obterDescricaoCompleta().isEmpty() && !novoServico.obterPalavrasChave().isEmpty() && !novoServico.obterIcone().obterIcone().isEmpty() && novoServico.obterFormulario()!=null /*&& novoServico.obterWorkflow()!=null*/){
             if(novoServico.obterFormulario().estaCompleto()) {
