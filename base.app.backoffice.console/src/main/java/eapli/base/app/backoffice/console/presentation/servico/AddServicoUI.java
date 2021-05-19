@@ -56,6 +56,7 @@ public class AddServicoUI extends AbstractUI {
         int aux=Console.readInteger("Adicionar atributos ao formulario?\n0-não\n1-sim");
 
         while(aux==1){
+            //tornar nome obrigatorio
             final String nomeAtributo= Console.readLine("Nome Atributo: ");
             final String etiqueta= Console.readLine("Etiqueta: ");
             final String descricao= Console.readLine("Descricao: ");

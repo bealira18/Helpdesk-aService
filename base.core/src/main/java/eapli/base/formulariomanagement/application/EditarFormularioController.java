@@ -34,4 +34,29 @@ public class EditarFormularioController {
         formularioRepository.save(formulario);
     }
 
+    public Formulario verificarFormularioId(int id){
+
+        Iterable<Formulario> formularios=formularioRepository.findAll();
+
+        for(Formulario f : formularios){
+            if(f.obterId()==id)
+                return f;
+        }
+
+        return null;
+    }
+
+    public void mudarNomeId(int id,String nomeNovo){
+
+        Formulario formulario=verificarFormularioId(id);
+
+        if(formulario==null){
+            throw new IllegalArgumentException("Formulario inválido com id: "+id);
+        }else{
+            formulario.mudarNome(nomeNovo);
+        }
+
+        formularioRepository.save(formulario);
+    }
+
 }
