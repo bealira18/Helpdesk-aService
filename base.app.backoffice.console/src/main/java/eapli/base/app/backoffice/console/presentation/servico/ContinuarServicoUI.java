@@ -28,40 +28,46 @@ public class ContinuarServicoUI extends AbstractUI {
         Iterable<Servico> servicosInacabados=controller.listarServicosIncompletos();
 
         for(Servico s : servicosInacabados){
-            System.out.println(s.obterTitulo()+"\n");
+            System.out.println(s.obterCod()+"\n");
         }
 
-        String titulo= Console.readLine("\nTitulo serviço pretendido: ");
+        String cod= Console.readLine("\nCodigo serviço pretendido: ");
 
-        while(controllerpesq.procurarServicoPorTitulo(titulo)==null)
-            titulo=Console.readLine("Titulo serviço pretendido: ");
+        while(controllerpesq.procurarServicoPorCod(cod)==null)
+            cod=Console.readLine("Codigo serviço pretendido: ");
 
-        Servico servico=controllerpesq.procurarServicoPorTitulo(titulo);
+        Servico servico=controllerpesq.procurarServicoPorCod(cod);
 
+        String titulo;
         String descricaobreve;
         String descricaocompleta;
         String palavraschave;
         String icone;
         String nomeForm;
 
+        if(servico.obterTitulo().isEmpty()) {
+            titulo = Console.readLine("\nTitulo: ");
+            controllereditar.mudarDescricaoBreve(cod,titulo);
+        }
+
         if(servico.obterDescricaoBreve().isEmpty()) {
             descricaobreve = Console.readLine("\nDescricao Breve: ");
-            controllereditar.mudarDescricaoBreve(titulo,descricaobreve);
+            controllereditar.mudarDescricaoBreve(cod,descricaobreve);
         }
 
         if(servico.obterDescricaoCompleta().isEmpty()) {
             descricaocompleta = Console.readLine("\nDescricao Completa: ");
-            controllereditar.mudarDescricaoCompleta(titulo,descricaocompleta);
+            controllereditar.mudarDescricaoCompleta(cod,descricaocompleta);
         }
 
         if(servico.obterPalavrasChave().isEmpty()) {
             palavraschave = Console.readLine("\nPalavras chave: ");
-            controllereditar.mudarPalavrasChave(titulo,palavraschave);
+            controllereditar.mudarPalavrasChave(cod,palavraschave);
         }
 
         if(servico.obterIcone().obterIcone().isEmpty()) {
             icone = Console.readLine("\nIcone em jpg ou png: ");
-            controllereditar.mudarIcone(titulo,icone);
+            controllereditar.mudarIcone(cod,icone);
         }
 
         if(servico.obterFormulario().obterNome().isEmpty()){

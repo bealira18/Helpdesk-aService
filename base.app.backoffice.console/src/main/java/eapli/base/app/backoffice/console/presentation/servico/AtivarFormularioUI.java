@@ -20,21 +20,21 @@ public class AtivarFormularioUI extends AbstractUI {
             Iterable<Servico> servicos = controllerList.listarServicos();
 
             for (Servico s : servicos) {
-                    System.out.println(s.obterTitulo());
+                    System.out.println(s.obterCod());
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        String titulo= Console.readLine("\nTitulo pretendido: ");
+        String cod= Console.readLine("\nCodigo pretendido: ");
 
-        while(controllerPesq.procurarServicoPorTitulo(titulo)==null)
-            titulo= Console.readLine("Acronimo pretendido: ");
+        while(controllerPesq.procurarServicoPorCod(cod)==null)
+            cod= Console.readLine("Codigo pretendido: ");
 
         Servico s=new Servico();
 
         try{
-            s=controllerPesq.procurarServicoPorTitulo(titulo);
+            s=controllerPesq.procurarServicoPorCod(cod);
         }catch (Exception e) {
             e.printStackTrace();
         }

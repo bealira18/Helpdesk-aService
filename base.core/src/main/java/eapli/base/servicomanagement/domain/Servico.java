@@ -19,7 +19,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     private int id;
     @Column(unique=true)
     private String cod;
-    @Column(unique=true)
     private String titulo;
     private String descricaoBreve;
     private String descricaoCompleta;
@@ -75,6 +74,10 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
 
     public int obterId() {
         return id;
+    }
+
+    public String obterCod() {
+        return cod;
     }
 
     public String obterTitulo() {
@@ -156,7 +159,8 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Override
     public String toString() {
         return "Servico:\n" +
-                "titulo= " + titulo +
+                "codigo= " + cod+
+                "\ntitulo= " + titulo +
                 "\ndescricaoBreve= " + descricaoBreve +
                 "\npalavrasChave= " + palavrasChave;
     }

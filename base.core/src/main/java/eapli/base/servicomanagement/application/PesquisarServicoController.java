@@ -8,14 +8,14 @@ public class PesquisarServicoController {
 
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
 
-    public Servico procurarServicoPorTitulo(String titulo) {
+    public Servico procurarServicoPorCod(String codigo) {
 
         Iterable<Servico> servicos = servicoRepository.findAll();
 
         Servico servico = null;
 
         for (Servico s : servicos) {
-            if (s.obterTitulo().equalsIgnoreCase(titulo)) {
+            if (s.obterCod().equalsIgnoreCase(codigo)) {
                 servico = s;
             }
         }

@@ -282,7 +282,7 @@ public class MainMenu extends AbstractUI {
 
         menu.addItem(ADICIONAR_SERVICO_OPTION,"Adicionar serviço",new AddServicoAction());
         menu.addItem(LISTAR_SERVICO_OPTION,"Listar serviços ativos",new ListarServicoAction());
-        menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por nome",new PesquisarServicoAction());
+        menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por codigo",new PesquisarServicoAction());
         menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION,"Associar serviço a catalogo",new AssociarServicoACatalogoAction());
         menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
         menu.addItem(LISTAR_SERVICOS_CATALOGO,"Listar serviços de um catalogo",new ListarServicosDeCatalogoAction());

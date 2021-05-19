@@ -29,12 +29,12 @@ public class AddAtributoAFormularioUI extends AbstractUI {
             e.printStackTrace();
         }
 
-        String titulo= Console.readLine("Titulo pretendido: ");
+        String cod= Console.readLine("Codigo pretendido: ");
 
-        while(controllerPesq.procurarServicoPorTitulo(titulo)==null)
-            titulo= Console.readLine("Acronimo pretendido: ");
+        while(controllerPesq.procurarServicoPorCod(cod)==null)
+            cod= Console.readLine("Acronimo pretendido: ");
 
-        Servico servico=controllerPesq.procurarServicoPorTitulo(titulo);
+        Servico servico=controllerPesq.procurarServicoPorCod(cod);
 
         int aux=1;
 

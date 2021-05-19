@@ -53,22 +53,22 @@ public class AssociarServicoACatalogoUI extends AbstractUI {
 
         for(Servico s : todosServicos){
             if(s.estaCompleto() && s.estaAtivo() && !servicosEmCatalogo.contains(s)){
-                System.out.println(s.obterTitulo()+"\n");
+                System.out.println(s.obterCod()+"\n");
             }
         }
 
         //escolher serviço
 
-        String tituloServico= Console.readLine("\nTitulo serviço pretendido: ");
+        String codServico= Console.readLine("\nCodigo serviço pretendido: ");
 
-        while(controllerpesqserv.procurarServicoPorTitulo(tituloServico)==null)
-            tituloServico=Console.readLine("Titulo serviço pretendido: ");
+        while(controllerpesqserv.procurarServicoPorCod(codServico)==null)
+            codServico=Console.readLine("Codigo serviço pretendido: ");
 
         //associar
 
 
         try{
-            controller.associarServicoACatalogo(tituloCatalogo,tituloServico);
+            controller.associarServicoACatalogo(tituloCatalogo,codServico);
             System.out.println("Associado com sucesso");
         }catch (Exception e) {
             e.printStackTrace();

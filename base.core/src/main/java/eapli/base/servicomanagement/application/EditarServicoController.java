@@ -9,26 +9,26 @@ public class EditarServicoController {
     
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     
-    public Servico procurarServicoPorTitulo(String titulo) {
+    public Servico procurarServicoPorCod(String cod) {
 
         Iterable<Servico> servicos = servicoRepository.findAll();
 
         Servico servico = null;
 
         for (Servico serv : servicos) {
-            if (serv.obterTitulo().compareTo(titulo) == 0) {
+            if (serv.obterCod().compareTo(cod) == 0) {
                 servico = serv;
             }
         }
         return servico;
     }
     
-    public void mudarTitulo(String tituloAtual, String tituloNovo) {
+    public void mudarTitulo(String cod, String tituloNovo) {
 
-        Servico servico = procurarServicoPorTitulo(tituloAtual);
+        Servico servico = procurarServicoPorCod(cod);
 
         if (servico == null) {
-            throw new IllegalArgumentException("Este serviço tem um título inválido: " + tituloAtual);
+            throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
         } else {
             servico.mudarTitulo(tituloNovo);
         }
@@ -38,12 +38,12 @@ public class EditarServicoController {
         servicoRepository.save(servico);
     }
     
-    public void mudarDescricaoBreve(String titulo, String descricaoBreve) {
+    public void mudarDescricaoBreve(String cod, String descricaoBreve) {
 
-        Servico servico = procurarServicoPorTitulo(titulo);
+        Servico servico = procurarServicoPorCod(cod);
 
         if (servico == null) {
-            throw new IllegalArgumentException("Este serviço tem um título inválido: " + titulo);
+            throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
         } else {
             servico.mudarDescricaoBreve(descricaoBreve);
         }
@@ -53,12 +53,12 @@ public class EditarServicoController {
         servicoRepository.save(servico);
     }
     
-     public void mudarDescricaoCompleta(String titulo, String descricaoCompleta) {
+     public void mudarDescricaoCompleta(String cod, String descricaoCompleta) {
 
-        Servico servico = procurarServicoPorTitulo(titulo);
+        Servico servico = procurarServicoPorCod(cod);
 
         if (servico == null) {
-            throw new IllegalArgumentException("Este serviço tem um título inválido: " + titulo);
+            throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
         } else {
             servico.mudarDescricaoCompleta(descricaoCompleta);
         }
@@ -68,12 +68,12 @@ public class EditarServicoController {
         servicoRepository.save(servico);
     }
      
-     public void mudarPalavrasChave(String titulo, String palavrasChave) {
+     public void mudarPalavrasChave(String cod, String palavrasChave) {
 
-        Servico servico = procurarServicoPorTitulo(titulo);
+        Servico servico = procurarServicoPorCod(cod);
 
         if (servico == null) {
-            throw new IllegalArgumentException("Este serviço tem um título inválido: " + titulo);
+            throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
         } else {
             servico.mudarPalavrasChave(palavrasChave);
         }
@@ -83,12 +83,12 @@ public class EditarServicoController {
         servicoRepository.save(servico);
     }
      
-     public void mudarIcone(String titulo, String novoIcone) {
+     public void mudarIcone(String cod, String novoIcone) {
 
-        Servico servico = procurarServicoPorTitulo(titulo);
+        Servico servico = procurarServicoPorCod(cod);
 
         if (servico == null) {
-            throw new IllegalArgumentException("Este serviço tem um título inválido: " + titulo);
+            throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
         } else {
             servico.mudarIcone(new Icone(novoIcone));
         }

@@ -18,7 +18,7 @@ public class AssociarServicoACatalogoController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final CatalogoRepository catalogoRepository = PersistenceContext.repositories().catalogo();
 
-    public void associarServicoACatalogo(String tituloCatalogo, String tituloServico){
+    public void associarServicoACatalogo(String tituloCatalogo, String codServico){
         Iterable<Catalogo> catalogos = catalogoRepository.findAll();
         Catalogo c1 = null;
         for (Catalogo c : catalogos){
@@ -29,7 +29,7 @@ public class AssociarServicoACatalogoController {
         Iterable<Servico> servicos = servicoRepository.findAll();
         Servico s1 = null;
         for (Servico s : servicos){
-            if(s.obterTitulo().equalsIgnoreCase(tituloServico)){
+            if(s.obterCod().equalsIgnoreCase(codServico)){
                 s1 = s;
             }
         }
@@ -38,7 +38,7 @@ public class AssociarServicoACatalogoController {
         }
 
         if(s1 == null){
-            throw new IllegalArgumentException("Não existe nenhum serviço com o título: " + tituloServico);
+            throw new IllegalArgumentException("Não existe nenhum serviço com o codigo: " + codServico);
         }
 
         associacao(c1, s1);

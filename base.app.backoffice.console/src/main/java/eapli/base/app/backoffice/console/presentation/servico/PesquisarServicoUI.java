@@ -19,20 +19,20 @@ public class PesquisarServicoUI extends AbstractUI {
 
             for (Servico s : servicos) {
                 if (s.estaAtivo() && s.estaCompleto()) {
-                    System.out.println(s.obterTitulo());
+                    System.out.println(s.obterCod());
                 }
             }
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-        String titulo= Console.readLine("Titulo pretendido: ");
+        String cod= Console.readLine("Codigo pretendido: ");
 
-        while(controller.procurarServicoPorTitulo(titulo)==null)
-            titulo= Console.readLine("Acronimo pretendido: ");
+        while(controller.procurarServicoPorCod(cod)==null)
+            cod= Console.readLine("Codigo pretendido: ");
 
         try{
-            Servico s=controller.procurarServicoPorTitulo(titulo);
+            Servico s=controller.procurarServicoPorCod(cod);
             System.out.println(s.toString());
         }catch (Exception e) {
             e.printStackTrace();
