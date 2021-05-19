@@ -28,12 +28,41 @@ public class AssociarAtributoAFormularioController {
 
     }
 
+    public Formulario associarAtributoAFormularioIds(int idF,int idA){
+
+        Formulario f=verificarFormularioId(idF);
+        Atributo a=verificarAtributoId(idA);
+
+        if(f==null)
+            throw new IllegalArgumentException("Formulario inválido com id: "+idF);
+
+        if(a==null)
+            throw new IllegalArgumentException("Atributo inválido com id: "+idA);
+
+        f.addAtributo(a);
+
+        return formularioRepository.save(f);
+
+    }
+
     public Formulario verificarFormulario(String nomeFormulario){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
         for(Formulario f : formularios){
             if(f.compareTo(nomeFormulario)==0)
+                return f;
+        }
+
+        return null;
+    }
+
+    public Formulario verificarFormularioId(int id){
+
+        Iterable<Formulario> formularios=formularioRepository.findAll();
+
+        for(Formulario f : formularios){
+            if(f.obterId()==id)
                 return f;
         }
 
@@ -52,5 +81,16 @@ public class AssociarAtributoAFormularioController {
         return null;
     }
 
+    public Atributo verificarAtributoId(int id){
+
+        Iterable<Atributo> atributos=atributoRepository.findAll();
+
+        for(Atributo a : atributos){
+            if(a.obterId()==id)
+                return a;
+        }
+
+        return null;
+    }
 
 }

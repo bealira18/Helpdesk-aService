@@ -50,7 +50,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Workflow workflow;
 
-    protected Servico() {
+    public Servico() {
     }
 
     public Servico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
@@ -71,6 +71,10 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Override
     public Integer identity() {
         return null;
+    }
+
+    public int obterId() {
+        return id;
     }
 
     public String obterTitulo() {

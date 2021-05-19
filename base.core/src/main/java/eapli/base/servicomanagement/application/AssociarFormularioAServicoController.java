@@ -11,7 +11,7 @@ public class AssociarFormularioAServicoController {
     private final ServicoRepository servicoRepository= PersistenceContext.repositories().servico();
     private final FormularioRepository formularioRepository= PersistenceContext.repositories().formulario();
 
-    public Servico associarFormularioAServico(String nomeFormulario,String codServico){
+    public Servico associarFormularioAServicoComNome(String nomeFormulario,String codServico){
 
         Formulario f=verificarFormulario(nomeFormulario);
         Servico s=verificarServico(codServico);
@@ -28,6 +28,34 @@ public class AssociarFormularioAServicoController {
 
     }
 
+    public Servico associarFormularioAServicoComIdF(int idF,int idS){
+
+        Servico s=verificarIdS(idS);
+        Formulario f=verificaIdF(idF);
+
+        if(f==null)
+            throw new IllegalArgumentException("Formulario inválido com id: "+idF);
+
+        if(s==null)
+            throw new IllegalArgumentException("Serviço inválido com id: "+idS);
+
+        s.associarFormulario(f);
+
+        return servicoRepository.save(s);
+
+    }
+
+    public Formulario verificaIdF(int id){
+        Iterable<Formulario> formularios=formularioRepository.findAll();
+
+        for(Formulario f : formularios){
+            if(f.obterId()==id)
+                return f;
+        }
+
+        return null;
+    }
+
     public Formulario verificarFormulario(String nomeFormulario){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
@@ -37,6 +65,16 @@ public class AssociarFormularioAServicoController {
                 return f;
         }
 
+        return null;
+    }
+
+    public Servico verificarIdS(int id){
+        Iterable<Servico> servicos=servicoRepository.findAll();
+
+        for(Servico s : servicos){
+            if(s.obterId()==id)
+                return s;
+        }
         return null;
     }
 

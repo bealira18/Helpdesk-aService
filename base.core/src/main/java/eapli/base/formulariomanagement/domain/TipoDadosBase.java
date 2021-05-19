@@ -17,7 +17,7 @@ public class TipoDadosBase implements ValueObject, Serializable, Comparable<Tipo
     }
 
     public TipoDadosBase(final String tipoDadosBase){
-        if(!tipoDadosBase.equals("String") && !tipoDadosBase.equals("Integer") && !tipoDadosBase.equals("Char") && !tipoDadosBase.equals("Boolean") && !tipoDadosBase.equals("Short") && !tipoDadosBase.equals("Double") && !tipoDadosBase.equals("Float"))
+        if(!tipoDadosBase.equals("String") && !tipoDadosBase.equals("Integer") && !tipoDadosBase.equals("Char") && !tipoDadosBase.equals("Boolean") && !tipoDadosBase.equals("Short") && !tipoDadosBase.equals("Double") && !tipoDadosBase.equals("Float") && !tipoDadosBase.isEmpty())
             throw new IllegalArgumentException("Formato inválido");
         this.tipoDadosBase=tipoDadosBase;
     }

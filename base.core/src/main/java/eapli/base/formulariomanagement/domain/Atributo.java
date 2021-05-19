@@ -20,7 +20,7 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
     private boolean completo = false;
     private boolean ativo = false;
 
-    protected Atributo(){}
+    public Atributo(){}
 
     public Atributo(String nome, String etiqueta, String descricao, String expressaoRegular, String tipoDadosBase){
         this.nome =nome;
@@ -56,6 +56,10 @@ public class Atributo implements AggregateRoot<Integer>, Serializable {
 
     public void mudarAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public int obterId() {
+        return id;
     }
 
     public String obterNome() {

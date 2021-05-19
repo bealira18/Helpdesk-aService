@@ -17,7 +17,7 @@ public class Icone implements ValueObject, Serializable, Comparable<Icone> {
     }
 
     public Icone(final String icone){
-        if(!icone.contains(".jpg") && !icone.contains(".png"))
+        if(!icone.contains(".jpg") && !icone.contains(".png") && !icone.isEmpty())
             throw new IllegalArgumentException("Formato do icone deve ser .jpg ou .png");
         this.icone=icone;
     }

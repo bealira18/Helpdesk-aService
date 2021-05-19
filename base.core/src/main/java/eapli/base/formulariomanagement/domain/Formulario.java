@@ -22,7 +22,7 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     @JoinColumn
     private List<Atributo> atributos = new ArrayList<>();
     
-    protected Formulario(){}
+    public Formulario(){}
     
     public Formulario(String nome){
         this.nome=nome;
@@ -38,6 +38,10 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
 
     public void removeAtributo(Atributo atributo){
         atributos.remove(atributo);
+    }
+
+    public int obterId() {
+        return id;
     }
 
     public void mudarNome(String nome) {
