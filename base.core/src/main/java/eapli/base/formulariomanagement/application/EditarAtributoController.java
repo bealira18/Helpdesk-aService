@@ -10,6 +10,7 @@ import eapli.base.formulariomanagement.domain.TipoDadosBase;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
+import eapli.base.servicomanagement.domain.Servico;
 
 public class EditarAtributoController {
 
@@ -37,6 +38,8 @@ public class EditarAtributoController {
             atributo.mudarNome(nomeNovo);
         }
 
+        verificarCompleto(atributo);
+
         atributoRepository.save(atributo);
     }
 
@@ -49,6 +52,8 @@ public class EditarAtributoController {
         }else{
             atributo.mudarEtiqueta(etiqueta);
         }
+
+        verificarCompleto(atributo);
 
         atributoRepository.save(atributo);
     }
@@ -63,6 +68,8 @@ public class EditarAtributoController {
             atributo.mudarDescricao(descricao);
         }
 
+        verificarCompleto(atributo);
+
         atributoRepository.save(atributo);
     }
 
@@ -75,6 +82,8 @@ public class EditarAtributoController {
         }else{
             atributo.mudarExpressaoRegular(new ExpressaoRegular(expressaoRegular));
         }
+
+        verificarCompleto(atributo);
 
         atributoRepository.save(atributo);
     }
@@ -89,7 +98,16 @@ public class EditarAtributoController {
             atributo.mudarTipoDadosBase(new TipoDadosBase(tipoDadosBase));
         }
 
+        verificarCompleto(atributo);
+
         atributoRepository.save(atributo);
+    }
+
+    public void verificarCompleto(Atributo atributo){
+        if (!atributo.obterNome().isEmpty() && !atributo.obterEtiqueta().isEmpty() && !atributo.obterDescricao().isEmpty() && !atributo.obterTipoDadosBase().obterTipoDadosBase().isEmpty() && !atributo.obterExpressaoRegular().obterExpressaoRegular().isEmpty()){
+            atributo.mudarCompleto(true);
+            atributo.mudarAtivo(true);
+        }
     }
 
 }
