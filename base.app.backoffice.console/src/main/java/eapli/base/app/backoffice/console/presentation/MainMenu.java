@@ -98,8 +98,9 @@ public class MainMenu extends AbstractUI {
     private static final int ACABAR_SERVICO_OPTION=5;
     private static final int LISTAR_SERVICOS_CATALOGO=6;
     private static final int ADICIONAR_ATRIBUTO_A_FORMULARIO=7;
-    private static final int EDITAR_SERVICO_OPTION = 8;
-    private static final int DESATIVAR_SERVICO_OPTION = 9;
+    private static final int ATIVAR_FORMULARIO=8;
+    private static final int EDITAR_SERVICO_OPTION = 9;
+    private static final int DESATIVAR_SERVICO_OPTION = 10;
 
     //Equipa
     private static final int ADICIONAR_EQUIPA_OPTION = 1;
@@ -286,6 +287,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
         menu.addItem(LISTAR_SERVICOS_CATALOGO,"Listar serviços de um catalogo",new ListarServicosDeCatalogoAction());
         menu.addItem(ADICIONAR_ATRIBUTO_A_FORMULARIO,"Adicionar atributo a formulário de um serviço",new AddAtributoAFormularioAction());
+        menu.addItem(ATIVAR_FORMULARIO,"Ativar formulario de um serviço",new AtivarFormularioAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
