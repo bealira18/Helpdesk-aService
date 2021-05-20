@@ -18,8 +18,8 @@ public class AssociarServicoACatalogoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        ascc.associarServicoACatalogo("Catalogo1", "Título");
-        ascc.associarServicoACatalogo("Catalogo2", "Exemplo");
+        ascc.associarServicoACatalogo("Catalogo1", "cod1");
+        ascc.associarServicoACatalogo("Catalogo2", "cod2");
         return true;
     }
 }

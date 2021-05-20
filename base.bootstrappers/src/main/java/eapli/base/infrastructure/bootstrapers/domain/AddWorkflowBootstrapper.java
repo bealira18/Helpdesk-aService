@@ -13,12 +13,12 @@ public class AddWorkflowBootstrapper implements Action {
     public boolean execute() {
 
         repository= PersistenceContext.repositories().workflow();
-        Workflow w1=new Workflow(1,1,1);
-        Workflow w2=new Workflow(1,2,2);
-        Workflow w3=new Workflow(1,3,3);
+        /*Workflow w1=new Workflow(1,1);
+        Workflow w2=new Workflow(1,2);
+        Workflow w3=new Workflow(1,3);
         repository.save(w1);
         repository.save(w2);
-        repository.save(w3);
+        repository.save(w3);*/
         return false;
     }
 

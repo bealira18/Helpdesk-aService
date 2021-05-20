@@ -41,9 +41,12 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Rascunho rascunho;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    /*@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Formulario> formularios = new ArrayList<>();
+    private List<Formulario> formularios = new ArrayList<>();*/
+
+    @OneToOne
+    private Formulario formulario;
 
     @OneToOne
     private Workflow workflow;

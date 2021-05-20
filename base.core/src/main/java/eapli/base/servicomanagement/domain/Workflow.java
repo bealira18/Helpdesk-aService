@@ -15,8 +15,9 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int idServico;
-    private int posicao;
+
+    @OneToOne
+    private Servico servico;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -26,11 +27,6 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
     private HashMap<Integer,Tarefa> prioridades= new HashMap<>();
 
     protected Workflow(){}
-
-    public Workflow(int idServico, int idTarefa, int posicao){
-        this.idServico = idServico;
-        this.posicao = posicao;
-    }
 
     @Override
     public boolean sameAs(Object other) {

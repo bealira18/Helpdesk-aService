@@ -10,8 +10,8 @@ public class ServicoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.adicionarServico("cod1","Título", "Tít", "TítuloExemplo", "exemplo, titulo", "tituloExemplo.jpg",false);
-        controller.adicionarServico("cod2","Exemplo", "Ex", "ExemploTítulo", "título, exemplo", "exemploTitulo.png",false);
+        controller.adicionarServico("cod1","Título", "Tít", "TítuloExemplo", "exemplo, titulo", "tituloExemplo.jpg");
+        controller.adicionarServico("cod2","Exemplo", "Ex", "ExemploTítulo", "título, exemplo", "exemploTitulo.png");
 
         return true;
     }

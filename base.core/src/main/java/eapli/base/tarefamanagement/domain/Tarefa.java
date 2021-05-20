@@ -25,13 +25,14 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private EstadoTarefa estadoTarefa;
     private int tempo; //Tempo
     private Prioridade prioridade;
+    private boolean automatico;
 
     @OneToOne
     private Formulario formulario;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn
-    private Workflow workflow;
+    private Workflow workflow;*/
 
     @OneToOne
     private NivelCriticidade nivelCriticidade;

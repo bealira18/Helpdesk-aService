@@ -29,7 +29,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     private boolean requerAprovacao;
     @Transient
     private boolean Aprovado;
-    private boolean automatico;
     private boolean completo = false;
     private Icone icone;
     private boolean ativo = false;
@@ -51,7 +50,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     public Servico() {
     }
 
-    public Servico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone,boolean automatico) {
+    public Servico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
         Preconditions.nonNull(titulo);
         this.cod=cod;
         this.titulo = titulo;
@@ -59,7 +58,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         this.descricaoCompleta = descricaoCompleta;
         this.palavrasChave = palavrasChave;
         this.icone = new Icone(icone);
-        this.automatico=automatico;
     }
 
     @Override
