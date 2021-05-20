@@ -6,6 +6,7 @@ import eapli.base.formulariomanagement.application.AssociarAtributoAFormularioCo
 import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.servicomanagement.application.AdicionarServicoController;
+import eapli.base.servicomanagement.application.AdicionarWorkflowController;
 import eapli.base.servicomanagement.application.AssociarFormularioAServicoController;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.io.util.Console;
@@ -20,6 +21,7 @@ public class AddServicoUI extends AbstractUI {
     private final AssociarFormularioAServicoController controllerAss=new AssociarFormularioAServicoController();
     private final AdicionarAtributoController controllerAtr=new AdicionarAtributoController();
     private final AssociarAtributoAFormularioController controllerAssAtrForm=new AssociarAtributoAFormularioController();
+    private final AdicionarWorkflowController controllerWorkflow=new AdicionarWorkflowController();
 
     @Override
     protected boolean doShow(){
@@ -76,6 +78,11 @@ public class AddServicoUI extends AbstractUI {
 
             aux = Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
         }
+
+        System.out.println("\nDefinir workflow para o serviço\n");
+
+
+
 
         System.out.println("\nServiço adicionado com sucesso!");
 

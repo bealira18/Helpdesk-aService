@@ -25,7 +25,8 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private EstadoTarefa estadoTarefa;
     private int tempo; //Tempo
     private Prioridade prioridade;
-    private boolean automatico;
+    private boolean automatico; //true se a tarefa for automatica, false se for manual
+    private boolean aprovacao; //true se a tarefa for de aprovaçao, false se for de realizaçao
 
     @OneToOne
     private Formulario formulario;
@@ -44,9 +45,9 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         this.tempoDecorridoA=tempoDecorridoA;
         this.tempoDecorridoR=tempoDecorridoR;
         this.estadoTarefa=EstadoTarefa.EM_APROVACAO;
-        Tempo t=new Tempo(0,0,0,tempo);
-        this.tempo= t.getTempoMaximoR();
-        this.prioridade=new Prioridade(3);
+        //Tempo t=new Tempo(0,0,0,tempo);
+        //this.tempo= t.getTempoMaximoR();
+        this.prioridade=new Prioridade(prioridade);
     }
 
     @Override

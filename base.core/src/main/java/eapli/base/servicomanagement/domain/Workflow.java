@@ -28,6 +28,10 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
 
     protected Workflow(){}
 
+    public Workflow(List<Tarefa> tarefas){
+        this.tarefas=tarefas;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;
