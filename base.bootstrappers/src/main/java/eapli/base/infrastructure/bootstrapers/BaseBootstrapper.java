@@ -72,13 +72,13 @@ public class BaseBootstrapper implements Action {
         new CriteriosEspecificacaoBootstrapper(),
         new AssociarCriteriosEspecificacaoACatalogoBootstrapper(),
         //new AssociarEquipaACriteriosEspecificacaoBootstrapper(),
+        new NivelCriticidadeBootstrapper(),
+        new AssociarNivelCriticidadeACatalogoBootstrapper(),
         new ServicoBootstrapper(),
         new AssociarServicoACatalogoBootstrapper(),
 
 
         new AddPedidoBootstrapper(),
-        new NivelCriticidadeBootstrapper(),
-        new AssociarNivelCriticidadeACatalogoBootstrapper(),
         new TarefaBootstrapper(),
         new FormularioBootstrapper(),
         new AddRascunhoBootstrapper(),
