@@ -137,4 +137,12 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
     public void mudarEstado(Boolean bool){
         this.ativo = bool;
     }
+    
+       public List<Tarefa> tarefas(){
+        return tarefas;
+    }
+    
+    public void reivindicarTarefa(Tarefa tarefa){
+        tarefas.add(tarefa);
+    }
 }

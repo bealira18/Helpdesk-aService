@@ -18,36 +18,31 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Temporal(TemporalType.DATE)
     private Date dataLimite;
+
     private int tempoDecorridoA;
     private int tempoDecorridoR;
-    private EstadoTarefa estadoTarefa;
     private int tempo; //Tempo
     private Prioridade prioridade;
-    private boolean automatico; //true se a tarefa for automatica, false se for manual
     private boolean aprovacao; //true se a tarefa for de aprovaçao, false se for de realizaçao
 
-    @OneToOne
-    private Formulario formulario;
-
-    /*@ManyToOne
+    /*@OneToOne
     @JoinColumn
     private Workflow workflow;*/
-
     @OneToOne
     private NivelCriticidade nivelCriticidade;
-    
-    protected Tarefa(){}
-    
-    public Tarefa(Date dataLimite, int tempoDecorridoA,int tempoDecorridoR,String estadoTarefa, int tempo, int prioridade){
-        this.dataLimite=dataLimite;
-        this.tempoDecorridoA=tempoDecorridoA;
-        this.tempoDecorridoR=tempoDecorridoR;
-        this.estadoTarefa=EstadoTarefa.EM_APROVACAO;
+
+    protected Tarefa() {
+    }
+
+    public Tarefa(Date dataLimite, int tempo, int prioridade) {
+        this.dataLimite = dataLimite;
+        this.tempoDecorridoA = 0;
+        this.tempoDecorridoR = 0;
         //Tempo t=new Tempo(0,0,0,tempo);
-        //this.tempo= t.getTempoMaximoR();
-        this.prioridade=new Prioridade(prioridade);
+        this.prioridade = new Prioridade(prioridade);
     }
 
     @Override
@@ -59,4 +54,17 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     public Integer identity() {
         return null;
     }
+
+    public int obterIdTarefa() {
+        return this.id;
+    }
+
+    public void atualizarTempoAprovacao(int tempo) {
+        this.tempoDecorridoA = tempo;
+    }
+
+    public void atualizarTempoRealizacao(int tempo) {
+        this.tempoDecorridoR = tempo;
+    }
+
 }
