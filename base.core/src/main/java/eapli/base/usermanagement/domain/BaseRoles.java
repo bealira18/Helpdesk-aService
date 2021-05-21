@@ -55,6 +55,12 @@ public final class BaseRoles {
      */
     public static final Role CASHIER = Role.valueOf("CASHIER");
 
+    public static final Role GSH = Role.valueOf("GSH");
+
+    public static final Role RRH = Role.valueOf("RRH");
+
+    public static final Role COLABORADOR = Role.valueOf("COLABORADOR");
+
     /**
      * get available role types for adding new users
      *
