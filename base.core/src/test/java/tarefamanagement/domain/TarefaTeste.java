@@ -4,6 +4,7 @@ import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.tarefamanagement.application.ReivindicarTarefaController;
 import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
+import eapli.base.tarefamanagement.domain.TarefaManual;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,7 +37,7 @@ public class TarefaTeste {
         Tarefa instance = new Tarefa(d2, 2, 4);
         Tarefa instance2 = new Tarefa(d1, 5,3);
     }
-//
+
 //    @Test
 //    public void reivindicarTarefa() {
 //
@@ -51,13 +52,13 @@ public class TarefaTeste {
 //            e.printStackTrace();
 //        }
 //        EstadoTarefa estado = null;
-//        Tarefa tarefa = new Tarefa(d1, 2, 4, estado.CONCLUIDO, 5, 3);
+//        TarefaManual tarefa = new TarefaManual(d1, 5, 3);
 //        Colaborador colaborador = new Colaborador(123, "Pedro", "Pedro Lapa", d2, "Paredes", true,
 //                "pedrolapa@gmail.com", "perfil", "funçao", "912345678");
 //        ReivindicarTarefaController reivTar = new ReivindicarTarefaController();
 //        Colaborador expected = reivTar.reivindicarTarefa(tarefa, colaborador);
-//        Tarefa result = null;
-//        for (Tarefa colab : colaborador.tarefas()) {
+//        TarefaManual result = null;
+//        for (TarefaManual colab : colaborador.tarefas()) {
 //            if (colab.equals(tarefa)) {
 //                result = colab;
 //                break;

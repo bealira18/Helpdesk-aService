@@ -6,6 +6,7 @@ import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.tarefamanagement.domain.Tarefa;
+import eapli.base.tarefamanagement.domain.TarefaManual;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -50,7 +51,7 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_numero")
-    private List<Tarefa> tarefas = new ArrayList<>();
+    private List<TarefaManual> tarefas = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Catalogo catalogo;
@@ -138,11 +139,11 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         this.ativo = bool;
     }
     
-       public List<Tarefa> tarefas(){
+       public List<TarefaManual> tarefas(){
         return tarefas;
     }
     
-    public void reivindicarTarefa(Tarefa tarefa){
+    public void reivindicarTarefa(TarefaManual tarefa){
         tarefas.add(tarefa);
     }
 }

@@ -1,5 +1,6 @@
 package eapli.base.tarefamanagement.domain;
 
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
 import eapli.base.nivelcriticidademanagement.domain.Tempo;
@@ -34,11 +35,14 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private NivelCriticidade nivelCriticidade;
 
+    @ManyToOne
+    private Colaborador colaborador;
+
     protected Tarefa() {
     }
 
-    public Tarefa(boolean aprovacao){
-        this.aprovacao=aprovacao;
+    public Tarefa(boolean aprovacao) {
+        this.aprovacao = aprovacao;
     }
 
     public Tarefa(Date dataLimite, int tempo, int prioridade) {
@@ -46,7 +50,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         this.tempoDecorridoA = 0;
         this.tempoDecorridoR = 0;
         //Tempo t=new Tempo(0,0,0,tempo);
-        this.prioridade = /*new Prioridade(prioridade);*/prioridade;
+        this.prioridade = /*new Prioridade(prioridade);*/ prioridade;
     }
 
     @Override
@@ -69,6 +73,14 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     public void atualizarTempoRealizacao(int tempo) {
         this.tempoDecorridoR = tempo;
+    }
+
+    public Colaborador obterColaborador() {
+        return this.colaborador;
+    }
+
+    public void associarColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
 }
