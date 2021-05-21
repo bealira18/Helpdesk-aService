@@ -28,6 +28,14 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
 
     protected Workflow(){}
 
+    public int obterId() {
+        return id;
+    }
+
+    public void associarServico(Servico s){
+        this.servico=s;
+    }
+
     public Workflow(List<Tarefa> tarefas){
         this.tarefas=tarefas;
     }

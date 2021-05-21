@@ -16,7 +16,6 @@ public class Prioridade implements ValueObject, Serializable, Comparable<Priorid
     public Prioridade(){}
 
     public Prioridade(int prioridade) {
-        Preconditions.nonNull(prioridade);
         Preconditions.nonNegative(prioridade);
         if(prioridade>5)
             throw new IllegalArgumentException("Prioridade fora do limite");

@@ -21,6 +21,10 @@ public class TarefaAutomatica extends Tarefa implements AggregateRoot<Integer>, 
     public TarefaAutomatica() {
     }
 
+    public TarefaAutomatica(boolean aprovacao){
+        super(aprovacao);
+    }
+
     public TarefaAutomatica(Date dataLimite, int tempo, int prioridade) {
         super(dataLimite, tempo, prioridade);
     }

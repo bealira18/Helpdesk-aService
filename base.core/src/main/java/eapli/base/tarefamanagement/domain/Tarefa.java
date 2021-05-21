@@ -25,7 +25,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private int tempoDecorridoA;
     private int tempoDecorridoR;
     private int tempo; //Tempo
-    private Prioridade prioridade;
+    private int prioridade; //prioridade
     private boolean aprovacao; //true se a tarefa for de aprovaçao, false se for de realizaçao
 
     /*@OneToOne
@@ -37,12 +37,16 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     protected Tarefa() {
     }
 
+    public Tarefa(boolean aprovacao){
+        this.aprovacao=aprovacao;
+    }
+
     public Tarefa(Date dataLimite, int tempo, int prioridade) {
         this.dataLimite = dataLimite;
         this.tempoDecorridoA = 0;
         this.tempoDecorridoR = 0;
         //Tempo t=new Tempo(0,0,0,tempo);
-        this.prioridade = new Prioridade(prioridade);
+        this.prioridade = /*new Prioridade(prioridade);*/prioridade;
     }
 
     @Override

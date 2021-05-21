@@ -16,4 +16,14 @@ public class CriarTarefaManualController {
         return tarefaManualRepository.save(novaTarefaManual);
 
     }
+
+    public TarefaManual criarTarefaManualWorkflow(boolean aprovacao) {
+
+        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao);
+
+        return tarefaManualRepository.save(novaTarefaManual);
+
+    }
+
+
 }

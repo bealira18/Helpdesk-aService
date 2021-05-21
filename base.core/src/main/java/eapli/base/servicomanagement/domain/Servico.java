@@ -150,6 +150,10 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         this.formulario=f;
     }
 
+    public void associarWorflow(Workflow w){
+        this.workflow=w;
+    }
+
     public int compareTo(String cod) {
         return this.cod.compareTo(cod);
     }
