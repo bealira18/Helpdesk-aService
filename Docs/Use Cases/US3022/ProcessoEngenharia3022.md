@@ -32,3 +32,36 @@ A forma encontrada para resolver este problema foi criar as classes ReivindicarT
 ![ConsultarTarefaPendente_CD](ConsultarTarefaPendente_CD.jpg)
 
 ![ReivindicarTarefaPendente_CD](ReivindicarTarefaPendente_CD.jpg)
+
+## 3.4. Testes 
+
+**Teste 1:** Verificar se o a reivindicação de uma Tarefa por parte do Colaborador.
+
+@Test
+    public void reivindicarTarefa() {
+
+        SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
+        Date d1 = new Date();
+        Date d2 = new Date();
+        try {
+            d1 = forma.parse("24/02/2022");
+            d2 = forma.parse("17/12/2003");
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        EstadoTarefa estado = null;
+        TarefaManual tarefa = new TarefaManual(d1, 5, 3);
+        Colaborador colaborador = new Colaborador(123, "Pedro", "Pedro Lapa", d2, "Paredes", true,
+                "pedrolapa@gmail.com", "perfil", "funçao", "912345678");
+        ReivindicarTarefaController reivTar = new ReivindicarTarefaController();
+        Colaborador expected = reivTar.reivindicarTarefa(tarefa, colaborador);
+        TarefaManual result = null;
+        for (TarefaManual colab : colaborador.tarefas()) {
+            if (colab.equals(tarefa)) {
+                result = colab;
+                break;
+            }
+        }
+        assertEquals(tarefa, result);
+    }
