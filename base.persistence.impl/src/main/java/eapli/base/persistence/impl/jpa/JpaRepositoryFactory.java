@@ -16,6 +16,9 @@ import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
+import eapli.base.tarefamanagement.domain.TarefaAutomatica;
+import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
+import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -85,17 +88,27 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 		return new JpaServicoRepository();
 	}
         
-        @Override
+	@Override
 	public NivelCriticidadeRepository nivelCriticidade() {
 		return new JpaNivelCriticidadeRepository();
 	}
         
-        @Override
+	@Override
 	public TarefaRepository tarefa() {
 		return new JpaTarefaRepository();
 	}
-        
-         @Override
+
+	@Override
+	public TarefaAutomaticaRepository tarefaAutomatica() {
+		return new JpaTarefaAutomaticaRepository();
+	}
+
+	@Override
+	public TarefaManualRepository tarefaManual() {
+		return new JpaTarefaManualRepository();
+	}
+
+	@Override
 	public FormularioRepository formulario() {
 		return new JpaFormularioRepository();
 	}

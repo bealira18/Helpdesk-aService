@@ -17,6 +17,9 @@ import eapli.base.pedidomanagement.repository.RascunhoRepository;
 import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
+import eapli.base.tarefamanagement.domain.TarefaAutomatica;
+import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
+import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -85,17 +88,27 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 		return new InMemoryServicoRepository();
 	}
         
-        @Override
+	@Override
 	public NivelCriticidadeRepository nivelCriticidade() {
 		return new InMemoryNivelCriticidadeRepository();
 	}
         
-        @Override
+	@Override
 	public TarefaRepository tarefa() {
 		return new InMemoryTarefaRepository();
 	}
-        
-        @Override
+
+	@Override
+	public TarefaManualRepository tarefaManual() {
+		return new InMemoryTarefaManualRepository();
+	}
+
+	@Override
+	public TarefaAutomaticaRepository tarefaAutomatica() {
+		return new InMemoryTarefaAutomaticaRepository();
+	}
+
+	@Override
 	public FormularioRepository formulario() {
 		return new InMemoryFormularioRepository();
 	}

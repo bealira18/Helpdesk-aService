@@ -19,6 +19,9 @@ import eapli.base.pedidomanagement.repository.RascunhoRepository;
 import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
+import eapli.base.tarefamanagement.domain.TarefaAutomatica;
+import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
+import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -86,6 +89,8 @@ public interface RepositoryFactory {
 	ServicoRepository servico();
 	NivelCriticidadeRepository nivelCriticidade();
 	TarefaRepository tarefa();
+	TarefaManualRepository tarefaManual();
+	TarefaAutomaticaRepository tarefaAutomatica();
 	FormularioRepository formulario();
 	CriteriosEspecificacaoRepository criteriosEspecificacao();
 	AtributoRepository atributo();

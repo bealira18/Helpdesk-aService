@@ -22,6 +22,8 @@
     <class>eapli.base.servicomanagement.domain.Workflow</class>
     <class>eapli.base.nivelcriticidademanagement.domain.NivelCriticidade</class>
     <class>eapli.base.tarefamanagement.domain.Tarefa</class>
+    <class>eapli.base.tarefamanagement.domain.TarefaManual</class>
+    <class>eapli.base.tarefamanagement.domain.TarefaAutomatica</class>
     <class>eapli.base.formulariomanagement.domain.Formulario</class>
     <class>eapli.base.catalogomanagement.domain.CriteriosEspecificacao</class>
     <class>eapli.base.formulariomanagement.domain.Atributo</class>

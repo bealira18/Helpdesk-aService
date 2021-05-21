@@ -4,9 +4,14 @@ import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.framework.domain.model.AggregateRoot;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
+@Entity
 public class TarefaManual extends Tarefa implements AggregateRoot<Integer>, Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @OneToOne
     private Formulario formulario;

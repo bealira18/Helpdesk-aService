@@ -24,6 +24,7 @@ public class TarefaManualBootstrapper implements Action {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         controller.criarTarefaManual(d1, 10, 4);
         controller.criarTarefaManual(d2, 25, 3);
         controller.criarTarefaManual(d3, 20, 2);
