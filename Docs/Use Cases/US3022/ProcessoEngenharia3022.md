@@ -65,3 +65,18 @@ A forma encontrada para resolver este problema foi criar as classes ReivindicarT
         }
         assertEquals(tarefa, result);
     }
+
+# 4. Implementação
+
+Nada a declarar
+
+# 5. Integração/Demonstração
+
+Sendo esta a funcionalidade definida com grande prioridade, foi das primeiras a ser implementada.
+
+# 6. Observações
+
+Nada a observar
+
+
+
