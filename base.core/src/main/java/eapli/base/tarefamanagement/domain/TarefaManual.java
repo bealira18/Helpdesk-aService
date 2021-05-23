@@ -27,4 +27,12 @@ public class TarefaManual extends Tarefa implements AggregateRoot<Integer>, Seri
         super(dataLimite, tempo, prioridade);
     }
 
+    public void addFormulario(Formulario f){
+        this.formulario=f;
+    }
+
+    public int obterId() {
+        return id;
+    }
+
 }

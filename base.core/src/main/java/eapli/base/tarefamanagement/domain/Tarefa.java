@@ -83,4 +83,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         this.colaborador = colaborador;
     }
 
+    public int obterId() {
+        return id;
+    }
 }

@@ -11,6 +11,7 @@ import eapli.base.servicomanagement.application.AssociarFormularioAServicoContro
 import eapli.base.servicomanagement.application.AssociarWorkflowAServicoController;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
+import eapli.base.tarefamanagement.application.AssociarTarefaAFormularioController;
 import eapli.base.tarefamanagement.application.CriarTarefaAutomaticaController;
 import eapli.base.tarefamanagement.application.CriarTarefaManualController;
 import eapli.base.tarefamanagement.domain.Tarefa;
@@ -33,6 +34,7 @@ public class AddServicoUI extends AbstractUI {
     private final CriarTarefaManualController controllerManual=new CriarTarefaManualController();
     private final CriarTarefaAutomaticaController controllerAutomatica=new CriarTarefaAutomaticaController();
     private final AssociarWorkflowAServicoController controllerAssWS=new AssociarWorkflowAServicoController();
+    private final AssociarTarefaAFormularioController controllerAssFT=new AssociarTarefaAFormularioController();
 
 
     @Override
@@ -68,6 +70,97 @@ public class AddServicoUI extends AbstractUI {
 
         controllerAss.associarFormularioAServicoComIdF(f.obterId(), s.obterId());
 
+        addFormulario(f);
+
+        System.out.println("\nDefinir workflow para o serviço\n");
+
+        System.out.println("Adicionar tarefa(s):\n");
+
+        List<Tarefa> tarefas=new ArrayList<>();
+
+        int aux=Console.readInteger("Tarefa de aprovação?\n0-não\n1-sim");
+
+        while(aux!=0 && aux!=1)
+            aux = Console.readInteger("Tarefa de aprovação?\n0-não\n1-sim");
+
+        int manual;
+
+        if(aux==1){
+            //tem tarefa de aprovação
+            manual=Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
+
+            while(manual!=0 && manual!=1)
+                manual = Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
+
+            if(manual==1){
+                Tarefa t=controllerManual.criarTarefaManualWorkflow(true);
+                tarefas.add(t);
+
+                System.out.println("\nAdicionar formulario à tarefa:\n");
+
+                final String nomeFormT = Console.readLine("Nome do Formulario: ");
+
+                Formulario form = new Formulario();
+
+                try {
+                    form = controllerForm.adicionarFormulario(nomeFormT);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t.obterId());
+
+                addFormulario(form);
+            }else{
+                Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(true);
+                tarefas.add(t);
+            }
+        }
+
+        //tarefa resoluçao
+
+        System.out.println("Tarefa de Resolução");
+
+        manual=Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
+
+        while(manual!=0 && manual!=1)
+            manual = Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
+
+        if(manual==1){
+            Tarefa t=controllerManual.criarTarefaManualWorkflow(false);
+            tarefas.add(t);
+
+            System.out.println("\nAdicionar formulario à tarefa:\n");
+
+            final String nomeFormT = Console.readLine("Nome do Formulario: ");
+
+            Formulario form = new Formulario();
+
+            try {
+                form = controllerForm.adicionarFormulario(nomeFormT);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t.obterId());
+
+            addFormulario(form);
+        }else{
+            Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(false);
+            tarefas.add(t);
+        }
+
+        Workflow w=controllerWorkflow.adicionarWorkflow(tarefas);
+        controllerAssWS.associarWorkflowAServico(w.obterId(),s.obterCod());
+
+        System.out.println("\nServiço adicionado com sucesso!");
+
+        return true;
+
+    }
+
+    public void addFormulario(Formulario f){
+
         int aux = Console.readInteger("Adicionar atributos ao formulario?\n0-não\n1-sim");
 
         while(aux!=0 && aux!=1)
@@ -97,59 +190,6 @@ public class AddServicoUI extends AbstractUI {
                 aux = Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
 
         }
-
-        System.out.println("\nDefinir workflow para o serviço\n");
-
-        System.out.println("Adicionar tarefa(s):\n");
-
-        List<Tarefa> tarefas=new ArrayList<>();
-
-        aux=Console.readInteger("Tarefa de aprovação?\n0-não\n1-sim");
-
-        while(aux!=0 && aux!=1)
-            aux = Console.readInteger("Tarefa de aprovação?\n0-não\n1-sim");
-
-        int manual;
-
-        if(aux==1){
-            //tem tarefa de aprovação
-            manual=Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
-
-            while(manual!=0 && manual!=1)
-                manual = Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
-
-            if(manual==1){
-                Tarefa t=controllerManual.criarTarefaManualWorkflow(true);
-                tarefas.add(t);
-            }else{
-                Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(true);
-                tarefas.add(t);
-            }
-        }
-
-        //tarefa resoluçao
-
-        System.out.println("Tarefa de Resolução");
-
-        manual=Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
-
-        while(manual!=0 && manual!=1)
-            manual = Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
-
-        if(manual==1){
-            Tarefa t=controllerManual.criarTarefaManualWorkflow(false);
-            tarefas.add(t);
-        }else{
-            Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(false);
-            tarefas.add(t);
-        }
-
-        Workflow w=controllerWorkflow.adicionarWorkflow(tarefas);
-        controllerAssWS.associarWorkflowAServico(w.obterId(),s.obterCod());
-
-        System.out.println("\nServiço adicionado com sucesso!");
-
-        return true;
 
     }
 
