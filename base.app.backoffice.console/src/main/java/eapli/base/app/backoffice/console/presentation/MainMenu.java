@@ -178,21 +178,31 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
         }
 
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+        }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.RRH)) {
             final Menu colaboradoresMenu=buildColaboradoresMenu();
             mainMenu.addSubMenu(COLABORADORES_OPTION,colaboradoresMenu);
-
-            final Menu catalogoMenu=buildCatalogoMenu();
-            mainMenu.addSubMenu(CATALOGOS_OPTION,catalogoMenu);
-
-            final Menu servicoMenu=buildServicoMenu();
-            mainMenu.addSubMenu(SERVICOS_OPTION,servicoMenu);
 
             final Menu equipasMenu=buildEquipasMenu();
             mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
 
             final Menu tipoEquipaMenu=buildTipoEquipaMenu();
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
+        }
+
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+        }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.GSH, BaseRoles.COLABORADOR)) {
+            final Menu catalogosMenu=buildCatalogoMenu();
+            mainMenu.addSubMenu(CATALOGOS_OPTION, catalogosMenu);
+
+            final Menu servicosMenu=buildServicoMenu();
+            mainMenu.addSubMenu(SERVICOS_OPTION, servicosMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {

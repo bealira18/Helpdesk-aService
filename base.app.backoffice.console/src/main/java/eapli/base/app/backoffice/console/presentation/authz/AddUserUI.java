@@ -53,7 +53,7 @@ public class AddUserUI extends AbstractUI {
         // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
         // UtenteApp
         final String username = Console.readLine("Username");
-        final String password = Console.readLine("Password");
+        //final String password = Console.readLine("Password");
         final String firstName = Console.readLine("First Name");
         final String lastName = Console.readLine("Last Name");
         final String email = Console.readLine("E-Mail");
@@ -65,7 +65,7 @@ public class AddUserUI extends AbstractUI {
         } while (!show);
 
         try {
-            this.theController.addUser(username, password, firstName, lastName, email, roleTypes);
+            this.theController.addUser(username, firstName, lastName, email, roleTypes);
         } catch (final IntegrityViolationException | ConcurrencyException e) {
             System.out.println("That username is already in use.");
         }
