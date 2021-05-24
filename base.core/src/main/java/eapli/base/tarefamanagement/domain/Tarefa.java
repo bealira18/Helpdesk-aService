@@ -64,10 +64,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return null;
     }
 
-    public int obterIdTarefa() {
-        return this.id;
-    }
-
     public void atualizarTempoAprovacao(int tempo) {
         this.tempoDecorridoA = tempo;
     }

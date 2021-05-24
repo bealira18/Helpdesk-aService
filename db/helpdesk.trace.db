@@ -19508,6 +19508,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+<<<<<<< HEAD
 2021-05-24 14:48:11 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "WORKFLOW0_.COMPLETO" not found; SQL statement:
 select workflow0_.id as id1_22_0_, workflow0_.completo as completo2_22_0_, workflow0_.servico_id as servico_3_22_0_, servico1_.id as id1_17_1_, servico1_.apresentar as apresent2_17_1_, servico1_.ativo as ativo3_17_1_, servico1_.cod as cod4_17_1_, servico1_.completo as completo5_17_1_, servico1_.descricaoBreve as descrica6_17_1_, servico1_.descricaoCompleta as descrica7_17_1_, servico1_.formulario_id as formula11_17_1_, servico1_.icone as icone8_17_1_, servico1_.nivelCriticidade_id as nivelcr12_17_1_, servico1_.palavrasChave as palavras9_17_1_, servico1_.titulo as titulo10_17_1_, servico1_.workflow_id as workflo13_17_1_, formulario2_.id as id1_9_2_, formulario2_.ativo as ativo2_9_2_, formulario2_.completo as completo3_9_2_, formulario2_.nome as nome4_9_2_, nivelcriti3_.id as id1_11_3_, nivelcriti3_.etiqueta as etiqueta2_11_3_, nivelcriti3_.objetivo as objetivo3_11_3_, nivelcriti3_.tempoMaximoA as tempomax4_11_3_, nivelcriti3_.tempoMaximoR as tempomax5_11_3_, nivelcriti3_.tempoMedioA as tempomed6_11_3_, nivelcriti3_.tempoMedioR as tempomed7_11_3_, nivelcriti3_.valor as valor8_11_3_, workflow4_.id as id1_22_4_, workflow4_.completo as completo2_22_4_, workflow4_.servico_id as servico_3_22_4_ from Workflow workflow0_ left outer join Servico servico1_ on workflow0_.servico_id=servico1_.id left outer join Formulario formulario2_ on servico1_.formulario_id=formulario2_.id left outer join NivelCriticidade nivelcriti3_ on servico1_.nivelCriticidade_id=nivelcriti3_.id left outer join Workflow workflow4_ on servico1_.workflow_id=workflow4_.id where workflow0_.id=? [42122-200]
@@ -19580,6 +19581,9 @@ select workflow0_.id as id1_22_0_, workflow0_.completo as completo2_22_0_, workf
 	at eapli.base.app.common.console.BaseApplication.run(BaseApplication.java:40)
 	at eapli.base.app.backoffice.console.BaseBackoffice.main(BaseBackoffice.java:61)
 2021-05-24 14:17:38 jdbc[3]: exception
+=======
+2021-05-24 14:52:20 jdbc[3]: exception
+>>>>>>> 67184e38e633e80722f136d3840652e502d239bd
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
@@ -19600,7 +19604,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+<<<<<<< HEAD
 2021-05-24 14:26:56 jdbc[3]: exception
+=======
+2021-05-24 14:52:29 jdbc[4]: exception
+>>>>>>> 67184e38e633e80722f136d3840652e502d239bd
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
@@ -19621,7 +19629,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+<<<<<<< HEAD
 2021-05-24 14:29:17 jdbc[3]: exception
+=======
+2021-05-24 14:57:29 jdbc[3]: exception
+>>>>>>> 67184e38e633e80722f136d3840652e502d239bd
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
@@ -19642,6 +19654,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+<<<<<<< HEAD
 2021-05-24 14:30:53 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
@@ -20054,6 +20067,9 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
 2021-05-24 15:34:23 jdbc[3]: exception
+=======
+2021-05-24 15:01:39 jdbc[3]: exception
+>>>>>>> 67184e38e633e80722f136d3840652e502d239bd
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:466)
