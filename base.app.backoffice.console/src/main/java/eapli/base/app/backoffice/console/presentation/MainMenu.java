@@ -297,7 +297,7 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
         menu.addItem(LISTAR_SERVICOS_CATALOGO,"Listar serviços de um catalogo",new ListarServicosDeCatalogoAction());
         menu.addItem(ADICIONAR_ATRIBUTO_A_FORMULARIO,"Adicionar atributo a formulário de um serviço",new AddAtributoAFormularioAction());
-        menu.addItem(ATIVAR_FORMULARIO,"Ativar formulario de um serviço",new AtivarFormularioAction());
+        menu.addItem(ATIVAR_FORMULARIO,"Ativar formulario de um serviço",new AtivarFormularioServicoAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

@@ -31,8 +31,16 @@ public class TarefaManual extends Tarefa implements AggregateRoot<Integer>, Seri
         this.formulario=f;
     }
 
+    public Formulario obterFormulario() {
+        return formulario;
+    }
+
     public int obterId() {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "id= "+id;
+    }
 }

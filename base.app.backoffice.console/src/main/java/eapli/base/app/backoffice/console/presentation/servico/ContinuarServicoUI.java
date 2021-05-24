@@ -2,10 +2,12 @@ package eapli.base.app.backoffice.console.presentation.servico;
 
 import eapli.base.formulariomanagement.application.*;
 import eapli.base.formulariomanagement.domain.Atributo;
-import eapli.base.servicomanagement.application.EditarServicoController;
-import eapli.base.servicomanagement.application.ListarServicosController;
-import eapli.base.servicomanagement.application.PesquisarServicoController;
+import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.servicomanagement.application.*;
 import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.tarefamanagement.application.PesquisarTarefaIdController;
+import eapli.base.tarefamanagement.domain.Tarefa;
+import eapli.base.tarefamanagement.domain.TarefaManual;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
@@ -21,6 +23,9 @@ public class ContinuarServicoUI extends AbstractUI {
     private final AssociarAtributoAFormularioController controllerAssAtrForm=new AssociarAtributoAFormularioController();
     private final ListarAtributosDeFormularioController controllerListAtr=new ListarAtributosDeFormularioController();
     private final EditarAtributoController controllerEditAtr=new EditarAtributoController();
+    private final ListarTarefasManuaisWorkflowController controllerListTW=new ListarTarefasManuaisWorkflowController();
+    private final AtivarWorkflowController ativarWorkflowController=new AtivarWorkflowController();
+    private final PesquisarTarefaIdController pesquisarTarefaIdController=new PesquisarTarefaIdController();
 
     @Override
     protected boolean doShow(){
@@ -79,72 +84,109 @@ public class ContinuarServicoUI extends AbstractUI {
         if(servico.obterFormulario().obterAtributos().isEmpty()){
 
             int aux=Console.readInteger("O formulario não tem atributos, adicionar?\n0-não\n1-sim");
-
             while(aux==1) {
-
-                final String nomeAtributo = Console.readLine("Nome Atributo: ");
-                final String etiqueta = Console.readLine("Etiqueta: ");
-                final String descricao = Console.readLine("Descricao: ");
-                final String expressao = Console.readLine("Expressao Regular: ");
-                final String tipoDadosBase = Console.readLine("Tipo Dados Base: ");
-
-                Atributo a = new Atributo();
-
-                try {
-                    a = controllerAddAtr.adicionarAtributo(nomeAtributo, etiqueta, descricao, expressao, tipoDadosBase);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
+                Atributo a=completarFormSemAtributos();
                 controllerAssAtrForm.associarAtributoAFormularioIds(servico.obterFormulario().obterId(),a.obterId());
-
                 aux=Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
             }
+
         }else{
-            //se já tiver atributos
-            //mostrar lista com nome dos atributos
-            //escolher um e editar
-
-            List<Atributo> atributos=controllerListAtr.listarAtributosIncompletosFormulario(servico.obterFormulario().obterId());
-
-            System.out.println("Atributos existentes no formulario correspondente ao serviço que está a ser editado:\n");
-
-            for(Atributo a : atributos){
-                System.out.println(a.obterNome());
-            }
-
-            String nomeF=Console.readLine("Atributo a editar/completar:\n");
-
-            while(controllerListAtr.procurarAtributoPorNome(servico.obterFormulario().obterId(),nomeF)==null){
-                nomeF=Console.readLine("Atributo a editar/completar:\n");
-            }
-
-            Atributo a=controllerListAtr.procurarAtributoPorNome(servico.obterFormulario().obterId(),nomeF);
-
-            if(a.obterEtiqueta().isEmpty()) {
-                String etiqueta = Console.readLine("\nEtiqueta: ");
-                controllerEditAtr.mudarEtiqueta(nomeF,etiqueta);
-            }
-
-            if(a.obterDescricao().isEmpty()) {
-                String descricao = Console.readLine("\nDescricao: ");
-                controllerEditAtr.mudarDescricao(nomeF,descricao);
-            }
-
-            if(a.obterExpressaoRegular().obterExpressaoRegular().isEmpty()) {
-                String expressao = Console.readLine("\nExpressao Regular: ");
-                controllerEditAtr.mudarExpressaoRegular(nomeF,expressao);
-            }
-
-            if(a.obterTipoDadosBase().obterTipoDadosBase().isEmpty()) {
-                String dados = Console.readLine("\nTipo Dados Base: ");
-                controllerEditAtr.mudarTipoDadosBase(nomeF,dados);
-            }
-
+            completarFormComAtributos(servico.obterFormulario());
         }
 
+        List<TarefaManual> tarefas=controllerListTW.tarefas(servico.obterWorkflow());
+
+        if(tarefas==null)
+            ativarWorkflowController.ativarWorkflow(servico.obterWorkflow());
+
+        System.out.println("Tarefas manuais:\n");
+        for(TarefaManual t : tarefas){
+            System.out.println(t.toString());
+        }
+
+        int id = Console.readInteger("\nId da Tarefa: ");
+
+        while(pesquisarTarefaIdController.procurarTarefaPorId(id)==null)
+            id = Console.readInteger("\nId da Tarefa: ");
+
+        TarefaManual t= (TarefaManual) pesquisarTarefaIdController.procurarTarefaPorId(id);
+
+        if(t.obterFormulario().obterAtributos().isEmpty()){
+
+            int aux=Console.readInteger("O formulario não tem atributos, adicionar?\n0-não\n1-sim");
+            while(aux==1) {
+                Atributo a=completarFormSemAtributos();
+                controllerAssAtrForm.associarAtributoAFormularioIds(servico.obterFormulario().obterId(),a.obterId());
+                aux=Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
+            }
+
+        }else{
+            completarFormComAtributos(t.obterFormulario());
+        }
 
         return true;
+    }
+
+    public Atributo completarFormSemAtributos(){
+
+        final String nomeAtributo = Console.readLine("Nome Atributo: ");
+        final String etiqueta = Console.readLine("Etiqueta: ");
+        final String descricao = Console.readLine("Descricao: ");
+        final String expressao = Console.readLine("Expressao Regular: ");
+        final String tipoDadosBase = Console.readLine("Tipo Dados Base: ");
+
+        Atributo a = new Atributo();
+
+        try {
+            a = controllerAddAtr.adicionarAtributo(nomeAtributo, etiqueta, descricao, expressao, tipoDadosBase);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return a;
+    }
+
+    public void completarFormComAtributos(Formulario formulario){
+
+        //se já tiver atributos
+        //mostrar lista com nome dos atributos
+        //escolher um e editar
+
+        List<Atributo> atributos=controllerListAtr.listarAtributosIncompletosFormulario(formulario.obterId());
+
+        System.out.println("Atributos existentes no formulario correspondente ao serviço que está a ser editado:\n");
+
+        for(Atributo a : atributos){
+            System.out.println(a.obterNome());
+        }
+
+        String nomeF=Console.readLine("Atributo a editar/completar:\n");
+
+        while(controllerListAtr.procurarAtributoPorNome(formulario.obterId(),nomeF)==null){
+            nomeF=Console.readLine("Atributo a editar/completar:\n");
+        }
+
+        Atributo a=controllerListAtr.procurarAtributoPorNome(formulario.obterId(),nomeF);
+
+        if(a.obterEtiqueta().isEmpty()) {
+            String etiqueta = Console.readLine("\nEtiqueta: ");
+            controllerEditAtr.mudarEtiqueta(nomeF,etiqueta);
+        }
+
+        if(a.obterDescricao().isEmpty()) {
+            String descricao = Console.readLine("\nDescricao: ");
+            controllerEditAtr.mudarDescricao(nomeF,descricao);
+        }
+
+        if(a.obterExpressaoRegular().obterExpressaoRegular().isEmpty()) {
+            String expressao = Console.readLine("\nExpressao Regular: ");
+            controllerEditAtr.mudarExpressaoRegular(nomeF,expressao);
+        }
+
+        if(a.obterTipoDadosBase().obterTipoDadosBase().isEmpty()) {
+            String dados = Console.readLine("\nTipo Dados Base: ");
+            controllerEditAtr.mudarTipoDadosBase(nomeF,dados);
+        }
+
     }
 
     @Override

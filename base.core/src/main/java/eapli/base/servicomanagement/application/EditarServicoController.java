@@ -99,7 +99,7 @@ public class EditarServicoController {
     }
 
     public void verificarCompleto(Servico servico){
-        if (!servico.obterTitulo().isEmpty() && !servico.obterDescricaoBreve().isEmpty() && !servico.obterDescricaoCompleta().isEmpty() && !servico.obterPalavrasChave().isEmpty() && !servico.obterIcone().obterIcone().isEmpty() && servico.obterFormulario().estaCompleto() /*&& servico.obterWorkflow()!=null*/){
+        if (!servico.obterTitulo().isEmpty() && !servico.obterDescricaoBreve().isEmpty() && !servico.obterDescricaoCompleta().isEmpty() && !servico.obterPalavrasChave().isEmpty() && !servico.obterIcone().obterIcone().isEmpty() && servico.obterFormulario().estaCompleto() && servico.obterWorkflow().estaCompleto()){
             servico.mudarCompleto(true);
             servico.mudarEstado(true);
         }

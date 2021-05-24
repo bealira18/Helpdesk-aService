@@ -15,6 +15,7 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private boolean completo=false;
 
     @OneToOne
     private Servico servico;
@@ -38,6 +39,18 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
 
     public Workflow(List<Tarefa> tarefas){
         this.tarefas=tarefas;
+    }
+
+    public List<Tarefa> obterTarefas() {
+        return tarefas;
+    }
+
+    public boolean estaCompleto() {
+        return completo;
+    }
+
+    public void mudarCompleto(boolean completo) {
+        this.completo = completo;
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.hibernate.annotations.JoinColumnOrFormula;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.*;
 
 @Entity
@@ -38,7 +39,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @ManyToOne
     private Colaborador colaborador;
 
-    protected Tarefa() {
+    public Tarefa() {
     }
 
     public Tarefa(boolean aprovacao) {
@@ -86,4 +87,13 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     public int obterId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tarefa)) return false;
+        Tarefa tarefa = (Tarefa) o;
+        return id == tarefa.id;
+    }
+
 }
