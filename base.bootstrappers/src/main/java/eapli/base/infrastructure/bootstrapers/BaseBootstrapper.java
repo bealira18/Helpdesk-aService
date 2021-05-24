@@ -87,7 +87,8 @@ public class BaseBootstrapper implements Action {
         new FormularioBootstrapper(),
         new AddRascunhoBootstrapper(),
         //new AddWorkflowBootstrapper(),
-        new AddHistoricoBootstrapper()};
+        new AddHistoricoBootstrapper(),
+        new ReivindicarTarefaBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();
