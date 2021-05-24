@@ -93,8 +93,7 @@ public class AddServicoUI extends AbstractUI {
                 manual = Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
 
             if(manual==1){
-                Tarefa t=controllerManual.criarTarefaManualWorkflow(true);
-                tarefas.add(t);
+                Tarefa t1=controllerManual.criarTarefaManualWorkflow(true);
 
                 System.out.println("\nAdicionar formulario à tarefa:\n");
 
@@ -108,12 +107,14 @@ public class AddServicoUI extends AbstractUI {
                     e.printStackTrace();
                 }
 
-                controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t.obterId());
-
                 addFormulario(form);
+
+                t1=controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t1.obterId());
+
+                tarefas.add(t1);
             }else{
-                Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(true);
-                tarefas.add(t);
+                Tarefa t2=controllerAutomatica.criarTarefaAutomaticaWorkflow(true);
+                tarefas.add(t2);
             }
         }
 
@@ -127,8 +128,7 @@ public class AddServicoUI extends AbstractUI {
             manual = Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
 
         if(manual==1){
-            Tarefa t=controllerManual.criarTarefaManualWorkflow(false);
-            tarefas.add(t);
+            Tarefa t3=controllerManual.criarTarefaManualWorkflow(false);
 
             System.out.println("\nAdicionar formulario à tarefa:\n");
 
@@ -142,12 +142,14 @@ public class AddServicoUI extends AbstractUI {
                 e.printStackTrace();
             }
 
-            controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t.obterId());
-
             addFormulario(form);
+
+            t3=controllerAssFT.associarTarefaAFormularioIds(form.obterId(), t3.obterId());
+
+            tarefas.add(t3);
         }else{
-            Tarefa t=controllerAutomatica.criarTarefaAutomaticaWorkflow(false);
-            tarefas.add(t);
+            Tarefa t4=controllerAutomatica.criarTarefaAutomaticaWorkflow(false);
+            tarefas.add(t4);
         }
 
         Workflow w=controllerWorkflow.adicionarWorkflow(tarefas);
