@@ -36,6 +36,7 @@ import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
+import eapli.base.app.backoffice.console.presentation.tarefa.ReivindicarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
@@ -121,9 +122,9 @@ public class MainMenu extends AbstractUI {
     private static final int DESATIVAR_TIPOEQUIPA_OPTION = 5;
 
     //Tarefa
-    private static final int CRIAR_TAREFA_MANUAL = 1;
+    private static final int REIVINDICAR_TAREFA_MANUAL = 1;
     private static final int CONSULTAR_MINHAS_TAREFAS = 2;
-    private static final int REIVINDICAR_TAREFA_MANUAL = 3;
+    private static final int CRIAR_TAREFA_MANUAL = 3;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -316,9 +317,9 @@ public class MainMenu extends AbstractUI {
     private Menu buildTarefasMenu() {
         final Menu menu = new Menu("Tarefas >");
 
-        menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
+        // menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
         // menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsularTarefaAction());
-        // menu.addItem(REIVINDICAR_TAREFA_MANUAL,"Reivindicar Tarefa",new ReivindicarTarefaAction());
+        menu.addItem(REIVINDICAR_TAREFA_MANUAL, "Reivindicar Tarefa", new ReivindicarTarefaAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
