@@ -7,7 +7,9 @@ import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.equipamanagement.repository.TipoEquipaRepository;
+import eapli.base.formulariomanagement.domain.RespostasFormulario;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
+import eapli.base.formulariomanagement.repository.RespostasFormularioRepository;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
@@ -16,7 +18,6 @@ import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
-import eapli.base.tarefamanagement.domain.TarefaAutomatica;
 import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
@@ -111,6 +112,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public FormularioRepository formulario() {
 		return new JpaFormularioRepository();
+	}
+
+	@Override
+	public RespostasFormularioRepository respostasFormulario() {
+		return new JpaRespostasFormularioRepository();
 	}
 
 	@Override

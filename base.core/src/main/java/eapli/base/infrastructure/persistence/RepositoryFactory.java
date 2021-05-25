@@ -11,8 +11,10 @@ import eapli.base.clientusermanagement.repositories.SignupRequestRepository;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.equipamanagement.repository.TipoEquipaRepository;
+import eapli.base.formulariomanagement.domain.RespostasFormulario;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
+import eapli.base.formulariomanagement.repository.RespostasFormularioRepository;
 import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
 import eapli.base.pedidomanagement.repository.RascunhoRepository;
@@ -92,6 +94,7 @@ public interface RepositoryFactory {
 	TarefaManualRepository tarefaManual();
 	TarefaAutomaticaRepository tarefaAutomatica();
 	FormularioRepository formulario();
+	RespostasFormularioRepository respostasFormulario();
 	CriteriosEspecificacaoRepository criteriosEspecificacao();
 	AtributoRepository atributo();
 	RascunhoRepository rascunho();

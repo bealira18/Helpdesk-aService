@@ -9,6 +9,7 @@ import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.equipamanagement.repository.TipoEquipaRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
+import eapli.base.formulariomanagement.repository.RespostasFormularioRepository;
 import eapli.base.infrastructure.bootstrapers.BaseBootstrapper;
 import eapli.base.infrastructure.persistence.RepositoryFactory;
 import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
@@ -17,7 +18,6 @@ import eapli.base.pedidomanagement.repository.RascunhoRepository;
 import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
-import eapli.base.tarefamanagement.domain.TarefaAutomatica;
 import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
@@ -111,6 +111,11 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public FormularioRepository formulario() {
 		return new InMemoryFormularioRepository();
+	}
+
+	@Override
+	public RespostasFormularioRepository respostasFormulario(){
+		return new InMemoryRespostasFormularioRepository();
 	}
 
 	@Override

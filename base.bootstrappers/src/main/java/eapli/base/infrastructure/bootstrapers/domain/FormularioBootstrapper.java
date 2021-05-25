@@ -34,13 +34,13 @@ public class FormularioBootstrapper implements Action{
         addFormularioController.adicionarFormulario("Formulario1");
         addFormularioController.adicionarFormulario("Formulario2");
 
-        addAtributoController.adicionarAtributo("atributo1","etiqueta1","descricao1","expressao regular1","String");
+        /*addAtributoController.adicionarAtributo("atributo1","etiqueta1","descricao1","expressao regular1","String");
         addAtributoController.adicionarAtributo("atributo2","etiqueta2","descricao2","expressao regular2","Integer");
         addAtributoController.adicionarAtributo("atributo3","etiqueta3","descricao3","expressao regular3","String");
 
         associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","atributo1");
         associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","atributo2");
-        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario2","atributo3");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario2","atributo3");*/
 
         return true;
     }
