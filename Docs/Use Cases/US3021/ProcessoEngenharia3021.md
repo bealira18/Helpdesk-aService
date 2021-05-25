@@ -34,3 +34,11 @@ Nada a apresentar.
 # 4. Implementação
 
 Nada a declarar
+
+# 5. Integração/Demonstração
+
+Sendo esta a funcionalidade definida com alguma prioridade mas que dependia de outras, primeiro foram implementadas as funcionalidades dais quais esta dependia e só depois esta foi implementada.
+
+# 6. Observações
+
+Nada a observar
