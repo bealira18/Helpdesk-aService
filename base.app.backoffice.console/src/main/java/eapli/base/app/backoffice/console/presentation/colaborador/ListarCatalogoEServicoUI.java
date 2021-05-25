@@ -2,6 +2,7 @@ package eapli.base.app.backoffice.console.presentation.colaborador;
 
 import eapli.base.catalogomanagement.application.ListarCatálogosEServicosController;
 import eapli.base.catalogomanagement.domain.Catalogo;
+import eapli.base.colaboradormanagement.application.ColaboradorComUserController;
 import eapli.base.colaboradormanagement.application.ListarColaboradoresController;
 import eapli.base.colaboradormanagement.application.PesquisarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
@@ -14,6 +15,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
     private final ListarCatálogosEServicosController controller=new ListarCatálogosEServicosController();
     private final ListarColaboradoresController controllercol=new ListarColaboradoresController();
     private final PesquisarColaboradorController controllerpesqcol=new PesquisarColaboradorController();
+    private final ColaboradorComUserController colaboradorComUserController=new ColaboradorComUserController();
 
     @Override
     protected boolean doShow(){
@@ -26,6 +28,8 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
         }
 
         //escolher colaborador
+
+        //int numero=colaboradorComUserController.resultColaborador().obterNumero().obterNumero();
 
         int numero= Console.readInteger("\nNumero pretendido: ");
 

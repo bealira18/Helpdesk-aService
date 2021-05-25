@@ -210,6 +210,9 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.GSH, BaseRoles.COLABORADOR)) {
+            //final Menu colaboradoresMenu = buildColaboradoresMenu();
+            //mainMenu.addSubMenu(COLABORADORES_OPTION, colaboradoresMenu);
+
             final Menu catalogosMenu = buildCatalogoMenu();
             mainMenu.addSubMenu(CATALOGOS_OPTION, catalogosMenu);
 
