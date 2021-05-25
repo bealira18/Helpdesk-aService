@@ -35,6 +35,7 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.servico.*;
+import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
@@ -78,7 +79,7 @@ public class MainMenu extends AbstractUI {
     private static final int LISTAR_COLABORADORES_OPTION = 2;
     private static final int PESQUISAR_COLABORADOR_OPTION = 3;
     private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 4;
-    private static final int LISTAR_CATALOGOS_SERVICOS=5;
+    private static final int LISTAR_CATALOGOS_SERVICOS = 5;
     private static final int EDITAR_COLABORADOR_OPTION = 6;
     private static final int DESATIVAR_COLABORADOR_OPTION = 7;
 
@@ -95,10 +96,10 @@ public class MainMenu extends AbstractUI {
     private static final int LISTAR_SERVICO_OPTION = 2;
     private static final int PESQUISAR_SERVICO_OPTION = 3;
     private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 4;
-    private static final int ACABAR_SERVICO_OPTION=5;
-    private static final int LISTAR_SERVICOS_CATALOGO=6;
-    private static final int ADICIONAR_ATRIBUTO_A_FORMULARIO=7;
-    private static final int ATIVAR_FORMULARIO=8;
+    private static final int ACABAR_SERVICO_OPTION = 5;
+    private static final int LISTAR_SERVICOS_CATALOGO = 6;
+    private static final int ADICIONAR_ATRIBUTO_A_FORMULARIO = 7;
+    private static final int ATIVAR_FORMULARIO = 8;
     private static final int EDITAR_SERVICO_OPTION = 9;
     private static final int DESATIVAR_SERVICO_OPTION = 10;
 
@@ -108,7 +109,7 @@ public class MainMenu extends AbstractUI {
     private static final int PESQUISAR_EQUIPA_OPTION = 3;
     private static final int ADICIONAR_COLABORADOR_A_EQUIPA_OPTION = 4;
     private static final int ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION = 5;
-    private static final int LISTAR_COLABORADORES_DE_EQUIPA_OPTION=6;
+    private static final int LISTAR_COLABORADORES_DE_EQUIPA_OPTION = 6;
     private static final int EDITAR_EQUIPA_OPTION = 7;
     private static final int DESATIVAR_EQUIPA_OPTION = 8;
 
@@ -119,6 +120,11 @@ public class MainMenu extends AbstractUI {
     private static final int EDITAR_TIPOEQUIPA_OPTION = 4;
     private static final int DESATIVAR_TIPOEQUIPA_OPTION = 5;
 
+    //Tarefa
+    private static final int CRIAR_TAREFA_MANUAL = 1;
+    private static final int CONSULTAR_MINHAS_TAREFAS = 2;
+    private static final int REIVINDICAR_TAREFA_MANUAL = 3;
+
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -128,6 +134,7 @@ public class MainMenu extends AbstractUI {
     private static final int SERVICOS_OPTION = 7;
     private static final int EQUIPA_OPTION = 8;
     private static final int TIPOEQUIPA_OPTION = 9;
+    private static final int TAREFA_OPTION = 10;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -183,14 +190,17 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.RRH)) {
-            final Menu colaboradoresMenu=buildColaboradoresMenu();
-            mainMenu.addSubMenu(COLABORADORES_OPTION,colaboradoresMenu);
+            final Menu colaboradoresMenu = buildColaboradoresMenu();
+            mainMenu.addSubMenu(COLABORADORES_OPTION, colaboradoresMenu);
 
-            final Menu equipasMenu=buildEquipasMenu();
-            mainMenu.addSubMenu(EQUIPA_OPTION,equipasMenu);
+            final Menu equipasMenu = buildEquipasMenu();
+            mainMenu.addSubMenu(EQUIPA_OPTION, equipasMenu);
 
-            final Menu tipoEquipaMenu=buildTipoEquipaMenu();
-            mainMenu.addSubMenu(TIPOEQUIPA_OPTION,tipoEquipaMenu);
+            final Menu tipoEquipaMenu = buildTipoEquipaMenu();
+            mainMenu.addSubMenu(TIPOEQUIPA_OPTION, tipoEquipaMenu);
+
+            final Menu tarefasMenu = buildTarefasMenu();
+            mainMenu.addSubMenu(TAREFA_OPTION, tarefasMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -198,10 +208,10 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.GSH, BaseRoles.COLABORADOR)) {
-            final Menu catalogosMenu=buildCatalogoMenu();
+            final Menu catalogosMenu = buildCatalogoMenu();
             mainMenu.addSubMenu(CATALOGOS_OPTION, catalogosMenu);
 
-            final Menu servicosMenu=buildServicoMenu();
+            final Menu servicosMenu = buildServicoMenu();
             mainMenu.addSubMenu(SERVICOS_OPTION, servicosMenu);
         }
 
@@ -237,67 +247,78 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
-    private Menu buildColaboradoresMenu(){
+    private Menu buildColaboradoresMenu() {
         final Menu menu = new Menu("Colaboradores >");
 
-        menu.addItem(ADICIONAR_COLABORADOR_OPTION,"Adicionar colaborador", new AddColaboradorAction());
-        menu.addItem(LISTAR_COLABORADORES_OPTION,"Listar colaboradores",new ListarColaboradorAction());
-        menu.addItem(PESQUISAR_COLABORADOR_OPTION,"Pesquisar colaborador por numero",new PesquisarColaboradorAction());
-        menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
-        menu.addItem(LISTAR_CATALOGOS_SERVICOS,"Listar catalogo e serviços a que um utilizador tem acesso",new ListarCatalogosEServicoAction());
+        menu.addItem(ADICIONAR_COLABORADOR_OPTION, "Adicionar colaborador", new AddColaboradorAction());
+        menu.addItem(LISTAR_COLABORADORES_OPTION, "Listar colaboradores", new ListarColaboradorAction());
+        menu.addItem(PESQUISAR_COLABORADOR_OPTION, "Pesquisar colaborador por numero", new PesquisarColaboradorAction());
+        menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION, "Associar colaborador a equipa", new AssociarColaboradorAEquipaAction());
+        menu.addItem(LISTAR_CATALOGOS_SERVICOS, "Listar catalogo e serviços a que um utilizador tem acesso", new ListarCatalogosEServicoAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
 
-    private Menu buildEquipasMenu(){
-        final Menu menu=new Menu("Equipas >");
+    private Menu buildEquipasMenu() {
+        final Menu menu = new Menu("Equipas >");
 
-        menu.addItem(ADICIONAR_EQUIPA_OPTION,"Adicionar equipa",new AddEquipaAction());
-        menu.addItem(LISTAR_EQUIPA_OPTION,"Listar equipas",new ListarEquipaAction());
-        menu.addItem(PESQUISAR_EQUIPA_OPTION,"Pesquisar equipa por acronimo",new PesquisarEquipaAction());
-        menu.addItem(ADICIONAR_COLABORADOR_A_EQUIPA_OPTION,"Associar colaborador a equipa",new AssociarColaboradorAEquipaAction());
-        menu.addItem(ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION,"Associar tipo de equipa a equipa",new AssociarTipoEquipaAEquipaAction());
-        menu.addItem(LISTAR_COLABORADORES_DE_EQUIPA_OPTION,"Listar colaboradores de uma equipa",new ListarColaboradoresDeEquipaAction());
+        menu.addItem(ADICIONAR_EQUIPA_OPTION, "Adicionar equipa", new AddEquipaAction());
+        menu.addItem(LISTAR_EQUIPA_OPTION, "Listar equipas", new ListarEquipaAction());
+        menu.addItem(PESQUISAR_EQUIPA_OPTION, "Pesquisar equipa por acronimo", new PesquisarEquipaAction());
+        menu.addItem(ADICIONAR_COLABORADOR_A_EQUIPA_OPTION, "Associar colaborador a equipa", new AssociarColaboradorAEquipaAction());
+        menu.addItem(ASSOCIAR_TIPOEQUIPA_A_EQUIPA_OPTION, "Associar tipo de equipa a equipa", new AssociarTipoEquipaAEquipaAction());
+        menu.addItem(LISTAR_COLABORADORES_DE_EQUIPA_OPTION, "Listar colaboradores de uma equipa", new ListarColaboradoresDeEquipaAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
 
-    private Menu buildTipoEquipaMenu(){
-        final Menu menu=new Menu("Tipos de Equipa >");
+    private Menu buildTipoEquipaMenu() {
+        final Menu menu = new Menu("Tipos de Equipa >");
 
-        menu.addItem(ADICIONAR_TIPOEQUIPA_OPTION,"Adicionar tipo de equipa",new AddTipoEquipaAction());
-        menu.addItem(LISTAR_TIPOEQUIPA_OPTION,"Listar tipos de equipa",new ListarTipoEquipaAction());
-        menu.addItem(PESQUISAR_TIPOEQUIPA_OPTION,"Pesquisar tipo de equipa por nome",new PesquisarTipoEquipaAction());
-        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
-
-       return menu;
-    }
-
-    private Menu buildCatalogoMenu(){
-        final Menu menu=new Menu("Catalogos >");
-
-        menu.addItem(ADICIONAR_CATALOGO_OPTION,"Adicionar catalogo",new AddCatalogoAction());
-        menu.addItem(LISTAR_CATALOGO_OPTION,"Listar catalogos",new ListarCatalogoAction());
-        menu.addItem(PESQUISAR_CATALOGO_OPTION,"Pesquisar catalogo por titulo",new PesquisarCatalogoAction());
-        menu.addItem(ASSOCIAR_CATALOGO_A_EQUIPA_OPTION,"Associar equipa a catalogo",new AssociarEquipaACatalogoAction());
+        menu.addItem(ADICIONAR_TIPOEQUIPA_OPTION, "Adicionar tipo de equipa", new AddTipoEquipaAction());
+        menu.addItem(LISTAR_TIPOEQUIPA_OPTION, "Listar tipos de equipa", new ListarTipoEquipaAction());
+        menu.addItem(PESQUISAR_TIPOEQUIPA_OPTION, "Pesquisar tipo de equipa por nome", new PesquisarTipoEquipaAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
     }
 
-    private Menu buildServicoMenu(){
-        final Menu menu=new Menu("serviços >");
+    private Menu buildCatalogoMenu() {
+        final Menu menu = new Menu("Catalogos >");
 
-        menu.addItem(ADICIONAR_SERVICO_OPTION,"Adicionar serviço",new AddServicoAction());
-        menu.addItem(LISTAR_SERVICO_OPTION,"Listar serviços ativos",new ListarServicoAction());
-        menu.addItem(PESQUISAR_SERVICO_OPTION,"Pesquisar serviço por codigo",new PesquisarServicoAction());
-        menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION,"Associar serviço a catalogo",new AssociarServicoACatalogoAction());
-        menu.addItem(ACABAR_SERVICO_OPTION,"Acabar serviço",new ContinuarServicoAction());
-        menu.addItem(LISTAR_SERVICOS_CATALOGO,"Listar serviços de um catalogo",new ListarServicosDeCatalogoAction());
-        menu.addItem(ADICIONAR_ATRIBUTO_A_FORMULARIO,"Adicionar atributo a formulário de um serviço",new AddAtributoAFormularioAction());
-        menu.addItem(ATIVAR_FORMULARIO,"Ativar formulario de um serviço",new AtivarFormularioServicoAction());
+        menu.addItem(ADICIONAR_CATALOGO_OPTION, "Adicionar catalogo", new AddCatalogoAction());
+        menu.addItem(LISTAR_CATALOGO_OPTION, "Listar catalogos", new ListarCatalogoAction());
+        menu.addItem(PESQUISAR_CATALOGO_OPTION, "Pesquisar catalogo por titulo", new PesquisarCatalogoAction());
+        menu.addItem(ASSOCIAR_CATALOGO_A_EQUIPA_OPTION, "Associar equipa a catalogo", new AssociarEquipaACatalogoAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildServicoMenu() {
+        final Menu menu = new Menu("serviços >");
+
+        menu.addItem(ADICIONAR_SERVICO_OPTION, "Adicionar serviço", new AddServicoAction());
+        menu.addItem(LISTAR_SERVICO_OPTION, "Listar serviços ativos", new ListarServicoAction());
+        menu.addItem(PESQUISAR_SERVICO_OPTION, "Pesquisar serviço por codigo", new PesquisarServicoAction());
+        menu.addItem(ASSOCIAR_SERVICO_A_CATALOGO_OPTION, "Associar serviço a catalogo", new AssociarServicoACatalogoAction());
+        menu.addItem(ACABAR_SERVICO_OPTION, "Acabar serviço", new ContinuarServicoAction());
+        menu.addItem(LISTAR_SERVICOS_CATALOGO, "Listar serviços de um catalogo", new ListarServicosDeCatalogoAction());
+        menu.addItem(ADICIONAR_ATRIBUTO_A_FORMULARIO, "Adicionar atributo a formulário de um serviço", new AddAtributoAFormularioAction());
+        menu.addItem(ATIVAR_FORMULARIO, "Ativar formulario de um serviço", new AtivarFormularioServicoAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildTarefasMenu() {
+        final Menu menu = new Menu("Tarefas >");
+
+        menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
+        // menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsularTarefaAction());
+        // menu.addItem(REIVINDICAR_TAREFA_MANUAL,"Reivindicar Tarefa",new ReivindicarTarefaAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
