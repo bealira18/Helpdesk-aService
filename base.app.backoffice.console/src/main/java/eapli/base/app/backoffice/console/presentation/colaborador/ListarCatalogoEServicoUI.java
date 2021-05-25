@@ -7,6 +7,9 @@ import eapli.base.colaboradormanagement.application.ListarColaboradoresControlle
 import eapli.base.colaboradormanagement.application.PesquisarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.usermanagement.domain.BaseRoles;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
@@ -16,25 +19,30 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
     private final ListarColaboradoresController controllercol=new ListarColaboradoresController();
     private final PesquisarColaboradorController controllerpesqcol=new PesquisarColaboradorController();
     private final ColaboradorComUserController colaboradorComUserController=new ColaboradorComUserController();
+    private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
     @Override
     protected boolean doShow(){
 
-        //mostrar colaboradores
-        Iterable<Colaborador> colaboradores=controllercol.listarColaboradores();
+        int numero=0;
 
-        for(Colaborador c : colaboradores){
-            System.out.println(c.obterNumero()+"\n");
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.COLABORADOR)) {
+            numero=colaboradorComUserController.resultColaborador().obterNumero().obterNumero();
+        }else{
+            //mostrar colaboradores
+            Iterable<Colaborador> colaboradores=controllercol.listarColaboradores();
+
+            for(Colaborador c : colaboradores){
+                System.out.println(c.obterNumero()+"\n");
+            }
+
+            //escolher colaborador
+
+            numero= Console.readInteger("\nNumero pretendido: ");
+
+            while(controllerpesqcol.procurarColaboradorPorNumero(numero)==null)
+                numero=Console.readInteger("Titulo colaborador pretendido: ");
         }
-
-        //escolher colaborador
-
-        //int numero=colaboradorComUserController.resultColaborador().obterNumero().obterNumero();
-
-        int numero= Console.readInteger("\nNumero pretendido: ");
-
-        while(controllerpesqcol.procurarColaboradorPorNumero(numero)==null)
-            numero=Console.readInteger("Titulo colaborador pretendido: ");
 
         Iterable<Catalogo> catalogos=controller.listarCatálogos(numero);
 
