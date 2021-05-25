@@ -35,6 +35,7 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.servico.*;
+import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.ReivindicarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
@@ -318,8 +319,9 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Tarefas >");
 
         // menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
-        // menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsularTarefaAction());
         menu.addItem(REIVINDICAR_TAREFA_MANUAL, "Reivindicar Tarefa", new ReivindicarTarefaAction());
+        menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsultarTarefaAction());
+
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

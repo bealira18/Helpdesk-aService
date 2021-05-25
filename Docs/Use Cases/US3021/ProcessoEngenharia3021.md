@@ -30,3 +30,7 @@ A forma encontrada para resolver este problema foi criar uma classe ListarCatalo
 ## 3.4. Testes 
 
 Nada a apresentar.
+
+# 4. Implementação
+
+Nada a declarar
