@@ -1,26 +1,19 @@
-# USDemo1
-=======================================
+# Consultar Tarefas de um determinado Colaborador
+==================================================
 
 
 # 1. Requisitos
 
-*Nesta secção a equipa deve indicar a funcionalidade desenvolvida bem como descrever a sua interpretação sobre a mesma e sua correlação e/ou dependência de/com outros requisitos.*
+**Demo1**
+Como utilizador, eu pretendo consultar as tarefas pendentes que me estão assignadas.
 
-*Exemplo*
+Demo1.1. Consultar Minhas Tarefas Pendentes
 
-**Demo1** Como {Ator} pretendo...
-
-- Demo1.1. Blá Blá Blá ...
-
-- Demo1.2. Blá Blá Blá ...
-
-A interpretação feita deste requisito foi no sentido de ...
+A interpretação feita deste requisito foi no sentido de criar uma forma de pesquisar/consultar a informação das tarefas pendentes assignadas a um colaborador através da base de dados.
 
 # 2. Análise
 
-*Neste secção a equipa deve relatar o estudo/análise/comparação que fez com o intuito de tomar as melhores opções de design para a funcionalidade bem como aplicar diagramas/artefactos de análise adequados.*
-
-*Recomenda-se que organize este conteúdo por subsecções.*
+Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir informação na base de dados de cada vez que o programa precisa ser testado. Sendo assim, faz-se bootstrap de tarefas de forma a agilizar e a rentabilizar melhor o tempo da equipa no desenvolvimento do software.
 
 # 3. Design
 
