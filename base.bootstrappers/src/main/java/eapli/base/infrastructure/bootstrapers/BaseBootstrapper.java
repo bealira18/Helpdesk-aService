@@ -85,6 +85,7 @@ public class BaseBootstrapper implements Action {
         new TarefaManualBootstrapper(),
         new TarefaAutomaticaBootstrapper(),
         new FormularioBootstrapper(),
+        new AtributoBootstrapper(),
         new AddRascunhoBootstrapper(),
         //new AddWorkflowBootstrapper(),
         new AddHistoricoBootstrapper(),
