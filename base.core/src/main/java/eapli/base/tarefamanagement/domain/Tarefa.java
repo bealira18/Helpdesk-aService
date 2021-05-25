@@ -50,6 +50,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         this.dataLimite = dataLimite;
         this.tempoDecorridoA = 0;
         this.tempoDecorridoR = 0;
+        this.tempo=tempo;
         //Tempo t=new Tempo(0,0,0,tempo);
         this.prioridade = /*new Prioridade(prioridade);*/ prioridade;
     }

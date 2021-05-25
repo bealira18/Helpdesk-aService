@@ -16,6 +16,8 @@ public class ColaboradorBootstrapper implements Action {
 
         controller.adicionarColaborador(36, "Bea", "Beatriz Lira", new Date(2001 / 05 / 18), "Gaia", true, "ui@gmail.com", "idk", "idk", "919191991");
         controller.adicionarColaborador(8, "Pedro", "Pedro Morais", new Date(1998 / 11 / 25), "Matosinhos", true, "ai@isep.ipp.pt", "idk", "idk", "939393939");
+        controller.adicionarColaborador(5, "Joao", "Joao Moreira", new Date(2000 / 05 / 23), "Porto", true, "jm@isep.ipp.pt", "idk", "idk", "939393939");
+
         //editarController.mudarNomeCurto("Bea", "Beazita");
         //editarController.mudarNomeCompleto("Beatriz Lira", "Beatriz Meireles");
         //editarController.mudarLocalResidencia("Pedro Morais", "Rua das Bananas");
