@@ -6,7 +6,11 @@ import eapli.base.colaboradormanagement.application.ColaboradorComUserController
 import eapli.base.colaboradormanagement.application.ListarColaboradoresController;
 import eapli.base.colaboradormanagement.application.PesquisarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.formulariomanagement.application.AdicionarRespostasFormularioController;
+import eapli.base.formulariomanagement.application.ListarAtributosDeFormularioController;
+import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.pedidomanagement.application.AdicionarPedidoController;
+import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.servicomanagement.application.PesquisarServicoController;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.usermanagement.domain.BaseRoles;
@@ -16,6 +20,7 @@ import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
 import java.util.Date;
+import java.util.List;
 
 public class AddPedidoUI extends AbstractUI {
 
@@ -27,6 +32,8 @@ public class AddPedidoUI extends AbstractUI {
     private final PesquisarColaboradorController controllerpesqcol=new PesquisarColaboradorController();
     private final ListarCatálogosEServicosController controller=new ListarCatálogosEServicosController();
     private final PesquisarServicoController pesquisarServicoController=new PesquisarServicoController();
+    private final ListarAtributosDeFormularioController listarAtributosDeFormularioController=new ListarAtributosDeFormularioController();
+    private final AdicionarRespostasFormularioController adicionarRespostasFormularioController=new AdicionarRespostasFormularioController();
 
     @Override
     protected boolean doShow(){
@@ -76,11 +83,28 @@ public class AddPedidoUI extends AbstractUI {
         String urgencia=Console.readLine("Urgencia (reduzida,moderada,urgente)\nSelecione (r/m/u)");
         //int numeroDestinatario=Console.readInteger("Numero do destinatario do pedido");
 
+        Pedido pedido=new Pedido();
+
         try{
-            adicionarPedidoController.addPedido(dataLimite,urgencia,numero,cod);
+            pedido=adicionarPedidoController.addPedido(dataLimite,urgencia,numero,cod);
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+        //responder ao formulario de solicitação de serviço
+
+        System.out.println("\nResponder ao formulario de solicitação de pedido");
+
+        List<Atributo> atributos=listarAtributosDeFormularioController.listarAtributosCompletosFormulario(pedido.obterServico().obterFormulario().obterId());
+
+        for(Atributo a : atributos){
+            System.out.println(a.obterNome());
+            System.out.println(a.obterDescricao());
+            String resposta= Console.readLine("\nResposta: ");
+            adicionarRespostasFormularioController.responderFormulario(a,resposta);
+        }
+
+        System.out.println("Pedido feito com sucesso!");
 
         return true;
     }

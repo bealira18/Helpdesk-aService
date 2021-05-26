@@ -17,6 +17,7 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     private String nome;
     private boolean completo = false;
     private boolean ativo = false;
+    private int numAtributos;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
@@ -70,6 +71,14 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
 
     public List<Atributo> obterAtributos() {
         return atributos;
+    }
+
+    public void mudarNumAtributos(int numAtributos) {
+        this.numAtributos = numAtributos;
+    }
+
+    public int obterNumAtributos() {
+        return numAtributos;
     }
 
     @Override

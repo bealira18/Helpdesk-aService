@@ -21,6 +21,20 @@ public class EditarFormularioController {
         return null;
     }
 
+    public void mudarNumAtributos(String nomeFormulario,int num){
+
+        Formulario formulario=verificarFormulario(nomeFormulario);
+
+        if(formulario==null){
+            throw new IllegalArgumentException("Formulario inválido com nome: "+nomeFormulario);
+        }else{
+            formulario.mudarNumAtributos(num);
+        }
+
+        formularioRepository.save(formulario);
+
+    }
+
     public void mudarNome(String nomeAtual,String nomeNovo){
 
         Formulario formulario=verificarFormulario(nomeAtual);

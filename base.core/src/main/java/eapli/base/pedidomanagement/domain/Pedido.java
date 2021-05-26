@@ -47,7 +47,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private List<Formulario> formularios = new ArrayList<>();*/
 
     @OneToOne
-    private RespostasFormulario formulario;
+    private RespostasFormulario respostasFormulario;
 
     @OneToOne
     private Workflow workflow;
@@ -56,7 +56,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     @JoinColumn
     private List<Tarefa> tarefas = new ArrayList<>();
 
-    protected Pedido(){}
+    public Pedido(){}
 
     public Pedido(Date dataLimite,String urgencia,int numeroS/*, int numeroD*/){
         this.ano=c.getTime().getYear();
@@ -74,6 +74,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         this.numeroS = numeros.numeroSolicitante();
         this.numeroD = numeros.numeroSolicitante();
         this.feedback=new Feedback(-1);
+    }
+
+    public Servico obterServico() {
+        return servico;
     }
 
     public void associarServico(Servico servico) {

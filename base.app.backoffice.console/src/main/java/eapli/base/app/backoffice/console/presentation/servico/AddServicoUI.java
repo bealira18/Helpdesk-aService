@@ -3,6 +3,7 @@ package eapli.base.app.backoffice.console.presentation.servico;
 import eapli.base.formulariomanagement.application.AdicionarAtributoController;
 import eapli.base.formulariomanagement.application.AdicionarFormularioController;
 import eapli.base.formulariomanagement.application.AssociarAtributoAFormularioController;
+import eapli.base.formulariomanagement.application.EditarFormularioController;
 import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.servicomanagement.application.AdicionarServicoController;
@@ -35,7 +36,7 @@ public class AddServicoUI extends AbstractUI {
     private final CriarTarefaAutomaticaController controllerAutomatica=new CriarTarefaAutomaticaController();
     private final AssociarWorkflowAServicoController controllerAssWS=new AssociarWorkflowAServicoController();
     private final AssociarTarefaAFormularioController controllerAssFT=new AssociarTarefaAFormularioController();
-
+    private final EditarFormularioController editarFormularioController=new EditarFormularioController();
 
     @Override
     protected boolean doShow(){
@@ -163,6 +164,8 @@ public class AddServicoUI extends AbstractUI {
 
     public void addFormulario(Formulario f){
 
+        int numAtributos=0;
+
         int aux = Console.readInteger("Adicionar atributos ao formulario?\n0-não\n1-sim");
 
         while(aux!=0 && aux!=1)
@@ -180,11 +183,14 @@ public class AddServicoUI extends AbstractUI {
 
             try {
                 a = controllerAtr.adicionarAtributo(nomeAtributo, etiqueta, descricao, expressao, tipoDadosBase);
+                numAtributos++;
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             controllerAssAtrForm.associarAtributoAFormularioIds(f.obterId(), a.obterId());
+
+            editarFormularioController.mudarNumAtributos(f.obterNome(),numAtributos);
 
             aux = Console.readInteger("Adicionar mais atributos ao formulario?\n0-não\n1-sim");
 

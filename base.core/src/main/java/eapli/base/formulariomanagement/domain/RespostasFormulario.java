@@ -12,12 +12,10 @@ public class RespostasFormulario implements AggregateRoot<Integer>, Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String resposta;
+    private boolean valido;
 
     @OneToOne
     private Atributo atributo;
-
-    @OneToOne
-    private Formulario formulario;
 
     public RespostasFormulario(){}
 
@@ -25,12 +23,16 @@ public class RespostasFormulario implements AggregateRoot<Integer>, Serializable
         this.resposta=resposta;
     }
 
+    public String obterResposta() {
+        return resposta;
+    }
+
     public void relacionarAtributo(Atributo atributo) {
         this.atributo = atributo;
     }
 
-    public void relacionarFormulario(Formulario formulario) {
-        this.formulario = formulario;
+    public void mudarValido(boolean valido) {
+        this.valido = valido;
     }
 
     @Override
