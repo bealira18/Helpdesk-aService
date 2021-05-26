@@ -31,9 +31,9 @@ public class TarefaBootstrapper implements Action {
             e.printStackTrace();
         }
         EstadoTarefa estado = null;
-        controller.criarTarefa(d1, 10, 15, estado.EM_APROVACAO, 20, 3);
-        controller.criarTarefa(d2, 25, 20, estado.CONCLUIDO, 35, 4);
-        controller.criarTarefa(d3, 20, 25, estado.SUBMETIDO, 30, 1);
+        controller.criarTarefa("descricao1",true);
+        controller.criarTarefa("descricao2",true);
+        controller.criarTarefa("descricao3",true);
         
         
         return true;

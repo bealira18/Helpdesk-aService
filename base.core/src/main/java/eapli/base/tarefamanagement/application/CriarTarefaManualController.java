@@ -11,17 +11,17 @@ public class CriarTarefaManualController {
 
     private final TarefaManualRepository tarefaManualRepository = PersistenceContext.repositories().tarefaManual();
 
-    public TarefaManual criarTarefaManual(Date dataLimite, int tempo, int prioridade) {
+    public TarefaManual criarTarefaManual(String descricao,boolean aprovacao) {
 
-        final TarefaManual novaTarefaManual = new TarefaManual(dataLimite, tempo, prioridade);
+        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao,descricao);
 
         return tarefaManualRepository.save(novaTarefaManual);
 
     }
 
-    public TarefaManual criarTarefaManualWorkflow(boolean aprovacao) {
+    public TarefaManual criarTarefaManualWorkflow(String descricao,boolean aprovacao) {
 
-        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao);
+        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao,descricao);
 
         return tarefaManualRepository.save(novaTarefaManual);
 

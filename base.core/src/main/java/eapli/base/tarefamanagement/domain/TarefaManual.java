@@ -19,12 +19,8 @@ public class TarefaManual extends Tarefa implements AggregateRoot<Integer>, Seri
     public TarefaManual() {
     }
 
-    public TarefaManual(boolean aprovacao){
-        super(aprovacao);
-    }
-
-    public TarefaManual(Date dataLimite, int tempo, int prioridade) {
-        super(dataLimite, tempo, prioridade);
+    public TarefaManual(boolean aprovacao,String descricao){
+        super(descricao,aprovacao);
     }
 
     public void addFormulario(Formulario f){

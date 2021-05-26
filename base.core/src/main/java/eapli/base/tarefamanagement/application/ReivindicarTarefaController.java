@@ -31,7 +31,7 @@ public class ReivindicarTarefaController {
 
         c.reivindicarTarefa(tm);
 
-        tm.associarColaborador(c);
+        //tm.associarColaborador(c);
 
         colabRepository.save(c);
 

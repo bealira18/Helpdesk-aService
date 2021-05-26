@@ -1,5 +1,6 @@
 package eapli.base.tarefamanagement.domain;
 
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -21,6 +22,9 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
     private int prioridade; //prioridade
 
     @OneToOne
+    private Colaborador colaborador;
+
+    @OneToOne
     private Tarefa tarefa;
 
     public InfoTarefa(){}
@@ -28,6 +32,18 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
     public InfoTarefa(Date dataLimite,int prioridade){
         this.dataLimite=dataLimite;
         this.prioridade=prioridade;
+    }
+
+    public Colaborador obterColaborador() {
+        return this.colaborador;
+    }
+
+    public int obterIdColaborador(){
+        return this.colaborador.obterNumero().obterNumero();
+    }
+
+    public void associarColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
     }
 
     @Override

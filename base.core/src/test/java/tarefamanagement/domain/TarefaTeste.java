@@ -16,26 +16,15 @@ public class TarefaTeste {
     @Test(expected = IllegalArgumentException.class)
     public void nullEmTodosParametros() {
 
-        Date d2 = new Date(null);
-
-        Tarefa instance = new Tarefa(d2, 0, 0);
+        //Tarefa instance = new Tarefa("descricao",false);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void nullNumParametro() {
 
-        SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
-        Date d1 = new Date();
-        Date d2 = new Date();
-        try {
-            d1 = forma.parse("24/02/2022");
-            d2 = null;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         EstadoTarefa estado = null;
-        Tarefa instance = new Tarefa(d2, 2, 4);
-        Tarefa instance2 = new Tarefa(d1, 5,3);
+        //Tarefa instance = new Tarefa("descricao",false);
+        //Tarefa instance2 = new Tarefa("descricao",false);
     }
 
 //    @Test

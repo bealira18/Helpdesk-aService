@@ -18,11 +18,11 @@ public class ConsultarTarefaController {
         Iterable<TarefaManual> tarefas = tarefaManualRepository.findAll();
         List<TarefaManual> tarefasPendentes = new ArrayList<>();
 
-        for (TarefaManual t : tarefas) {
+        /*for (TarefaManual t : tarefas) {
             if (t.obterColaborador() == null) {
                 tarefasPendentes.add(t);
             }
-        }
+        }*/
 
         if (tarefasPendentes == null) {
             throw new IllegalArgumentException("Não existem tarefas pendentes.");

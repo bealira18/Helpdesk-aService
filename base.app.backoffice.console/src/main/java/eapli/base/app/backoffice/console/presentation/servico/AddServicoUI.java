@@ -94,7 +94,8 @@ public class AddServicoUI extends AbstractUI {
                 manual = Console.readInteger("Tarefa de aprovação é manual?\n0-não\n1-sim");
 
             if(manual==1){
-                Tarefa t1=controllerManual.criarTarefaManualWorkflow(true);
+                String descricao = Console.readLine("Descricao da Tarefa: ");
+                Tarefa t1=controllerManual.criarTarefaManualWorkflow(descricao,true);
 
                 System.out.println("\nAdicionar formulario à tarefa:\n");
 
@@ -114,7 +115,8 @@ public class AddServicoUI extends AbstractUI {
 
                 tarefas.add(t1);
             }else{
-                Tarefa t2=controllerAutomatica.criarTarefaAutomaticaWorkflow(true);
+                String descricao = Console.readLine("Descricao da Tarefa: ");
+                Tarefa t2=controllerAutomatica.criarTarefaAutomaticaWorkflow(true,descricao);
                 tarefas.add(t2);
             }
         }
@@ -129,7 +131,8 @@ public class AddServicoUI extends AbstractUI {
             manual = Console.readInteger("Tarefa de resolução é manual?\n0-não\n1-sim");
 
         if(manual==1){
-            Tarefa t3=controllerManual.criarTarefaManualWorkflow(false);
+            String descricao = Console.readLine("Descricao da Tarefa: ");
+            Tarefa t3=controllerManual.criarTarefaManualWorkflow(descricao,false);
 
             System.out.println("\nAdicionar formulario à tarefa:\n");
 
@@ -149,7 +152,8 @@ public class AddServicoUI extends AbstractUI {
 
             tarefas.add(t3);
         }else{
-            Tarefa t4=controllerAutomatica.criarTarefaAutomaticaWorkflow(false);
+            String descricao = Console.readLine("Descricao da Tarefa: ");
+            Tarefa t4=controllerAutomatica.criarTarefaAutomaticaWorkflow(false,descricao);
             tarefas.add(t4);
         }
 

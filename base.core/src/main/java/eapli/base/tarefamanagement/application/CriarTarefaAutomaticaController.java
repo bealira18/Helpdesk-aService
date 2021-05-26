@@ -10,17 +10,17 @@ public class CriarTarefaAutomaticaController {
 
     private final TarefaAutomaticaRepository tarefaAutomaticaRepository = PersistenceContext.repositories().tarefaAutomatica();
 
-    public TarefaAutomatica criarTarefaAutomatica(Date dataLimite, int tempo, int prioridade) {
+    public TarefaAutomatica criarTarefaAutomatica(String descricao,boolean aprovacao) {
 
-        final TarefaAutomatica novaTarefaAutomatica = new TarefaAutomatica(dataLimite, tempo, prioridade);
+        final TarefaAutomatica novaTarefaAutomatica = new TarefaAutomatica(descricao,aprovacao);
 
         return tarefaAutomaticaRepository.save(novaTarefaAutomatica);
 
     }
 
-    public TarefaAutomatica criarTarefaAutomaticaWorkflow(boolean aprovacao) {
+    public TarefaAutomatica criarTarefaAutomaticaWorkflow(boolean aprovacao,String descricao) {
 
-        final TarefaAutomatica novaTarefaAutomatica = new TarefaAutomatica(aprovacao);
+        final TarefaAutomatica novaTarefaAutomatica = new TarefaAutomatica(descricao,aprovacao);
 
         return tarefaAutomaticaRepository.save(novaTarefaAutomatica);
 

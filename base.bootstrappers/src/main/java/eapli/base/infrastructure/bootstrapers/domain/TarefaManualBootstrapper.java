@@ -13,21 +13,9 @@ public class TarefaManualBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        SimpleDateFormat forma = new SimpleDateFormat("dd/MM/yyyy");
-        Date d1 = new Date();
-        Date d2 = new Date();
-        Date d3 = new Date();
-        try {
-            d1 = forma.parse("24/02/2022");
-            d2 = forma.parse("07/08/2024");
-            d3 = forma.parse("06/12/2021");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        controller.criarTarefaManual(d1, 10, 4);
-        controller.criarTarefaManual(d2, 25, 3);
-        controller.criarTarefaManual(d3, 20, 2);
+        controller.criarTarefaManual("descricao",true);
+        controller.criarTarefaManual("descricao",true);
+        controller.criarTarefaManual("descricao",true);
 
         return true;
 

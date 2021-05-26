@@ -10,9 +10,9 @@ public class CriarTarefaController {
 
     private final TarefaRepository tarefaRepository = PersistenceContext.repositories().tarefa();
 
-    public Tarefa criarTarefa(Date dataLimite, int tempoDecorridoA, int tempoDecorridoR, EstadoTarefa estadoTarefa, int tempo, int prioridade) {
+    public Tarefa criarTarefa(String descricao,boolean aprovacao) {
 
-        final Tarefa novaTarefa = new Tarefa( dataLimite,  tempo,  prioridade);
+        final Tarefa novaTarefa = new Tarefa(descricao,aprovacao);
 
         return tarefaRepository.save(novaTarefa);
 
