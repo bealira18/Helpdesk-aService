@@ -24,6 +24,7 @@
     <class>eapli.base.tarefamanagement.domain.Tarefa</class>
     <class>eapli.base.tarefamanagement.domain.TarefaManual</class>
     <class>eapli.base.tarefamanagement.domain.TarefaAutomatica</class>
+    <class>eapli.base.tarefamanagement.domain.InfoTarefa</class>
     <class>eapli.base.formulariomanagement.domain.Formulario</class>
     <class>eapli.base.formulariomanagement.domain.RespostasFormulario</class>
     <class>eapli.base.catalogomanagement.domain.CriteriosEspecificacao</class>

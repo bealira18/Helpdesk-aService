@@ -22,6 +22,7 @@ import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
 import eapli.base.tarefamanagement.domain.TarefaAutomatica;
+import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
@@ -93,6 +94,7 @@ public interface RepositoryFactory {
 	TarefaRepository tarefa();
 	TarefaManualRepository tarefaManual();
 	TarefaAutomaticaRepository tarefaAutomatica();
+	InfoTarefaRepository infoTarefa();
 	FormularioRepository formulario();
 	RespostasFormularioRepository respostasFormulario();
 	CriteriosEspecificacaoRepository criteriosEspecificacao();

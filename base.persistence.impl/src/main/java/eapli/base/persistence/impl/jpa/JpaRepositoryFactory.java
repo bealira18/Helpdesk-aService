@@ -18,6 +18,7 @@ import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
+import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
@@ -107,6 +108,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	@Override
 	public TarefaManualRepository tarefaManual() {
 		return new JpaTarefaManualRepository();
+	}
+
+	@Override
+	public InfoTarefaRepository infoTarefa() {
+		return new JpaInfoTarefaRepository();
 	}
 
 	@Override
