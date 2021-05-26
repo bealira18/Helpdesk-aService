@@ -34,6 +34,7 @@ import eapli.base.app.backoffice.console.presentation.catalogo.PesquisarCatalogo
 import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSignupRequestAction;
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
+import eapli.base.app.backoffice.console.presentation.pedido.AddPedidoAction;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
@@ -127,6 +128,9 @@ public class MainMenu extends AbstractUI {
     private static final int CONSULTAR_MINHAS_TAREFAS = 2; //COLAB
     private static final int CRIAR_TAREFA_MANUAL = 3;
 
+    //Pedido
+    private static final int ADD_PEDIDO=1;
+
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
@@ -137,6 +141,7 @@ public class MainMenu extends AbstractUI {
     private static final int EQUIPA_OPTION = 7;
     private static final int TIPOEQUIPA_OPTION = 8;
     private static final int TAREFA_OPTION = 9;
+    private static final int PEDIDO_OPTION=10;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -197,6 +202,8 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION, tiposEquipaMenu);
             final Menu tarefasMenu = buildTarefasMenu();
             mainMenu.addSubMenu(TAREFA_OPTION, tarefasMenu);
+            final Menu pedidoMenu=buildPedidoMenu();
+            mainMenu.addSubMenu(PEDIDO_OPTION,pedidoMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -357,6 +364,13 @@ public class MainMenu extends AbstractUI {
         menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsultarTarefaAction());
 
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildPedidoMenu(){
+        final Menu menu=new Menu("Pedido >");
+        menu.addItem(ADD_PEDIDO,"Fazer um pedido",new AddPedidoAction());
 
         return menu;
     }

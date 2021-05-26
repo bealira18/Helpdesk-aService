@@ -2,6 +2,7 @@ package eapli.base.pedidomanagement.domain;
 
 import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.formulariomanagement.domain.RespostasFormulario;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
 import eapli.base.tarefamanagement.domain.Tarefa;
@@ -46,7 +47,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private List<Formulario> formularios = new ArrayList<>();*/
 
     @OneToOne
-    private Formulario formulario;
+    private RespostasFormulario formulario;
 
     @OneToOne
     private Workflow workflow;
@@ -57,22 +58,26 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
 
     protected Pedido(){}
 
-    public Pedido(Date dataLimite,String urgencia,int numeroS, int numeroD,int feedback){
+    public Pedido(Date dataLimite,String urgencia,int numeroS/*, int numeroD*/){
         this.ano=c.getTime().getYear();
         this.dataSolicitacao=c.getTime();
         this.dataLimite=dataLimite;
         //this.dataFim=null;
-        if(urgencia.equals("reduzida"))
+        if(urgencia.equals("r"))
             this.urgencia=Urgencia.REDUZIDA;
-        if(urgencia.equals("moderada"))
+        if(urgencia.equals("m"))
             this.urgencia=Urgencia.MODERADA;
-        if(urgencia.equals("urgente"))
+        if(urgencia.equals("u"))
             this.urgencia=Urgencia.URGENTE;
-        this.estadoPedido=EstadoPedido.EM_APROVACAO;
+        this.estadoPedido=EstadoPedido.SUBMETIDO;
         NumeroParaPedido numeros = new NumeroParaPedido(numeroS, numeroD);
         this.numeroS = numeros.numeroSolicitante();
-        this.numeroD = numeros.numeroDestinatario();
-        this.feedback=new Feedback(feedback);
+        this.numeroD = numeros.numeroSolicitante();
+        this.feedback=new Feedback(-1);
+    }
+
+    public void associarServico(Servico servico) {
+        this.servico = servico;
     }
 
     @Override
