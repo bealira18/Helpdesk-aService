@@ -80,8 +80,8 @@ public class MainMenu extends AbstractUI {
     private static final int ADICIONAR_COLABORADOR_OPTION = 1;
     private static final int LISTAR_COLABORADORES_OPTION = 2;
     private static final int PESQUISAR_COLABORADOR_OPTION = 3;
-    private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 4;
-    private static final int LISTAR_CATALOGOS_SERVICOS = 5;
+    private static final int ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION = 4; //RRH
+    private static final int LISTAR_CATALOGOS_SERVICOS = 5;  //COLAB
     private static final int EDITAR_COLABORADOR_OPTION = 6;
     private static final int DESATIVAR_COLABORADOR_OPTION = 7;
 
@@ -89,7 +89,7 @@ public class MainMenu extends AbstractUI {
     private static final int ADICIONAR_CATALOGO_OPTION = 1;
     private static final int LISTAR_CATALOGO_OPTION = 2;
     private static final int PESQUISAR_CATALOGO_OPTION = 3;
-    private static final int ASSOCIAR_CATALOGO_A_EQUIPA_OPTION = 4;
+    private static final int ASSOCIAR_CATALOGO_A_EQUIPA_OPTION = 4; //GSH
     private static final int EDITAR_CATALOGO_OPTION = 5;
     private static final int DESATIVAR_CATALOGO_OPTION = 6;
 
@@ -100,8 +100,8 @@ public class MainMenu extends AbstractUI {
     private static final int ASSOCIAR_SERVICO_A_CATALOGO_OPTION = 4;
     private static final int ACABAR_SERVICO_OPTION = 5;
     private static final int LISTAR_SERVICOS_CATALOGO = 6;
-    private static final int ADICIONAR_ATRIBUTO_A_FORMULARIO = 7;
-    private static final int ATIVAR_FORMULARIO = 8;
+    private static final int ADICIONAR_ATRIBUTO_A_FORMULARIO = 7; //GSH
+    private static final int ATIVAR_FORMULARIO = 8; //GSH
     private static final int EDITAR_SERVICO_OPTION = 9;
     private static final int DESATIVAR_SERVICO_OPTION = 10;
 
@@ -123,20 +123,20 @@ public class MainMenu extends AbstractUI {
     private static final int DESATIVAR_TIPOEQUIPA_OPTION = 5;
 
     //Tarefa
-    private static final int REIVINDICAR_TAREFA_MANUAL = 1;
-    private static final int CONSULTAR_MINHAS_TAREFAS = 2;
+    private static final int REIVINDICAR_TAREFA_MANUAL = 1; //COLAB
+    private static final int CONSULTAR_MINHAS_TAREFAS = 2; //COLAB
     private static final int CRIAR_TAREFA_MANUAL = 3;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
-    private static final int SETTINGS_OPTION = 4;
-    private static final int COLABORADORES_OPTION = 5;
-    private static final int CATALOGOS_OPTION = 6;
-    private static final int SERVICOS_OPTION = 7;
-    private static final int EQUIPA_OPTION = 8;
-    private static final int TIPOEQUIPA_OPTION = 9;
-    private static final int TAREFA_OPTION = 10;
+    private static final int SETTINGS_OPTION = 3;
+    private static final int COLABORADORES_OPTION = 4;
+    private static final int CATALOGOS_OPTION = 5;
+    private static final int SERVICOS_OPTION = 6;
+    private static final int EQUIPA_OPTION = 7;
+    private static final int TIPOEQUIPA_OPTION = 8;
+    private static final int TAREFA_OPTION = 9;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -180,27 +180,21 @@ public class MainMenu extends AbstractUI {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
 
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.ADMIN)) {
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER)) {
             final Menu usersMenu = buildUsersMenu();
             mainMenu.addSubMenu(USERS_OPTION, usersMenu);
             final Menu settingsMenu = buildAdminSettingsMenu();
             mainMenu.addSubMenu(SETTINGS_OPTION, settingsMenu);
-        }
-
-        if (!Application.settings().isMenuLayoutHorizontal()) {
-            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-        }
-
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.RRH)) {
             final Menu colaboradoresMenu = buildColaboradoresMenu();
             mainMenu.addSubMenu(COLABORADORES_OPTION, colaboradoresMenu);
-
+            final Menu catalogosMenu = buildCatalogoMenu();
+            mainMenu.addSubMenu(CATALOGOS_OPTION, catalogosMenu);
+            final Menu servicosMenu = buildServicoMenu();
+            mainMenu.addSubMenu(SERVICOS_OPTION, servicosMenu);
             final Menu equipasMenu = buildEquipasMenu();
             mainMenu.addSubMenu(EQUIPA_OPTION, equipasMenu);
-
-            final Menu tipoEquipaMenu = buildTipoEquipaMenu();
-            mainMenu.addSubMenu(TIPOEQUIPA_OPTION, tipoEquipaMenu);
-
+            final Menu tiposEquipaMenu = buildTipoEquipaMenu();
+            mainMenu.addSubMenu(TIPOEQUIPA_OPTION, tiposEquipaMenu);
             final Menu tarefasMenu = buildTarefasMenu();
             mainMenu.addSubMenu(TAREFA_OPTION, tarefasMenu);
         }
@@ -209,15 +203,52 @@ public class MainMenu extends AbstractUI {
             mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
         }
 
-        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER, BaseRoles.GSH, BaseRoles.COLABORADOR)) {
-            //final Menu colaboradoresMenu = buildColaboradoresMenu();
-            //mainMenu.addSubMenu(COLABORADORES_OPTION, colaboradoresMenu);
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.ADMIN)) {
+            final Menu usersMenu = buildUsersMenu();
+            mainMenu.addSubMenu(2, usersMenu);
+            final Menu settingsMenu = buildAdminSettingsMenu();
+            mainMenu.addSubMenu(3, settingsMenu);
+        }
+
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+        }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.RRH)) {
+            final Menu colaboradoresMenu = buildColaboradoresParaRRHMenu();
+            mainMenu.addSubMenu(2, colaboradoresMenu);
+
+            final Menu equipasMenu = buildEquipasMenu();
+            mainMenu.addSubMenu(3, equipasMenu);
+
+            final Menu tipoEquipaMenu = buildTipoEquipaMenu();
+            mainMenu.addSubMenu(4, tipoEquipaMenu);
+        }
+
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+        }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.GSH)) {
 
             final Menu catalogosMenu = buildCatalogoMenu();
-            mainMenu.addSubMenu(CATALOGOS_OPTION, catalogosMenu);
+            mainMenu.addSubMenu(2, catalogosMenu);
 
             final Menu servicosMenu = buildServicoMenu();
-            mainMenu.addSubMenu(SERVICOS_OPTION, servicosMenu);
+            mainMenu.addSubMenu(3, servicosMenu);
+        }
+
+        if (!Application.settings().isMenuLayoutHorizontal()) {
+            mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
+        }
+
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.COLABORADOR)) {
+
+            final Menu tarefasMenu = buildTarefasMenu();
+            mainMenu.addSubMenu(2, tarefasMenu);
+
+            final Menu catalogosEServicosMenu = buildCatalogosEServicosMenuParaColaborador();
+            mainMenu.addSubMenu(3, catalogosEServicosMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -325,6 +356,28 @@ public class MainMenu extends AbstractUI {
         menu.addItem(REIVINDICAR_TAREFA_MANUAL, "Reivindicar Tarefa", new ReivindicarTarefaAction());
         menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsultarTarefaAction());
 
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildColaboradoresParaRRHMenu() {
+
+        final Menu menu = new Menu("Colaboradores >");
+
+        menu.addItem(ADICIONAR_COLABORADOR_OPTION, "Adicionar colaborador", new AddColaboradorAction());
+        menu.addItem(LISTAR_COLABORADORES_OPTION, "Listar colaboradores", new ListarColaboradorAction());
+        menu.addItem(PESQUISAR_COLABORADOR_OPTION, "Pesquisar colaborador por numero", new PesquisarColaboradorAction());
+        menu.addItem(ASSOCIAR_COLABORADOR_A_EQUIPA_OPTION, "Associar colaborador a equipa", new AssociarColaboradorAEquipaAction());
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+
+    private Menu buildCatalogosEServicosMenuParaColaborador(){
+        final Menu menu = new Menu("Catálogos/Serviços >");
+
+        menu.addItem(1, "Listar Catálogos e Respetivos Serviços disponíveis", new ListarCatalogosEServicoAction());
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;
