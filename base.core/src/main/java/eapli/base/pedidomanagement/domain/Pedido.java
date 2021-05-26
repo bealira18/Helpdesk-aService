@@ -84,6 +84,14 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         this.servico = servico;
     }
 
+    public Date obterDataLimite() {
+        return dataLimite;
+    }
+
+    public Urgencia obterUrgencia() {
+        return urgencia;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;

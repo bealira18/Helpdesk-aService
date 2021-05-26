@@ -13,6 +13,7 @@ import eapli.base.pedidomanagement.application.AdicionarPedidoController;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.servicomanagement.application.PesquisarServicoController;
 import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.tarefamanagement.application.CriarTarefaController;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -34,6 +35,7 @@ public class AddPedidoUI extends AbstractUI {
     private final PesquisarServicoController pesquisarServicoController=new PesquisarServicoController();
     private final ListarAtributosDeFormularioController listarAtributosDeFormularioController=new ListarAtributosDeFormularioController();
     private final AdicionarRespostasFormularioController adicionarRespostasFormularioController=new AdicionarRespostasFormularioController();
+    private final CriarTarefaController criarTarefaController=new CriarTarefaController();
 
     @Override
     protected boolean doShow(){
@@ -77,6 +79,8 @@ public class AddPedidoUI extends AbstractUI {
         while(pesquisarServicoController.procurarServicoEspecifico(cod,numero)==null)
             cod= Console.readLine("\nEscolha um serviços dos apresentados: ");
 
+        Servico s=pesquisarServicoController.procurarServicoEspecifico(cod,numero);
+
         System.out.println("Pedido iniciado:\n");
 
         Date dataLimite= Console.readDate("\nData Limite: ");
@@ -105,6 +109,8 @@ public class AddPedidoUI extends AbstractUI {
         }
 
         System.out.println("Pedido feito com sucesso!");
+
+        criarTarefaController.novaTarefa(s,pedido);
 
         return true;
     }

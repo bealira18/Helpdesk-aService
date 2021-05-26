@@ -26,7 +26,7 @@ public class CriarTarefaUI extends AbstractUI {
             System.out.println(n.toString());
         }
 
-        final Date dataLimite=Console.readDate("Data Limite (yyyy/mm/dd): ");
+        /*final Date dataLimite=Console.readDate("Data Limite (yyyy/mm/dd): ");
         int tempo=Console.readInteger("Tempo: ");
         int prioridade=Console.readInteger("Prioridade (0-5): ");
 
@@ -34,7 +34,7 @@ public class CriarTarefaUI extends AbstractUI {
             this.controller.criarTarefaManual(dataLimite,tempo,prioridade);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         return true;
 

@@ -46,6 +46,10 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         this.colaborador = colaborador;
     }
 
+    public void associarTarefa(Tarefa tarefa) {
+        this.tarefa = tarefa;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;
