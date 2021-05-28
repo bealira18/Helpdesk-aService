@@ -50,6 +50,16 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         this.tarefa = tarefa;
     }
 
+    public Date obterDataLimite(){
+        return this.dataLimite;
+    }
+
+    public int obterPrioridade(){
+        return this.prioridade;
+    }
+
+    public int obteridTarefa(){return this.tarefa.obterId();}
+
     @Override
     public boolean sameAs(Object other) {
         return false;
@@ -59,4 +69,6 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
     public Integer identity() {
         return null;
     }
+
+
 }

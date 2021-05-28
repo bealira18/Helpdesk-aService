@@ -6,18 +6,24 @@ import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
+import eapli.base.tarefamanagement.domain.InfoTarefa;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
+import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
+import eapli.base.tarefamanagement.repository.TarefaRepository;
+
 import java.util.Optional;
 
 public class ReivindicarTarefaController {
 
     private final TarefaManualRepository tarefaManualRepository = PersistenceContext.repositories().tarefaManual();
     private final ColaboradorRepository colabRepository = PersistenceContext.repositories().colaborador();
+    private final InfoTarefaRepository infotarefaRepository = PersistenceContext.repositories().infoTarefa();
 
-    public TarefaManual reivindicarTarefaPendente(int idTarefaManual, int numColaborador) {
+    public InfoTarefa reivindicarTarefaPendente(int idTarefaManual, int numColaborador) {
 
-        TarefaManual tm = verificarTarefa(idTarefaManual);
+        InfoTarefa tm = verificarTarefa(idTarefaManual);
 
         Colaborador c = verificarColaborador(numColaborador);
 
@@ -30,18 +36,15 @@ public class ReivindicarTarefaController {
         }
 
         c.reivindicarTarefa(tm);
-
-        //tm.associarColaborador(c);
-
+tm.associarColaborador(c);
         colabRepository.save(c);
 
-        return tarefaManualRepository.save(tm);
+        return infotarefaRepository.save(tm);
     }
 
     /*public Colaborador reivindicarTarefa(TarefaManual tarefa, Colaborador colaborador) {
 
         colaborador.reivindicarTarefa(tarefa);
-        tarefa.associarColaborador(colaborador);
         tarefaManualRepository.save(tarefa);
         return colabRepository.save(colaborador);
     }*/
@@ -57,11 +60,11 @@ public class ReivindicarTarefaController {
         return colab;
     }
 
-    public TarefaManual verificarTarefa(int idTarefaManual){
-        Iterable<TarefaManual> tarefas = tarefaManualRepository.findAll();
-        TarefaManual tarefa1 = null;
-        for (TarefaManual tM : tarefas) {
-            if (tM.obterId() == idTarefaManual) {
+    public InfoTarefa verificarTarefa(int idTarefaManual){
+        Iterable<InfoTarefa> tarefas = infotarefaRepository.findAll();
+        InfoTarefa tarefa1 = null;
+        for (InfoTarefa tM : tarefas) {
+            if (tM.obteridTarefa() == idTarefaManual) {
                 tarefa1 = tM;
             }
         }

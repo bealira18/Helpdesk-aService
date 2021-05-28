@@ -59,7 +59,11 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     }
 
     public int obterId() {
-        return id;
+        return this.id;
+    }
+
+    public boolean obterTipo(){
+        return this.aprovacao;
     }
 
     @Override
