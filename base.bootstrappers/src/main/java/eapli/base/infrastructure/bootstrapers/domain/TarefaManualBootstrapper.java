@@ -13,9 +13,9 @@ public class TarefaManualBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.criarTarefaManual("descricao",true);
-        controller.criarTarefaManual("descricao",true);
-        controller.criarTarefaManual("descricao",true);
+        controller.criarTarefaManual("descricao1",true);
+        controller.criarTarefaManual("descricao2",true);
+        controller.criarTarefaManual("descricao3",true);
 
         return true;
 

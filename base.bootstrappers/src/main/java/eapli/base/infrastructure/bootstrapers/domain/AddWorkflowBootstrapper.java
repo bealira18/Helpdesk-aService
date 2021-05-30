@@ -1,25 +1,26 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
-import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.servicomanagement.domain.Workflow;
-import eapli.base.servicomanagement.repository.WorkflowRepository;
+import eapli.base.servicomanagement.application.AdicionarWorkflowController;
 import eapli.framework.actions.Action;
 
 public class AddWorkflowBootstrapper implements Action {
 
-    WorkflowRepository repository;
+    AdicionarWorkflowController awc = new AdicionarWorkflowController();
 
     @Override
     public boolean execute() {
 
-        repository= PersistenceContext.repositories().workflow();
+        awc.adicionarWorkflow(1, 4);
+        awc.adicionarWorkflow(2, 5);
+        awc.adicionarWorkflow(3, 6);
+
         /*Workflow w1=new Workflow(1,1);
         Workflow w2=new Workflow(1,2);
         Workflow w3=new Workflow(1,3);
         repository.save(w1);
         repository.save(w2);
         repository.save(w3);*/
-        return false;
+        return true;
     }
 
 }

@@ -18,8 +18,8 @@ public class AddPedidoBootstrapper implements Action {
 
         repository= PersistenceContext.repositories().pedido();
         Pedido pedido1=new Pedido(new Date(2021 / 5 / 18),"urgente",8);
-        Pedido pedido2=new Pedido(new Date(2021 / 9 / 3),"urgente",8);
-        Pedido pedido3=new Pedido(new Date(2021 / 11 / 25),"urgente",8);
+        Pedido pedido2=new Pedido(new Date(2021 / 9 / 3),"urgente",5);
+        Pedido pedido3=new Pedido(new Date(2021 / 11 / 25),"urgente",36);
         repository.save(pedido1);
         repository.save(pedido2);
         repository.save(pedido3);

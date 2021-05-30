@@ -20,6 +20,7 @@ public class AssociarColaboradorAEquipaBootstrapper implements Action {
 
         acec.associarColaboradorAEquipa("EDC", 8);
         acec.associarColaboradorAEquipa("EDF", 36);
+        acec.associarColaboradorAEquipa("EDF", 5);
         return true;
     }
 }

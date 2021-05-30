@@ -13,9 +13,9 @@ public class TarefaAutomaticaBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.criarTarefaAutomatica("tarefaA1",true);
-        controller.criarTarefaAutomatica("tarefaA2",true);
-        controller.criarTarefaAutomatica("tarefaA3",true);
+        controller.criarTarefaAutomatica("tarefaA1",false);
+        controller.criarTarefaAutomatica("tarefaA2",false);
+        controller.criarTarefaAutomatica("tarefaA3",false);
 
         return true;
 

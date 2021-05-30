@@ -32,7 +32,7 @@ public class TarefaBootstrapper implements Action {
         }
         EstadoTarefa estado = null;
         controller.criarTarefa("descricao1",true);
-        controller.criarTarefa("descricao2",true);
+        controller.criarTarefa("descricao2",false);
         controller.criarTarefa("descricao3",true);
         
         
