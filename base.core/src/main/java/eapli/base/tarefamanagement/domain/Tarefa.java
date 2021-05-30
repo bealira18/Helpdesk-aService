@@ -23,11 +23,12 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dataLimite;
-
+    private EstadoTarefa estadoTarefa;
     private String descricao;
     private int tempoMedioA;
     private int tempoMedioR;
-    private boolean aprovacao; //true se a tarefa for de aprovaçao, false se for de realizaçao
+    private boolean aprovacao;//true se a tarefa for de aprovaçao, false se for de realizaçao
+    private int aprovado = 0; //se for igual 1 foi aprovado, se for igual a -1 rejeitado
 
     /*@OneToOne
     @JoinColumn
@@ -37,6 +38,7 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     }
 
     public Tarefa(String descricao,boolean aprovacao) {
+        this.estadoTarefa = EstadoTarefa.NAO_INICIADA;
         this.aprovacao = aprovacao;
     }
 
@@ -60,6 +62,18 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     public int obterId() {
         return id;
+    }
+
+    public boolean obterTipoTarefa(){
+        return aprovacao;
+    }
+
+    public int obterAprovado(){
+        return aprovado;
+    }
+
+    public EstadoTarefa obterEstadoTarefa(){
+        return estadoTarefa;
     }
 
     @Override

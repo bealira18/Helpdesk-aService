@@ -1,10 +1,7 @@
 package eapli.base.tarefamanagement.domain;
 
 public enum EstadoTarefa {
-    SUBMETIDO,
-    EM_APROVACAO,
-    APROVADO,
-    REJEITADO,
-    EM_RESOLUCAO,
-    CONCLUIDO;
+    NAO_INICIADA,
+    EM_EXECUÇAO,
+    TERMINADA;
 }

@@ -92,6 +92,21 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return urgencia;
     }
 
+    public int obterId(){
+        return id;
+    }
+
+    public List<Tarefa> obterListaTarefas(){
+        return tarefas;
+    }
+
+    public EstadoPedido obterEstadoPedido(){
+        return estadoPedido;
+    }
+
+    public void mudarEstadoPedido(EstadoPedido e){
+        this.estadoPedido = e;
+    }
     @Override
     public boolean sameAs(Object other) {
         return false;
