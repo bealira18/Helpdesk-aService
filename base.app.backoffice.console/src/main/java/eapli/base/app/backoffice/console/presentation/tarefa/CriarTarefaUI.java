@@ -16,8 +16,8 @@ public class CriarTarefaUI extends AbstractUI {
 
     @Override
     protected boolean doShow(){
-
-        final Iterable<TarefaManual> tarefasPendentes=cosultacontroller.listarTarefasPendentes();
+/*
+        final Iterable<TarefaManual> tarefasPendentes=cosultacontroller.listarTarefasPendentes(5);
 
         if(tarefasPendentes!=null)
             System.out.println("Tarefas Manuais indisponiveis:\n");

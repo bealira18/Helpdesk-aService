@@ -1,56 +1,72 @@
 package eapli.base.app.backoffice.console.presentation.tarefa;
 
+import eapli.base.colaboradormanagement.application.ColaboradorComUserController;
 import eapli.base.colaboradormanagement.application.ListarColaboradoresController;
 import eapli.base.colaboradormanagement.application.PesquisarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
-import eapli.base.equipamanagement.application.AssociarColaboradorAEquipaController;
-import eapli.base.equipamanagement.application.ListarEquipasController;
-import eapli.base.equipamanagement.application.PesquisarEquipaController;
-import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.tarefamanagement.application.ConsultarTarefaController;
 import eapli.base.tarefamanagement.application.PesquisarTarefaController;
 import eapli.base.tarefamanagement.application.ReivindicarTarefaController;
-import eapli.base.tarefamanagement.domain.TarefaManual;
+import eapli.base.tarefamanagement.domain.Tarefa;
+import eapli.base.usermanagement.domain.BaseRoles;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
+
+import java.util.ArrayList;
 
 public class ReivindicarTarefaUI extends AbstractUI {
 
     private final ReivindicarTarefaController controller=new ReivindicarTarefaController();
-    private final ListarColaboradoresController controllerColab=new ListarColaboradoresController();
-    private final PesquisarColaboradorController controllerPesqColab=new PesquisarColaboradorController();
     private final PesquisarTarefaController controllerTar=new PesquisarTarefaController();
     private final ConsultarTarefaController controllerTarefas=new ConsultarTarefaController();
+    private final AuthorizationService authz = AuthzRegistry.authorizationService();
+    private final ColaboradorComUserController colaboradorComUserController=new ColaboradorComUserController();
+    private final ListarColaboradoresController controllercol=new ListarColaboradoresController();
+    private final PesquisarColaboradorController controllerpesqcol=new PesquisarColaboradorController();
 
     @Override
     protected boolean doShow(){
+        int numero=0;
 
-        final Iterable<Colaborador> colaboradores=controllerColab.listarColaboradores();
+        if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.COLABORADOR)) {
+            numero=colaboradorComUserController.resultColaborador().obterNumero().obterNumero();
+        }else{
+            //mostrar colaboradores
+            Iterable<Colaborador> colaboradores=controllercol.listarColaboradores();
 
-        if(colaboradores!=null)
-            System.out.println("Colaboradores possiveis:\n");
-        else
-            System.out.println("Ainda não existem colaboradores");
+            for(Colaborador c : colaboradores){
+                System.out.println(c.obterNumero()+"\n");
+            }
 
-        for(Colaborador c : colaboradores){
-            System.out.println(c.toString());
+            //escolher colaborador
+
+            numero= Console.readInteger("\nNumero pretendido: ");
+
+            while(controllerpesqcol.procurarColaboradorPorNumero(numero)==null)
+                numero=Console.readInteger("Titulo colaborador pretendido: ");
         }
 
-        final Iterable<TarefaManual> tarefas=controllerTarefas.listarTarefasPendentes();
+
+
+        Iterable<Tarefa> tarefas = new ArrayList<>();
+        try{
+            tarefas = controllerTarefas.listarTarefasPendentes(numero);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
 
         if(tarefas!=null)
             System.out.println("\nTarefas possiveis:\n");
         else
             System.out.println("Ainda não existem equipas");
 
-        for(TarefaManual tm : tarefas){
+        for(Tarefa tm : tarefas){
             System.out.println(tm.toString());
         }
 
-        int num= Console.readInteger("\nNumero pretendido: ");
-
-        while(controllerPesqColab.procurarColaboradorPorNumero(num)==null)
-            num= Console.readInteger("Numero pretendido: ");
 
         int id= Console.readInteger("\nId pretendido: ");
 
@@ -60,7 +76,7 @@ public class ReivindicarTarefaUI extends AbstractUI {
 
 
         try{
-            controller.reivindicarTarefaPendente(id,num);
+            controller.reivindicarTarefaPendente(id,numero);
             System.out.println("Reivindicado com sucesso");
         }catch (Exception e) {
             e.printStackTrace();
