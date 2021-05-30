@@ -82,8 +82,28 @@ public class ObterEstadoWorkflowClient {
                     data_length=sIn.read();
                     if(data_length==0) break;
                     sIn.read(data,0,data_length);
-                    frase = new String(data, 0, data_length);
-                    System.out.println(frase);
+                    frase = new String(data, 3, data_length);
+                    int estadoPedido = Integer.parseInt(frase);
+                    String estado = null;
+                    if(estadoPedido == 1){
+                        estado = "Submetido";
+                    }
+                    if(estadoPedido == 2){
+                        estado = "Em aprovação";
+                    }
+                    if(estadoPedido == 3){
+                        estado = "Aprovado";
+                    }
+                    if(estadoPedido == 4){
+                        estado = "Rejeitado";
+                    }
+                    if(estadoPedido == 5){
+                        estado = "Em resolução";
+                    }
+                    if(estadoPedido == 6){
+                        estado = "Concluído";
+                    }
+                    System.out.println("O pedido, neste momento, encontra-se no estado " + estado + "!");
                 }
             }
             catch(IOException ex) { System.out.println("Client disconnected."); }

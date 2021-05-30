@@ -68,10 +68,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return this.aprovacao;
     }
 
-    public boolean obterTipoTarefa(){
-        return aprovacao;
-    }
-
     public int obterAprovado(){
         return aprovado;
     }

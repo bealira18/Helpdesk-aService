@@ -1,6 +1,5 @@
 package eapli.base.appSDP2021management;
 
-import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.domain.EstadoPedido;
 import eapli.base.pedidomanagement.domain.Pedido;
@@ -65,6 +64,9 @@ public class ObterEstadoWorkflowServer {
 class TcpChatSrvClient extends Thread {
     private Socket myS;
     private DataInputStream sIn;
+    private static final byte VERSION = 0;
+    private static final byte ACEITE = 4;
+    private static final byte REJEITADO = 5;
 
     PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
 
@@ -80,6 +82,9 @@ class TcpChatSrvClient extends Thread {
                 nChars=sIn.read();
                 if(nChars==0) break; // empty line means client wants to exit
                 sIn.read(data,0,nChars);
+                String pedido = new String(data, 3, 4);
+                int idPedido = Integer.parseInt(pedido);
+                data = estadoSeguinte(idPedido);
                 ObterEstadoWorkflowServer.sendToAll(nChars,data);
             }
             // the client wants to exit
@@ -88,7 +93,9 @@ class TcpChatSrvClient extends Thread {
         catch(Exception ex) { System.out.println("Error"); }
     }
 
-    public void EstadoSeguinte(int idPedido){
+    public byte[] estadoSeguinte(int idPedido){
+
+        byte[] data = new byte[300];
         Iterable<Pedido> pedidos = pedidoRepository.findAll();
 
         Pedido pedido = null;
@@ -99,16 +106,95 @@ class TcpChatSrvClient extends Thread {
             }
         }
 
+        if(pedido == null){
+            data[1] = REJEITADO;
+        }else {
+            data[1] = ACEITE;
+        }
+
         if(pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO){
-            List<Tarefa> tarefas = new ArrayList<>();
+            List<Tarefa> tarefas;
             tarefas = pedido.obterListaTarefas();
             for(Tarefa t : tarefas){
-                if (t.obterTipoTarefa()==true && t.obterEstadoTarefa()== EstadoTarefa.TERMINADA && t.obterAprovado()==1){
+                if (t.obterTipo()==true && t.obterEstadoTarefa()== EstadoTarefa.TERMINADA && t.obterAprovado()==1){
                     pedido.mudarEstadoPedido(EstadoPedido.APROVADO);
+                    int resultado = 3;
+                    data[0] = VERSION;
+                    data[2] = (Integer.SIZE/8);
+                    byte[] bytes = String.valueOf(resultado).getBytes();
+                    data[3] = bytes[0];
+                    data[4] = bytes[1];
+                    data[5] = bytes[2];
+                    data[6] = bytes[3];
+                    return data;
+                }
+                if (t.obterTipo()==true && t.obterEstadoTarefa()== EstadoTarefa.TERMINADA && t.obterAprovado()==-1){
+                    pedido.mudarEstadoPedido(EstadoPedido.REJEITADO);
+                    int resultado = 4;
+                    data[0] = VERSION;
+                    data[2] = (Integer.SIZE/8);
+                    byte[] bytes = String.valueOf(resultado).getBytes();
+                    data[3] = bytes[0];
+                    data[4] = bytes[1];
+                    data[5] = bytes[2];
+                    data[6] = bytes[3];
+                    return data;
+                }
+                if (t.obterTipo()==true && t.obterEstadoTarefa()== EstadoTarefa.EM_EXECUÇAO){
+                    int resultado = 2;
+                    data[0] = VERSION;
+                    data[2] = (Integer.SIZE/8);
+                    byte[] bytes = String.valueOf(resultado).getBytes();
+                    data[3] = bytes[0];
+                    data[4] = bytes[1];
+                    data[5] = bytes[2];
+                    data[6] = bytes[3];
+                    return data;
+                }
+            }
+
+        }
+        if(pedido.obterEstadoPedido() == EstadoPedido.EM_RESOLUCAO) {
+            List<Tarefa> tarefas = new ArrayList<>();
+            tarefas = pedido.obterListaTarefas();
+            for (Tarefa t : tarefas) {
+                if (t.obterTipo() == false && t.obterEstadoTarefa() == EstadoTarefa.TERMINADA) {
+                    pedido.mudarEstadoPedido(EstadoPedido.CONCLUIDO);
+                    int resultado = 6;
+                    data[0] = VERSION;
+                    data[2] = (Integer.SIZE / 8);
+                    byte[] bytes = String.valueOf(resultado).getBytes();
+                    data[3] = bytes[0];
+                    data[4] = bytes[1];
+                    data[5] = bytes[2];
+                    data[6] = bytes[3];
+                    return data;
+                }
+                if (t.obterTipo() == false && t.obterEstadoTarefa() == EstadoTarefa.EM_EXECUÇAO) {
+                    int resultado = 5;
+                    data[0] = VERSION;
+                    data[2] = (Integer.SIZE / 8);
+                    byte[] bytes = String.valueOf(resultado).getBytes();
+                    data[3] = bytes[0];
+                    data[4] = bytes[1];
+                    data[5] = bytes[2];
+                    data[6] = bytes[3];
+                    return data;
                 }
             }
         }
-
+        if(pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
+            int resultado = 1;
+            data[0] = VERSION;
+            data[2] = (Integer.SIZE / 8);
+            byte[] bytes = String.valueOf(resultado).getBytes();
+            data[3] = bytes[0];
+            data[4] = bytes[1];
+            data[5] = bytes[2];
+            data[6] = bytes[3];
+            return data;
+        }
+        return null;
     }
 }
 
