@@ -91,7 +91,8 @@ public class ContinuarServicoUI extends AbstractUI {
             }
 
         }else{
-            completarFormComAtributos(servico.obterFormulario());
+            if(!servico.obterFormulario().estaAtivo())
+                completarFormComAtributos(servico.obterFormulario());
         }
 
         List<TarefaManual> tarefas=controllerListTW.tarefas(servico.obterWorkflow());
@@ -121,8 +122,12 @@ public class ContinuarServicoUI extends AbstractUI {
             }
 
         }else{
-            completarFormComAtributos(t.obterFormulario());
+            if(!t.obterFormulario().estaAtivo())
+                completarFormComAtributos(t.obterFormulario());
         }
+
+        if(ativarWorkflowController.verificarServico(servico))
+            System.out.println("Ativado com sucesso!\n");
 
         return true;
     }

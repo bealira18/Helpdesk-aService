@@ -24,7 +24,6 @@ public class FormularioBootstrapper implements Action{
         addFormularioController.adicionarFormulario("Formulario2");
 
         associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","CC");
-        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario2","CC");
 
         atafc.associarTarefaAFormularioIds(1, 1);
         atafc.associarTarefaAFormularioIds(2, 2);

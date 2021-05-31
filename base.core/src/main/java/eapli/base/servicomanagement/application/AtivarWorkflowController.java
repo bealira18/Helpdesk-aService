@@ -71,12 +71,17 @@ public class AtivarWorkflowController {
         return null;
     }
 
-    public void verificarServico(Servico servico){
+    public boolean verificarServico(Servico servico){
         if (!servico.obterTitulo().isEmpty() && !servico.obterDescricaoBreve().isEmpty() && !servico.obterDescricaoCompleta().isEmpty() && !servico.obterPalavrasChave().isEmpty() && !servico.obterIcone().obterIcone().isEmpty() && servico.obterFormulario().estaCompleto() && servico.obterWorkflow().estaCompleto()){
             servico.mudarCompleto(true);
             servico.mudarEstado(true);
         }
+        servicoRepository.save(servico);
 
+        if(servico.estaCompleto())
+            return true;
+
+        return false;
     }
 
     public Workflow verificarWorkflow(Servico s){

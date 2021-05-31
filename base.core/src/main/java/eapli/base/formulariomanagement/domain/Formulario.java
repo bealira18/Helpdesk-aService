@@ -20,7 +20,7 @@ public class Formulario implements AggregateRoot<Integer>, Serializable {
     private int numAtributos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name="FormularioId")
     private List<Atributo> atributos = new ArrayList<>();
     
     public Formulario(){}

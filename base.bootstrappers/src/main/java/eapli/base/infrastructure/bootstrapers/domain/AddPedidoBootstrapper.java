@@ -18,9 +18,9 @@ public class AddPedidoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        apc.addPedido(new Date(2021 / 5 / 18),"urgente",8, "cod1");
-        apc.addPedido(new Date(2021 / 9 / 3),"urgente",5, "cod2");
-        apc.addPedido(new Date(2021 / 11 / 25),"urgente",36, "cod2");
+        apc.addPedido(new Date(2021 / 5 / 18),"u",8, "cod1");
+        apc.addPedido(new Date(2021 / 9 / 3),"u",5, "cod2");
+        apc.addPedido(new Date(2021 / 11 / 25),"u",36, "cod2");
 
         return true;
     }

@@ -49,7 +49,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     private Workflow workflow;
 
     @OneToMany
-    @JoinColumn
+    @JoinColumn(name="PedidoId")
     private List<Tarefa> tarefas = new ArrayList<>();
 
     public Pedido(){}
