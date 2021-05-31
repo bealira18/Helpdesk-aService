@@ -3,6 +3,7 @@ package eapli.base.app.backoffice.console.presentation.catalogo;
 import eapli.base.catalogomanagement.application.AdicionarCatalogoController;
 import eapli.base.catalogomanagement.application.AdicionarCriteriosEspecificacaoController;
 import eapli.base.catalogomanagement.application.AssociarCriteriosEspecificacaoACatalogoController;
+import eapli.base.catalogomanagement.application.AssociarNivelCriticidadeACatalogoController;
 import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
 import eapli.base.colaboradormanagement.application.ListarColaboradoresController;
@@ -11,6 +12,7 @@ import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.equipamanagement.application.ListarEquipasController;
 import eapli.base.equipamanagement.application.PesquisarEquipaController;
 import eapli.base.equipamanagement.domain.Equipa;
+import eapli.base.nivelcriticidademanagement.application.DefinirNivelCriticidadeController;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
@@ -23,6 +25,8 @@ public class AddCatalogoUI extends AbstractUI {
     private final ListarEquipasController controlerEquipas=new ListarEquipasController();
     private final PesquisarEquipaController controllerPesqEq=new PesquisarEquipaController();
     private final AssociarCriteriosEspecificacaoACatalogoController controllerassociar=new AssociarCriteriosEspecificacaoACatalogoController();
+    private final DefinirNivelCriticidadeController definirNivelCriticidadeController=new DefinirNivelCriticidadeController();
+    private final AssociarNivelCriticidadeACatalogoController associarNivelCriticidadeACatalogoController=new AssociarNivelCriticidadeACatalogoController();
 
     @Override
     protected boolean doShow(){
@@ -49,7 +53,7 @@ public class AddCatalogoUI extends AbstractUI {
         Catalogo c=new Catalogo();
         try{
             c=this.controller.adicionarCatalogo(titulo,descricaoBreve,descricaoCompleta,numeroColaborador,icone);
-            System.out.println("Adicionado com sucesso!\n");
+            //System.out.println("Adicionado com sucesso!\n");
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,6 +72,28 @@ public class AddCatalogoUI extends AbstractUI {
 
         try{
             controllerassociar.associarCriteriosEspecificacaoACatalogo(c,ce);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("\nDefinir nivel de criticidade\n");
+
+        final String objetivo=Console.readLine("Objetivo do Nivel de Criticidade: ");
+        final int tempoMaximoA=Console.readInteger("Tempo Maximo das Tarefas de Aprovação (minutos): ");
+        final int tempoMaximoR=Console.readInteger("Tempo Maximo das Tarefas de Resolução (minutos): ");
+        int valor=Console.readInteger("Valor de 1 a 5, para caraterizar: ");
+
+        while(valor<1 || valor>5)
+            valor=Console.readInteger("Valor de 1 a 5, para caraterizar: ");
+
+        String etiqueta=Console.readLine("Etiqueta: ");
+
+        definirNivelCriticidadeController.definirNivelCriticidade(objetivo,tempoMaximoA,tempoMaximoR,valor,etiqueta);
+
+        try {
+            associarNivelCriticidadeACatalogoController.associarNivelCriticidadeACatalogo(titulo, objetivo);
+            System.out.println("Adicionado com sucesso!\n");
         }catch (Exception e) {
             e.printStackTrace();
         }

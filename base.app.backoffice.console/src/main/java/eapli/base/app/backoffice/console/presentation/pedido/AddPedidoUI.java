@@ -83,7 +83,7 @@ public class AddPedidoUI extends AbstractUI {
 
         System.out.println("Pedido iniciado:\n");
 
-        Date dataLimite= Console.readDate("\nData Limite: ");
+        Date dataLimite= Console.readDate("\nData Limite (yyyy/mm/dd): ");
         String urgencia=Console.readLine("Urgencia (reduzida,moderada,urgente)\nSelecione (r/m/u)");
         //int numeroDestinatario=Console.readInteger("Numero do destinatario do pedido");
 
