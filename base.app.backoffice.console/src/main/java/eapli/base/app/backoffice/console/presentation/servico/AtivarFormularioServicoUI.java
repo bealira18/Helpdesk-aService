@@ -27,6 +27,8 @@ public class AtivarFormularioServicoUI extends AbstractUI {
     @Override
     protected boolean doShow(){
 
+        System.out.println("Escolher o serviço para ativar o formulario\n");
+
         try {
             Iterable<Servico> servicos = controllerList.listarServicos();
 
@@ -75,7 +77,7 @@ public class AtivarFormularioServicoUI extends AbstractUI {
                 Iterable<TarefaManual> tarefas = listarTarefasManuaisWorkflowController.tarefas(s.obterWorkflow());
 
                 for (Tarefa t : tarefas) {
-                    System.out.println(t.obterId());
+                    System.out.println("Id tarefa: " + t.obterId() + ", Descricao: " + t.obterDescricao());
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -107,6 +109,9 @@ public class AtivarFormularioServicoUI extends AbstractUI {
             else
                 System.out.println("Ativado com sucesso!");
         }
+
+        if(ativarWorkflowController.verificarServico(s))
+            System.out.println("\nO serviço também foi ativado uma vez que os formularios também estão ativos\n");
 
         return true;
     }
