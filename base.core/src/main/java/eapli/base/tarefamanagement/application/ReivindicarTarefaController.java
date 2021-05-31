@@ -21,25 +21,24 @@ public class ReivindicarTarefaController {
     private final ColaboradorRepository colabRepository = PersistenceContext.repositories().colaborador();
     private final InfoTarefaRepository infotarefaRepository = PersistenceContext.repositories().infoTarefa();
 
-    public InfoTarefa reivindicarTarefaPendente(int idTarefaManual, int numColaborador) {
+    public InfoTarefa reivindicarTarefaPendente(int idInfoTarefa, int numColaborador) {
 
-        InfoTarefa tm = verificarTarefa(idTarefaManual);
-
-        Colaborador c = verificarColaborador(numColaborador);
+        InfoTarefa it=verificarTarefa(idInfoTarefa);
+        Colaborador c=verificarColaborador(numColaborador);
 
         if(c==null) {
             throw new IllegalArgumentException("Colaborador inválido com número: " + numColaborador);
         }
 
-        if(tm==null) {
-            throw new IllegalArgumentException("Tarefa Manual inválida com id: " + idTarefaManual);
+        if(it==null) {
+            throw new IllegalArgumentException("Tarefa inválida com id: " + idInfoTarefa);
         }
 
-        c.reivindicarTarefa(tm);
-        tm.associarColaborador(c);
+        c.reivindicarTarefa(it);
+        it.associarColaborador(c);
         colabRepository.save(c);
 
-        return infotarefaRepository.save(tm);
+        return infotarefaRepository.save(it);
     }
 
     /*public Colaborador reivindicarTarefa(TarefaManual tarefa, Colaborador colaborador) {
@@ -60,14 +59,17 @@ public class ReivindicarTarefaController {
         return colab;
     }
 
-    public InfoTarefa verificarTarefa(int idTarefaManual){
-        Iterable<InfoTarefa> tarefas = infotarefaRepository.findAll();
-        InfoTarefa tarefa1 = null;
-        for (InfoTarefa tM : tarefas) {
-            if (tM.obteridTarefa() == idTarefaManual) {
-                tarefa1 = tM;
+    public InfoTarefa verificarTarefa(int idTarefa){
+        Iterable<InfoTarefa> tarefas=infotarefaRepository.findAll();
+
+        InfoTarefa tarefa=null;
+
+        for (InfoTarefa it : tarefas) {
+            if (it.obterId()==idTarefa) {
+                tarefa=it;
             }
         }
-        return tarefa1;
+
+        return tarefa;
     }
 }

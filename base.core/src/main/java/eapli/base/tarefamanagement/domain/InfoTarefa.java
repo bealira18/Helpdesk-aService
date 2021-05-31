@@ -60,6 +60,14 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
 
     public int obteridTarefa(){return this.tarefa.obterId();}
 
+    public int obterId() {
+        return id;
+    }
+
+    public Tarefa obterTarefa() {
+        return tarefa;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;

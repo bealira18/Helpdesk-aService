@@ -3,6 +3,7 @@ package eapli.base.appSDP2021management;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
 import eapli.base.tarefamanagement.application.ConsultarTarefaController;
+import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
 
 import java.io.DataInputStream;
@@ -107,7 +108,7 @@ class TcpChatSrvTarefasClient extends Thread {
     public byte[] tarefasPendentes(int numColaborador){
         byte[] data = new byte[300];
 
-        List<Tarefa> tarefas=consultarTarefaController.listarTarefasPendentes(numColaborador);
+        List<InfoTarefa> tarefas=consultarTarefaController.listarTarefasPendentes(numColaborador);
 
         if(tarefas.isEmpty()){
             data[0] = VERSION;
@@ -121,7 +122,7 @@ class TcpChatSrvTarefasClient extends Thread {
         }else{
             int num=0;
 
-            for(Tarefa t : tarefas){
+            for(InfoTarefa t : tarefas){
                 num++;
             }
 

@@ -73,6 +73,10 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return estadoTarefa;
     }
 
+    public String obterDescricao() {
+        return descricao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

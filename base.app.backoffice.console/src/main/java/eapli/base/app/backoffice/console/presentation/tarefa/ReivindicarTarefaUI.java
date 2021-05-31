@@ -7,6 +7,7 @@ import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.tarefamanagement.application.ConsultarTarefaController;
 import eapli.base.tarefamanagement.application.PesquisarTarefaController;
 import eapli.base.tarefamanagement.application.ReivindicarTarefaController;
+import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -50,7 +51,7 @@ public class ReivindicarTarefaUI extends AbstractUI {
 
 
 
-        Iterable<Tarefa> tarefas = new ArrayList<>();
+        Iterable<InfoTarefa> tarefas=new ArrayList<>();
         try{
             tarefas = controllerTarefas.listarTarefasPendentes(numero);
         }catch (Exception e) {
@@ -61,25 +62,31 @@ public class ReivindicarTarefaUI extends AbstractUI {
         if(tarefas!=null)
             System.out.println("\nTarefas possiveis:\n");
         else
-            System.out.println("Ainda não existem equipas");
+            System.out.println("Ainda não existem tarefas");
 
-        for(Tarefa tm : tarefas){
-            System.out.println(tm.toString());
+        for(InfoTarefa it : tarefas){
+            System.out.println("Id: " + it.obterId() + ", Descrição: " + it.obterTarefa().obterDescricao());
         }
 
 
-        int id= Console.readInteger("\nId pretendido: ");
+        int option=Console.readInteger("\nDeseja reivindicar alguma tarefa?\n0-Não\n1-Sim: ");
 
-        while(controllerTar.procurarTarefaPorID(id)==null)
-            id= Console.readInteger("Id pretendido: ");
+        while(option!=0 && option!=1)
+            option=Console.readInteger("\nDeseja reivindicar alguma tarefa?\n0-Não\n1-Sim: ");
+
+        if(option==1) {
+            int id = Console.readInteger("\nId pretendido: ");
+
+            while (controllerTar.procurarInfoTarefaPorID(id) == null)
+                id = Console.readInteger("Id pretendido: ");
 
 
-
-        try{
-            controller.reivindicarTarefaPendente(id,numero);
-            System.out.println("Reivindicado com sucesso");
-        }catch (Exception e) {
-            e.printStackTrace();
+            try {
+                controller.reivindicarTarefaPendente(id, numero);
+                System.out.println("Reivindicado com sucesso");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return true;

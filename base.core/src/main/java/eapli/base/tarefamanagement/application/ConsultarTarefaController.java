@@ -25,10 +25,11 @@ public class ConsultarTarefaController {
     private final InfoTarefaRepository infoTarefaRepository = PersistenceContext.repositories().infoTarefa();
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
 
-    public List<Tarefa> listarTarefasPendentes(int numColaborador) {
+    public List<InfoTarefa> listarTarefasPendentes(int numColaborador) {
 
-        List<Tarefa> tarefasPendentes = new ArrayList<>();
+        List<InfoTarefa> tarefasPendentes = new ArrayList<>();
         List<Servico> servDoColaborador = servicosController.listarServicosDeCatalogo(numColaborador);
+        Iterable<InfoTarefa> infoTarefas=infoTarefaRepository.findAll();
 
         for (Servico serv : servDoColaborador) {
             Workflow workflow = serv.obterWorkflow();
@@ -36,19 +37,16 @@ public class ConsultarTarefaController {
                 throw new IllegalArgumentException("Ainda não existem workflows.");
             } else{
                 for(Tarefa tm: workflow.obterTarefas()){
-                    if (tm.getClass().getSimpleName().compareTo("TarefaManual") == 0) {
-                        tarefasPendentes.add(tm);
-
+                    for(InfoTarefa it : infoTarefas){
+                        if (it.obteridTarefa() == tm.obterId() && tm.getClass().getSimpleName().compareTo("TarefaManual") == 0) {
+                            tarefasPendentes.add(it);
+                        }
                     }
-
-            }
-
-
+                }
             }
         }
 
-
-        if (tarefasPendentes == null) {
+        if(tarefasPendentes == null){
             throw new IllegalArgumentException("Não existem tarefas pendentes disponíveis para o colaborador.");
         }
 
