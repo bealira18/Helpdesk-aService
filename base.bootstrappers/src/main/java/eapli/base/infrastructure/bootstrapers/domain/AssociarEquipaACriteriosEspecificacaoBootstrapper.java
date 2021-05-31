@@ -10,8 +10,8 @@ public class AssociarEquipaACriteriosEspecificacaoBootstrapper implements Action
     @Override
     public boolean execute() {
 
-        aecec.associarEquipaACriteriosEspecificacao("Catalogo1", "EDF");
-        aecec.associarEquipaACriteriosEspecificacao("Catalogo2", "EDC");
+        aecec.associarEquipaACriteriosEspecificacao("Catalogo1", "EDC");
+        aecec.associarEquipaACriteriosEspecificacao("Catalogo2", "EDF");
         return true;
     }
 }

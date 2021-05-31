@@ -16,12 +16,17 @@ public class AdicionarWorkflowController {
 
     public Workflow adicionarWorkflow(List<Tarefa> tarefas){
 
-        final Workflow workflow=new Workflow(tarefas);
+        final Workflow workflow=new Workflow();
+
+        associarTarefasAWorkflow(workflow, tarefas);
 
         return workflowRepository.save(workflow);
     }
 
     public Workflow adicionarWorkflow(int idTarefa1, int idTarefa2){
+
+        final Workflow w = new Workflow();
+
         Tarefa tarefa1 = null;
         Tarefa tarefa2 = null;
 
@@ -44,11 +49,20 @@ public class AdicionarWorkflowController {
             throw new IllegalArgumentException("Tarefa inválida com id: "+ idTarefa2);
         }
 
-        List<Tarefa> tarefas2 = new ArrayList<>();
-
-        Workflow w = new Workflow(tarefas2);
+        associarTarefasAWorkflow(w, tarefa1, tarefa2);
 
         return workflowRepository.save(w);
+    }
+
+    public void associarTarefasAWorkflow(Workflow w, Tarefa t1, Tarefa t2){
+        w.obterTarefas().add(t1);
+        w.obterTarefas().add(t2);
+    }
+
+    public void associarTarefasAWorkflow(Workflow w, List<Tarefa> tarefasTemp){
+        for(Tarefa t : tarefasTemp){
+            w.obterTarefas().add(t);
+        }
     }
 
 }

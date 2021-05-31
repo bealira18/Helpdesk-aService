@@ -23,6 +23,7 @@ public class AssociarAtributoAFormularioController {
             throw new IllegalArgumentException("Atributo inválido com nome: "+nomeAtributo);
 
         f.addAtributo(a);
+        f.mudarNumAtributos(f.obterNumAtributos()+1);
 
         return formularioRepository.save(f);
 
@@ -40,6 +41,7 @@ public class AssociarAtributoAFormularioController {
             throw new IllegalArgumentException("Atributo inválido com id: "+idA);
 
         f.addAtributo(a);
+        f.mudarNumAtributos(f.obterNumAtributos()+1);
 
         return formularioRepository.save(f);
 
@@ -74,8 +76,9 @@ public class AssociarAtributoAFormularioController {
         Iterable<Atributo> atributos=atributoRepository.findAll();
 
         for(Atributo a : atributos){
-            if(a.compareTo(nomeAtributo)==0)
+            if(a.obterNome().equals(nomeAtributo)) {
                 return a;
+            }
         }
 
         return null;

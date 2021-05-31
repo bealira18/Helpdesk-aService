@@ -25,6 +25,7 @@ public class AdicionarPedidoController {
         Servico servico=servicoComId(idServico);
 
         novoPedido.associarServico(servico);
+        novoPedido.associarWorkflow(servico.obterWorkflow());
 
         return pedidoRepository.save(novoPedido);
     }

@@ -47,6 +47,7 @@ public class AssociarServicoACatalogoController {
     public Catalogo associacao(Catalogo catalogo, Servico servico) {
 
         catalogo.addServico(servico);
+        servico.mudarNivelCriticidade(catalogo.obterNivelCriticidade());
 
         return catalogoRepository.save(catalogo);
 

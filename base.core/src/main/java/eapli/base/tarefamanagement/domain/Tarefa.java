@@ -30,14 +30,11 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private boolean aprovacao;//true se a tarefa for de aprovaçao, false se for de realizaçao
     private int aprovado = 0; //se for igual 1 foi aprovado, se for igual a -1 rejeitado
 
-    /*@OneToOne
-    @JoinColumn
-    private Workflow workflow;*/
-
     public Tarefa() {
     }
 
     public Tarefa(String descricao,boolean aprovacao) {
+        this.descricao = descricao;
         this.estadoTarefa = EstadoTarefa.NAO_INICIADA;
         this.aprovacao = aprovacao;
     }

@@ -19,7 +19,7 @@ public class TarefaManual extends Tarefa implements AggregateRoot<Integer>, Seri
     public TarefaManual() {
     }
 
-    public TarefaManual(boolean aprovacao,String descricao){
+    public TarefaManual(String descricao, boolean aprovacao){
         super(descricao,aprovacao);
     }
 

@@ -42,10 +42,6 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private Rascunho rascunho;
 
-    /*@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Formulario> formularios = new ArrayList<>();*/
-
     @OneToOne
     private RespostasFormulario respostasFormulario;
 
@@ -82,6 +78,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
 
     public void associarServico(Servico servico) {
         this.servico = servico;
+    }
+
+    public void associarWorkflow(Workflow workflow){
+        this.workflow = workflow;
     }
 
     public Date obterDataLimite() {

@@ -32,7 +32,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     private List<Colaborador> colaboradores = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "CATALOGO_ID")
     private List<Servico> servicos = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -64,6 +64,10 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
 
     public boolean obterApresentar(){
         return apresentar;
+    }
+
+    public NivelCriticidade obterNivelCriticidade(){
+        return nivelCriticidade;
     }
 
     public List<Servico> servicos(){

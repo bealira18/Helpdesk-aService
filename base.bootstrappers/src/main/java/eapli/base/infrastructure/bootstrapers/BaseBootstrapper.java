@@ -73,7 +73,7 @@ public class BaseBootstrapper implements Action {
         new CatalogoBootstrapper(),
         new CriteriosEspecificacaoBootstrapper(),
         new AssociarCriteriosEspecificacaoACatalogoBootstrapper(),
-        //new AssociarEquipaACriteriosEspecificacaoBootstrapper(),
+        new AssociarEquipaACriteriosEspecificacaoBootstrapper(),
         new NivelCriticidadeBootstrapper(),
         new AssociarNivelCriticidadeACatalogoBootstrapper(),
         new ServicoBootstrapper(),
@@ -81,13 +81,13 @@ public class BaseBootstrapper implements Action {
 
 
         new AddPedidoBootstrapper(),
-        //new TarefaBootstrapper(),
+        //new TarefaBootstrapper(),  --> não é preciso este bootstrapper uma vez que temos os bootstrappers de tarefa manual e automatica.
         new TarefaManualBootstrapper(),
         new TarefaAutomaticaBootstrapper(),
-        new FormularioBootstrapper(),
         new AtributoBootstrapper(),
+        new FormularioBootstrapper(),
         new AddRascunhoBootstrapper(),
-        //new AddWorkflowBootstrapper(),
+        new AddWorkflowBootstrapper(),
         new AddHistoricoBootstrapper(),
         /*new ReivindicarTarefaBootstrapper()*/};
 

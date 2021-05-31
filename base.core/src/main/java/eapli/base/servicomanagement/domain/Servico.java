@@ -37,10 +37,6 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @OneToOne
     private NivelCriticidade nivelCriticidade;
 
-    /*@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
-    private List<Formulario> formularios = new ArrayList<>();*/
-
     @OneToOne
     private Formulario formulario;
 
@@ -144,6 +140,10 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
 
     public void mudarCompleto(boolean completo){
         this.completo = completo;
+    }
+
+    public void mudarNivelCriticidade(NivelCriticidade nc){
+        this.nivelCriticidade = nc;
     }
 
     public void associarFormulario(Formulario f){

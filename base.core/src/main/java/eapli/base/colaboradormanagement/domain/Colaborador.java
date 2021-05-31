@@ -140,7 +140,7 @@ public class Colaborador implements AggregateRoot<Numero>, Serializable {
         this.ativo = bool;
     }
     
-       public List<InfoTarefa> tarefas(){
+    public List<InfoTarefa> tarefas(){
         return tarefas;
     }
     

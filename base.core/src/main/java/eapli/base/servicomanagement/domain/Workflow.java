@@ -21,13 +21,13 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
     private Servico servico;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "WORKFLOW_ID")
     private List<Tarefa> tarefas = new ArrayList<>();
 
     @Transient
     private HashMap<Integer,Tarefa> prioridades= new HashMap<>();
 
-    protected Workflow(){}
+    public Workflow(){}
 
     public int obterId() {
         return id;
@@ -35,10 +35,6 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
 
     public void associarServico(Servico s){
         this.servico=s;
-    }
-
-    public Workflow(List<Tarefa> tarefas){
-        this.tarefas=tarefas;
     }
 
     public List<Tarefa> obterTarefas() {

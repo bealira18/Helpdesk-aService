@@ -6,15 +6,13 @@ import eapli.framework.actions.Action;
 
 public class AtributoBootstrapper implements Action {
 
-    private final AdicionarAtributoController adicionarAtributoController=new AdicionarAtributoController();
+    private final AdicionarAtributoController aac =new AdicionarAtributoController();
     private final AssociarAtributoAFormularioController associarAtributoAFormularioController=new AssociarAtributoAFormularioController();
 
     @Override
     public boolean execute() {
 
-        adicionarAtributoController.adicionarAtributo("CC","num","Numero do CC","[0-9]{9}","Integer");
-
-        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","CC");
+        aac.adicionarAtributo("CC","num","Numero do CC","[0-9]{9}","Integer");
 
         return true;
     }

@@ -13,7 +13,7 @@ public class CriarTarefaManualController {
 
     public TarefaManual criarTarefaManual(String descricao,boolean aprovacao) {
 
-        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao,descricao);
+        final TarefaManual novaTarefaManual = new TarefaManual(descricao, aprovacao);
 
         return tarefaManualRepository.save(novaTarefaManual);
 
@@ -21,7 +21,7 @@ public class CriarTarefaManualController {
 
     public TarefaManual criarTarefaManualWorkflow(String descricao,boolean aprovacao) {
 
-        final TarefaManual novaTarefaManual = new TarefaManual(aprovacao,descricao);
+        final TarefaManual novaTarefaManual = new TarefaManual(descricao, aprovacao);
 
         return tarefaManualRepository.save(novaTarefaManual);
 

@@ -26,9 +26,6 @@ public class Equipa implements AggregateRoot<Integer>, Serializable {
     private List<Colaborador> colaboradores = new ArrayList<>();
 
     @OneToOne
-    private CriteriosEspecificacao criteriosEspecificacao;
-
-    @OneToOne
     private TipoEquipa tipoEquipa;
 
     @OneToMany(cascade = CascadeType.ALL)

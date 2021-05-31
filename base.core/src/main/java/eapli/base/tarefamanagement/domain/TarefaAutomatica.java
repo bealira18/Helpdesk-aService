@@ -25,4 +25,8 @@ public class TarefaAutomatica extends Tarefa implements AggregateRoot<Integer>, 
         super(descricao,aprovacao);
     }
 
+    public int obterId(){
+        return id;
+    }
+
 }
