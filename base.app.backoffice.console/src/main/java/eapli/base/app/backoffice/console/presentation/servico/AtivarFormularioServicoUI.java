@@ -1,16 +1,19 @@
 package eapli.base.app.backoffice.console.presentation.servico;
 
 import eapli.base.formulariomanagement.application.AtivarFormularioController;
+import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.servicomanagement.application.AtivarWorkflowController;
 import eapli.base.servicomanagement.application.ListarServicosController;
 import eapli.base.servicomanagement.application.ListarTarefasManuaisWorkflowController;
 import eapli.base.servicomanagement.application.PesquisarServicoController;
 import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.servicomanagement.domain.Workflow;
 import eapli.base.tarefamanagement.application.PesquisarTarefaIdController;
 import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
+import org.hibernate.mapping.Formula;
 
 public class AtivarFormularioServicoUI extends AbstractUI {
 
@@ -47,14 +50,15 @@ public class AtivarFormularioServicoUI extends AbstractUI {
             e.printStackTrace();
         }
 
+        Formulario f=new Formulario();
 
         try {
-            controller.ativarFormServico(s.obterFormulario().obterNome(), s);
+            f=controller.ativarFormServico(s.obterFormulario().obterNome(), s);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (!s.obterFormulario().estaAtivo())
+        if (!f.estaAtivo())
             System.out.println("Não pode ser ativado");
         else
             System.out.println("Ativado com sucesso!");
@@ -90,14 +94,15 @@ public class AtivarFormularioServicoUI extends AbstractUI {
                 e.printStackTrace();
             }
 
+            Workflow w =new Workflow();
 
             try {
-                ativarWorkflowController.ativarTarefaWorkflow(t.obterFormulario().obterId(),s);
+                w=ativarWorkflowController.ativarTarefaWorkflow(t.obterFormulario().obterId(),s);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            if (!t.obterFormulario().estaAtivo())
+            if (!w.estaCompleto())
                 System.out.println("Não pode ser ativado");
             else
                 System.out.println("Ativado com sucesso!");

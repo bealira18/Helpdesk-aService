@@ -69,6 +69,7 @@ public class AtivarFormularioController {
             servico.mudarCompleto(true);
             servico.mudarEstado(true);
         }
+        servicoRepository.save(servico);
 
     }
 
