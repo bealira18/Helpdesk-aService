@@ -10,4 +10,8 @@ public class InMemoryInfoTarefaRepository extends InMemoryDomainRepository<InfoT
         InMemoryInitializer.init();
     }
 
+    @Override
+    public Iterable<InfoTarefa> filtarInfoTarefaporIdDoColaborador(final int idColaborador) {
+        throw new UnsupportedOperationException();
+    }
 }

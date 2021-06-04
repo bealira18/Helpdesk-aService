@@ -54,14 +54,10 @@ public class ConsultarTarefaUI extends AbstractUI {
         while (op != 1 && op != 2)
             op = Console.readInteger("\n1- Consultar por prioridade // 2- Consultar por data limite: ");
 
-        try {
-            List<InfoTarefa> tarefas = controller.listarMinhasTarefas(numero);
-            if (tarefas == null) {
-                System.out.println("Não possui tarefas.");
-            } else {
-                controller.infoMinhasTarefas(tarefas, op,numero);
-            }
 
+        try {
+            Iterable<InfoTarefa> infoTarefaIterable = controller.tarefasporcolab(numero);
+            controller.infoMinhasTarefas(infoTarefaIterable, op, numero);
 
         } catch (Exception e) {
             e.printStackTrace();
