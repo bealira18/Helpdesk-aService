@@ -5,4 +5,5 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 public interface CatalogoRepository extends DomainRepository<Integer, Catalogo> {
     Iterable<Catalogo> listarCatalogos();
+    Catalogo procurarPorTitulo(String nome);
 }

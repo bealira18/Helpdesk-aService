@@ -12,7 +12,7 @@ public class InMemoryServicoRepository extends InMemoryDomainRepository<Servico,
     }
 
     @Override
-    public Iterable<Servico> listarServicos() {
+    public Iterable<Servico> listarServicosIncompletos() {
         return match(Servico::obterApresentar);
     }
 

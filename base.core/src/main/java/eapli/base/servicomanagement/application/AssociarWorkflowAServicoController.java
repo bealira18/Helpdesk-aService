@@ -5,6 +5,7 @@ import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
+import org.hibernate.jdbc.Work;
 
 public class AssociarWorkflowAServicoController {
 
@@ -13,9 +14,9 @@ public class AssociarWorkflowAServicoController {
 
     public Workflow associarWorkflowAServico(int idW,String codServico){
 
-        Servico s=verificarServico(codServico);
+        Servico s=verificarServicoCod(codServico);
 
-        Workflow w=verificarWorkflow(idW);
+        Workflow w=verificarWorkflowId(idW);
 
         if(w==null)
             throw new IllegalArgumentException("Workflow inválido com id: "+idW);
@@ -32,7 +33,15 @@ public class AssociarWorkflowAServicoController {
 
     }
 
-    public Servico verificarServico(String codServico){
+    public Servico verificarServicoCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
+    }
+
+    public Workflow verificarWorkflowId(int id){
+        return workflowRepository.ofIdentity(id).get();
+    }
+
+    /*public Servico verificarServico(String codServico){
 
         Iterable<Servico> servicos=servicoRepository.findAll();
 
@@ -42,9 +51,9 @@ public class AssociarWorkflowAServicoController {
         }
 
         return null;
-    }
+    }*/
 
-    public Workflow verificarWorkflow(int id){
+    /*public Workflow verificarWorkflow(int id){
 
         Iterable<Workflow> workflows=workflowRepository.findAll();
 
@@ -54,6 +63,6 @@ public class AssociarWorkflowAServicoController {
         }
 
         return null;
-    }
+    }*/
 
 }

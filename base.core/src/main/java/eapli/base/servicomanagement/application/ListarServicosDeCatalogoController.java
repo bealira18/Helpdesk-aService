@@ -11,10 +11,22 @@ import java.util.List;
 
 public class ListarServicosDeCatalogoController {
 
-    private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final CatalogoRepository catalogoRepository = PersistenceContext.repositories().catalogo();
 
-    public Catalogo procurarCatalogoPorTitulo(String titulo) {
+    public Catalogo procurarCatalogoTitulo(String titulo){
+        return catalogoRepository.procurarPorTitulo(titulo);
+    }
+
+    public List<Servico> listarServicosCatalogo(String titulo){
+
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
+
+        List<Servico> servicos =catalogo.servicos();
+
+        return servicos;
+    }
+
+    /*public Catalogo procurarCatalogoPorTitulo(String titulo) {
 
         Iterable<Catalogo> catalogos = catalogoRepository.findAll();
 
@@ -26,14 +38,5 @@ public class ListarServicosDeCatalogoController {
             }
         }
         return catalogo;
-    }
-
-    public List<Servico> listarServicosCatalogo(String titulo){
-
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
-
-        List<Servico> servicos =catalogo.servicos();
-
-        return servicos;
-    }
+    }*/
 }

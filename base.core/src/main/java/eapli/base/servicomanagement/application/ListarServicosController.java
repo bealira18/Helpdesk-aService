@@ -10,7 +10,6 @@ import java.util.List;
 public class ListarServicosController {
 
     private final ServicoRepository servicoRepository= PersistenceContext.repositories().servico();
-    private final EditarServicoController esc = new EditarServicoController();
 
     public Iterable<Servico> listarServicos(){
 
@@ -22,7 +21,11 @@ public class ListarServicosController {
         return servicos;
     }
 
-    public List<Servico> listarServicosIncompletos(){
+    public Iterable<Servico> listarServicosIncompletos(){
+        return servicoRepository.listarServicosIncompletos();
+    }
+
+    /*public List<Servico> listarServicosIncompletos(){
 
         Iterable<Servico> servicos = servicoRepository.findAll();
 
@@ -38,6 +41,5 @@ public class ListarServicosController {
         }
 
         return servicosIncompletos;
-    }
-
+    }*/
 }

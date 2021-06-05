@@ -4,6 +4,7 @@ import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class JpaServicoRepository extends BasepaRepositoryBase<Servico, Integer, Integer> implements DomainRepository<Integer, Servico>, ServicoRepository {
@@ -11,8 +12,12 @@ public class JpaServicoRepository extends BasepaRepositoryBase<Servico, Integer,
     public JpaServicoRepository(){ super("id");}
 
     @Override
-    public Iterable<Servico> listarServicos() {
-        return match("e.apresentar=true");
+    public Iterable<Servico> listarServicosIncompletos() {
+        final TypedQuery<Servico> query = entityManager().createQuery(
+                "SELECT d FROM Servico d WHERE d.completo = false",
+                Servico.class);
+
+        return query.getResultList();
     }
 
     @Override
@@ -22,7 +27,14 @@ public class JpaServicoRepository extends BasepaRepositoryBase<Servico, Integer,
                 Servico.class);
         query.setParameter("COD", cod);
 
-        return query.getSingleResult();
+        Servico s=null;
+
+        try{
+            s=query.getSingleResult();
+        }catch (NoResultException nre){
+        }
+
+        return s;
     }
 
 }

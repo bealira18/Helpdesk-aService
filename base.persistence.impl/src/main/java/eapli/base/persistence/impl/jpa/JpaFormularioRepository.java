@@ -2,9 +2,9 @@ package eapli.base.persistence.impl.jpa;
 
 import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
-import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.domain.repositories.DomainRepository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 public class JpaFormularioRepository extends BasepaRepositoryBase<Formulario, Integer, Integer> implements DomainRepository<Integer, Formulario>, FormularioRepository {
@@ -20,6 +20,13 @@ public class JpaFormularioRepository extends BasepaRepositoryBase<Formulario, In
                 Formulario.class);
         query.setParameter("NOME", nome);
 
-        return query.getSingleResult();
+        Formulario f=null;
+
+        try{
+            f=query.getSingleResult();
+        }catch (NoResultException nre){
+        }
+
+        return f;
     }
 }

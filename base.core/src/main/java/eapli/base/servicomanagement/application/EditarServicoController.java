@@ -8,24 +8,14 @@ import eapli.base.servicomanagement.repository.ServicoRepository;
 public class EditarServicoController {
     
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
-    
-    public Servico procurarServicoPorCod(String cod) {
 
-        Iterable<Servico> servicos = servicoRepository.findAll();
-
-        Servico servico = null;
-
-        for (Servico serv : servicos) {
-            if (serv.obterCod().compareTo(cod) == 0) {
-                servico = serv;
-            }
-        }
-        return servico;
+    public Servico procurarServicoCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
     }
     
     public void mudarTitulo(String cod, String tituloNovo) {
 
-        Servico servico = procurarServicoPorCod(cod);
+        Servico servico = procurarServicoCod(cod);
 
         if (servico == null) {
             throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
@@ -40,7 +30,7 @@ public class EditarServicoController {
     
     public void mudarDescricaoBreve(String cod, String descricaoBreve) {
 
-        Servico servico = procurarServicoPorCod(cod);
+        Servico servico = procurarServicoCod(cod);
 
         if (servico == null) {
             throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
@@ -55,7 +45,7 @@ public class EditarServicoController {
     
      public void mudarDescricaoCompleta(String cod, String descricaoCompleta) {
 
-        Servico servico = procurarServicoPorCod(cod);
+        Servico servico = procurarServicoCod(cod);
 
         if (servico == null) {
             throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
@@ -70,7 +60,7 @@ public class EditarServicoController {
      
      public void mudarPalavrasChave(String cod, String palavrasChave) {
 
-        Servico servico = procurarServicoPorCod(cod);
+        Servico servico = procurarServicoCod(cod);
 
         if (servico == null) {
             throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
@@ -85,7 +75,7 @@ public class EditarServicoController {
      
      public void mudarIcone(String cod, String novoIcone) {
 
-        Servico servico = procurarServicoPorCod(cod);
+        Servico servico = procurarServicoCod(cod);
 
         if (servico == null) {
             throw new IllegalArgumentException("Este serviço tem um codigo inválido: " + cod);
@@ -104,4 +94,18 @@ public class EditarServicoController {
             servico.mudarEstado(true);
         }
     }
+
+    /*public Servico procurarServicoPorCod(String cod) {
+
+        Iterable<Servico> servicos = servicoRepository.findAll();
+
+        Servico servico = null;
+
+        for (Servico serv : servicos) {
+            if (serv.obterCod().compareTo(cod) == 0) {
+                servico = serv;
+            }
+        }
+        return servico;
+    }*/
 }

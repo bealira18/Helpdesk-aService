@@ -30,7 +30,7 @@ public class AtivarWorkflowController {
 
     public Workflow ativarTarefaWorkflow(int id, Servico s){
 
-        Formulario f=verificarFormulario(id);
+        Formulario f=verificarFormularioID(id);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com id: "+id);
@@ -59,16 +59,8 @@ public class AtivarWorkflowController {
 
     }
 
-    public Formulario verificarFormulario(int id){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.obterId()==id)
-                return f;
-        }
-
-        return null;
+    public Formulario verificarFormularioID(int id){
+        return formularioRepository.ofIdentity(id).get();
     }
 
     public boolean verificarServico(Servico servico){
@@ -104,5 +96,17 @@ public class AtivarWorkflowController {
         }
         return w;
     }
+
+    /*public Formulario verificarFormulario(int id){
+
+        Iterable<Formulario> formularios=formularioRepository.findAll();
+
+        for(Formulario f : formularios){
+            if(f.obterId()==id)
+                return f;
+        }
+
+        return null;
+    }*/
 
 }
