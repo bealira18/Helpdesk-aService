@@ -26,11 +26,11 @@ public class PesquisarColaboradorUI extends AbstractUI {
 
         int num= Console.readInteger("Numero pretendido: ");
 
-        while(controller.procurarColaboradorPorNumero(num)==null)
+        while(controller.procurarColaboradorNumero(num)==null)
             num= Console.readInteger("Numero pretendido: ");
 
         try{
-            Colaborador colaborador=controller.procurarColaboradorPorNumero(num);
+            Colaborador colaborador=controller.procurarColaboradorNumero(num);
 
             System.out.println(colaborador.toString());
 

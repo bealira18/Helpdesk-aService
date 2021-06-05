@@ -40,7 +40,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
 
             numero= Console.readInteger("\nNumero pretendido: ");
 
-            while(controllerpesqcol.procurarColaboradorPorNumero(numero)==null)
+            while(controllerpesqcol.procurarColaboradorNumero(numero)==null)
                 numero=Console.readInteger("Titulo colaborador pretendido: ");
         }
 

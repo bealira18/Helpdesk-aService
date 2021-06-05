@@ -1,6 +1,7 @@
 package eapli.base.persistence.impl.inmemory;
 
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.colaboradormanagement.domain.Email;
 import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -9,5 +10,15 @@ public class InMemoryColaboradorRepository extends InMemoryDomainRepository<Cola
 
     static {
         InMemoryInitializer.init();
+    }
+
+    @Override
+    public Colaborador procurarPorEmail(final Email email) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Colaborador procurarPorNomeCompleto(final String nome) {
+        throw new UnsupportedOperationException();
     }
 }

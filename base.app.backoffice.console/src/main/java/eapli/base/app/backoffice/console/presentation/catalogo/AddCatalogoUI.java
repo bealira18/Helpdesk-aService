@@ -45,7 +45,7 @@ public class AddCatalogoUI extends AbstractUI {
 
         int numeroColaborador=Console.readInteger("Numero de colaborador responsável: ");
 
-        while(controllerauxpesq.procurarColaboradorPorNumero(numeroColaborador)==null)
+        while(controllerauxpesq.procurarColaboradorNumero(numeroColaborador)==null)
             numeroColaborador= Console.readInteger("Numero pretendido: ");
 
         final String icone=Console.readLine("Nome do icone em jpg ou png: ");

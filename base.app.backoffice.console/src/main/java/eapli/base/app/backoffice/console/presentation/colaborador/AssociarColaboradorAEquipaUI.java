@@ -45,7 +45,7 @@ public class AssociarColaboradorAEquipaUI extends AbstractUI {
 
         int num= Console.readInteger("\nNumero pretendido: ");
 
-        while(controllerPesqColab.procurarColaboradorPorNumero(num)==null)
+        while(controllerPesqColab.procurarColaboradorNumero(num)==null)
             num= Console.readInteger("Numero pretendido: ");
 
         String acronimo=Console.readLine("Acronimo pretendido: ");

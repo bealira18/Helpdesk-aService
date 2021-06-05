@@ -1,6 +1,7 @@
 package eapli.base.colaboradormanagement.application;
 
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.colaboradormanagement.domain.Email;
 import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.usermanagement.domain.BaseRoles;
@@ -30,7 +31,28 @@ public class ColaboradorComUserController {
         return us.get();
     }
 
-    public Colaborador procurarColaborador(SystemUser us){
+    public Colaborador procurarColaboradorEmail(SystemUser us){
+
+        Username username=us.username();
+
+        String email=username.toString();
+
+        return colaboradorRepository.procurarPorEmail(new Email(email));
+    }
+
+    public Colaborador resultColaborador(){
+
+        Colaborador c=null;
+        SystemUser us=obterSystemUser();
+        if(us==null)
+            return null;
+        else
+            c= procurarColaboradorEmail(us);
+
+        return c;
+    }
+
+    /*public Colaborador procurarColaborador(SystemUser us){
 
         Username username=us.username();
 
@@ -46,18 +68,5 @@ public class ColaboradorComUserController {
             }
         }
         return colaborador;
-    }
-
-    public Colaborador resultColaborador(){
-
-        Colaborador c=null;
-        SystemUser us=obterSystemUser();
-        if(us==null)
-            return null;
-        else
-            c= procurarColaborador(us);
-
-        return c;
-    }
-
+    }*/
 }

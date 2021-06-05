@@ -12,23 +12,13 @@ public class EditarColaboradorController {
 
     private final ColaboradorRepository colaboradorRepository = PersistenceContext.repositories().colaborador();
 
-    public Colaborador procurarColaboradorPorNomeCompleto(String nomeCompleto) {
-
-        Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
-
-        Colaborador colaborador = null;
-
-        for (Colaborador c : colaboradores) {
-            if (c.obterNomeCompleto().compareTo(nomeCompleto) == 0) {
-                colaborador = c;
-            }
-        }
-        return colaborador;
+    public Colaborador procurarColaboradorNomeCompleto(String nome){
+        return colaboradorRepository.procurarPorNomeCompleto(nome);
     }
 
     public void mudarNomeCurto(String nomeCompleto, String nomeCurto) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -41,7 +31,7 @@ public class EditarColaboradorController {
 
     public void mudarNomeCompleto(String nomeAtual, String nomeNovo) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeAtual);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeAtual);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeAtual);
@@ -54,7 +44,7 @@ public class EditarColaboradorController {
 
     public void mudarLocalResidencia(String nomeCompleto, String novaResidencia) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -67,7 +57,7 @@ public class EditarColaboradorController {
 
     public void mudarPasse(String nomeCompleto, String novaPasse) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -80,7 +70,7 @@ public class EditarColaboradorController {
 
     public void mudarEmail(String nomeCompleto, String novoEmail) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -93,7 +83,7 @@ public class EditarColaboradorController {
 
     public void mudarFuncao(String nomeCompleto, String novaFuncao) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -106,7 +96,7 @@ public class EditarColaboradorController {
 
     public void mudarContacto(String nomeCompleto, String novoContacto) {
 
-        Colaborador colaborador = procurarColaboradorPorNomeCompleto(nomeCompleto);
+        Colaborador colaborador = procurarColaboradorNomeCompleto(nomeCompleto);
 
         if (colaborador == null) {
             throw new IllegalArgumentException("Este colaborador tem um nome inválido: " + nomeCompleto);
@@ -117,4 +107,17 @@ public class EditarColaboradorController {
         colaboradorRepository.save(colaborador);
     }
 
+    /*public Colaborador procurarColaboradorPorNomeCompleto(String nomeCompleto) {
+
+        Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
+
+        Colaborador colaborador = null;
+
+        for (Colaborador c : colaboradores) {
+            if (c.obterNomeCompleto().compareTo(nomeCompleto) == 0) {
+                colaborador = c;
+            }
+        }
+        return colaborador;
+    }*/
 }
