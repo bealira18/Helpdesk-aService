@@ -10,7 +10,7 @@ public class PesquisarServicoController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final ListarCatálogosEServicosController listarCatálogosEServicosController=new ListarCatálogosEServicosController();
 
-    public Servico procurarServicoPorCod(String codigo) {
+    /*public Servico procurarServicoPorCod(String codigo) {
 
         Iterable<Servico> servicos = servicoRepository.findAll();
 
@@ -22,7 +22,7 @@ public class PesquisarServicoController {
             }
         }
         return servico;
-    }
+    }*/
 
     public Servico procurarServicoEspecifico(String codigo,int numeroColaborador){
 

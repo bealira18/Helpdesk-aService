@@ -6,6 +6,8 @@ import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 
+import java.util.Optional;
+
 public class AssociarFormularioAServicoController {
 
     private final ServicoRepository servicoRepository= PersistenceContext.repositories().servico();
@@ -13,8 +15,8 @@ public class AssociarFormularioAServicoController {
 
     public Servico associarFormularioAServicoComNome(String nomeFormulario,String codServico){
 
-        Formulario f=verificarFormulario(nomeFormulario);
-        Servico s=verificarServico(codServico);
+        Formulario f=verificarFormularioNome(nomeFormulario);
+        Servico s=verificarServicoCod(codServico);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com nome: "+nomeFormulario);
@@ -30,8 +32,8 @@ public class AssociarFormularioAServicoController {
 
     public Servico associarFormularioAServicoComIdF(int idF,int idS){
 
-        Servico s=verificarIdS(idS);
-        Formulario f=verificaIdF(idF);
+        Servico s=verificarIDServico(idS);
+        Formulario f=verificarIDFormulario(idF);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com id: "+idF);
@@ -45,7 +47,23 @@ public class AssociarFormularioAServicoController {
 
     }
 
-    public Formulario verificaIdF(int id){
+    public Formulario verificarIDFormulario(int id){
+        return formularioRepository.ofIdentity(id).get();
+    }
+
+    public Formulario verificarFormularioNome(String nomeFormulario){
+        return formularioRepository.procurarPorNome(nomeFormulario);
+    }
+
+    public Servico verificarIDServico(int id){
+        return servicoRepository.ofIdentity(id).get();
+    }
+
+    public Servico verificarServicoCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
+    }
+
+    /*public Formulario verificaIdF(int id){
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
         for(Formulario f : formularios){
@@ -54,9 +72,9 @@ public class AssociarFormularioAServicoController {
         }
 
         return null;
-    }
+    }*/
 
-    public Formulario verificarFormulario(String nomeFormulario){
+    /*public Formulario verificarFormulario(String nomeFormulario){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
@@ -66,9 +84,9 @@ public class AssociarFormularioAServicoController {
         }
 
         return null;
-    }
+    }*/
 
-    public Servico verificarIdS(int id){
+    /*public Servico verificarIdS(int id){
         Iterable<Servico> servicos=servicoRepository.findAll();
 
         for(Servico s : servicos){
@@ -76,9 +94,9 @@ public class AssociarFormularioAServicoController {
                 return s;
         }
         return null;
-    }
+    }*/
 
-    public Servico verificarServico(String codServico){
+    /*public Servico verificarServico(String codServico){
 
         Iterable<Servico> servicos=servicoRepository.findAll();
 
@@ -88,6 +106,6 @@ public class AssociarFormularioAServicoController {
         }
 
         return null;
-    }
+    }*/
 
 }
