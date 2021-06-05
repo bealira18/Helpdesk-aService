@@ -40,12 +40,12 @@ public class AssociarServicoACatalogoUI extends AbstractUI {
 
         String tituloCatalogo= Console.readLine("\nTitulo catalogo pretendido: ");
 
-        while(controllerpesqcat.procurarCatalogoPorTitulo(tituloCatalogo)==null)
+        while(controllerpesqcat.procurarCatalogoTitulo(tituloCatalogo)==null)
             tituloCatalogo=Console.readLine("Titulo catalogo pretendido: ");
 
         //mostrar que serviços se pode adicionar
 
-        Catalogo catalogo=controllerpesqcat.procurarCatalogoPorTitulo(tituloCatalogo);
+        Catalogo catalogo=controllerpesqcat.procurarCatalogoTitulo(tituloCatalogo);
 
         List<Servico> servicosEmCatalogo=catalogo.servicos();
 

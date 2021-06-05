@@ -27,6 +27,6 @@ public class ListarCatalogosEServicosService {
     public Iterable<Servico> listarServicos(){
         authz.ensureAuthenticatedUserHasAnyOf(BaseRoles.POWER_USER);
 
-        return this.servicoRepository.listarServicos();
+        return this.servicoRepository.listarServicosIncompletos();
     }
 }

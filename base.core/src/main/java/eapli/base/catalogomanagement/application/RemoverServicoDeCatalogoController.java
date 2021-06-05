@@ -1,6 +1,7 @@
 package eapli.base.catalogomanagement.application;
 
 import eapli.base.catalogomanagement.domain.Catalogo;
+import eapli.base.catalogomanagement.domain.Titulo;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.colaboradormanagement.domain.Numero;
@@ -18,27 +19,18 @@ public class RemoverServicoDeCatalogoController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final CatalogoRepository catalogoRepository = PersistenceContext.repositories().catalogo();
 
-    public void removerServicoDeCatalogo(String tituloCatalogo, String tituloServico){
-        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
-        Catalogo c1 = null;
-        for (Catalogo c : catalogos){
-            if(c.obterTitulo().obterTitulo().equalsIgnoreCase(tituloCatalogo)){
-                c1 = c;
-            }
-        }
-        Iterable<Servico> servicos = servicoRepository.findAll();
-        Servico s1 = null;
-        for (Servico s : servicos){
-            if(s.obterTitulo().equalsIgnoreCase(tituloServico)){
-                s1 = s;
-            }
-        }
+    public void removerServicoDeCatalogo(String tituloCatalogo, String cod){
+
+        Catalogo c1 = procurarCatalogoTitulo(tituloCatalogo);
+
+        Servico s1 = procurarServicoCod(cod);
+
         if(c1 == null){
             throw new IllegalArgumentException("Não existe nenhum catálogo com o título: " + tituloCatalogo);
         }
 
         if(s1 == null){
-            throw new IllegalArgumentException("Não existe nenhum serviço com o título: " + tituloServico);
+            throw new IllegalArgumentException("Não existe nenhum serviço com o codigo: " + cod);
         }
 
         removerServicoDeCatalogo(c1, s1);
@@ -52,4 +44,11 @@ public class RemoverServicoDeCatalogoController {
 
     }
 
+    public Catalogo procurarCatalogoTitulo(String titulo){
+        return catalogoRepository.procurarPorTitulo(new Titulo(titulo));
+    }
+
+    public Servico procurarServicoCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
+    }
 }

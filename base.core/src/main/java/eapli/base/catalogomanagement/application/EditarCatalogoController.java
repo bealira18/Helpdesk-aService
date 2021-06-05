@@ -11,18 +11,8 @@ public class EditarCatalogoController {
     private final CatalogoRepository catalogoRepository= PersistenceContext.repositories().catalogo();
     private final ColaboradorRepository colaboradorRepository= PersistenceContext.repositories().colaborador();
 
-    public Catalogo procurarCatalogoPorTitulo(String titulo){
-
-        Iterable<Catalogo> catalogos=catalogoRepository.findAll();
-
-        Catalogo catalogo=null;
-
-        for(Catalogo c : catalogos){
-            if(c.obterTitulo().compareTo(new Titulo(titulo))==0){
-                catalogo=c;
-            }
-        }
-        return catalogo;
+    public Catalogo procurarCatalogoTitulo(String titulo){
+        return catalogoRepository.procurarPorTitulo(new Titulo(titulo));
     }
 
     public boolean verificarColaborador(int numero){
@@ -35,7 +25,7 @@ public class EditarCatalogoController {
 
     public void mudarTitulo(String tituloAtual,String tituloNovo){
 
-        Catalogo catalogo=procurarCatalogoPorTitulo(tituloAtual);
+        Catalogo catalogo=procurarCatalogoTitulo(tituloAtual);
 
         if(catalogo==null){
             throw new IllegalArgumentException("Catalogo inválido com titulo: "+tituloAtual);
@@ -48,7 +38,7 @@ public class EditarCatalogoController {
 
     public void mudarDescricaoBreve(String titulo,String descricaoBreve){
 
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
 
         if(catalogo==null){
             throw new IllegalArgumentException("Catalogo inválido com titulo: "+titulo);
@@ -61,7 +51,7 @@ public class EditarCatalogoController {
 
     public void mudarDescricaoCompleta(String titulo,String descricaoCompleta){
 
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
 
         if(catalogo==null){
             throw new IllegalArgumentException("Catalogo inválido com titulo: "+titulo);
@@ -74,7 +64,7 @@ public class EditarCatalogoController {
 
     public void mudarIcone(String titulo,String icone){
 
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
 
         if(catalogo==null){
             throw new IllegalArgumentException("Catalogo inválido com titulo: "+titulo);
@@ -87,7 +77,7 @@ public class EditarCatalogoController {
 
     public void mudarColaboradorResponsavel(String titulo,int numeroColaborador){
 
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
 
         if(!verificarColaborador(numeroColaborador))
             throw new IllegalArgumentException("Colaborador inválido com numero: "+numeroColaborador);
@@ -101,4 +91,17 @@ public class EditarCatalogoController {
         catalogoRepository.save(catalogo);
     }
 
+    /*public Catalogo procurarCatalogoPorTitulo(String titulo){
+
+        Iterable<Catalogo> catalogos=catalogoRepository.findAll();
+
+        Catalogo catalogo=null;
+
+        for(Catalogo c : catalogos){
+            if(c.obterTitulo().compareTo(new Titulo(titulo))==0){
+                catalogo=c;
+            }
+        }
+        return catalogo;
+    }*/
 }

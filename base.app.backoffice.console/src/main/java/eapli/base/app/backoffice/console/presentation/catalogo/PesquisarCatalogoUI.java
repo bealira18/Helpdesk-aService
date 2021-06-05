@@ -27,11 +27,11 @@ public class PesquisarCatalogoUI extends AbstractUI {
 
         String titulo= Console.readLine("Titulo pretendido: ");
 
-        while(controller.procurarCatalogoPorTitulo(titulo)==null)
+        while(controller.procurarCatalogoTitulo(titulo)==null)
             titulo= Console.readLine("Titulo pretendido: ");
 
         try{
-            Catalogo catalogo=controller.procurarCatalogoPorTitulo(titulo);
+            Catalogo catalogo=controller.procurarCatalogoTitulo(titulo);
             System.out.println(catalogo.toString());
         }catch (Exception e) {
             e.printStackTrace();

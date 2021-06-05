@@ -8,7 +8,24 @@ public class RemoverCriteriosEspecificacaoController {
 
     private final CriteriosEspecificacaoRepository criteriosEspecificacaoRepository = PersistenceContext.repositories().criteriosEspecificacao();
 
-    public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
+    public CriteriosEspecificacao procurarCriteriosEspecificacaoID(int id){
+        return criteriosEspecificacaoRepository.ofIdentity(id).get();
+    }
+    
+     public void removerCriteriosEspecificacao(int id){
+
+        CriteriosEspecificacao criteriosEspecificacao = procurarCriteriosEspecificacaoID(id);
+
+        if(criteriosEspecificacao==null){
+            throw new IllegalArgumentException("Este critério de especificação tem um id inválido: " + id);
+        }else{
+            criteriosEspecificacao.mudarEstado(false);
+        }
+
+        criteriosEspecificacaoRepository.save(criteriosEspecificacao);
+    }
+
+    /*public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
 
         Iterable<CriteriosEspecificacao> criterios = criteriosEspecificacaoRepository.findAll();
 
@@ -20,19 +37,5 @@ public class RemoverCriteriosEspecificacaoController {
             }
         }
         return criterio;
-    }
-    
-     public void removerCriteriosEspecificacao(int id){
-
-        CriteriosEspecificacao criteriosEspecificacao = procurarCriteriosEspecificacaoPorId(id);
-
-        if(criteriosEspecificacao==null){
-            throw new IllegalArgumentException("Este critério de especificação tem um id inválido: " + id);
-        }else{
-            criteriosEspecificacao.mudarEstado(false);
-        }
-
-        criteriosEspecificacaoRepository.save(criteriosEspecificacao);
-    }
-
+    }*/
 }

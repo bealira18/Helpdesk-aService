@@ -9,11 +9,11 @@ public class EditarCriteriosEspecificacaoController {
 
     private final CriteriosEspecificacaoRepository criteriosEspecificacaoRepository = PersistenceContext.repositories().criteriosEspecificacao();
 
-    public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
+    /*public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
 
         Iterable<CriteriosEspecificacao> criterios = criteriosEspecificacaoRepository.findAll();
 
-        CriteriosEspecificacao criterio = null;
+        CriteriosEspecificacao criterio = procurarCriteriosEspecificacaoID(id);
 
         for (CriteriosEspecificacao crit : criterios) {
             if (crit.obterId() == id) {
@@ -21,10 +21,10 @@ public class EditarCriteriosEspecificacaoController {
             }
         }
         return criterio;
-    }
+    }*/
 
     public void mudarEstado(int id, Boolean ativo){
-        CriteriosEspecificacao ce = procurarCriteriosEspecificacaoPorId(id);
+        CriteriosEspecificacao ce = procurarCriteriosEspecificacaoID(id);
 
         if(ce==null){
             throw new IllegalArgumentException("Critérios de especificação inválidos com id: "+id);
@@ -33,5 +33,9 @@ public class EditarCriteriosEspecificacaoController {
         }
 
         criteriosEspecificacaoRepository.save(ce);
+    }
+
+    public CriteriosEspecificacao procurarCriteriosEspecificacaoID(int id){
+        return criteriosEspecificacaoRepository.ofIdentity(id).get();
     }
 }

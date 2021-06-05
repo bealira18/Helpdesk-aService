@@ -9,7 +9,24 @@ public class RemoverCatalogoController {
 
     private final CatalogoRepository catalogoRepository= PersistenceContext.repositories().catalogo();
 
-    public Catalogo procurarCatalogoPorTitulo(String titulo){
+    public Catalogo procurarCatalogoTitulo(String titulo){
+        return catalogoRepository.procurarPorTitulo(new Titulo(titulo));
+    }
+
+    public void removerCatalogo(String titulo){
+
+        Catalogo catalogo=procurarCatalogoTitulo(titulo);
+
+        if(catalogo==null){
+            throw new IllegalArgumentException("Catalogo inválido com titulo: "+titulo);
+        }else{
+            catalogo.mudarEstado(false);
+        }
+
+        catalogoRepository.save(catalogo);
+    }
+
+    /*public Catalogo procurarCatalogoPorTitulo(String titulo){
 
         Iterable<Catalogo> catalogos=catalogoRepository.findAll();
 
@@ -21,19 +38,5 @@ public class RemoverCatalogoController {
             }
         }
         return catalogo;
-    }
-
-    public void removerCatalogo(String titulo){
-
-        Catalogo catalogo=procurarCatalogoPorTitulo(titulo);
-
-        if(catalogo==null){
-            throw new IllegalArgumentException("Catalogo inválido com titulo: "+titulo);
-        }else{
-            catalogo.mudarEstado(false);
-        }
-
-        catalogoRepository.save(catalogo);
-    }
-
+    }*/
 }

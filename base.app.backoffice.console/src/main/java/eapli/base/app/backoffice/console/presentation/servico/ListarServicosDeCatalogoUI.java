@@ -36,7 +36,7 @@ public class ListarServicosDeCatalogoUI extends AbstractUI {
 
         String tituloCatalogo= Console.readLine("\nTitulo catalogo pretendido: ");
 
-        while(controllerpesqcat.procurarCatalogoPorTitulo(tituloCatalogo)==null)
+        while(controllerpesqcat.procurarCatalogoTitulo(tituloCatalogo)==null)
             tituloCatalogo=Console.readLine("Titulo catalogo pretendido: ");
 
         //listar serviços

@@ -2,6 +2,7 @@ package eapli.base.catalogomanagement.application;
 
 import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
+import eapli.base.catalogomanagement.domain.Titulo;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.catalogomanagement.repository.CriteriosEspecificacaoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -13,13 +14,9 @@ public class AssociarCriteriosEspecificacaoACatalogoController {
 
 
     public void associarCriteriosEspecificacaoACatalogo(String titulo){
-        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
-        Catalogo catalogo1 = null;
-        for (Catalogo c : catalogos){
-            if(c.obterTitulo().obterTitulo().equalsIgnoreCase(titulo)){
-                catalogo1 = c;
-            }
-        }
+
+        Catalogo catalogo1 = procurarCatalogoTitulo(titulo);
+
         if(catalogo1 == null){
             throw new IllegalArgumentException("Não existe nenhum catalogo com o título: " + titulo);
         }
@@ -47,5 +44,9 @@ public class AssociarCriteriosEspecificacaoACatalogoController {
 
         return catalogoRepository.save(catalogo);
 
+    }
+
+    public Catalogo procurarCatalogoTitulo(String titulo){
+        return catalogoRepository.procurarPorTitulo(new Titulo(titulo));
     }
 }

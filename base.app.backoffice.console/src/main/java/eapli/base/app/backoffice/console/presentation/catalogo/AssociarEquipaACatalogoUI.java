@@ -36,10 +36,10 @@ public class AssociarEquipaACatalogoUI extends AbstractUI {
         System.out.println("Titulo do catalogo a que pretende adicionar a equipa:\n");
         String titulo= Console.readLine("Titulo: ");
 
-        while(controllerpesqcat.procurarCatalogoPorTitulo(titulo)==null)
+        while(controllerpesqcat.procurarCatalogoTitulo(titulo)==null)
             titulo= Console.readLine("Titulo pretendido: ");
 
-        Catalogo catalogo=controllerpesqcat.procurarCatalogoPorTitulo(titulo);
+        Catalogo catalogo=controllerpesqcat.procurarCatalogoTitulo(titulo);
 
         CriteriosEspecificacao criteriosEspecificacao=catalogo.obterCriteriosEspecificacao();
 
