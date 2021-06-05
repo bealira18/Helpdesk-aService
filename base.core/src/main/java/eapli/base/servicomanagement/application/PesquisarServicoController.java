@@ -39,4 +39,8 @@ public class PesquisarServicoController {
 
     }
 
+    public Servico procurarPorCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
+    }
+
 }

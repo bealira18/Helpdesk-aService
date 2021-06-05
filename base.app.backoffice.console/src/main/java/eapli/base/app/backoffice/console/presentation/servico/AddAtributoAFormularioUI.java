@@ -31,10 +31,10 @@ public class AddAtributoAFormularioUI extends AbstractUI {
 
         String cod= Console.readLine("Codigo pretendido: ");
 
-        while(controllerPesq.procurarServicoPorCod(cod)==null)
+        while(controllerPesq.procurarPorCod(cod)==null)
             cod= Console.readLine("Acronimo pretendido: ");
 
-        Servico servico=controllerPesq.procurarServicoPorCod(cod);
+        Servico servico=controllerPesq.procurarPorCod(cod);
 
         int aux=1;
 

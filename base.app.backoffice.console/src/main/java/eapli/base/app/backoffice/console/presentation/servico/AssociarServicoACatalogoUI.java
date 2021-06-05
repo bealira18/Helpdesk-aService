@@ -61,7 +61,7 @@ public class AssociarServicoACatalogoUI extends AbstractUI {
 
         String codServico= Console.readLine("\nCodigo serviço pretendido: ");
 
-        while(controllerpesqserv.procurarServicoPorCod(codServico)==null)
+        while(controllerpesqserv.procurarPorCod(codServico)==null)
             codServico=Console.readLine("Codigo serviço pretendido: ");
 
         //associar

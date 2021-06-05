@@ -41,13 +41,13 @@ public class AtivarFormularioServicoUI extends AbstractUI {
 
         String cod = Console.readLine("\nCodigo pretendido: ");
 
-        while (controllerPesq.procurarServicoPorCod(cod) == null)
+        while (controllerPesq.procurarPorCod(cod) == null)
             cod = Console.readLine("Codigo pretendido: ");
 
         Servico s = new Servico();
 
         try {
-            s = controllerPesq.procurarServicoPorCod(cod);
+            s = controllerPesq.procurarPorCod(cod);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -38,10 +38,10 @@ public class ContinuarServicoUI extends AbstractUI {
 
         String cod= Console.readLine("\nCodigo serviço pretendido: ");
 
-        while(controllerpesq.procurarServicoPorCod(cod)==null)
+        while(controllerpesq.procurarPorCod(cod)==null)
             cod=Console.readLine("Codigo serviço pretendido: ");
 
-        Servico servico=controllerpesq.procurarServicoPorCod(cod);
+        Servico servico=controllerpesq.procurarPorCod(cod);
 
         String titulo;
         String descricaobreve;

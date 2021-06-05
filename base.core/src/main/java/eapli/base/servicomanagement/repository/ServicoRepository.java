@@ -5,4 +5,5 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 public interface ServicoRepository extends DomainRepository<Integer, Servico> {
     Iterable<Servico> listarServicos();
+    Servico procurarPorCod(String cod);
 }

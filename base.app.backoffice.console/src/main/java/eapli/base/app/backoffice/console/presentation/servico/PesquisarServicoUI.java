@@ -28,11 +28,11 @@ public class PesquisarServicoUI extends AbstractUI {
 
         String cod= Console.readLine("Codigo pretendido: ");
 
-        while(controller.procurarServicoPorCod(cod)==null)
+        while(controller.procurarPorCod(cod)==null)
             cod= Console.readLine("Codigo pretendido: ");
 
         try{
-            Servico s=controller.procurarServicoPorCod(cod);
+            Servico s=controller.procurarPorCod(cod);
             System.out.println(s.toString());
         }catch (Exception e) {
             e.printStackTrace();

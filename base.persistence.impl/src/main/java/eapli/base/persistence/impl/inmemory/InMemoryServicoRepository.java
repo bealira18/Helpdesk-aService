@@ -15,4 +15,9 @@ public class InMemoryServicoRepository extends InMemoryDomainRepository<Servico,
     public Iterable<Servico> listarServicos() {
         return match(Servico::obterApresentar);
     }
+
+    @Override
+    public Servico procurarPorCod(final String cod) {
+        throw new UnsupportedOperationException();
+    }
 }
