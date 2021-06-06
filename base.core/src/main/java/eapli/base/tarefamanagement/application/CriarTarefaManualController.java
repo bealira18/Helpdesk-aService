@@ -2,6 +2,7 @@ package eapli.base.tarefamanagement.application;
 
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 
@@ -27,7 +28,11 @@ public class CriarTarefaManualController {
 
     }
 
-    public TarefaManual procurarTarefaPorId(int id) {
+    public TarefaManual procurarTarefaID(int id){
+        return tarefaManualRepository.ofIdentity(id).get();
+    }
+
+    /*public TarefaManual procurarTarefaPorId(int id) {
 
         Iterable<TarefaManual> tarefas = tarefaManualRepository.findAll();
 
@@ -39,6 +44,6 @@ public class CriarTarefaManualController {
             }
         }
         return tarefaManual;
-    }
+    }*/
 
 }

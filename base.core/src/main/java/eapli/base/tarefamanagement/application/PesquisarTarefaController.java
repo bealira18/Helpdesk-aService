@@ -1,7 +1,5 @@
 package eapli.base.tarefamanagement.application;
 
-import eapli.base.colaboradormanagement.domain.Colaborador;
-import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
@@ -13,7 +11,15 @@ public class PesquisarTarefaController {
     private final TarefaManualRepository tmRepository = PersistenceContext.repositories().tarefaManual();
     private final InfoTarefaRepository infoTarefaRepository = PersistenceContext.repositories().infoTarefa();
 
-    public TarefaManual procurarTarefaPorID(int id) {
+    public TarefaManual procurarTarefaPorID(int id){
+        return tmRepository.ofIdentity(id).get();
+    }
+
+    public InfoTarefa procurarInfoTarefaPorID(int id){
+        return infoTarefaRepository.ofIdentity(id).get();
+    }
+
+    /*public TarefaManual procurarTarefaPorId(int id) {
 
         Iterable<TarefaManual> tarefas = tmRepository.findAll();
 
@@ -25,9 +31,9 @@ public class PesquisarTarefaController {
             }
         }
         return tarefaManual;
-    }
+    }*/
 
-    public InfoTarefa procurarInfoTarefaPorID(int id) {
+    /*public InfoTarefa procurarInfoTarefaPorId(int id) {
 
         Iterable<InfoTarefa> tarefas = infoTarefaRepository.findAll();
 
@@ -39,6 +45,6 @@ public class PesquisarTarefaController {
             }
         }
         return infoTarefa;
-    }
+    }*/
 
 }

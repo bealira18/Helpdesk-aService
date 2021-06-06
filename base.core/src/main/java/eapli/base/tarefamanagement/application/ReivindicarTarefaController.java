@@ -17,14 +17,13 @@ import java.util.Optional;
 
 public class ReivindicarTarefaController {
 
-    private final TarefaManualRepository tarefaManualRepository = PersistenceContext.repositories().tarefaManual();
     private final ColaboradorRepository colabRepository = PersistenceContext.repositories().colaborador();
     private final InfoTarefaRepository infotarefaRepository = PersistenceContext.repositories().infoTarefa();
 
     public InfoTarefa reivindicarTarefaPendente(int idInfoTarefa, int numColaborador) {
 
-        InfoTarefa it=verificarTarefa(idInfoTarefa);
-        Colaborador c=verificarColaborador(numColaborador);
+        InfoTarefa it=verificarInfoTarefaID(idInfoTarefa);
+        Colaborador c=verificarColaboradorNum(numColaborador);
 
         if(c==null) {
             throw new IllegalArgumentException("Colaborador inválido com número: " + numColaborador);
@@ -41,6 +40,14 @@ public class ReivindicarTarefaController {
         return infotarefaRepository.save(it);
     }
 
+    public Colaborador verificarColaboradorNum(int num){
+        return colabRepository.ofIdentity(new Numero(num)).get();
+    }
+
+    public InfoTarefa verificarInfoTarefaID(int id){
+        return infotarefaRepository.ofIdentity(id).get();
+    }
+
     /*public Colaborador reivindicarTarefa(TarefaManual tarefa, Colaborador colaborador) {
 
         colaborador.reivindicarTarefa(tarefa);
@@ -48,7 +55,7 @@ public class ReivindicarTarefaController {
         return colabRepository.save(colaborador);
     }*/
 
-    public Colaborador verificarColaborador(int numero){
+    /*public Colaborador verificarColaborador(int numero){
         Iterable<Colaborador> colaboradores = colabRepository.findAll();
         Colaborador colab = null;
         for (Colaborador c : colaboradores) {
@@ -57,9 +64,9 @@ public class ReivindicarTarefaController {
             }
         }
         return colab;
-    }
+    }*/
 
-    public InfoTarefa verificarTarefa(int idTarefa){
+    /*public InfoTarefa verificarTarefa(int idTarefa){
         Iterable<InfoTarefa> tarefas=infotarefaRepository.findAll();
 
         InfoTarefa tarefa=null;
@@ -71,5 +78,5 @@ public class ReivindicarTarefaController {
         }
 
         return tarefa;
-    }
+    }*/
 }

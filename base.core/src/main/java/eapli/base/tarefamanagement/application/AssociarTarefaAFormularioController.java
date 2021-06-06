@@ -11,13 +11,12 @@ import eapli.base.tarefamanagement.repository.TarefaRepository;
 public class AssociarTarefaAFormularioController {
 
     private final FormularioRepository formularioRepository= PersistenceContext.repositories().formulario();
-    private final TarefaManualRepository tarefaManualRepository= PersistenceContext.repositories().tarefaManual();
     private final TarefaRepository tarefaRepository= PersistenceContext.repositories().tarefa();
 
     public TarefaManual associarTarefaAFormularioIds(int idF,int idT){
 
-        Formulario f=verificarFormularioId(idF);
-        TarefaManual t= (TarefaManual) verificarTarefaId(idT);
+        Formulario f=verificarFormularioID(idF);
+        TarefaManual t= (TarefaManual) verificarTarefaID(idT);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com id: "+idF);
@@ -30,7 +29,15 @@ public class AssociarTarefaAFormularioController {
         return tarefaRepository.save(t);
     }
 
-    public Formulario verificarFormularioId(int id){
+    public Formulario verificarFormularioID(int id){
+        return formularioRepository.ofIdentity(id).get();
+    }
+
+    public Tarefa verificarTarefaID(int id){
+        return tarefaRepository.ofIdentity(id).get();
+    }
+
+    /*public Formulario verificarFormularioId(int id){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
@@ -40,9 +47,9 @@ public class AssociarTarefaAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
-    public Tarefa verificarTarefaId(int id){
+    /*public Tarefa verificarTarefaId(int id){
 
         Iterable<Tarefa> tarefas=tarefaRepository.findAll();
 
@@ -52,6 +59,6 @@ public class AssociarTarefaAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
 }
