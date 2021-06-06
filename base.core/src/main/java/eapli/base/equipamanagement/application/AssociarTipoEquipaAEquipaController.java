@@ -1,9 +1,11 @@
 package eapli.base.equipamanagement.application;
 
+import eapli.base.equipamanagement.domain.Acronimo;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.equipamanagement.domain.TipoEquipa;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.equipamanagement.repository.TipoEquipaRepository;
+import eapli.base.formulariomanagement.domain.Nome;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 
 public class AssociarTipoEquipaAEquipaController {
@@ -13,8 +15,8 @@ public class AssociarTipoEquipaAEquipaController {
 
     public Equipa associarTipoEquipaAEquipa(String acronimoEquipa, String nomeTipoEquipa){
 
-        Equipa e=verificarEquipa(acronimoEquipa);
-        TipoEquipa t=verificarTipoEquipa(nomeTipoEquipa);
+        Equipa e=procurarEquipaAcronimo(acronimoEquipa);
+        TipoEquipa t=procurarTipoEquipaNome(nomeTipoEquipa);
 
         if(e==null)
             throw new IllegalArgumentException("Equipa inválido com acronimo: "+acronimoEquipa);
@@ -28,7 +30,15 @@ public class AssociarTipoEquipaAEquipaController {
 
     }
 
-    public Equipa verificarEquipa(String acronimo){
+    public Equipa procurarEquipaAcronimo(String acronimo){
+        return equipaRepository.procurarPorAcronimo(new Acronimo(acronimo));
+    }
+
+    public TipoEquipa procurarTipoEquipaNome(String nome){
+        return tipoEquipaRepository.procurarPorNome(new Nome(nome));
+    }
+
+    /*public Equipa verificarEquipa(String acronimo){
 
         Iterable<Equipa> equipas=equipaRepository.findAll();
 
@@ -38,9 +48,9 @@ public class AssociarTipoEquipaAEquipaController {
         }
 
         return null;
-    }
+    }*/
 
-    public TipoEquipa verificarTipoEquipa(String nome){
+    /*public TipoEquipa verificarTipoEquipa(String nome){
 
         Iterable<TipoEquipa> tiposEquipa=tipoEquipaRepository.findAll();
 
@@ -50,6 +60,6 @@ public class AssociarTipoEquipaAEquipaController {
         }
 
         return null;
-    }
+    }*/
 
 }

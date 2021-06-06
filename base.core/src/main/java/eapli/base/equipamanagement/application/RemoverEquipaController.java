@@ -11,16 +11,7 @@ public class RemoverEquipaController {
 
 public Equipa procurarEquipaPorAcronimo(String acronimo) {
 
-        Iterable<Equipa> equipas = equipaRepository.findAll();
-
-        Equipa equipa = null;
-
-        for (Equipa eq : equipas) {
-            if (eq.acronimo().compareTo(new Acronimo(acronimo)) == 0) {
-                equipa = eq;
-            }
-        }
-        return equipa;
+        return equipaRepository.procurarPorAcronimo(new Acronimo(acronimo));
     }
 
    public void removerEquipa(String acronimo){

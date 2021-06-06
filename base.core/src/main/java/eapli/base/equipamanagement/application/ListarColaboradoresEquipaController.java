@@ -1,6 +1,7 @@
 package eapli.base.equipamanagement.application;
 
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.equipamanagement.domain.Acronimo;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -13,19 +14,16 @@ public class ListarColaboradoresEquipaController {
 
     public List<Colaborador> listarColaboradoresEquipa(String acronimo){
 
-        Iterable<Equipa> equipas = equipaRepository.findAll();
-        Equipa equipa = null;
-
-        for(Equipa e : equipas){
-            if(e.compareTo(acronimo)==0){
-                equipa = e;
-            }
-        }
+        Equipa equipa = procurarEquipaAcronimo(acronimo);
 
         if(equipa == null){
             throw new IllegalArgumentException("Não existe nenhuma equipa com o acrónimo: " + acronimo);
         }
 
         return equipa.colaboradores();
+    }
+
+    public Equipa procurarEquipaAcronimo(String acronimo){
+        return equipaRepository.procurarPorAcronimo(new Acronimo(acronimo));
     }
 }

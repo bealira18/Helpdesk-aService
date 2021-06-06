@@ -11,21 +11,13 @@ public class EditarTipoEquipaController {
 
     private final TipoEquipaRepository tipoEquipaRepository= PersistenceContext.repositories().tipoEquipa();
 
-    public TipoEquipa verificarTipoEquipa(String nome){
-
-        Iterable<TipoEquipa> tiposEquipa=tipoEquipaRepository.findAll();
-
-        for(TipoEquipa t : tiposEquipa){
-            if(t.compareTo(nome)==0)
-                return t;
-        }
-
-        return null;
+    public TipoEquipa procurarTipoEquipaNome(String nome){
+        return tipoEquipaRepository.procurarPorNome(new Nome(nome));
     }
 
     public void mudarNome(String nomeAtual,String nomeNovo){
 
-        TipoEquipa tipoEquipa=verificarTipoEquipa(nomeAtual);
+        TipoEquipa tipoEquipa=procurarTipoEquipaNome(nomeAtual);
 
         if(tipoEquipa==null){
             throw new IllegalArgumentException("Tipo de Equipa inválido com nome: "+nomeAtual);
@@ -38,7 +30,7 @@ public class EditarTipoEquipaController {
 
     public void mudarDescricao(String nome,String descricao){
 
-        TipoEquipa tipoEquipa=verificarTipoEquipa(nome);
+        TipoEquipa tipoEquipa=procurarTipoEquipaNome(nome);
 
         if(tipoEquipa==null){
             throw new IllegalArgumentException("Tipo de Equipa inválido com nome: "+nome);
@@ -51,7 +43,7 @@ public class EditarTipoEquipaController {
 
     public void mudarCor(String nome,String cor){
 
-        TipoEquipa tipoEquipa=verificarTipoEquipa(nome);
+        TipoEquipa tipoEquipa=procurarTipoEquipaNome(nome);
 
         if(tipoEquipa==null){
             throw new IllegalArgumentException("Tipo de Equipa inválido com nome: "+nome);
@@ -62,4 +54,15 @@ public class EditarTipoEquipaController {
         tipoEquipaRepository.save(tipoEquipa);
     }
 
+    /*public TipoEquipa verificarTipoEquipa(String nome){
+
+        Iterable<TipoEquipa> tiposEquipa=tipoEquipaRepository.findAll();
+
+        for(TipoEquipa t : tiposEquipa){
+            if(t.compareTo(nome)==0)
+                return t;
+        }
+
+        return null;
+    }*/
 }

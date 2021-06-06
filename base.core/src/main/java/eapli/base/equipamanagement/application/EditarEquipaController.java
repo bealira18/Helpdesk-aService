@@ -10,23 +10,13 @@ public class EditarEquipaController {
 
     private final EquipaRepository equipaRepository = PersistenceContext.repositories().equipa();
 
-    public Equipa procurarEquipaPorAcronimo(String acronimo) {
-
-        Iterable<Equipa> equipas = equipaRepository.findAll();
-
-        Equipa equipa = null;
-
-        for (Equipa eq : equipas) {
-            if (eq.acronimo().compareTo(new Acronimo(acronimo)) == 0) {
-                equipa = eq;
-            }
-        }
-        return equipa;
+    public Equipa procurarEquipaAcronimo(String acronimo){
+        return equipaRepository.procurarPorAcronimo(new Acronimo(acronimo));
     }
 
     public void mudarAcronimo(String acronimoAtual, String acronimoNovo) {
 
-        Equipa equipa = procurarEquipaPorAcronimo(acronimoAtual);
+        Equipa equipa = procurarEquipaAcronimo(acronimoAtual);
 
         if (equipa == null) {
             throw new IllegalArgumentException("Esta equipa tem um acrónimo inválido: " + acronimoAtual);
@@ -39,7 +29,7 @@ public class EditarEquipaController {
     
     public void mudarDesignacao(String acronimo,String designacao){
 
-        Equipa equipa=procurarEquipaPorAcronimo(acronimo);
+        Equipa equipa=procurarEquipaAcronimo(acronimo);
 
         if(equipa==null){
             throw new IllegalArgumentException("Esta equipa tem um acrónimo inválido: " + acronimo);
@@ -49,4 +39,18 @@ public class EditarEquipaController {
 
         equipaRepository.save(equipa);
     }
+
+    /*public Equipa procurarEquipaPorAcronimo(String acronimo) {
+
+        Iterable<Equipa> equipas = equipaRepository.findAll();
+
+        Equipa equipa = null;
+
+        for (Equipa eq : equipas) {
+            if (eq.acronimo().compareTo(new Acronimo(acronimo)) == 0) {
+                equipa = eq;
+            }
+        }
+        return equipa;
+    }*/
 }
