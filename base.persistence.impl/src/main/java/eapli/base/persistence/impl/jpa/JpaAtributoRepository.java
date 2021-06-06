@@ -8,6 +8,7 @@ import eapli.framework.domain.repositories.DomainRepository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class JpaAtributoRepository extends BasepaRepositoryBase<Atributo, Integer, Integer> implements DomainRepository<Integer, Atributo>, AtributoRepository {
 
@@ -35,17 +36,19 @@ public class JpaAtributoRepository extends BasepaRepositoryBase<Atributo, Intege
     @Override
     public Iterable<Atributo> atributosIncompletosFormulario(final int idFormulario) {
         final TypedQuery<Atributo> query = entityManager().createQuery(
-                "SELECT d FROM Atributo d, Formulario f WHERE f.id = :FORMULARIOID AND d.completo=false",
+                "SELECT a FROM Atributo a WHERE a IN (SELECT aind FROM Formulario f JOIN f.atributos aind WHERE f.id = :FORMULARIOID) AND a.completo=false",
                 Atributo.class);
         query.setParameter("FORMULARIOID", idFormulario);
 
         return query.getResultList();
     }
 
+    //AND a.completo=true
+
     @Override
     public Iterable<Atributo> atributosCompletosFormulario(final int idFormulario) {
         final TypedQuery<Atributo> query = entityManager().createQuery(
-                "SELECT d FROM Atributo d, Formulario f WHERE f.id = :FORMULARIOID AND d.completo=true",
+                "SELECT a FROM Atributo a WHERE a IN (SELECT aind FROM Formulario f JOIN f.atributos aind WHERE f.id = :FORMULARIOID) AND a.completo=true",
                 Atributo.class);
         query.setParameter("FORMULARIOID", idFormulario);
 

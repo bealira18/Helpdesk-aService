@@ -15,14 +15,12 @@ public class AdicionarPedidoController {
 
     public Pedido addPedido(Date dataLimite, String urgencia, int numeroS/*, int numeroD*/,String codServico){
 
-        int idServico=codParaId(codServico);
+        Servico servico=procurarServicoCod(codServico);
 
-        if(!verificarServico(idServico))
+        if(servico==null)
             throw new IllegalArgumentException("Servico inválido com codigo: "+codServico);
 
         final Pedido novoPedido=new Pedido(dataLimite,urgencia,numeroS/*,numeroD*/);
-
-        Servico servico=servicoComId(idServico);
 
         novoPedido.associarServico(servico);
         novoPedido.associarWorkflow(servico.obterWorkflow());
@@ -30,15 +28,19 @@ public class AdicionarPedidoController {
         return pedidoRepository.save(novoPedido);
     }
 
-    public boolean verificarServico(int idServico){
+    public Servico procurarServicoCod(String cod){
+        return servicoRepository.procurarPorCod(cod);
+    }
+
+    /*public boolean verificarServico(int idServico){
 
         if(servicoRepository.ofIdentity(idServico).isEmpty())
             return false;
 
         return true;
-    }
+    }*/
 
-    public int codParaId(String cod){
+    /*public int codParaId(String cod){
 
         Iterable<Servico> servicos=servicoRepository.findAll();
 
@@ -47,9 +49,9 @@ public class AdicionarPedidoController {
                 return s.obterId();
         }
         return 0;
-    }
+    }*/
 
-    public Servico servicoComId(int id){
+    /*public Servico servicoComId(int id){
         Iterable<Servico> servicos=servicoRepository.findAll();
 
         for(Servico s : servicos){
@@ -57,6 +59,6 @@ public class AdicionarPedidoController {
                 return s;
         }
         return null;
-    }
+    }*/
 
 }
