@@ -25,7 +25,7 @@ public class AtivarFormularioController {
 
     public Formulario ativarFormServico(String nomeFormulario,Servico s){
 
-        Formulario f=verificarFormulario(nomeFormulario);
+        Formulario f=verificarFormularioNome(nomeFormulario);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com nome: "+nomeFormulario);
@@ -52,16 +52,8 @@ public class AtivarFormularioController {
         return formularioRepository.save(f);
     }
 
-    public Formulario verificarFormulario(String nomeFormulario){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.compareTo(nomeFormulario)==0)
-                return f;
-        }
-
-        return null;
+    public Formulario verificarFormularioNome(String nome){
+        return formularioRepository.procurarPorNome(nome);
     }
 
     public void verificarServico(Servico servico){
@@ -73,4 +65,15 @@ public class AtivarFormularioController {
 
     }
 
+    /*public Formulario verificarFormulario(String nomeFormulario){
+
+        Iterable<Formulario> formularios=formularioRepository.findAll();
+
+        for(Formulario f : formularios){
+            if(f.compareTo(nomeFormulario)==0)
+                return f;
+        }
+
+        return null;
+    }*/
 }

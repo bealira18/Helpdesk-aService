@@ -1,35 +1,31 @@
 package eapli.base.formulariomanagement.application;
 
-import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.formulariomanagement.domain.Formulario;
+import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.formulariomanagement.repository.FormularioRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.servicomanagement.domain.Servico;
-import eapli.base.servicomanagement.repository.ServicoRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListarAtributosDeFormularioController {
 
     private final FormularioRepository formularioRepository= PersistenceContext.repositories().formulario();
+    private final AtributoRepository atributoRepository=PersistenceContext.repositories().atributo();
 
     public Formulario procurarFormularioPorId(int id) {
-
-        Iterable<Formulario> formularios = formularioRepository.findAll();
-
-        Formulario formulario = new Formulario();
-
-        for (Formulario f : formularios) {
-            if (f.obterId()==id) {
-                formulario = f;
-            }
-        }
-        return formulario;
+        return formularioRepository.ofIdentity(id).get();
     }
 
     public List<Atributo> listarAtributosIncompletosFormulario(int id){
+        return (List<Atributo>) atributoRepository.atributosIncompletosFormulario(id);
+    }
+
+    public List<Atributo> listarAtributosCompletosFormulario(int id){
+        return (List<Atributo>) atributoRepository.atributosCompletosFormulario(id);
+    }
+
+    /*public List<Atributo> listarAtributosIncompletosFormulario(int id){
 
         Formulario formulario=procurarFormularioPorId(id);
 
@@ -43,9 +39,9 @@ public class ListarAtributosDeFormularioController {
         }
 
         return atributosInc;
-    }
+    }*/
 
-    public List<Atributo> listarAtributosCompletosFormulario(int id){
+    /*public List<Atributo> listarAtributosCompletosFormulario(int id){
 
         Formulario formulario=procurarFormularioPorId(id);
 
@@ -59,7 +55,7 @@ public class ListarAtributosDeFormularioController {
         }
 
         return atributosInc;
-    }
+    }*/
 
     public Atributo procurarAtributoPorNome(int id,String nome) {
 

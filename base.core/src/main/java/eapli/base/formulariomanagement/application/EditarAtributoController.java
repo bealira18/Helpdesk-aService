@@ -1,31 +1,17 @@
 package eapli.base.formulariomanagement.application;
 
-import eapli.base.catalogomanagement.domain.Catalogo;
-import eapli.base.catalogomanagement.domain.DescricaoBreve;
-import eapli.base.equipamanagement.domain.Descricao;
 import eapli.base.formulariomanagement.domain.Atributo;
 import eapli.base.formulariomanagement.domain.ExpressaoRegular;
-import eapli.base.formulariomanagement.domain.Nome;
 import eapli.base.formulariomanagement.domain.TipoDadosBase;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.nivelcriticidademanagement.domain.Etiqueta;
-import eapli.base.servicomanagement.domain.Servico;
 
 public class EditarAtributoController {
 
     private final AtributoRepository atributoRepository= PersistenceContext.repositories().atributo();
 
     public Atributo verificarAtributo(String nomeAtributo){
-
-        Iterable<Atributo> atributos=atributoRepository.findAll();
-
-        for(Atributo a : atributos){
-            if(a.compareTo(nomeAtributo)==0)
-                return a;
-        }
-
-        return null;
+        return atributoRepository.procurarPorNome(nomeAtributo);
     }
 
     public void mudarNome(String nomeAtual,String nomeNovo){

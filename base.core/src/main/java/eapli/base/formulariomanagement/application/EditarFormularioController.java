@@ -10,15 +10,7 @@ public class EditarFormularioController {
     private final FormularioRepository formularioRepository= PersistenceContext.repositories().formulario();
 
     public Formulario verificarFormulario(String nomeFormulario){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.compareTo(nomeFormulario)==0)
-                return f;
-        }
-
-        return null;
+        return formularioRepository.procurarPorNome(nomeFormulario);
     }
 
     public void mudarNumAtributos(String nomeFormulario,int num){

@@ -13,8 +13,8 @@ public class AssociarAtributoAFormularioController {
 
     public Formulario associarAtributoAFormulario(String nomeFormulario, String nomeAtributo){
 
-        Formulario f=verificarFormulario(nomeFormulario);
-        Atributo a=verificarAtributo(nomeAtributo);
+        Formulario f=verificarFormularioNome(nomeFormulario);
+        Atributo a=verificarAtributoNome(nomeAtributo);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com nome: "+nomeFormulario);
@@ -31,8 +31,8 @@ public class AssociarAtributoAFormularioController {
 
     public Formulario associarAtributoAFormularioIds(int idF,int idA){
 
-        Formulario f=verificarFormularioId(idF);
-        Atributo a=verificarAtributoId(idA);
+        Formulario f=verificarFormularioID(idF);
+        Atributo a=verificarAtributoID(idA);
 
         if(f==null)
             throw new IllegalArgumentException("Formulario inválido com id: "+idF);
@@ -47,7 +47,23 @@ public class AssociarAtributoAFormularioController {
 
     }
 
-    public Formulario verificarFormulario(String nomeFormulario){
+    public Formulario verificarFormularioID(int id){
+        return formularioRepository.ofIdentity(id).get();
+    }
+
+    public Atributo verificarAtributoID(int id){
+        return atributoRepository.ofIdentity(id).get();
+    }
+
+    public Formulario verificarFormularioNome(String nome){
+        return formularioRepository.procurarPorNome(nome);
+    }
+
+    public Atributo verificarAtributoNome(String nome){
+        return atributoRepository.procurarPorNome(nome);
+    }
+
+    /*public Formulario verificarFormulario(String nomeFormulario){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
@@ -57,9 +73,9 @@ public class AssociarAtributoAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
-    public Formulario verificarFormularioId(int id){
+    /*public Formulario verificarFormularioId(int id){
 
         Iterable<Formulario> formularios=formularioRepository.findAll();
 
@@ -69,9 +85,9 @@ public class AssociarAtributoAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
-    public Atributo verificarAtributo(String nomeAtributo){
+    /*public Atributo verificarAtributo(String nomeAtributo){
 
         Iterable<Atributo> atributos=atributoRepository.findAll();
 
@@ -82,9 +98,9 @@ public class AssociarAtributoAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
-    public Atributo verificarAtributoId(int id){
+    /*public Atributo verificarAtributoId(int id){
 
         Iterable<Atributo> atributos=atributoRepository.findAll();
 
@@ -94,6 +110,6 @@ public class AssociarAtributoAFormularioController {
         }
 
         return null;
-    }
+    }*/
 
 }
