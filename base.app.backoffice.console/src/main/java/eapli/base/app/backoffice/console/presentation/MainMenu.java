@@ -35,6 +35,7 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.pedido.AddPedidoAction;
+import eapli.base.app.backoffice.console.presentation.pedido.DarFeedbackAction;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
@@ -131,6 +132,7 @@ public class MainMenu extends AbstractUI {
 
     //Pedido
     private static final int ADD_PEDIDO=1;
+    private static final int DAR_FEEDBACK=2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -375,6 +377,8 @@ public class MainMenu extends AbstractUI {
     private Menu buildPedidoMenu(){
         final Menu menu=new Menu("Pedido >");
         menu.addItem(ADD_PEDIDO,"Fazer um pedido",new AddPedidoAction());
+
+        menu.addItem(DAR_FEEDBACK,"Dar feedback",new DarFeedbackAction());
 
         return menu;
     }

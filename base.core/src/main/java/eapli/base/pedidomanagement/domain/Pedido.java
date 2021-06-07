@@ -104,6 +104,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return estadoPedido;
     }
 
+    public void darFeedback(Feedback feedback) {
+        this.feedback = feedback;
+    }
+
     public void mudarEstadoPedido(EstadoPedido e){
         this.estadoPedido = e;
     }

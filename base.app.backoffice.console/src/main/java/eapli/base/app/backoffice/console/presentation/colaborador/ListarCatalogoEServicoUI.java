@@ -41,7 +41,7 @@ public class ListarCatalogoEServicoUI extends AbstractUI {
             numero= Console.readInteger("\nNumero pretendido: ");
 
             while(controllerpesqcol.procurarColaboradorNumero(numero)==null)
-                numero=Console.readInteger("Titulo colaborador pretendido: ");
+                numero=Console.readInteger("Numero colaborador pretendido: ");
         }
 
         Iterable<Catalogo> catalogos=controller.listarCatálogos(numero);
