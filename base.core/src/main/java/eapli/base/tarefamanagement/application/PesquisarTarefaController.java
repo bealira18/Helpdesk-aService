@@ -19,32 +19,4 @@ public class PesquisarTarefaController {
         return infoTarefaRepository.ofIdentity(id).get();
     }
 
-    /*public TarefaManual procurarTarefaPorId(int id) {
-
-        Iterable<TarefaManual> tarefas = tmRepository.findAll();
-
-        TarefaManual tarefaManual = null;
-
-        for (TarefaManual tfM : tarefas) {
-            if (tfM.obterId() == id) {
-                tarefaManual = tfM;
-            }
-        }
-        return tarefaManual;
-    }*/
-
-    /*public InfoTarefa procurarInfoTarefaPorId(int id) {
-
-        Iterable<InfoTarefa> tarefas = infoTarefaRepository.findAll();
-
-        InfoTarefa infoTarefa=null;
-
-        for(InfoTarefa it : tarefas) {
-            if (it.obterId() == id) {
-                infoTarefa = it;
-            }
-        }
-        return infoTarefa;
-    }*/
-
 }

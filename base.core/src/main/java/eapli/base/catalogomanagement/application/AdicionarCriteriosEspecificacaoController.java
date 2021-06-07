@@ -1,7 +1,10 @@
 package eapli.base.catalogomanagement.application;
 
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
+import eapli.base.catalogomanagement.domain.Titulo;
 import eapli.base.catalogomanagement.repository.CriteriosEspecificacaoRepository;
+import eapli.base.colaboradormanagement.domain.Numero;
+import eapli.base.equipamanagement.domain.Acronimo;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.equipamanagement.repository.EquipaRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
@@ -15,18 +18,8 @@ public class AdicionarCriteriosEspecificacaoController {
 
         final CriteriosEspecificacao novoCriterioEspecificacao = new CriteriosEspecificacao();
 
-        Equipa equipa = null;
-        Iterable<Equipa> equipas=equipaRepository.findAll();
+        Equipa equipa = procurarEquipaPorAcronimo(acronimo);
 
-        if(equipas==null)
-            throw new IllegalArgumentException("Ainda não existem equipas");
-        else {
-            for (Equipa e : equipas) {
-                if (e.acronimo().comparar(acronimo) == 0)
-                    equipa = e;
-            }
-        }
-        
         if(equipa==null)
             throw new IllegalArgumentException("Equipa inexistente "+acronimo);
 
@@ -34,5 +27,9 @@ public class AdicionarCriteriosEspecificacaoController {
 
         return criteriosEspecificacaoRepository.save(novoCriterioEspecificacao);
 
+    }
+
+    public Equipa procurarEquipaPorAcronimo(String acronimo){
+        return equipaRepository.procurarPorAcronimo(new Acronimo(acronimo));
     }
 }

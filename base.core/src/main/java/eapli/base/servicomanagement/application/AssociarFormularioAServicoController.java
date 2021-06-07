@@ -63,49 +63,4 @@ public class AssociarFormularioAServicoController {
         return servicoRepository.procurarPorCod(cod);
     }
 
-    /*public Formulario verificaIdF(int id){
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.obterId()==id)
-                return f;
-        }
-
-        return null;
-    }*/
-
-    /*public Formulario verificarFormulario(String nomeFormulario){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.compareTo(nomeFormulario)==0)
-                return f;
-        }
-
-        return null;
-    }*/
-
-    /*public Servico verificarIdS(int id){
-        Iterable<Servico> servicos=servicoRepository.findAll();
-
-        for(Servico s : servicos){
-            if(s.obterId()==id)
-                return s;
-        }
-        return null;
-    }*/
-
-    /*public Servico verificarServico(String codServico){
-
-        Iterable<Servico> servicos=servicoRepository.findAll();
-
-        for(Servico s : servicos){
-            if(s.compareTo(codServico)==0)
-                return s;
-        }
-
-        return null;
-    }*/
-
 }

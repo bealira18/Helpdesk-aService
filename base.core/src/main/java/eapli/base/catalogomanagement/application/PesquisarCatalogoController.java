@@ -12,19 +12,4 @@ public class PesquisarCatalogoController {
     public Catalogo procurarCatalogoTitulo(String titulo){
         return catalogoRepository.procurarPorTitulo(new Titulo(titulo));
     }
-
-    /*public Catalogo procurarCatalogoPorTitulo(String titulo) {
-
-        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
-
-        Catalogo catalogo = null;
-
-        for (Catalogo c : catalogos) {
-            if (c.obterTitulo().obterTitulo().equalsIgnoreCase(titulo)) {
-                catalogo = c;
-            }
-        }
-        return catalogo;
-    }*/
-
 }

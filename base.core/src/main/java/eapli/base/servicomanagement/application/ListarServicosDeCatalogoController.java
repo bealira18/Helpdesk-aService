@@ -27,17 +27,4 @@ public class ListarServicosDeCatalogoController {
         return servicos;
     }
 
-    /*public Catalogo procurarCatalogoPorTitulo(String titulo) {
-
-        Iterable<Catalogo> catalogos = catalogoRepository.findAll();
-
-        Catalogo catalogo = null;
-
-        for (Catalogo c : catalogos) {
-            if (c.obterTitulo().obterTitulo().equalsIgnoreCase(titulo)) {
-                catalogo = c;
-            }
-        }
-        return catalogo;
-    }*/
 }

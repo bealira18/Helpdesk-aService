@@ -41,28 +41,4 @@ public class AssociarWorkflowAServicoController {
         return workflowRepository.ofIdentity(id).get();
     }
 
-    /*public Servico verificarServico(String codServico){
-
-        Iterable<Servico> servicos=servicoRepository.findAll();
-
-        for(Servico s : servicos){
-            if(s.compareTo(codServico)==0)
-                return s;
-        }
-
-        return null;
-    }*/
-
-    /*public Workflow verificarWorkflow(int id){
-
-        Iterable<Workflow> workflows=workflowRepository.findAll();
-
-        for(Workflow w : workflows){
-            if(w.obterId()==id)
-                return w;
-        }
-
-        return null;
-    }*/
-
 }

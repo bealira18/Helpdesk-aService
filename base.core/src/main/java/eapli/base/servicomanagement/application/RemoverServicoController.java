@@ -25,17 +25,4 @@ public class RemoverServicoController {
         servicoRepository.save(servico);
     }
 
-    /*public Servico procurarServicoPorCod(String cod) {
-
-        Iterable<Servico> servicos = servicoRepository.findAll();
-
-        Servico servico = null;
-
-        for (Servico serv : servicos) {
-            if (serv.obterCod().compareTo(cod) == 0) {
-                servico = serv;
-            }
-        }
-        return servico;
-    }*/
 }

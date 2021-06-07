@@ -27,19 +27,8 @@ public class AdicionarWorkflowController {
 
         final Workflow w = new Workflow();
 
-        Tarefa tarefa1 = null;
-        Tarefa tarefa2 = null;
-
-        Iterable<Tarefa> tarefas = tarefaRepository.findAll();
-
-        for (Tarefa t : tarefas){
-            if (t.obterId()==idTarefa1){
-                tarefa1 = t;
-            }
-            if (t.obterId()==idTarefa2){
-                tarefa2 = t;
-            }
-        }
+        Tarefa tarefa1 = tarefaRepository.ofIdentity(idTarefa1).get();
+        Tarefa tarefa2 = tarefaRepository.ofIdentity(idTarefa2).get();
 
         if(tarefa1 == null){
             throw new IllegalArgumentException("Tarefa inválida com id: "+ idTarefa1);

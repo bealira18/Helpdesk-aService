@@ -48,35 +48,4 @@ public class ReivindicarTarefaController {
         return infotarefaRepository.ofIdentity(id).get();
     }
 
-    /*public Colaborador reivindicarTarefa(TarefaManual tarefa, Colaborador colaborador) {
-
-        colaborador.reivindicarTarefa(tarefa);
-        tarefaManualRepository.save(tarefa);
-        return colabRepository.save(colaborador);
-    }*/
-
-    /*public Colaborador verificarColaborador(int numero){
-        Iterable<Colaborador> colaboradores = colabRepository.findAll();
-        Colaborador colab = null;
-        for (Colaborador c : colaboradores) {
-            if (c.obterNumero().obterNumero() == numero) {
-                colab = c;
-            }
-        }
-        return colab;
-    }*/
-
-    /*public InfoTarefa verificarTarefa(int idTarefa){
-        Iterable<InfoTarefa> tarefas=infotarefaRepository.findAll();
-
-        InfoTarefa tarefa=null;
-
-        for (InfoTarefa it : tarefas) {
-            if (it.obterId()==idTarefa) {
-                tarefa=it;
-            }
-        }
-
-        return tarefa;
-    }*/
 }

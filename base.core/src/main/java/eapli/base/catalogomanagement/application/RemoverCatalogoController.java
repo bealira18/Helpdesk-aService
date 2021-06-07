@@ -26,17 +26,4 @@ public class RemoverCatalogoController {
         catalogoRepository.save(catalogo);
     }
 
-    /*public Catalogo procurarCatalogoPorTitulo(String titulo){
-
-        Iterable<Catalogo> catalogos=catalogoRepository.findAll();
-
-        Catalogo catalogo=null;
-
-        for(Catalogo c : catalogos){
-            if(c.obterTitulo().compareTo(new Titulo(titulo))==0){
-                catalogo=c;
-            }
-        }
-        return catalogo;
-    }*/
 }

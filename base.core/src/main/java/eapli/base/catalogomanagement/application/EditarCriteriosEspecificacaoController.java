@@ -9,20 +9,6 @@ public class EditarCriteriosEspecificacaoController {
 
     private final CriteriosEspecificacaoRepository criteriosEspecificacaoRepository = PersistenceContext.repositories().criteriosEspecificacao();
 
-    /*public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
-
-        Iterable<CriteriosEspecificacao> criterios = criteriosEspecificacaoRepository.findAll();
-
-        CriteriosEspecificacao criterio = procurarCriteriosEspecificacaoID(id);
-
-        for (CriteriosEspecificacao crit : criterios) {
-            if (crit.obterId() == id) {
-                criterio = crit;
-            }
-        }
-        return criterio;
-    }*/
-
     public void mudarEstado(int id, Boolean ativo){
         CriteriosEspecificacao ce = procurarCriteriosEspecificacaoID(id);
 

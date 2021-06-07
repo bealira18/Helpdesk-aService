@@ -32,18 +32,4 @@ public class CriarTarefaManualController {
         return tarefaManualRepository.ofIdentity(id).get();
     }
 
-    /*public TarefaManual procurarTarefaPorId(int id) {
-
-        Iterable<TarefaManual> tarefas = tarefaManualRepository.findAll();
-
-        TarefaManual tarefaManual = null;
-
-        for (TarefaManual tm : tarefas) {
-            if (tm.obterId() == id) {
-                tarefaManual = tm;
-            }
-        }
-        return tarefaManual;
-    }*/
-
 }

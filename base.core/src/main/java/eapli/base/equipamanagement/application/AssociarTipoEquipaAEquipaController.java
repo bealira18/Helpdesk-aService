@@ -38,28 +38,4 @@ public class AssociarTipoEquipaAEquipaController {
         return tipoEquipaRepository.procurarPorNome(new Nome(nome));
     }
 
-    /*public Equipa verificarEquipa(String acronimo){
-
-        Iterable<Equipa> equipas=equipaRepository.findAll();
-
-        for(Equipa e : equipas){
-            if(e.compareTo(acronimo)==0)
-                return e;
-        }
-
-        return null;
-    }*/
-
-    /*public TipoEquipa verificarTipoEquipa(String nome){
-
-        Iterable<TipoEquipa> tiposEquipa=tipoEquipaRepository.findAll();
-
-        for(TipoEquipa t : tiposEquipa){
-            if(t.compareTo(nome)==0)
-                return t;
-        }
-
-        return null;
-    }*/
-
 }

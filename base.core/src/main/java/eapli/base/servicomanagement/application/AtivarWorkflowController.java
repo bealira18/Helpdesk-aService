@@ -97,16 +97,4 @@ public class AtivarWorkflowController {
         return w;
     }
 
-    /*public Formulario verificarFormulario(int id){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.obterId()==id)
-                return f;
-        }
-
-        return null;
-    }*/
-
 }

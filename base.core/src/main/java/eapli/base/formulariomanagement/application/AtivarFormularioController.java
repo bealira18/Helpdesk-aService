@@ -65,15 +65,4 @@ public class AtivarFormularioController {
 
     }
 
-    /*public Formulario verificarFormulario(String nomeFormulario){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.compareTo(nomeFormulario)==0)
-                return f;
-        }
-
-        return null;
-    }*/
 }

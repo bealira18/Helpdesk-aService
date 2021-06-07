@@ -25,38 +25,6 @@ public class ListarAtributosDeFormularioController {
         return (List<Atributo>) atributoRepository.atributosCompletosFormulario(id);
     }
 
-    /*public List<Atributo> listarAtributosIncompletosFormulario(int id){
-
-        Formulario formulario=procurarFormularioPorId(id);
-
-        List<Atributo> atributos =formulario.obterAtributos();
-
-        List<Atributo> atributosInc=new ArrayList<>();
-
-        for(Atributo a : atributos){
-            if(!a.obterCompleto())
-                atributosInc.add(a);
-        }
-
-        return atributosInc;
-    }*/
-
-    /*public List<Atributo> listarAtributosCompletosFormulario(int id){
-
-        Formulario formulario=procurarFormularioPorId(id);
-
-        List<Atributo> atributos =formulario.obterAtributos();
-
-        List<Atributo> atributosInc=new ArrayList<>();
-
-        for(Atributo a : atributos){
-            if(a.obterCompleto())
-                atributosInc.add(a);
-        }
-
-        return atributosInc;
-    }*/
-
     public Atributo procurarAtributoPorNome(int id,String nome) {
 
         Iterable<Atributo> atributosForm = listarAtributosIncompletosFormulario(id);

@@ -10,20 +10,6 @@ public class PesquisarServicoController {
     private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
     private final ListarCatálogosEServicosController listarCatálogosEServicosController=new ListarCatálogosEServicosController();
 
-    /*public Servico procurarServicoPorCod(String codigo) {
-
-        Iterable<Servico> servicos = servicoRepository.findAll();
-
-        Servico servico = null;
-
-        for (Servico s : servicos) {
-            if (s.obterCod().equalsIgnoreCase(codigo)) {
-                servico = s;
-            }
-        }
-        return servico;
-    }*/
-
     public Servico procurarServicoEspecifico(String codigo,int numeroColaborador){
 
         Iterable<Servico> servicos = listarCatálogosEServicosController.listarServicosDeCatalogo(numeroColaborador);
