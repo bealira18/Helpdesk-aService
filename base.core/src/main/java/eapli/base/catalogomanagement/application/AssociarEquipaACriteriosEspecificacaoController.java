@@ -18,6 +18,7 @@ public class AssociarEquipaACriteriosEspecificacaoController {
 
 
     public void associarEquipaACriteriosEspecificacao(String titulo, String acronimo){
+
         Catalogo catalogo1=procurarCatalogoTitulo(titulo);
 
         Equipa equipa1 = procurarEquipaAcronimo(acronimo);

@@ -13,17 +13,4 @@ public class PesquisarColaboradorController {
         return colaboradorRepository.ofIdentity(new Numero(numero)).get();
     }
 
-    /*public Colaborador procurarColaboradorPorNumero(int numero) {
-
-        Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
-
-        Colaborador colaborador = null;
-
-        for (Colaborador c : colaboradores) {
-            if (c.obterNumero().obterNumero() == numero) {
-                colaborador = c;
-            }
-        }
-        return colaborador;
-    }*/
 }

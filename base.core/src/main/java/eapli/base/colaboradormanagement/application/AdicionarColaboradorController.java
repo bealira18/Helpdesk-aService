@@ -36,24 +36,14 @@ public class AdicionarColaboradorController {
     }
 
     public Colaborador procurarColaboradorPorNumero(int numero) {
-
-        Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
-
-        Colaborador colaborador = null;
-
-        for (Colaborador c : colaboradores) {
-            if (c.obterNumero().obterNumero() == numero) {
-                colaborador = c;
-            }
-        }
-        return colaborador;
+        return colaboradorRepository.ofIdentity(new Numero(numero)).get();
     }
 
     public List<Numero> mostrarNumerosIndisponiveis(){
 
         Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
 
-        List<Numero> numeros=new ArrayList<Numero>();
+        List<Numero> numeros=new ArrayList<>();
 
         for(Colaborador c : colaboradores){
             numeros.add(c.obterNumero());

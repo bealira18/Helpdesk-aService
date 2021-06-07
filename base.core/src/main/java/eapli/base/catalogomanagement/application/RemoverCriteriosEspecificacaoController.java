@@ -25,17 +25,4 @@ public class RemoverCriteriosEspecificacaoController {
         criteriosEspecificacaoRepository.save(criteriosEspecificacao);
     }
 
-    /*public CriteriosEspecificacao procurarCriteriosEspecificacaoPorId(int id) {
-
-        Iterable<CriteriosEspecificacao> criterios = criteriosEspecificacaoRepository.findAll();
-
-        CriteriosEspecificacao criterio = null;
-
-        for (CriteriosEspecificacao crit : criterios) {
-            if (crit.obterId() == id) {
-                criterio = crit;
-            }
-        }
-        return criterio;
-    }*/
 }

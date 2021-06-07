@@ -40,17 +40,4 @@ public class EditarEquipaController {
         equipaRepository.save(equipa);
     }
 
-    /*public Equipa procurarEquipaPorAcronimo(String acronimo) {
-
-        Iterable<Equipa> equipas = equipaRepository.findAll();
-
-        Equipa equipa = null;
-
-        for (Equipa eq : equipas) {
-            if (eq.acronimo().compareTo(new Acronimo(acronimo)) == 0) {
-                equipa = eq;
-            }
-        }
-        return equipa;
-    }*/
 }

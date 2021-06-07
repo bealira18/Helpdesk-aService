@@ -10,20 +10,6 @@ public class PesquisarTarefaIdController {
 
     private final TarefaRepository tarefaRepository = PersistenceContext.repositories().tarefa();
 
-    /*public Tarefa procurarTarefaPorID(int id) {
-
-        Iterable<Tarefa> tarefas = tarefaRepository.findAll();
-
-        Tarefa tarefa = null;
-
-        for (Tarefa t : tarefas) {
-            if (t.obterId()==id) {
-                tarefa = t;
-            }
-        }
-        return tarefa;
-    }*/
-
     public Tarefa procurarTarefaPorId(int id){
         return tarefaRepository.ofIdentity(id).get();
     }

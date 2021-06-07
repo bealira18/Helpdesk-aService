@@ -107,17 +107,4 @@ public class EditarColaboradorController {
         colaboradorRepository.save(colaborador);
     }
 
-    /*public Colaborador procurarColaboradorPorNomeCompleto(String nomeCompleto) {
-
-        Iterable<Colaborador> colaboradores = colaboradorRepository.findAll();
-
-        Colaborador colaborador = null;
-
-        for (Colaborador c : colaboradores) {
-            if (c.obterNomeCompleto().compareTo(nomeCompleto) == 0) {
-                colaborador = c;
-            }
-        }
-        return colaborador;
-    }*/
 }

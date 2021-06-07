@@ -37,28 +37,4 @@ public class AssociarTarefaAFormularioController {
         return tarefaRepository.ofIdentity(id).get();
     }
 
-    /*public Formulario verificarFormularioId(int id){
-
-        Iterable<Formulario> formularios=formularioRepository.findAll();
-
-        for(Formulario f : formularios){
-            if(f.obterId()==id)
-                return f;
-        }
-
-        return null;
-    }*/
-
-    /*public Tarefa verificarTarefaId(int id){
-
-        Iterable<Tarefa> tarefas=tarefaRepository.findAll();
-
-        for(Tarefa t : tarefas){
-            if(t.obterId()==id)
-                return t;
-        }
-
-        return null;
-    }*/
-
 }

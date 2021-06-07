@@ -54,15 +54,4 @@ public class EditarTipoEquipaController {
         tipoEquipaRepository.save(tipoEquipa);
     }
 
-    /*public TipoEquipa verificarTipoEquipa(String nome){
-
-        Iterable<TipoEquipa> tiposEquipa=tipoEquipaRepository.findAll();
-
-        for(TipoEquipa t : tiposEquipa){
-            if(t.compareTo(nome)==0)
-                return t;
-        }
-
-        return null;
-    }*/
 }
