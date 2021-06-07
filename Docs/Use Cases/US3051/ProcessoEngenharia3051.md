@@ -26,13 +26,12 @@ Enquanto é desenvolvido o programa é de interesse que não se tenha de inserir
 ![DarFeedbackCD](DarFeedbackCD.jpg)
 
 ## 3.4. Testes 
-*Nesta secção deve sistematizar como os testes foram concebidos para permitir uma correta aferição da satisfação dos requisitos.*
 
-**Teste 1:** Verificar que não é possível criar uma instância da classe Exemplo com valores nulos.
+**Teste 1:** Verificar que não é possível dar feedback com valores que não estejam entre 1 e 5
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Exemplo instance = new Exemplo(null, null);
+		public void VerificaFeedbackCumpreLimites() {
+		
 	}
 
 # 4. Implementação
