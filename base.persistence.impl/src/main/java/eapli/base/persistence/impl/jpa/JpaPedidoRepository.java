@@ -13,7 +13,7 @@ public class JpaPedidoRepository extends BasepaRepositoryBase<Pedido, Integer, I
     @Override
     public Iterable<Pedido> pedidosFinalizados(int numColaborador) {
         final TypedQuery<Pedido> query = entityManager().createQuery(
-                "SELECT p FROM Pedido p WHERE p.dataFim IS NOT null AND p.numeroS = :NUMEROS AND p.feedback = -1",
+                "SELECT p FROM Pedido p WHERE p.dataFim IS NOT null AND p.numeroS = :NUMEROS AND p.feedback = -1 AND (EXTRACT(DAY FROM CURRENT_DATE-p.dataFim) < 7)",
                 Pedido.class);
         query.setParameter("NUMEROS", numColaborador);
 
