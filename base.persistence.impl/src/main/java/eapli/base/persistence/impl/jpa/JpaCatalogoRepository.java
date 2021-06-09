@@ -4,12 +4,10 @@ import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.Titulo;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.colaboradormanagement.domain.Numero;
-import eapli.base.servicomanagement.domain.Servico;
 import eapli.framework.domain.repositories.DomainRepository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 
 public class JpaCatalogoRepository extends BasepaRepositoryBase<Catalogo, Integer, Integer> implements DomainRepository<Integer, Catalogo>, CatalogoRepository {
 
@@ -38,15 +36,15 @@ public class JpaCatalogoRepository extends BasepaRepositoryBase<Catalogo, Intege
     }
 
     @Override
-    public Iterable<Catalogo> listarCatalogosColaborador(final Numero colaborador) {
-        /*final TypedQuery<Catalogo> query = entityManager().createQuery(
-                "SELECT d FROM Catalogo d WHERE titulo = :TITULO",
+    public Iterable<Catalogo> listarCatalogosColaborador(final Numero num) {
+        final TypedQuery<Catalogo> query = entityManager().createQuery(
+                "SELECT DISTINCT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE (col.id= :NUMERO AND col IN (SELECT aind FROM e.colaboradores aind WHERE aind.id= :NUMERO) AND e IN (SELECT aind FROM CriteriosEspecificacao ce JOIN ce.equipas aind) AND ce IN c.criteriosEspecificaçao)",
                 Catalogo.class);
-        query.setParameter("TITULO", titulo);*/
+        query.setParameter("NUMERO", num);
 
-        Iterable<Catalogo> catalogos=new ArrayList<>();
-
-        return catalogos;
+        return query.getResultList();
     }
-
+//"SELECT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE col.id = :NUMERO AND col IN (SELECT aind FROM Equipa e JOIN e.colaboradores aind) AND e IN (SELECT aind FROM CriteriosEspecificacao ce JOIN ce.equipas aind) AND ce IN c.criteriosEspecificaçao",
+//"SELECT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE col.id = :NUMERO AND col IN (SELECT aind FROM Equipa e JOIN e.colaboradores aind WHERE e IN (SELECT ainda FROM CriteriosEspecificacao ce JOIN ce.equipas ainda WHERE ce IN c.criteriosEspecificaçao))",
+//"SELECT DISTINCT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE col IN (SELECT eq FROM Equipa e JOIN e.colaboradores eq WHERE eq IN (SELECT cri FROM CriteriosEspecificacao ce JOIN ce.equipas cri WHERE cri=c.criteriosEspecificaçao))",
 }

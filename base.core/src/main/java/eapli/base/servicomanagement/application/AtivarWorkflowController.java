@@ -77,6 +77,19 @@ public class AtivarWorkflowController {
     }
 
     public Workflow verificarWorkflow(Servico s){
+        Iterable<TarefaManual> tarefas=workflowRepository.listarTarefasManuais(s.obterId());
+
+        Workflow w=s.obterWorkflow();
+
+        for(TarefaManual t : tarefas){
+            if (t.obterFormulario().estaCompleto() && t.obterFormulario().estaAtivo()) {
+                w.mudarCompleto(true);
+            }
+        }
+        return w;
+    }
+
+    /*public Workflow verificarWorkflow(Servico s){
 
         Workflow w=s.obterWorkflow();
 
@@ -95,6 +108,6 @@ public class AtivarWorkflowController {
             }
         }
         return w;
-    }
+    }*/
 
 }

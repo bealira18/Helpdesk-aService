@@ -4,6 +4,7 @@ import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.colaboradormanagement.domain.Numero;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
@@ -67,7 +68,11 @@ public class ListarCatálogosEServicosController {
         }
     }*/
 
-    public List<Catalogo> listarCatálogos(int numeroColaborador) {
+    public Iterable<Catalogo> listarCatálogos(int numeroColaborador){
+        return catalogoRepository.listarCatalogosColaborador(new Numero(numeroColaborador));
+    }
+
+    /*public List<Catalogo> listarCatálogos(int numeroColaborador) {
 
         List<Catalogo> catalogosDisponiveis = new ArrayList<>();
 
@@ -85,10 +90,10 @@ public class ListarCatálogosEServicosController {
             }
         }
         return catalogosDisponiveis;
-    }
+    }*/
 
     public List<Servico> listarServicosDeCatalogo(int numero){
-        List<Catalogo> catalogosDisponiveis = listarCatálogos(numero);
+        Iterable<Catalogo> catalogosDisponiveis = listarCatálogos(numero);
         List<Servico> servicosDisponiveis = new ArrayList<>();
         for(Catalogo c : catalogosDisponiveis){
             List<Servico> servicos = c.servicos();

@@ -43,8 +43,6 @@ public class JpaAtributoRepository extends BasepaRepositoryBase<Atributo, Intege
         return query.getResultList();
     }
 
-    //AND a.completo=true
-
     @Override
     public Iterable<Atributo> atributosCompletosFormulario(final int idFormulario) {
         final TypedQuery<Atributo> query = entityManager().createQuery(
