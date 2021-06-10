@@ -49,6 +49,10 @@ public class Workflow implements AggregateRoot<Integer>, Serializable {
         this.completo = completo;
     }
 
+    public Servico obterServico(){
+        return this.servico;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;

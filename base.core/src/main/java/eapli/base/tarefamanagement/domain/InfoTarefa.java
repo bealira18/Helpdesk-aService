@@ -87,6 +87,14 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         return tempoDecorrido;
     }
 
+    public Date obterDataFim(){
+        return dataFim;
+    }
+
+    public void mudarEstado(EstadoTarefa estado){
+        this.estadoTarefa = estado;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;
