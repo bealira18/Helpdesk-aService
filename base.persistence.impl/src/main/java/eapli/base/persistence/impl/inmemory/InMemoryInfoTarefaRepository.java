@@ -15,8 +15,4 @@ public class InMemoryInfoTarefaRepository extends InMemoryDomainRepository<InfoT
         throw new UnsupportedOperationException();
     }
 
-    /*@Override
-    public Iterable<InfoTarefa> procurarTarefasManuaisNaoAtribuidas() {
-        throw new UnsupportedOperationException();
-    }*/
 }

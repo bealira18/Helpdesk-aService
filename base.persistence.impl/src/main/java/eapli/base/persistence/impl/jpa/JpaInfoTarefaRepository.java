@@ -21,12 +21,5 @@ public class JpaInfoTarefaRepository extends BasepaRepositoryBase<InfoTarefa, In
         return query.getResultList();
     }
 
-    /*public Iterable<InfoTarefa> procurarTarefasManuaisNaoAtribuidas(){
-        final TypedQuery<InfoTarefa> query = entityManager().createQuery(
-                "SELECT d FROM InfoTarefa d WHERE",
-                InfoTarefa.class);
-
-        return query.getResultList();
-    }*/
 }
 

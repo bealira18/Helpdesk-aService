@@ -54,4 +54,8 @@ public class AtribuirTarefaManualController {
         }
         return tarefasPendentes;
     }
+
+    public Iterable<InfoTarefa> listar(){
+        return tarefaManualRepository.procurarTarefasManuaisNaoAtribuidas();
+    }
 }
