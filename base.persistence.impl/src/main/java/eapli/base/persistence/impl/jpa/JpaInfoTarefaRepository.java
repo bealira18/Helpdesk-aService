@@ -2,7 +2,6 @@ package eapli.base.persistence.impl.jpa;
 
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
-import eapli.framework.domain.repositories.DomainRepository;
 
 import javax.persistence.TypedQuery;
 
@@ -21,5 +20,13 @@ public class JpaInfoTarefaRepository extends BasepaRepositoryBase<InfoTarefa, In
 
         return query.getResultList();
     }
+
+    /*public Iterable<InfoTarefa> procurarTarefasManuaisNaoAtribuidas(){
+        final TypedQuery<InfoTarefa> query = entityManager().createQuery(
+                "SELECT d FROM InfoTarefa d WHERE",
+                InfoTarefa.class);
+
+        return query.getResultList();
+    }*/
 }
 

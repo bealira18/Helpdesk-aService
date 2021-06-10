@@ -5,6 +5,7 @@ import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -16,9 +17,13 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
 
     @Temporal(TemporalType.DATE)
     private Date dataLimite;
-
-    private int tempoDecorridoA;
-    private int tempoDecorridoR;
+    @Temporal(TemporalType.DATE)
+    private Date dataFim;
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+    
+    private EstadoTarefa estadoTarefa;
+    private int tempoDecorrido;
     private int prioridade; //prioridade
 
     @OneToOne
@@ -32,6 +37,8 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
     public InfoTarefa(Date dataLimite,int prioridade){
         this.dataLimite=dataLimite;
         this.prioridade=prioridade;
+        this.estadoTarefa = EstadoTarefa.NAO_INICIADA;
+        this.dataInicio = Calendar.getInstance().getTime();
     }
 
     public Colaborador obterColaborador() {
@@ -66,6 +73,14 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
 
     public Tarefa obterTarefa() {
         return tarefa;
+    }
+
+    public EstadoTarefa obterEstado(){
+        return this.estadoTarefa;
+    }
+
+    public Date obterDataInicio(){
+        return dataInicio;
     }
 
     @Override

@@ -21,8 +21,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Temporal(TemporalType.DATE)
-    private Date dataLimite;
     private EstadoTarefa estadoTarefa;
     private String descricao;
     private int tempoMedioA;

@@ -140,7 +140,7 @@ class TcpChatSrvClient extends Thread {
                     data[6] = bytes[3];
                     return data;
                 }
-                if (t.obterTipo()==true && t.obterEstadoTarefa()== EstadoTarefa.EM_EXECUÇAO){
+                if (t.obterTipo()==true && (t.obterEstadoTarefa()== EstadoTarefa.EM_EXECUÇAO || t.obterEstadoTarefa()==EstadoTarefa.ATRIBUIDA)){
                     int resultado = 2;
                     data[0] = VERSION;
                     data[2] = (Integer.SIZE/8);
@@ -170,7 +170,7 @@ class TcpChatSrvClient extends Thread {
                     data[6] = bytes[3];
                     return data;
                 }
-                if (t.obterTipo() == false && t.obterEstadoTarefa() == EstadoTarefa.EM_EXECUÇAO) {
+                if (t.obterTipo() == false && (t.obterEstadoTarefa() == EstadoTarefa.EM_EXECUÇAO || t.obterEstadoTarefa() == EstadoTarefa.ATRIBUIDA)) {
                     int resultado = 5;
                     data[0] = VERSION;
                     data[2] = (Integer.SIZE / 8);
