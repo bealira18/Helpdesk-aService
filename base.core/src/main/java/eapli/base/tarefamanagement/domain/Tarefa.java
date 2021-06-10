@@ -75,6 +75,14 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return descricao;
     }
 
+    public void atualizarTempoMedioA(int tempoMedioA) {
+        this.tempoMedioA = tempoMedioA;
+    }
+
+    public void atualizarTempoMedioR(int tempoMedioR) {
+        this.tempoMedioR = tempoMedioR;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

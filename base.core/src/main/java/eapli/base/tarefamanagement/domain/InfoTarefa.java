@@ -83,6 +83,10 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         return dataInicio;
     }
 
+    public int obterTempoDecorrido() {
+        return tempoDecorrido;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         return false;

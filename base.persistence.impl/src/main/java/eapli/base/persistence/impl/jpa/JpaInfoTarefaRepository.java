@@ -21,5 +21,22 @@ public class JpaInfoTarefaRepository extends BasepaRepositoryBase<InfoTarefa, In
         return query.getResultList();
     }
 
+    @Override
+    public Iterable<InfoTarefa> tarefasAprovacao(){
+        final TypedQuery<InfoTarefa> query=entityManager().createQuery(
+                "SELECT i FROM InfoTarefa i WHERE i.tarefa.aprovacao=true",
+                InfoTarefa.class);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Iterable<InfoTarefa> tarefasRealizacao(){
+        final TypedQuery<InfoTarefa> query=entityManager().createQuery(
+                "SELECT i FROM InfoTarefa i WHERE i.tarefa.aprovacao=false",
+                InfoTarefa.class);
+
+        return query.getResultList();
+    }
 }
 

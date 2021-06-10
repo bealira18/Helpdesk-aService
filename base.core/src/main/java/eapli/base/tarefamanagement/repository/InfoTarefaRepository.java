@@ -9,4 +9,7 @@ public interface InfoTarefaRepository extends DomainRepository<Integer, InfoTare
 
     Iterable<InfoTarefa> filtarInfoTarefaporIdDoColaborador(int idColaborador);
 
+    Iterable<InfoTarefa> tarefasAprovacao();
+
+    Iterable<InfoTarefa> tarefasRealizacao();
 }

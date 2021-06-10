@@ -15,4 +15,13 @@ public class InMemoryInfoTarefaRepository extends InMemoryDomainRepository<InfoT
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public Iterable<InfoTarefa> tarefasAprovacao(){
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Iterable<InfoTarefa> tarefasRealizacao(){
+        throw new UnsupportedOperationException();
+    }
 }
