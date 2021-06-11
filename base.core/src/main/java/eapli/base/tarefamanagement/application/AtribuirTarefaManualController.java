@@ -1,5 +1,6 @@
 package eapli.base.tarefamanagement.application;
 
+import api.SendEmail;
 import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
@@ -46,11 +47,35 @@ public class AtribuirTarefaManualController {
         }
         colaboradorEscolhido.reivindicarTarefa(t1);
         t1.mudarEstado(EstadoTarefa.ATRIBUIDA);
-        //mandar email a avisar o colaborador
+        enviarEmail(colaboradorEscolhido);
     }
 
     public void atribuirTarefas2(InfoTarefa t2){
-
+        List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t2);
+        Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
+        List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
+        int tempoMedioEscolhido = 0;
+        for(InfoTarefa it : tarefasEscolhido){
+            if (it.obterEstado()!=EstadoTarefa.TERMINADA){
+                tempoMedioEscolhido += it.obterTarefa().obterTempoMedio();
+            }
+        }
+        for(Colaborador c : colaboradoresDisponiveis){
+            int tempoMedio = 0;
+            List<InfoTarefa> tarefas = c.tarefas();
+            for(InfoTarefa it1 : tarefas){
+                if (it1.obterEstado()!=EstadoTarefa.TERMINADA){
+                    tempoMedio += it1.obterTarefa().obterTempoMedio();
+                }
+            }
+            if (tempoMedio < tempoMedioEscolhido){
+                tempoMedioEscolhido = tempoMedio;
+                colaboradorEscolhido = c;
+            }
+        }
+        colaboradorEscolhido.reivindicarTarefa(t2);
+        t2.mudarEstado(EstadoTarefa.ATRIBUIDA);
+        enviarEmail(colaboradorEscolhido);
     }
 
     public void fcfs(int option){
@@ -125,5 +150,11 @@ public class AtribuirTarefaManualController {
             }
         }
         return colaboradoresDisponiveis;
+    }
+
+    public void enviarEmail(Colaborador c){
+        String subject = "Atribuição de tarefas";
+        String body = String.format("Aconselhámos que faça uma consulta as suas tarefas, umas vez que lhe foi atribuída uma nova!");
+        SendEmail.sendEmail(c.obterEmail().obterEmail(), subject, body);
     }
 }
