@@ -5,6 +5,7 @@ import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.CriteriosEspecificacao;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.colaboradormanagement.domain.Colaborador;
+import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
@@ -24,6 +25,7 @@ public class AtribuirTarefaManualController {
     private final TarefaManualRepository tarefaManualRepository = PersistenceContext.repositories().tarefaManual();
     private final WorkflowRepository workflowRepository = PersistenceContext.repositories().workflow();
     private final CatalogoRepository catalogoRepository = PersistenceContext.repositories().catalogo();
+    private final ColaboradorRepository colaboradorRepository=PersistenceContext.repositories().colaborador();
 
     public void atribuirTarefas1(InfoTarefa t1){
         
@@ -157,4 +159,26 @@ public class AtribuirTarefaManualController {
         String body = String.format("Aconselhámos que faça uma consulta as suas tarefas, umas vez que lhe foi atribuída uma nova!");
         SendEmail.sendEmail(c.obterEmail().obterEmail(), subject, body);
     }
+
+    public List<Colaborador> colaboradoresAtravesTarefa(int idTarefa){
+        Workflow w=colaboradorRepository.workflowAtravesTarefa(idTarefa);
+        Servico s=colaboradorRepository.servicoAtravesWorkflow(w);
+        Catalogo c=colaboradorRepository.catalogoAtravesServico(s);
+        CriteriosEspecificacao ce=colaboradorRepository.criteriosEspecificacaoAtravesCatalogo(c);
+        List<Equipa> equipas=colaboradorRepository.equipasAtravesCriteriosEspecificacao(ce);
+
+        List<Colaborador> colaboradoresFinal=new ArrayList<>();
+        List<Colaborador> colaboradores=new ArrayList<>();
+
+        for(Equipa e : equipas){
+            colaboradores=colaboradorRepository.colaboradoresAtravesEquipa(e);
+            if(!colaboradores.isEmpty()) {
+                for (Colaborador col : colaboradores) {
+                    colaboradoresFinal.add(col);
+                }
+            }
+        }
+        return colaboradoresFinal;
+    }
+
 }
