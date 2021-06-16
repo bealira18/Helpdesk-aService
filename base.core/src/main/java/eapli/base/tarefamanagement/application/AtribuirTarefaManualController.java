@@ -28,7 +28,7 @@ public class AtribuirTarefaManualController {
     private final ColaboradorRepository colaboradorRepository=PersistenceContext.repositories().colaborador();
 
     public void atribuirTarefas1(InfoTarefa t1){
-        
+        int idTarefa = t1.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t1);
         Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
         List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
@@ -48,11 +48,14 @@ public class AtribuirTarefaManualController {
             }
         }
         colaboradorEscolhido.reivindicarTarefa(t1);
+        System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1!\n", t1.obterId());
         t1.mudarEstado(EstadoTarefa.ATRIBUIDA);
         enviarEmail(colaboradorEscolhido);
+        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
 
     public void atribuirTarefas2(InfoTarefa t2){
+        int idTarefa = t2.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t2);
         Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
         List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
@@ -76,11 +79,13 @@ public class AtribuirTarefaManualController {
             }
         }
         colaboradorEscolhido.reivindicarTarefa(t2);
+        System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2!\n", t2.obterId());
         t2.mudarEstado(EstadoTarefa.ATRIBUIDA);
         enviarEmail(colaboradorEscolhido);
+        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
 
-    public void fcfs(int option){
+    /*public void fcfs(){
 
         List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
         while(tarefasPorAtribuir.size()!=0) {
@@ -90,14 +95,33 @@ public class AtribuirTarefaManualController {
                     tarefa1 = t;
                 }
             }
-            if(option == 1){
+            if(tarefa1.obterTarefa().obterOption() == 1){
                 atribuirTarefas1(tarefa1);
             }
-            if(option == 2){
+            if(tarefa1.obterTarefa().obterOption() == 2){
                 atribuirTarefas2(tarefa1);
             }
             tarefasPorAtribuir.remove(tarefa1);
         }
+    }*/
+
+    public void fcfs(){
+
+        List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
+        InfoTarefa tarefa1 = tarefasPorAtribuir.get(0);
+        for (InfoTarefa t : tarefasPorAtribuir) {
+            if (t.obterDataInicio().compareTo(tarefa1.obterDataInicio()) < 0) {
+                tarefa1 = t;
+            }
+        }
+        if(tarefa1.obterTarefa().obterOption() == 1){
+            atribuirTarefas1(tarefa1);
+        }
+        if(tarefa1.obterTarefa().obterOption() == 2){
+            atribuirTarefas2(tarefa1);
+        }
+        //tarefasPorAtribuir.remove(tarefa1); Não preciso de remover porque a próxima thread vai fazer novamente o método
+        // listarTarefasPendentes() e como esta já foi atribuída, já não vai aparecer.
     }
 
     /*public List<InfoTarefa> listarTarefasPendentes(){
@@ -160,7 +184,7 @@ public class AtribuirTarefaManualController {
         SendEmail.sendEmail(c.obterEmail().obterEmail(), subject, body);
     }
 
-    public List<Colaborador> colaboradoresAtravesTarefa(int idTarefa){
+    /*public List<Colaborador> colaboradoresAtravesTarefa(int idTarefa){
         Workflow w=colaboradorRepository.workflowAtravesTarefa(idTarefa);
         Servico s=colaboradorRepository.servicoAtravesWorkflow(w);
         Catalogo c=colaboradorRepository.catalogoAtravesServico(s);
@@ -179,6 +203,6 @@ public class AtribuirTarefaManualController {
             }
         }
         return colaboradoresFinal;
-    }
+    }*/
 
 }
