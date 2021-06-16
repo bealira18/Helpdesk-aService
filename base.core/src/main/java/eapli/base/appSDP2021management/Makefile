@@ -1,6 +1,6 @@
 
-P1=ObterInfoTarefasClient
-P2=ObterInfoTarefasServer
+P1=ObterEstadoWorkflowClient
+P2=ObterEstadoWorkflowServer
 
 all: $(P1).class $(P2).class
 

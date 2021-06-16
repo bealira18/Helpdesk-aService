@@ -1,11 +1,15 @@
 package eapli.base.appSDP2021management;
 
+import eapli.base.equipamanagement.application.PesquisarEquipaController;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.domain.EstadoPedido;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
+import eapli.base.tarefamanagement.application.PesquisarTarefaController;
 import eapli.base.tarefamanagement.domain.EstadoTarefa;
+import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
+import org.h2.tools.Server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -42,7 +46,9 @@ public class ObterEstadoWorkflowServer {
 
     private static ServerSocket sock;
 
-    public void run(String args[]) throws Exception {
+
+    public static void main(String args[]) throws Exception {
+        Server server = Server.createTcpServer(args).start();
         int i;
 
         try { sock = new ServerSocket(32507); }
@@ -56,10 +62,9 @@ public class ObterEstadoWorkflowServer {
             Thread cli = new TcpChatSrvClient(s);
             cli.start();
         }
+        //server.stop();
     }
 }
-
-
 
 class TcpChatSrvClient extends Thread {
     private Socket myS;
@@ -68,7 +73,8 @@ class TcpChatSrvClient extends Thread {
     private static final byte ACEITE = 4;
     private static final byte REJEITADO = 5;
 
-    PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
+    //PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
+    private PesquisarTarefaController ptc = new PesquisarTarefaController();
 
     public TcpChatSrvClient(Socket s) { myS=s;}
 
@@ -82,18 +88,33 @@ class TcpChatSrvClient extends Thread {
                 nChars=sIn.read();
                 if(nChars==0) break; // empty line means client wants to exit
                 sIn.read(data,0,nChars);
-                String pedido = new String(data, 3, 4);
+                String pedido = new String(data, 3, 1);
                 int idPedido = Integer.parseInt(pedido);
-                data = estadoSeguinte(idPedido);
+
+                InfoTarefa it = ptc.procurarInfoTarefaPorID(idPedido);
+                int idTarefa = it.obteridTarefa();
+
+                data[0] = VERSION;
+                data[1] = ACEITE;
+                data[2] = (Integer.SIZE/8);
+                byte[] bytes = String.valueOf(idTarefa).getBytes();
+                data[3] = bytes[0];
+                /*data[4] = bytes[1];
+                data[5] = bytes[2];
+                data[6] = bytes[3];*/
+
+                //data = estadoSeguinte(idPedido);
                 ObterEstadoWorkflowServer.sendToAll(nChars,data);
             }
             // the client wants to exit
             ObterEstadoWorkflowServer.remCli(myS);
         }
-        catch(Exception ex) { System.out.println("Error"); }
+        catch(Exception ex) { System.out.println("Error1212"); }
     }
 
-    public byte[] estadoSeguinte(int idPedido){
+
+
+    /*public byte[] estadoSeguinte(int idPedido){
 
         byte[] data = new byte[300];
         Iterable<Pedido> pedidos = pedidoRepository.findAll();
@@ -195,6 +216,6 @@ class TcpChatSrvClient extends Thread {
             return data;
         }
         return null;
-    }
+    }*/
 }
 
