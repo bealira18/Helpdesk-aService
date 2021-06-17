@@ -9,12 +9,12 @@ public class ThreadTarefa extends Thread {
     private AtribuirTarefaManualController atmc = new AtribuirTarefaManualController();
 
     public void run(){
-        try{
-            Thread.sleep(2000);
+        //try{
+            //Thread.sleep(10000);
             atmc.fcfs();
-        } catch (InterruptedException ie){
-            System.out.println("Erro Thread Tarefa");
-        }
+        //} catch (InterruptedException ie){
+            //System.out.println("Erro Thread Tarefa");
+        //}
     }
 
     /*public void run(){

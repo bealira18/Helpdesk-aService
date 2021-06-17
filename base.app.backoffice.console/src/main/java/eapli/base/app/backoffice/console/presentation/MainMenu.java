@@ -45,6 +45,7 @@ import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquip
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.appSDP2021management.HTMLOpen;
+import eapli.base.tarefamanagement.domain.ThreadPrincipal;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -189,6 +190,10 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER)) {
+
+            ThreadPrincipal tp = new ThreadPrincipal();
+            tp.start();
+
             final Menu usersMenu = buildUsersMenu();
             mainMenu.addSubMenu(USERS_OPTION, usersMenu);
             final Menu settingsMenu = buildAdminSettingsMenu();

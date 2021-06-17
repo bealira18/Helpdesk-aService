@@ -20,8 +20,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private EstadoTarefa estadoTarefa;
     private String descricao;
     private int tempoMedioA;
     private int tempoMedioR;
@@ -35,7 +33,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     public Tarefa(String descricao,boolean aprovacao) {
         this.descricao = descricao;
-        this.estadoTarefa = EstadoTarefa.NAO_INICIADA;
         this.aprovacao = aprovacao;
     }
 
@@ -67,10 +64,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     public int obterAprovado(){
         return aprovado;
-    }
-
-    public EstadoTarefa obterEstadoTarefa(){
-        return estadoTarefa;
     }
 
     public String obterDescricao() {

@@ -80,7 +80,6 @@ public class BaseBootstrapper implements Action {
         new AssociarServicoACatalogoBootstrapper(),
 
 
-        new AddPedidoBootstrapper(),
         //new TarefaBootstrapper(),  --> não é preciso este bootstrapper uma vez que temos os bootstrappers de tarefa manual e automatica.
         new TarefaManualBootstrapper(),
         new TarefaAutomaticaBootstrapper(),
@@ -88,8 +87,9 @@ public class BaseBootstrapper implements Action {
         new FormularioBootstrapper(),
         new AddRascunhoBootstrapper(),
         new AddWorkflowBootstrapper(),
+        new AddPedidoBootstrapper(),
         new AddHistoricoBootstrapper(),
-        /*new ReivindicarTarefaBootstrapper()*/};
+        new ReivindicarTarefaBootstrapper()};
 
         registerPowerUser();
         authenticateForBootstrapping();

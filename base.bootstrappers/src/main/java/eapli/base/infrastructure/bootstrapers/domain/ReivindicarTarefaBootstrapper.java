@@ -11,7 +11,9 @@ public class ReivindicarTarefaBootstrapper implements Action {
     public boolean execute() {
 
         reivindicarTarefa.reivindicarTarefaPendente(1, 8);
-        reivindicarTarefa.reivindicarTarefaPendente(2, 36);
+        reivindicarTarefa.reivindicarTarefaPendente(3, 5);
+        reivindicarTarefa.reivindicarTarefaPendente(5, 36);
+
         return true;
     }
 }

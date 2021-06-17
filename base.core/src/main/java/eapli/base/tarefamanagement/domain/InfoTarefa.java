@@ -91,7 +91,7 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         return dataFim;
     }
 
-    public void mudarEstado(EstadoTarefa estado){
+    public void mudarEstado(EstadoTarefa estado) {
         this.estadoTarefa = estado;
     }
 

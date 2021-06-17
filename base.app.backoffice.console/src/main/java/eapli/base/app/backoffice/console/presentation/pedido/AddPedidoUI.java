@@ -110,7 +110,7 @@ public class AddPedidoUI extends AbstractUI {
 
         System.out.println("Pedido feito com sucesso!");
 
-        criarTarefaController.novaTarefa(s,pedido);
+        criarTarefaController.novaTarefa(s.obterCod(), pedido.obterId());
 
         return true;
     }

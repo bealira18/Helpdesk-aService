@@ -14,6 +14,7 @@ import eapli.base.servicomanagement.repository.WorkflowRepository;
 import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
+import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 
 import java.util.ArrayList;
@@ -26,18 +27,63 @@ public class AtribuirTarefaManualController {
     private final WorkflowRepository workflowRepository = PersistenceContext.repositories().workflow();
     private final CatalogoRepository catalogoRepository = PersistenceContext.repositories().catalogo();
     private final ColaboradorRepository colaboradorRepository=PersistenceContext.repositories().colaborador();
+    private final InfoTarefaRepository infoTarefaRepository = PersistenceContext.repositories().infoTarefa();
 
     public void atribuirTarefas1(InfoTarefa t1){
-        int idTarefa = t1.obteridTarefa();
+        //int idTarefa = t1.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t1);
-        Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
+        Date dataUltimaTarefaDoColaborador = null;
+        Colaborador colaboradorEscolhido = null;
+        for (Colaborador c : colaboradoresDisponiveis){
+            List<InfoTarefa> its = c.tarefas();
+            for( InfoTarefa it : its){
+                if(it.obterDataFim() != null){
+                    dataUltimaTarefaDoColaborador = it.obterDataFim();
+                    colaboradorEscolhido = c;
+                    break;
+                }
+            }
+            if (dataUltimaTarefaDoColaborador != null && colaboradorEscolhido != null){
+                break;
+            }
+        }
+        Date dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
+        for(Colaborador c : colaboradoresDisponiveis){
+            if(c!=colaboradoresDisponiveis.get(0)){
+                List<InfoTarefa> ts = c.tarefas();
+                for( InfoTarefa it : ts) {
+                    if (it.obterDataFim() != null) {
+                        dataUltimaTarefaDoColaborador = it.obterDataFim();
+                    }
+                }
+            }
+            List<InfoTarefa> tarefasColaborador = c.tarefas();
+            for (InfoTarefa it : tarefasColaborador){
+                if(it.obterDataFim()!= null) {
+                    if (it.obterDataFim().compareTo(dataUltimaTarefaDoColaborador) > 0) {
+                        dataUltimaTarefaDoColaborador = it.obterDataFim();
+                    }
+                }
+            }
+            if(colaboradoresDisponiveis.get(0)==c){
+                dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
+                colaboradorEscolhido = c;
+            }
+            if(dataUltimaTarefaDoColaborador.compareTo(dataUltimaTarefaMaisAntiga) < 0){
+                dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
+                colaboradorEscolhido = c;
+            }
+        }
+        /*Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
         List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
         Date dataUltimaTarefa = tarefasEscolhido.get(0).obterDataFim();
+        Date dataUltimaTarefaMaisAntiga = dataUltimaTarefa;
         for(InfoTarefa it : tarefasEscolhido){
             if (it.obterDataFim().compareTo(dataUltimaTarefa)>0){
                 dataUltimaTarefa = it.obterDataFim();
             }
         }
+        dataUltimaTarefaMaisAntiga = dataUltimaTarefa;
         for(Colaborador c : colaboradoresDisponiveis){
             List<InfoTarefa> tarefas = c.tarefas();
             for(InfoTarefa it1 : tarefas){
@@ -46,16 +92,19 @@ public class AtribuirTarefaManualController {
                     colaboradorEscolhido = c;
                 }
             }
-        }
+        }*/
         colaboradorEscolhido.reivindicarTarefa(t1);
+        t1.associarColaborador(colaboradorEscolhido);
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1!\n", t1.obterId());
         t1.mudarEstado(EstadoTarefa.ATRIBUIDA);
         enviarEmail(colaboradorEscolhido);
         System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
+        colaboradorRepository.save(colaboradorEscolhido);
+        infoTarefaRepository.save(t1);
     }
 
     public void atribuirTarefas2(InfoTarefa t2){
-        int idTarefa = t2.obteridTarefa();
+        //int idTarefa = t2.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t2);
         Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
         List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
@@ -83,6 +132,8 @@ public class AtribuirTarefaManualController {
         t2.mudarEstado(EstadoTarefa.ATRIBUIDA);
         enviarEmail(colaboradorEscolhido);
         System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
+        colaboradorRepository.save(colaboradorEscolhido);
+        infoTarefaRepository.save(t2);
     }
 
     /*public void fcfs(){

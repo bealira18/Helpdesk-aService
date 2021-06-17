@@ -3,7 +3,9 @@ package eapli.base.tarefamanagement.application;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.pedidomanagement.domain.Urgencia;
+import eapli.base.pedidomanagement.repository.PedidoRepository;
 import eapli.base.servicomanagement.domain.Servico;
+import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
@@ -16,6 +18,8 @@ public class CriarTarefaController {
 
     private final TarefaRepository tarefaRepository = PersistenceContext.repositories().tarefa();
     private final InfoTarefaRepository infoTarefaRepository=PersistenceContext.repositories().infoTarefa();
+    private final ServicoRepository servicoRepository = PersistenceContext.repositories().servico();
+    private final PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
 
     public Tarefa criarTarefa(String descricao,boolean aprovacao) {
 
@@ -25,8 +29,9 @@ public class CriarTarefaController {
 
     }
 
-    public void novaTarefa(Servico s, Pedido p){
-
+    public void novaTarefa(String codServico, int idPedido){
+        Pedido p = pedidoRepository.ofIdentity(idPedido).get();
+        Servico s = servicoRepository.procurarPorCod(codServico);
         List<Tarefa> tarefas=s.obterWorkflow().obterTarefas();
         int prioridade=-1;
 
