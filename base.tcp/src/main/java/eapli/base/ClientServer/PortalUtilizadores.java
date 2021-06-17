@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 
-public class ObterEstadoWorkflowClient{
+public class PortalUtilizadores{
 
     private static final byte VERSION = 0;
     private static final byte PEDIDO = 3;

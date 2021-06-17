@@ -11,7 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 
-public class ObterEstadoWorkflowServer {
+public class MotorFluxoAtividades {
 
     private static HashMap<Socket, DataOutputStream> cliList = new HashMap<>();
 
@@ -95,10 +95,10 @@ class TcpChatSrvClient extends Thread {
                 data[6] = bytes[3];*/
 
                 //data = estadoSeguinte(idPedido);
-                ObterEstadoWorkflowServer.sendToAll(nChars,data);
+                MotorFluxoAtividades.sendToAll(nChars,data);
             }
             // the client wants to exit
-            ObterEstadoWorkflowServer.remCli(myS);
+            MotorFluxoAtividades.remCli(myS);
         }
         catch(Exception ex) { System.out.println("Error"); }
     }
