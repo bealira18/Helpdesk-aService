@@ -9,4 +9,5 @@ public interface CatalogoRepository extends DomainRepository<Integer, Catalogo> 
     Iterable<Catalogo> listarCatalogos();
     Catalogo procurarPorTitulo(Titulo titulo);
     Iterable<Catalogo> listarCatalogosColaborador(Numero numero);
+    Catalogo procurarCatalogoPorIdServico(int idServico);
 }

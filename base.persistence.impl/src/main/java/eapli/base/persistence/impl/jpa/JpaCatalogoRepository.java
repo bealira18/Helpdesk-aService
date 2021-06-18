@@ -4,6 +4,7 @@ import eapli.base.catalogomanagement.domain.Catalogo;
 import eapli.base.catalogomanagement.domain.Titulo;
 import eapli.base.catalogomanagement.repository.CatalogoRepository;
 import eapli.base.colaboradormanagement.domain.Numero;
+import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.framework.domain.repositories.DomainRepository;
 
 import javax.persistence.NoResultException;
@@ -43,6 +44,16 @@ public class JpaCatalogoRepository extends BasepaRepositoryBase<Catalogo, Intege
         query.setParameter("NUMERO", num);
 
         return query.getResultList();
+    }
+
+    @Override
+    public Catalogo procurarCatalogoPorIdServico(int idServico){
+        final TypedQuery<Catalogo> query = entityManager().createQuery(
+                "SELECT p FROM Catalogo p, Workflow w WHERE w.id=:IDWORKFLOW AND w IN(SELECT tar FROM p.servicos tar)",
+                Catalogo.class);
+        query.setParameter("IDWORKFLOW", idServico);
+
+        return query.getSingleResult();
     }
 //"SELECT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE col.id = :NUMERO AND col IN (SELECT aind FROM Equipa e JOIN e.colaboradores aind) AND e IN (SELECT aind FROM CriteriosEspecificacao ce JOIN ce.equipas aind) AND ce IN c.criteriosEspecificaçao",
 //"SELECT c FROM Catalogo c, Colaborador col, Equipa e, CriteriosEspecificacao ce WHERE col.id = :NUMERO AND col IN (SELECT aind FROM Equipa e JOIN e.colaboradores aind WHERE e IN (SELECT ainda FROM CriteriosEspecificacao ce JOIN ce.equipas ainda WHERE ce IN c.criteriosEspecificaçao))",

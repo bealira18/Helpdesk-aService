@@ -8,4 +8,6 @@ public interface PedidoRepository extends DomainRepository<Integer, Pedido> {
 
     Iterable<Pedido> pedidosFinalizados(int numColaborador);
 
+    Pedido procurarPedidoPorIdInfoTarefa(int idInfoTarefa);
+
 }
