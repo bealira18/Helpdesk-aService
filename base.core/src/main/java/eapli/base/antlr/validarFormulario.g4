@@ -4,7 +4,7 @@ prog: stat+;
 
 stat: expr NEWLINE # printExpr
 | condicao NEWLINE # printCondicao
-| ID '-' expr NEWLINE # assign
+| ID '=' expr NEWLINE # assign
 | NEWLINE # blank
 ;
 
@@ -13,9 +13,8 @@ expr: expr op=('*'|'/') expr # MulDiv
 | ',' expr # MaisQualquerCoisa
 | INT CAMPOS OBRIGATORIO # CampoObrigatorio
 | INT CAMPOS VAZIA # CampoNaoPreencher
-| INT CAMPOS TAMANHO '-' INT # DefinirTamanho
+| INT CAMPOS TAMANHO '=' INT # DefinirTamanho
 | QUANTIDADE # Quantidade
-| EXPRESSAOR # ExpressaoRegular
 | INT CAMPOS EQUALS equival # Equals
 | INT # int
 | ID # id
@@ -47,7 +46,6 @@ SE : 'Se' ;
 OBRIGATORIO : 'Obrigatorio' ;
 VAZIO : 'Vazio' ;
 TAMANHO : 'Tamanho' ;
-EXPRESSAOR : 'ExpressaoRegular';
 QUANTIDADE : 'Quantidade:'INT ;
 EQUALS : 'Equivale:' ;
 WS : [ \t]+ -> skip;
