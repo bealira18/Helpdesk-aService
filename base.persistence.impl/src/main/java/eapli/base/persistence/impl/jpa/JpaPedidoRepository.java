@@ -8,7 +8,9 @@ import javax.persistence.TypedQuery;
 
 public class JpaPedidoRepository extends BasepaRepositoryBase<Pedido, Integer, Integer> implements DomainRepository<Integer, Pedido>, PedidoRepository {
 
-    public JpaPedidoRepository(){ super("id");}
+    public JpaPedidoRepository() {
+        super("id");
+    }
 
     @Override
     public Iterable<Pedido> pedidosFinalizados(int numColaborador) {
@@ -18,6 +20,16 @@ public class JpaPedidoRepository extends BasepaRepositoryBase<Pedido, Integer, I
         query.setParameter("NUMEROS", numColaborador);
 
         return query.getResultList();
+    }
+
+    @Override
+    public Pedido procurarPedidoPorIdInfoTarefa(int idInfoTarefa) {
+        final TypedQuery<Pedido> query = entityManager().createQuery(
+                "SELECT p FROM Pedido p, InfoTarefa it WHERE it.id=:IDINFOTAREFA AND it IN(SELECT tar FROM p.tarefas tar)",
+                Pedido.class);
+        query.setParameter("IDINFOTAREFA", idInfoTarefa);
+
+        return query.getSingleResult();
     }
 
 }

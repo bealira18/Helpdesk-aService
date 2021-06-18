@@ -27,4 +27,9 @@ public class InMemoryCatalogoRepository extends InMemoryDomainRepository<Catalog
     public Iterable<Catalogo> listarCatalogosColaborador(final Numero numero) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public Catalogo procurarCatalogoPorIdServico(final int idServico) {
+        throw new UnsupportedOperationException();
+    }
 }

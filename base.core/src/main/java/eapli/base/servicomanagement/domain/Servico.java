@@ -17,7 +17,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique=true)
+    @Column(unique = true)
     private String cod;
     private String titulo;
     private String descricaoBreve;
@@ -46,9 +46,9 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     public Servico() {
     }
 
-    public Servico(String cod,String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
+    public Servico(String cod, String titulo, String descricaoBreve, String descricaoCompleta, String palavrasChave, String icone) {
         Preconditions.nonNull(titulo);
-        this.cod=cod;
+        this.cod = cod;
         this.titulo = titulo;
         this.descricaoBreve = descricaoBreve;
         this.descricaoCompleta = descricaoCompleta;
@@ -78,23 +78,23 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
         return this.titulo;
     }
 
-    public String obterDescricaoBreve(){
+    public String obterDescricaoBreve() {
         return descricaoBreve;
     }
 
-    public String obterDescricaoCompleta(){
+    public String obterDescricaoCompleta() {
         return descricaoCompleta;
     }
 
-    public String obterPalavrasChave(){
+    public String obterPalavrasChave() {
         return palavrasChave;
     }
 
-    public Icone obterIcone(){
+    public Icone obterIcone() {
         return icone;
     }
 
-    public boolean obterApresentar(){
+    public boolean obterApresentar() {
         return apresentar;
     }
 
@@ -133,25 +133,25 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     public void mudarIcone(Icone icone) {
         this.icone = icone;
     }
-    
+
     public void mudarEstado(boolean ativo) {
         this.ativo = ativo;
     }
 
-    public void mudarCompleto(boolean completo){
+    public void mudarCompleto(boolean completo) {
         this.completo = completo;
     }
 
-    public void mudarNivelCriticidade(NivelCriticidade nc){
+    public void mudarNivelCriticidade(NivelCriticidade nc) {
         this.nivelCriticidade = nc;
     }
 
-    public void associarFormulario(Formulario f){
-        this.formulario=f;
+    public void associarFormulario(Formulario f) {
+        this.formulario = f;
     }
 
-    public void associarWorflow(Workflow w){
-        this.workflow=w;
+    public void associarWorflow(Workflow w) {
+        this.workflow = w;
     }
 
     public int compareTo(String cod) {
@@ -161,7 +161,7 @@ public class Servico implements AggregateRoot<Integer>, Serializable {
     @Override
     public String toString() {
         return "Servico:\n" +
-                "codigo= " + cod+
+                "codigo= " + cod +
                 "\ntitulo= " + titulo +
                 "\ndescricaoBreve= " + descricaoBreve +
                 "\npalavrasChave= " + palavrasChave;

@@ -13,4 +13,8 @@ public class InMemoryPedidoRepository extends InMemoryDomainRepository<Pedido, I
 
     @Override
     public Iterable<Pedido> pedidosFinalizados(final int numColaborador){throw new UnsupportedOperationException();}
+
+    @Override
+    public Pedido procurarPedidoPorIdInfoTarefa(int idInfoTarefa){throw new UnsupportedOperationException();}
+
 }
