@@ -5,6 +5,7 @@ import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.domain.RespostasFormulario;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
+import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
@@ -50,7 +51,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
 
     @OneToMany
     @JoinColumn(name="PedidoId")
-    private List<Tarefa> tarefas = new ArrayList<>();
+    private List<InfoTarefa> tarefas = new ArrayList<>();
 
     public Pedido(){}
 
@@ -96,7 +97,7 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return id;
     }
 
-    public List<Tarefa> obterListaTarefas(){
+    public List<InfoTarefa> obterListaTarefas(){
         return tarefas;
     }
 
