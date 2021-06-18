@@ -5,6 +5,7 @@ import eapli.base.pedidomanagement.domain.EstadoPedido;
 import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.pedidomanagement.repository.PedidoRepository;
 import eapli.base.tarefamanagement.application.PesquisarTarefaController;
+import eapli.base.tarefamanagement.application.TarefasTCPController;
 import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import org.h2.tools.Server;
@@ -67,7 +68,7 @@ class TcpChatSrvClient extends Thread {
     private static final byte VERSION = 0;
     private static final byte NUMERO_TAREFAS_PENDENTES = 3;
     private static final byte NUMERO_TAREFAS_DEPOIS_PRAZO = 4;
-    private static final byte NUMERO_TAREFAS_A_UM_DIA_DO_PRAZO = 5;
+    private static final byte NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA = 5;
     private static final byte LISTA_TAREFAS_URGENCIA_CRITICIDADE = 6;
     private static final byte ATUALIZAR_PEDIDO = 7;
     private static final byte ACEITE = 8;
@@ -75,6 +76,7 @@ class TcpChatSrvClient extends Thread {
 
     PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
     private PesquisarTarefaController ptc = new PesquisarTarefaController();
+    private TarefasTCPController ttc = new TarefasTCPController();
 
     public TcpChatSrvClient(Socket s) { myS=s;}
 
@@ -88,8 +90,38 @@ class TcpChatSrvClient extends Thread {
                 nChars=sIn.read();
                 if(nChars==0) break; // empty line means client wants to exit
                 sIn.read(data,0,nChars);
-                String pedido = new String(data, 3, 1);
-                int idPedido = Integer.parseInt(pedido);
+                String opcaoS = new String(data, 1, 1);
+                int opcao = Integer.parseInt(opcaoS);
+                if(opcao == NUMERO_TAREFAS_PENDENTES){
+                    String colaboradorS = new String(data, 3, 1);
+                    int colaborador = Integer.parseInt(colaboradorS);
+                    data = numeroTarefasPendentesColaborador(colaborador);
+                    nChars = data[2];
+                }
+                if(opcao == NUMERO_TAREFAS_DEPOIS_PRAZO){
+                    String colaboradorS = new String(data, 3, 1);
+                    int colaborador = Integer.parseInt(colaboradorS);
+                    data = numeroTarefasDepoisPrazo(colaborador);
+                    nChars = data[2];
+                }
+                if(opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA){
+                    String colaboradorS = new String(data, 3, 1);
+                    int colaborador = Integer.parseInt(colaboradorS);
+                    data = numeroTarefasEmMenosDeUmDia(colaborador);
+                    nChars = data[2];
+                }
+                if(opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE){
+                    String colaboradorS = new String(data, 3, 1);
+                    int colaborador = Integer.parseInt(colaboradorS);
+                    data = listaTarefasUrgenciaCriticidade(colaborador);
+                    nChars = data[2];
+                }
+                if(opcao == ATUALIZAR_PEDIDO){
+                    String idPedidoS = new String(data, 3, 1);
+                    int idPedido = Integer.parseInt(idPedidoS);
+                    data = atualizarEstadoPedido(idPedido);
+                    nChars = data[2];
+                }
 
                 /*InfoTarefa it = ptc.procurarInfoTarefaPorID(idPedido);
                 int idTarefa = it.obteridTarefa();
@@ -103,7 +135,6 @@ class TcpChatSrvClient extends Thread {
                 data[5] = bytes[2];
                 data[6] = bytes[3];*/
 
-                data = atualizarEstadoPedido(idPedido);
                 MotorFluxoAtividades.sendToAll(nChars,data);
             }
             // the client wants to exit
@@ -212,5 +243,65 @@ class TcpChatSrvClient extends Thread {
             return data;
         }
         return null;
+    }
+
+    public byte[] numeroTarefasPendentesColaborador(int numeroColaborador){
+        byte[] data = new byte[300];
+        int numeroTarefas = ttc.numTarefasPendentesDoColab(numeroColaborador);
+        data[0] = VERSION;
+        data[1] = ACEITE;
+        data[2] = (Byte.SIZE/8);
+        byte[] numero = String.valueOf(numeroTarefas).getBytes();
+        data[3] = numero[0];
+        return data;
+    }
+
+    public byte[] numeroTarefasDepoisPrazo(int numeroColaborador){
+        byte[] data = new byte[300];
+        int numeroTarefas = ttc.numTarefasDpsPrazo(numeroColaborador);
+        data[0] = VERSION;
+        data[1] = ACEITE;
+        data[2] = (Byte.SIZE/8);
+        byte[] numero = String.valueOf(numeroTarefas).getBytes();
+        data[3] = numero[0];
+        return data;
+    }
+
+    public byte[] numeroTarefasEmMenosDeUmDia(int numeroColaborador){
+        byte[] data = new byte[300];
+        int numeroTarefas = ttc.numTarefasTerminamEmMenos1Dia(numeroColaborador);
+        data[0] = VERSION;
+        data[1] = ACEITE;
+        data[2] = (Byte.SIZE/8);
+        byte[] numero = String.valueOf(numeroTarefas).getBytes();
+        data[3] = numero[0];
+        return data;
+    }
+
+    public byte[] listaTarefasUrgenciaCriticidade(int numeroColaborador){
+        byte[] data = new byte[300];
+        String finalString = "";
+        List<InfoTarefa> tarefas = ttc.listaTarefasUrgenciaCriticidade(numeroColaborador);
+        for (int i = 0; i < tarefas.size(); i++){
+            if(i != (tarefas.size()-1)) {
+                int id = tarefas.get(i).obterId();
+                String idString = String.valueOf(id);
+                idString += ",";
+                finalString += idString;
+            } else {
+                int id = tarefas.get(i).obterId();
+                String idString = String.valueOf(id);
+                finalString += idString;
+            }
+        }
+        int tamanho = finalString.length();
+        data[0] = VERSION;
+        data[1] = ACEITE;
+        data[2] = (byte) tamanho;
+        byte[] string = String.valueOf(finalString).getBytes();
+        for(int i=3, j=0; j < tamanho; i++, j++){
+            data[i] = string[j];
+        }
+        return data;
     }
 }
