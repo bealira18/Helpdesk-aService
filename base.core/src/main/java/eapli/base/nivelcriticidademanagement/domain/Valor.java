@@ -13,7 +13,7 @@ public class Valor implements ValueObject, Serializable, Comparable<Valor> {
 
     private int valor;
 
-    public Valor(){
+    public Valor(){ //de 1 a 5
     }
 
     public Valor(int valor) {
