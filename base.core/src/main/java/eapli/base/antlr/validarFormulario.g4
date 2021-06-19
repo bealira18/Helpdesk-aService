@@ -26,7 +26,7 @@ equival:
 | ID
 ;
 
-condicao: SE INT CAMPOS '-' ID expr+ # CondicaoValidacao
+condicao: SE INT CAMPOS '=' ID expr+ # CondicaoValidacao
 | SE INT CAMPOS VAZIO expr+ # CondicaoValidacao
 | SE INT CAMPOS OBRIGATORIO expr+ # CondicaoValidacao
 ;

@@ -1,5 +1,5 @@
 // Generated from C:/Users/Bea/OneDrive/Documentos/lei20_21_s4_2dc_05/base.core/src/main/java/eapli/base/antlr\validarFormulario.g4 by ANTLR 4.9.1
-package eapli.base.antlr.eapli.base.antlr;
+package eapli.base.antlr.validacaoFormulario;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
