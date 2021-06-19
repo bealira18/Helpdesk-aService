@@ -21,7 +21,7 @@ public class PortalUtilizadores{
     static InetAddress serverIP;
     static Socket sock;
 
-    public static void main(String args[]) throws Exception {
+    public void runMain() throws Exception {
         byte[] data = new byte[300];
         int numeroColaborador = 8;
 
