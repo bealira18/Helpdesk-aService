@@ -1,17 +1,27 @@
 package eapli.base.ClientServer;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class HTTPServerAjax {
-    static private final String BASE_FOLDER="www";
+
+    static private final String BASE_FOLDER = "www";
     static private ServerSocket sock;
+    static Socket socket;
+    static InetAddress serverIP;
+    private static int accessesCounter;
+    private static final byte VERSION = 0;
 
     public static void main(String args[]) throws Exception {
         Socket cliSock;
+        byte[] data = new byte[300];
 
-        if(args.length!=1) {
+        int numeroColaborador = 8;
+
+        /*if(args.length!=1) {
             System.out.println("Local port number required at the command line.");
             System.exit(1);
         }
@@ -20,48 +30,41 @@ public class HTTPServerAjax {
         for(int i=0;i<candidatesNumber; i++) {
             candidateName[i] = "Candidate " + i;
             candidateVotes[i] = 0;
-        }
+        }*/
 
-        try { sock = new ServerSocket(Integer.parseInt(args[0])); }
-        catch(IOException ex) {
-            System.out.println("Server failed to open local port " + args[0]);
+       /* try {
+            sock = new ServerSocket(8080);
+        } catch (IOException ex) {
+            System.out.println("Local port number not available: 8080");
+            System.exit(1);
+        }*/
+
+        try {
+            serverIP = InetAddress.getByName("localhost");
+        } catch (UnknownHostException ex) {
+            System.out.println("Invalid server specified as localhost.");
             System.exit(1);
         }
-        while(true) {
-            cliSock=sock.accept();
-            HTTPAjaxRequest req=new HTTPAjaxRequest(cliSock, BASE_FOLDER);
+
+        try {
+            socket = new Socket(serverIP, 32507);
+        } catch (Exception ex) {
+            System.out.println("Failed to connect.");
+            System.exit(1);
+        }
+
+        PortalUtilizadores pu = new PortalUtilizadores();
+        pu.runMain();
+/*
+        while (true) {
+            cliSock = sock.accept();
+            HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
             req.start();
             incAccessesCounter();
-        }
+        }*/
     }
 
-
-    // DATA ACCESSED BY THREADS - LOCKING REQUIRED
-
-    private static final int candidatesNumber = 4;
-    private static final String[] candidateName = new String[candidatesNumber];
-    private static final int[] candidateVotes = new int[candidatesNumber];
-    private static int accessesCounter;
-
-    private static synchronized void incAccessesCounter() { accessesCounter++; }
-
-    public static synchronized String getVotesStandingInHTML() {
-        String textHtml = "<hr><ul>";
-        for(int i=0; i<candidatesNumber; i++) {
-            textHtml = textHtml + "<li><button type=button onclick=voteFor(" + (i+1) +
-                    ")>Vote for " + candidateName[i] + "</button> " +
-                    " - " + candidateVotes[i] + " votes </li>";
-        }
-        textHtml = textHtml + "</ul><hr><p>HTTP server accesses counter: " + accessesCounter + "</p><hr>";
-        return textHtml;
+    private static synchronized void incAccessesCounter(){
+        accessesCounter++;
     }
-
-    public static synchronized void castVote(String i) {
-        int cN;
-        try { cN=Integer.parseInt(i); }
-        catch(NumberFormatException ne) { return; }
-        cN--;
-        if(cN >= 0 && cN < candidatesNumber) candidateVotes[cN]++;
-    }
-
 }

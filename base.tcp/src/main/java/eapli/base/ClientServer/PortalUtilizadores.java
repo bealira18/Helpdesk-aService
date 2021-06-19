@@ -21,18 +21,18 @@ public class PortalUtilizadores{
     static InetAddress serverIP;
     static Socket sock;
 
-    public static void main(String args[]) throws Exception {
+    public void runMain() throws Exception {
         byte[] data = new byte[300];
-        int numeroColaborador = 8;
+        int numeroColaborador = 5;
 
         /*if(args.length!=1) {
             System.out.println(
                     "Server IPv4/IPv6 address or DNS name is required as argument");
             System.exit(1); }*/
 
-        try { serverIP = InetAddress.getByName("192.168.1.71"); }
+        try { serverIP = InetAddress.getByName("192.168.1.93"); }
         catch(UnknownHostException ex) {
-            System.out.println("Invalid server: " + "192.168.1.71");
+            System.out.println("Invalid server: " + "192.168.1.93");
             System.exit(1); }
 
         try {
@@ -48,11 +48,11 @@ public class PortalUtilizadores{
         System.out.println("Connected to server");
 
         // start a thread to read incoming messages from the server
-        Thread serverConn = new Thread(new TcpChatCliConn(sock));
+        Thread serverConn = new Thread(new eapli.base.ClientServer.TcpChatCliConn(sock));
         serverConn.start();
 
 
-        for(int i = 3; i < 7; i++) { // read messages from the console and send them to the server
+        for(int i = 6; i < 7; i++) { // read messages from the console and send them to the server
 
             //falta aqui o algoritmo para ir buscar o numero do colaborador que fez log in.
 
@@ -72,11 +72,9 @@ public class PortalUtilizadores{
             data[0] = VERSION;
             data[1] = (byte) i;
             data[2] = (Byte.SIZE/8);
-            byte[] bytes = String.valueOf(numeroColaborador).getBytes();
-            data[3] = bytes[0];
-
-            sOut.write(data[2]);
-            sOut.write(data,0, data[2]);
+            data[3] = (byte) numeroColaborador;
+            sOut.write(data.length);
+            sOut.write(data,0, data.length);
         }
 
         serverConn.join();
@@ -100,32 +98,26 @@ class TcpChatCliConn implements Runnable{
     public TcpChatCliConn(Socket tcp_s) { s=tcp_s;}
 
     public void run() {
-        int data_length;
         byte[] data = new byte[300];
-        String frase;
 
         try {
             sIn = new DataInputStream(s.getInputStream());
-            for(int i = 0; i < 4; i++) {
-                data_length=sIn.read();
+            for(int i = 0; i < 1; i++) {
+                int data_length = sIn.read();
                 if(data_length==0) break;
                 sIn.read(data,0,data_length);
-                String opcaoS = new String(data, 1, 1);
-                int opcao = Integer.parseInt(opcaoS);
+                int opcao = data[1];
 
                 if(opcao == NUMERO_TAREFAS_PENDENTES){
-                    String numeroTarefasS = new String(data, 3, 1);
-                    int numeroTarefas = Integer.parseInt(numeroTarefasS);
+                    int numeroTarefas = data[3];
                     System.out.printf("O número de tarefas pendentes é %d.\n", numeroTarefas);
                 }
                 if(opcao == NUMERO_TAREFAS_DEPOIS_PRAZO){
-                    String numeroTarefasS = new String(data,3 , 1);
-                    int numeroTarefas = Integer.parseInt(numeroTarefasS);
+                    int numeroTarefas = data[3];
                     System.out.printf("O número de tarefas depois do prazo de entrega é %d.\n", numeroTarefas);
                 }
                 if(opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA){
-                    String numeroTarefasS = new String(data, 3, 1);
-                    int numeroTarefas = Integer.parseInt(numeroTarefasS);
+                    int numeroTarefas = data[3];
                     System.out.printf("O número de tarefas cujo prazo acaba em menos de um dia é %d\n", numeroTarefas);
                 }
                 if(opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE){

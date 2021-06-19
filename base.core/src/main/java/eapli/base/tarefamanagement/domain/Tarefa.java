@@ -21,12 +21,9 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String descricao;
-    private int tempoMedioA;
-    private int tempoMedioR;
     private int tempoMedio;
     private boolean aprovacao;//true se a tarefa for de aprovaçao, false se for de realizaçao
     private int aprovado = 0; //se for igual 1 foi aprovado, se for igual a -1 rejeitado
-    private int optionAtribuicao = 1;
 
     public Tarefa() {
     }
@@ -46,14 +43,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return null;
     }
 
-    public void atualizarTempoMedioAprovacao(int tempo) {
-        this.tempoMedioA = tempo;
-    }
-
-    public void atualizarTempoMedioRealizacao(int tempo) {
-        this.tempoMedioR = tempo;
-    }
-
     public int obterId() {
         return this.id;
     }
@@ -70,24 +59,12 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
         return descricao;
     }
 
-    public void atualizarTempoMedioA(int tempoMedioA) {
-        this.tempoMedioA = tempoMedioA;
-    }
-
-    public void atualizarTempoMedioR(int tempoMedioR) {
-        this.tempoMedioR = tempoMedioR;
-    }
-
     public int obterTempoMedio(){
         return tempoMedio;
     }
 
-    public int obterOption(){
-        return optionAtribuicao;
-    }
-
-    public void mudarOption(int option){
-        this.optionAtribuicao = option;
+    public void atualizarTempoMedio(int tempoMedio){
+        this.tempoMedio = tempoMedio;
     }
 
     @Override
