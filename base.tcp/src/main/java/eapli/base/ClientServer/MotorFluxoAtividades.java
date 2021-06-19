@@ -90,37 +90,26 @@ class TcpChatSrvClient extends Thread {
                 nChars=sIn.read();
                 if(nChars==0) break; // empty line means client wants to exit
                 sIn.read(data,0,nChars);
-                String opcaoS = new String(data, 1, 1);
-                int opcao = Integer.parseInt(opcaoS);
+                int opcao = data[1];
                 if(opcao == NUMERO_TAREFAS_PENDENTES){
-                    String colaboradorS = new String(data, 3, 1);
-                    int colaborador = Integer.parseInt(colaboradorS);
+                    int colaborador = data[3];
                     data = numeroTarefasPendentesColaborador(colaborador);
-                    nChars = data[2];
                 }
                 if(opcao == NUMERO_TAREFAS_DEPOIS_PRAZO){
-                    String colaboradorS = new String(data, 3, 1);
-                    int colaborador = Integer.parseInt(colaboradorS);
+                    int colaborador = data[3];
                     data = numeroTarefasDepoisPrazo(colaborador);
-                    nChars = data[2];
                 }
                 if(opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA){
-                    String colaboradorS = new String(data, 3, 1);
-                    int colaborador = Integer.parseInt(colaboradorS);
+                    int colaborador = data[3];
                     data = numeroTarefasEmMenosDeUmDia(colaborador);
-                    nChars = data[2];
                 }
                 if(opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE){
-                    String colaboradorS = new String(data, 3, 1);
-                    int colaborador = Integer.parseInt(colaboradorS);
+                    int colaborador = data[3];
                     data = listaTarefasUrgenciaCriticidade(colaborador);
-                    nChars = data[2];
                 }
                 if(opcao == ATUALIZAR_PEDIDO){
-                    String idPedidoS = new String(data, 3, 1);
-                    int idPedido = Integer.parseInt(idPedidoS);
+                    int idPedido = data[3];
                     data = atualizarEstadoPedido(idPedido);
-                    nChars = data[2];
                 }
 
                 /*InfoTarefa it = ptc.procurarInfoTarefaPorID(idPedido);
@@ -135,7 +124,7 @@ class TcpChatSrvClient extends Thread {
                 data[5] = bytes[2];
                 data[6] = bytes[3];*/
 
-                MotorFluxoAtividades.sendToAll(nChars,data);
+                MotorFluxoAtividades.sendToAll(data.length,data);
             }
             // the client wants to exit
             MotorFluxoAtividades.remCli(myS);
@@ -151,13 +140,13 @@ class TcpChatSrvClient extends Thread {
 
         Pedido pedido = pedidoRepository.ofIdentity(idPedido).get();
 
-        if(pedido == null){
+        if(pedido == null) {
             data[0] = VERSION;
             data[1] = REJEITADO;
             data[2] = 0;
             return data;
-        }else {
-            data[1] = ACEITE;
+        } else {
+            data[1] = ATUALIZAR_PEDIDO;
         }
 
         if(pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO){
@@ -168,35 +157,23 @@ class TcpChatSrvClient extends Thread {
                     pedido.mudarEstadoPedido(EstadoPedido.APROVADO);
                     int resultado = 3;
                     data[0] = VERSION;
-                    data[2] = (Integer.SIZE/8);
-                    byte[] bytes = String.valueOf(resultado).getBytes();
-                    data[3] = bytes[0];
-                    data[4] = bytes[1];
-                    data[5] = bytes[2];
-                    data[6] = bytes[3];
+                    data[2] = (Byte.SIZE/8);
+                    data[3] = (byte) resultado;
                     return data;
                 }
                 if (t.obterTarefa().obterTipo()==true && t.obterEstado()== EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado()==-1){
                     pedido.mudarEstadoPedido(EstadoPedido.REJEITADO);
                     int resultado = 4;
                     data[0] = VERSION;
-                    data[2] = (Integer.SIZE/8);
-                    byte[] bytes = String.valueOf(resultado).getBytes();
-                    data[3] = bytes[0];
-                    data[4] = bytes[1];
-                    data[5] = bytes[2];
-                    data[6] = bytes[3];
+                    data[2] = (Byte.SIZE/8);
+                    data[3] = (byte) resultado;
                     return data;
                 }
                 if (t.obterTarefa().obterTipo()==true && (t.obterEstado()== EstadoTarefa.EM_EXECUÇAO || t.obterEstado()==EstadoTarefa.ATRIBUIDA)){
                     int resultado = 2;
                     data[0] = VERSION;
-                    data[2] = (Integer.SIZE/8);
-                    byte[] bytes = String.valueOf(resultado).getBytes();
-                    data[3] = bytes[0];
-                    data[4] = bytes[1];
-                    data[5] = bytes[2];
-                    data[6] = bytes[3];
+                    data[2] = (Byte.SIZE/8);
+                    data[3] = (byte) resultado;
                     return data;
                 }
             }
@@ -210,23 +187,15 @@ class TcpChatSrvClient extends Thread {
                     pedido.mudarEstadoPedido(EstadoPedido.CONCLUIDO);
                     int resultado = 6;
                     data[0] = VERSION;
-                    data[2] = (Integer.SIZE / 8);
-                    byte[] bytes = String.valueOf(resultado).getBytes();
-                    data[3] = bytes[0];
-                    data[4] = bytes[1];
-                    data[5] = bytes[2];
-                    data[6] = bytes[3];
+                    data[2] = (Byte.SIZE/8);
+                    data[3] = (byte) resultado;
                     return data;
                 }
                 if (t.obterTarefa().obterTipo() == false && (t.obterEstado() == EstadoTarefa.EM_EXECUÇAO || t.obterEstado() == EstadoTarefa.ATRIBUIDA)) {
                     int resultado = 5;
                     data[0] = VERSION;
-                    data[2] = (Integer.SIZE / 8);
-                    byte[] bytes = String.valueOf(resultado).getBytes();
-                    data[3] = bytes[0];
-                    data[4] = bytes[1];
-                    data[5] = bytes[2];
-                    data[6] = bytes[3];
+                    data[2] = (Byte.SIZE/8);
+                    data[3] = (byte) resultado;
                     return data;
                 }
             }
@@ -234,12 +203,8 @@ class TcpChatSrvClient extends Thread {
         if(pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
             int resultado = 1;
             data[0] = VERSION;
-            data[2] = (Integer.SIZE / 8);
-            byte[] bytes = String.valueOf(resultado).getBytes();
-            data[3] = bytes[0];
-            data[4] = bytes[1];
-            data[5] = bytes[2];
-            data[6] = bytes[3];
+            data[2] = (Byte.SIZE/8);
+            data[3] = (byte) resultado;
             return data;
         }
         return null;
@@ -249,10 +214,9 @@ class TcpChatSrvClient extends Thread {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasPendentesDoColab(numeroColaborador);
         data[0] = VERSION;
-        data[1] = ACEITE;
+        data[1] = NUMERO_TAREFAS_PENDENTES;
         data[2] = (Byte.SIZE/8);
-        byte[] numero = String.valueOf(numeroTarefas).getBytes();
-        data[3] = numero[0];
+        data[3] = (byte) numeroTarefas;
         return data;
     }
 
@@ -260,10 +224,9 @@ class TcpChatSrvClient extends Thread {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasDpsPrazo(numeroColaborador);
         data[0] = VERSION;
-        data[1] = ACEITE;
+        data[1] = NUMERO_TAREFAS_DEPOIS_PRAZO;
         data[2] = (Byte.SIZE/8);
-        byte[] numero = String.valueOf(numeroTarefas).getBytes();
-        data[3] = numero[0];
+        data[3] = (byte) numeroTarefas;
         return data;
     }
 
@@ -271,10 +234,9 @@ class TcpChatSrvClient extends Thread {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasTerminamEmMenos1Dia(numeroColaborador);
         data[0] = VERSION;
-        data[1] = ACEITE;
+        data[1] = NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA;
         data[2] = (Byte.SIZE/8);
-        byte[] numero = String.valueOf(numeroTarefas).getBytes();
-        data[3] = numero[0];
+        data[3] = (byte) numeroTarefas;
         return data;
     }
 
@@ -296,10 +258,10 @@ class TcpChatSrvClient extends Thread {
         }
         int tamanho = finalString.length();
         data[0] = VERSION;
-        data[1] = ACEITE;
+        data[1] = LISTA_TAREFAS_URGENCIA_CRITICIDADE;
         data[2] = (byte) tamanho;
         byte[] string = String.valueOf(finalString).getBytes();
-        for(int i=3, j=0; j < tamanho; i++, j++){
+        for(int i=3, j=0; j < string.length; i++, j++){
             data[i] = string[j];
         }
         return data;

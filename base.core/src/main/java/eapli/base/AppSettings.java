@@ -24,6 +24,7 @@ public class AppSettings {
     private static final String PERSISTENCE_UNIT_KEY = "persistence.persistenceUnit";
     private static final String SCHEMA_GENERATION_KEY = "javax.persistence.schema-generation.database.action";
     private static final String HIGH_CALORIES_DISH_LIMIT = "HighCaloriesDishLimit";
+    private static final String ALGORITHM_OPTION = "AlgortihmOption";
 
     private final Properties applicationProperties = new Properties();
 
@@ -54,6 +55,7 @@ public class AppSettings {
         this.applicationProperties.setProperty(PERSISTENCE_UNIT_KEY, "eapli"
                 + ".base");
         this.applicationProperties.setProperty(HIGH_CALORIES_DISH_LIMIT, "300");
+        this.applicationProperties.setProperty(ALGORITHM_OPTION, "1");
     }
 
     public Boolean isMenuLayoutHorizontal() {
@@ -71,6 +73,10 @@ public class AppSettings {
 
     public Integer getHighCaloriesDishLimit() {
         return Integer.valueOf(this.applicationProperties.getProperty(HIGH_CALORIES_DISH_LIMIT));
+    }
+
+    public Integer getAlgortihmOption(){
+        return Integer.parseInt(this.applicationProperties.getProperty(ALGORITHM_OPTION));
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })

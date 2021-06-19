@@ -17,9 +17,7 @@ import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaManualRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class AtribuirTarefaManualController {
 
@@ -69,11 +67,39 @@ public class AtribuirTarefaManualController {
                 dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
                 colaboradorEscolhido = c;
             }
-            if(dataUltimaTarefaDoColaborador.compareTo(dataUltimaTarefaMaisAntiga) < 0){
-                dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
-                colaboradorEscolhido = c;
+            int contadorTarefasNaoTerminadasC = 0;
+            List<InfoTarefa> tarefas = c.tarefas();
+            for (InfoTarefa it : tarefas){
+                if (it.obterEstado()==EstadoTarefa.ATRIBUIDA || it.obterEstado()==EstadoTarefa.EM_EXECUÇAO){
+                    contadorTarefasNaoTerminadasC++;
+                }
+            }
+            int contadorTarefasNaoTerminadasColaboradorEscolhido = 0;
+            List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
+            for (InfoTarefa it : tarefasEscolhido){
+                if (it.obterEstado()==EstadoTarefa.ATRIBUIDA || it.obterEstado()==EstadoTarefa.EM_EXECUÇAO){
+                    contadorTarefasNaoTerminadasColaboradorEscolhido++;
+                }
+            }
+            if(contadorTarefasNaoTerminadasC==0) {
+                if((dataUltimaTarefaDoColaborador.compareTo(dataUltimaTarefaMaisAntiga) < 0) || (contadorTarefasNaoTerminadasColaboradorEscolhido != 0)) {
+                    dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
+                    colaboradorEscolhido = c;
+                }
             }
         }
+
+        int contadorTarefasNaoTerminadas = 0;
+        List<InfoTarefa> tarefas = colaboradorEscolhido.tarefas();
+        for (InfoTarefa it : tarefas){
+            if (it.obterEstado()==EstadoTarefa.ATRIBUIDA || it.obterEstado()==EstadoTarefa.EM_EXECUÇAO){
+                contadorTarefasNaoTerminadas++;
+            }
+        }
+        if(contadorTarefasNaoTerminadas!=0) {
+            atribuirTarefas2(t1);
+        }
+
         /*Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
         List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
         Date dataUltimaTarefa = tarefasEscolhido.get(0).obterDataFim();
@@ -97,10 +123,10 @@ public class AtribuirTarefaManualController {
         t1.associarColaborador(colaboradorEscolhido);
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1!\n", t1.obterId());
         t1.mudarEstado(EstadoTarefa.ATRIBUIDA);
-        enviarEmail(colaboradorEscolhido);
-        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
         colaboradorRepository.save(colaboradorEscolhido);
         infoTarefaRepository.save(t1);
+        enviarEmail(colaboradorEscolhido);
+        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
 
     public void atribuirTarefas2(InfoTarefa t2){
@@ -156,7 +182,19 @@ public class AtribuirTarefaManualController {
         }
     }*/
 
-    public void fcfs(){
+    public List<InfoTarefa> fcfs() {
+
+        List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
+        Collections.sort(tarefasPorAtribuir, new Comparator<InfoTarefa>() {
+            @Override
+            public int compare(InfoTarefa it1, InfoTarefa it2) {
+                return it1.obterDataInicio().compareTo(it2.obterDataInicio());
+            }
+        });
+        return tarefasPorAtribuir;
+    }
+
+    /*public void fcfs(){
 
         List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
         InfoTarefa tarefa1 = tarefasPorAtribuir.get(0);
@@ -173,7 +211,7 @@ public class AtribuirTarefaManualController {
         }
         //tarefasPorAtribuir.remove(tarefa1); Não preciso de remover porque a próxima thread vai fazer novamente o método
         // listarTarefasPendentes() e como esta já foi atribuída, já não vai aparecer.
-    }
+    }*/
 
     /*public List<InfoTarefa> listarTarefasPendentes(){
         List<TarefaManual> tarefasManuais = (List<TarefaManual>) tarefaManualRepository.findAll();
