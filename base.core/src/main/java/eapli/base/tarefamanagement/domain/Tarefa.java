@@ -26,7 +26,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     private int tempoMedio;
     private boolean aprovacao;//true se a tarefa for de aprovaçao, false se for de realizaçao
     private int aprovado = 0; //se for igual 1 foi aprovado, se for igual a -1 rejeitado
-    private int optionAtribuicao = 1;
 
     public Tarefa() {
     }
@@ -44,14 +43,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
     @Override
     public Integer identity() {
         return null;
-    }
-
-    public void atualizarTempoMedioAprovacao(int tempo) {
-        this.tempoMedioA = tempo;
-    }
-
-    public void atualizarTempoMedioRealizacao(int tempo) {
-        this.tempoMedioR = tempo;
     }
 
     public int obterId() {
@@ -80,14 +71,6 @@ public class Tarefa implements AggregateRoot<Integer>, Serializable {
 
     public int obterTempoMedio(){
         return tempoMedio;
-    }
-
-    public int obterOption(){
-        return optionAtribuicao;
-    }
-
-    public void mudarOption(int option){
-        this.optionAtribuicao = option;
     }
 
     @Override

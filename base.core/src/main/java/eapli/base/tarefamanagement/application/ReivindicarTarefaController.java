@@ -6,6 +6,7 @@ import eapli.base.colaboradormanagement.repository.ColaboradorRepository;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
+import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
@@ -35,6 +36,7 @@ public class ReivindicarTarefaController {
 
         c.reivindicarTarefa(it);
         it.associarColaborador(c);
+        it.mudarEstado(EstadoTarefa.ATRIBUIDA);
         colabRepository.save(c);
 
         return infotarefaRepository.save(it);

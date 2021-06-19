@@ -11,15 +11,22 @@ public class ThreadPrincipal extends Thread {
     public void run(){
         for(;;){
             try{
-                Thread.sleep(10000);
-                List<InfoTarefa> tarefas = (List<InfoTarefa>) atmc.listarTarefasPendentes();
-                if (tarefas.size() != 0){
-                    System.out.printf("O tamanho do array tarefas é %d\n", tarefas.size());
-                    for (int i = 0; i < tarefas.size(); i++){
-                        ThreadTarefa tt = new ThreadTarefa();
+                Thread.sleep(30000);
+                List<InfoTarefa> tarefasPorAtribuir = atmc.fcfs();
+                if (tarefasPorAtribuir.size() != 0){
+                    System.out.printf("O tamanho do array tarefas é %d\n", tarefasPorAtribuir.size());
+                    if(tarefasPorAtribuir.size()>1) {
+                        for (int i = 0; i < tarefasPorAtribuir.size(); i++) {
+                            ThreadTarefa tt = new ThreadTarefa(tarefasPorAtribuir.get(i));
+                            System.out.println("Thread Criada!");
+                            tt.start();
+                            Thread.sleep(10000);
+                        }
+                    }
+                    if(tarefasPorAtribuir.size()==1){
+                        ThreadTarefa tt = new ThreadTarefa(tarefasPorAtribuir.get(0));
                         System.out.println("Thread Criada!");
                         tt.start();
-                        tt.join();
                     }
                 }
             } catch (InterruptedException ie){
