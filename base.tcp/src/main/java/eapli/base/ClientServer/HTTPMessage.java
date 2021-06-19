@@ -2,7 +2,7 @@ package eapli.base.ClientServer;
 
 import java.io.*;
 
-public class HTTPmessage {
+class HTTPmessage {
 
     private static final int CR=13;
     private static final int LF=10;
