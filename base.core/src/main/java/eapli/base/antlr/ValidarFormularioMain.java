@@ -2,6 +2,8 @@ package eapli.base.antlr;
 
 import java.io.*;
 
+import eapli.base.antlr.validacaoFormulario.validarFormularioLexer;
+import eapli.base.antlr.validacaoFormulario.validarFormularioParser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 

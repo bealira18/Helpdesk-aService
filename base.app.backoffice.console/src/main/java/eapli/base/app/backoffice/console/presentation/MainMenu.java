@@ -38,14 +38,12 @@ import eapli.base.app.backoffice.console.presentation.pedido.AddPedidoAction;
 import eapli.base.app.backoffice.console.presentation.pedido.DarFeedbackAction;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
-import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.ExecutarTarefaManualAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.ReivindicarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-//import eapli.base.appSDP2021management.HTMLOpen;
 import eapli.base.tarefamanagement.domain.ThreadPrincipal;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -60,6 +58,8 @@ import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
+
+import static java.lang.Thread.sleep;
 
 /**
  * TODO split this class in more specialized classes for each menu

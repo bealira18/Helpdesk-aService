@@ -19,7 +19,7 @@ public class HTTPServerAjax {
         Socket cliSock;
         byte[] data = new byte[300];
 
-        int numeroColaborador = 5;
+        int numeroColaborador = 8;
 
         /*if(args.length!=1) {
             System.out.println("Local port number required at the command line.");
