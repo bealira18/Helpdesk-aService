@@ -51,8 +51,10 @@ public class ListarIncumprimentoSLA {
         List<Pedido> pedidos=new ArrayList<>();
 
         for(Pedido p : pedidoRepository.findAll()){
-            if(p.obterDataSolicitacao().compareTo(dataI)>0 && p.obterDataFim().compareTo(dataF)<0){
-                pedidos.add(p);
+            if(p.obterDataFim()!=null) {
+                if (p.obterDataSolicitacao().compareTo(dataI) > 0 && p.obterDataFim().compareTo(dataF) < 0) {
+                    pedidos.add(p);
+                }
             }
         }
         return pedidos;

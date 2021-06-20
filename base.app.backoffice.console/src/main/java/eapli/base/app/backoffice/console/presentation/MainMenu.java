@@ -38,7 +38,9 @@ import eapli.base.app.backoffice.console.presentation.clientuser.AcceptRefuseSig
 import eapli.base.app.backoffice.console.presentation.colaborador.*;
 import eapli.base.app.backoffice.console.presentation.equipa.*;
 import eapli.base.app.backoffice.console.presentation.pedido.AddPedidoAction;
+import eapli.base.app.backoffice.console.presentation.pedido.CumprimentoSLAAction;
 import eapli.base.app.backoffice.console.presentation.pedido.DarFeedbackAction;
+import eapli.base.app.backoffice.console.presentation.pedido.PedidosColaboradorAction;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.ExecutarTarefaManualAction;
@@ -145,6 +147,8 @@ public class MainMenu extends AbstractUI {
     //Pedido
     private static final int ADD_PEDIDO = 1;
     private static final int DAR_FEEDBACK = 2;
+    private static final int PEDIDOS_COLABORADOR = 3;
+    private static final int SLA = 4;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -413,6 +417,10 @@ public class MainMenu extends AbstractUI {
         menu.addItem(ADD_PEDIDO, "Fazer um pedido", new AddPedidoAction());
 
         menu.addItem(DAR_FEEDBACK, "Dar feedback", new DarFeedbackAction());
+
+        menu.addItem(PEDIDOS_COLABORADOR,"Pedidos de Colaborador",new PedidosColaboradorAction());
+
+        menu.addItem(SLA,"Cumprimento SLA",new CumprimentoSLAAction());
 
         return menu;
     }
