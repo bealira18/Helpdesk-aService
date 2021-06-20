@@ -3,6 +3,7 @@ grammar validarFormulario;
 prog: stat+;
 
 stat: expr NEWLINE # printExpr
+| exprCampo NEWLINE # printCampo
 | condicao NEWLINE # printCondicao
 | ID '=' expr NEWLINE # assign
 | NEWLINE # blank
@@ -11,24 +12,27 @@ stat: expr NEWLINE # printExpr
 expr: expr op=('*'|'/') expr # MulDiv
 | expr op=('+'|'-') expr # AddSub
 | ',' expr # MaisQualquerCoisa
-| INT CAMPOS OBRIGATORIO # CampoObrigatorio
-| INT CAMPOS VAZIA # CampoNaoPreencher
-| INT CAMPOS TAMANHO '=' INT # DefinirTamanho
-| QUANTIDADE # Quantidade
-| INT CAMPOS EQUALS equival # Equals
 | INT # int
 | ID # id
 | '(' expr ')' # parens
 ;
 
-equival:
-| ID '||' equival
-| ID
+exprCampo: INT CAMPOS OBRIGATORIO # CampoObrigatorio
+| INT CAMPOS VAZIO # CampoNaoPreencher
+| INT CAMPOS TAMANHO '=' INT # DefinirTamanho
+| INT CAMPOS EXPRESSAOR # ExpressaoRegular
+| INT CAMPOS EQUALS equival # Equals
 ;
 
-condicao: SE INT CAMPOS '=' ID expr+ # CondicaoValidacao
-| SE INT CAMPOS VAZIO expr+ # CondicaoValidacao
-| SE INT CAMPOS OBRIGATORIO expr+ # CondicaoValidacao
+equival: ID '||' ID '||' ID # nada
+| ID '||' ID # nada
+| ID # nada
+;
+
+condicao: SE INT CAMPOS '=' ID exprCampo # CondicaoValidacao
+| SE INT CAMPOS VAZIO exprCampo # CondicaoValidacao1
+| SE INT CAMPOS OBRIGATORIO exprCampo # CondicaoValidacao2
+| QUANTIDADE '=' INT # Quantidade
 ;
 
 NEWLINE : [\r\n]+ ;

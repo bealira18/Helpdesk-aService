@@ -30,6 +30,18 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 */
 	void exitPrintExpr(validarFormularioParser.PrintExprContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code printCampo}
+	 * labeled alternative in {@link validarFormularioParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintCampo(validarFormularioParser.PrintCampoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code printCampo}
+	 * labeled alternative in {@link validarFormularioParser#stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintCampo(validarFormularioParser.PrintCampoContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code printCondicao}
 	 * labeled alternative in {@link validarFormularioParser#stat}.
 	 * @param ctx the parse tree
@@ -66,30 +78,6 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 */
 	void exitBlank(validarFormularioParser.BlankContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code CampoNaoPreencher}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code CampoNaoPreencher}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code Equals}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterEquals(validarFormularioParser.EqualsContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code Equals}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitEquals(validarFormularioParser.EqualsContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
 	 * @param ctx the parse tree
@@ -101,18 +89,6 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitParens(validarFormularioParser.ParensContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code DefinirTamanho}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code DefinirTamanho}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code MulDiv}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
@@ -137,18 +113,6 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAddSub(validarFormularioParser.AddSubContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code CampoObrigatorio}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code CampoObrigatorio}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code MaisQualquerCoisa}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
@@ -186,27 +150,77 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 */
 	void exitInt(validarFormularioParser.IntContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code Quantidade}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
+	 * Enter a parse tree produced by the {@code CampoObrigatorio}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuantidade(validarFormularioParser.QuantidadeContext ctx);
+	void enterCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code Quantidade}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
+	 * Exit a parse tree produced by the {@code CampoObrigatorio}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuantidade(validarFormularioParser.QuantidadeContext ctx);
+	void exitCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link validarFormularioParser#equival}.
+	 * Enter a parse tree produced by the {@code CampoNaoPreencher}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 */
-	void enterEquival(validarFormularioParser.EquivalContext ctx);
+	void enterCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link validarFormularioParser#equival}.
+	 * Exit a parse tree produced by the {@code CampoNaoPreencher}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 */
-	void exitEquival(validarFormularioParser.EquivalContext ctx);
+	void exitCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code DefinirTamanho}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code DefinirTamanho}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ExpressaoRegular}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoRegular(validarFormularioParser.ExpressaoRegularContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ExpressaoRegular}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoRegular(validarFormularioParser.ExpressaoRegularContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Equals}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void enterEquals(validarFormularioParser.EqualsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Equals}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 */
+	void exitEquals(validarFormularioParser.EqualsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code nada}
+	 * labeled alternative in {@link validarFormularioParser#equival}.
+	 * @param ctx the parse tree
+	 */
+	void enterNada(validarFormularioParser.NadaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code nada}
+	 * labeled alternative in {@link validarFormularioParser#equival}.
+	 * @param ctx the parse tree
+	 */
+	void exitNada(validarFormularioParser.NadaContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code CondicaoValidacao}
 	 * labeled alternative in {@link validarFormularioParser#condicao}.
@@ -219,4 +233,40 @@ public interface validarFormularioListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCondicaoValidacao(validarFormularioParser.CondicaoValidacaoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CondicaoValidacao1}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondicaoValidacao1(validarFormularioParser.CondicaoValidacao1Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CondicaoValidacao1}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondicaoValidacao1(validarFormularioParser.CondicaoValidacao1Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CondicaoValidacao2}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondicaoValidacao2(validarFormularioParser.CondicaoValidacao2Context ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CondicaoValidacao2}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondicaoValidacao2(validarFormularioParser.CondicaoValidacao2Context ctx);
+	/**
+	 * Enter a parse tree produced by the {@code Quantidade}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void enterQuantidade(validarFormularioParser.QuantidadeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code Quantidade}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 */
+	void exitQuantidade(validarFormularioParser.QuantidadeContext ctx);
 }

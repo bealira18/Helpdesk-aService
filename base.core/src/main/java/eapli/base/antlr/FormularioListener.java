@@ -12,12 +12,15 @@ public class FormularioListener extends validarFormularioBaseListener {
 
     private final Stack<Integer> stack;
     //private final formulario preenchido
-    private final Map<String, String> results;
 
     public FormularioListener(/*formulario preenchido*/){
         //this.formulario preenchido=formulario preenchido;
         this.stack=new Stack<>();
-        this.results=new HashMap<>();
+    }
+
+    public int getResults(){
+        this.stack.size();
+        return this.stack.peek();
     }
 
     /**
@@ -57,6 +60,26 @@ public class FormularioListener extends validarFormularioBaseListener {
      */
     @Override
     public void exitPrintExpr(validarFormularioParser.PrintExprContext ctx) {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterPrintCampo(validarFormularioParser.PrintCampoContext ctx) {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitPrintCampo(validarFormularioParser.PrintCampoContext ctx) {
 
     }
 
@@ -354,26 +377,6 @@ public class FormularioListener extends validarFormularioBaseListener {
      */
     @Override
     public void exitQuantidade(validarFormularioParser.QuantidadeContext ctx) {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override
-    public void enterEquival(validarFormularioParser.EquivalContext ctx) {
-
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override
-    public void exitEquival(validarFormularioParser.EquivalContext ctx) {
 
     }
 
