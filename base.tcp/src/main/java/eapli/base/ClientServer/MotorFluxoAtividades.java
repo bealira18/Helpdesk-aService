@@ -243,7 +243,7 @@ class TcpChatSrvClient extends Thread {
     public byte[] listaTarefasUrgenciaCriticidade(int numeroColaborador){
         byte[] data = new byte[300];
         String finalString = "";
-        List<InfoTarefa> tarefas = ttc.listaTarefasUrgenciaCriticidade(numeroColaborador);
+        List<InfoTarefa> tarefas = ttc.listarTarefasPorUrgenciaECriticidade(numeroColaborador);
         for (int i = 0; i < tarefas.size(); i++){
             if(i != (tarefas.size()-1)) {
                 int id = tarefas.get(i).obterId();
@@ -260,7 +260,7 @@ class TcpChatSrvClient extends Thread {
         data[0] = VERSION;
         data[1] = LISTA_TAREFAS_URGENCIA_CRITICIDADE;
         data[2] = (byte) tamanho;
-        byte[] string = String.valueOf(finalString).getBytes();
+        byte[] string = finalString.getBytes();
         for(int i=3, j=0; j < string.length; i++, j++){
             data[i] = string[j];
         }

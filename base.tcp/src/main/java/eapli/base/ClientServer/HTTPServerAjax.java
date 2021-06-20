@@ -19,7 +19,7 @@ public class HTTPServerAjax {
         Socket cliSock;
         byte[] data = new byte[300];
 
-        int numeroColaborador = 8;
+        int numeroColaborador = 5;
 
         /*if(args.length!=1) {
             System.out.println("Local port number required at the command line.");
@@ -38,20 +38,6 @@ public class HTTPServerAjax {
             System.out.println("Local port number not available: 8080");
             System.exit(1);
         }*/
-
-        try {
-            serverIP = InetAddress.getByName("localhost");
-        } catch (UnknownHostException ex) {
-            System.out.println("Invalid server specified as localhost.");
-            System.exit(1);
-        }
-
-        try {
-            socket = new Socket(serverIP, 32507);
-        } catch (Exception ex) {
-            System.out.println("Failed to connect.");
-            System.exit(1);
-        }
 
         PortalUtilizadores pu = new PortalUtilizadores();
         pu.runMain();

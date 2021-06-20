@@ -55,7 +55,7 @@ public class AppSettings {
         this.applicationProperties.setProperty(PERSISTENCE_UNIT_KEY, "eapli"
                 + ".base");
         this.applicationProperties.setProperty(HIGH_CALORIES_DISH_LIMIT, "300");
-        this.applicationProperties.setProperty(ALGORITHM_OPTION, "1");
+        this.applicationProperties.setProperty(ALGORITHM_OPTION, "2");
     }
 
     public Boolean isMenuLayoutHorizontal() {

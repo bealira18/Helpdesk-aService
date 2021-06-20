@@ -154,12 +154,13 @@ public class AtribuirTarefaManualController {
             }
         }
         colaboradorEscolhido.reivindicarTarefa(t2);
+        t2.associarColaborador(colaboradorEscolhido);
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2!\n", t2.obterId());
         t2.mudarEstado(EstadoTarefa.ATRIBUIDA);
-        enviarEmail(colaboradorEscolhido);
-        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
         colaboradorRepository.save(colaboradorEscolhido);
         infoTarefaRepository.save(t2);
+        enviarEmail(colaboradorEscolhido);
+        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
 
     /*public void fcfs(){

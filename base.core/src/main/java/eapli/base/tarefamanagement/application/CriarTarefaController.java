@@ -36,28 +36,34 @@ public class CriarTarefaController {
         int prioridade=-1;
 
         if(p.obterUrgencia()==Urgencia.URGENTE){
-            prioridade=5;
+            prioridade=1;
         }
 
         if(p.obterUrgencia()==Urgencia.MODERADA){
-            prioridade=3;
+            prioridade=2;
         }
 
         if(p.obterUrgencia()==Urgencia.REDUZIDA){
-            prioridade=1;
+            prioridade=3;
         }
 
         if(tarefas==null)
             return;
 
-        InfoTarefa infoTarefa=new InfoTarefa();
-
         for(Tarefa t : tarefas){
-            infoTarefa=new InfoTarefa(p.obterDataLimite(),prioridade);
+            InfoTarefa infoTarefa=new InfoTarefa(p.obterDataLimite(),prioridade);
             infoTarefa.associarTarefa(t);
             infoTarefaRepository.save(infoTarefa);
         }
-
+        List<InfoTarefa> infoTarefas = (List<InfoTarefa>) infoTarefaRepository.findAll();
+        for(InfoTarefa it : infoTarefas){
+            for(Tarefa t : tarefas){
+                if(it.obterTarefa().obterId()==t.obterId()){
+                    p.obterListaTarefas().add(it);
+                }
+            }
+        }
+        pedidoRepository.save(p);
     }
 
 }
