@@ -14,17 +14,12 @@ import java.util.Date;
 public class CatalogoBootstrapper implements Action {
 
     private final AdicionarCatalogoController addController=new AdicionarCatalogoController();
-    //private final EditarCatalogoController editarController=new EditarCatalogoController();
-    //private final RemoverCatalogoController removerController=new RemoverCatalogoController();
 
     @Override
     public boolean execute() {
 
-        addController.adicionarCatalogo("Catalogo1","breve catalogo 1","descricao completa catalogo 1, deve ter muitos carateres, espero que isto chegue",8,"catalogo1.jpg");
-        addController.adicionarCatalogo("Catalogo2","breve catalogo 2","descricao completa catalogo 2, deve ter muitos carateres, espero que isto chegue",36,"catalogo2.jpg");
-
-        //editarController.mudarTitulo("Catalogo2","Catalogo8");
-        //removerController.removerCatalogo("Catalogo2");
+        addController.adicionarCatalogo("Catalogo1","breve catalogo 1","descricao completa catalogo 1",8,"catalogo1.jpg");
+        addController.adicionarCatalogo("Catalogo2","breve catalogo 2","descricao completa catalogo 2",36,"catalogo2.jpg");
 
         return true;
     }

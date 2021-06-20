@@ -8,19 +8,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
-public class DescricaoCompleta implements ValueObject, Serializable, Comparable<DescricaoCompleta>{
+public class DescricaoCompleta implements ValueObject, Serializable, Comparable<DescricaoCompleta> {
 
     private String descricaoCompleta;
 
-    public DescricaoCompleta(){}
+    public DescricaoCompleta() {
+    }
 
-    public DescricaoCompleta(String descricaoCompleta){
+    public DescricaoCompleta(String descricaoCompleta) {
         Preconditions.nonNull(descricaoCompleta);
-        if(descricaoCompleta.toCharArray().length>200)
+        if (descricaoCompleta.toCharArray().length > 200)
             throw new IllegalArgumentException("Descricao muito grande");
-        if(descricaoCompleta.toCharArray().length<10)
+        if (descricaoCompleta.toCharArray().length < 10)
             throw new IllegalArgumentException("Descricao muito pequena");
-        this.descricaoCompleta=descricaoCompleta;
+        this.descricaoCompleta = descricaoCompleta;
     }
 
     public static DescricaoCompleta valueOf(final String descricaoCompleta) {
@@ -47,7 +48,7 @@ public class DescricaoCompleta implements ValueObject, Serializable, Comparable<
 
     @Override
     public String toString() {
-        return "Descricao Completa: "+descricaoCompleta;
+        return "Descricao Completa: " + descricaoCompleta;
     }
 
 }

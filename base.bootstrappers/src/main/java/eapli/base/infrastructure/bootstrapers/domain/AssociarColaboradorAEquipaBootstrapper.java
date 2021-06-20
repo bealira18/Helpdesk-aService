@@ -6,14 +6,13 @@ import eapli.framework.actions.Action;
 public class AssociarColaboradorAEquipaBootstrapper implements Action {
 
     private final AssociarColaboradorAEquipaController acec = new AssociarColaboradorAEquipaController();
-    //private final RemoverColaboradorDeEquipaController rcec = new RemoverColaboradorDeEquipaController();
 
     @Override
     public boolean execute() {
 
-        acec.associarColaboradorAEquipa("EDC", 8);
-        acec.associarColaboradorAEquipa("EDF", 36);
-        acec.associarColaboradorAEquipa("EDF", 5);
+        acec.associarColaboradorAEquipa("ERecursos", 8);
+        acec.associarColaboradorAEquipa("EReparacoes", 36);
+        acec.associarColaboradorAEquipa("EReparacoes", 5);
         return true;
     }
 }

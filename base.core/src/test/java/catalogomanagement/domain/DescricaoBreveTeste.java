@@ -7,13 +7,13 @@ import org.junit.Test;
 public class DescricaoBreveTeste {
 
     @Test(expected = IllegalArgumentException.class)
-    public void regraDescricaoBreve1() {
-        DescricaoBreve descricaoBreve=new DescricaoBreve(null);
+    public void testeAssegurarQueADescricaoBreveNaoPodeSerNula() {
+        DescricaoBreve instanceDescricaoBreve = new DescricaoBreve(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void regraDescricaoBreve2() {
-        DescricaoBreve descricaoBreve=new DescricaoBreve("isto e uma descricao muito grande para ser considerada descricao breve");
+    public void testeAssgurarQueADescricaoBreveNaoUltrapassaOLimiteDeCaracteres() {
+        DescricaoBreve instanceDescricaoBreve = new DescricaoBreve("isto e uma descricao muito grande para ser considerada descricao breve");
     }
 
 }

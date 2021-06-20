@@ -18,7 +18,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique=true)
+    @Column(unique = true)
     private Titulo titulo;
     private DescricaoBreve descricaoBreve;
     private DescricaoCompleta descricaoCompleta;
@@ -58,27 +58,27 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         return titulo;
     }
 
-    public int obterId(){
+    public int obterId() {
         return id;
     }
 
-    public boolean obterApresentar(){
+    public boolean obterApresentar() {
         return apresentar;
     }
 
-    public NivelCriticidade obterNivelCriticidade(){
+    public NivelCriticidade obterNivelCriticidade() {
         return nivelCriticidade;
     }
 
-    public List<Servico> servicos(){
+    public List<Servico> servicos() {
         return servicos;
     }
 
-    public void addServico(Servico servico){
+    public void addServico(Servico servico) {
         servicos.add(servico);
     }
 
-    public void removerServico(Servico servico){
+    public void removerServico(Servico servico) {
         servicos.remove(servico);
     }
 
@@ -94,7 +94,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.descricaoCompleta = descricaoCompleta;
     }
 
-    public void mudarCriteriosEspecificacao(CriteriosEspecificacao ce){
+    public void mudarCriteriosEspecificacao(CriteriosEspecificacao ce) {
         this.criteriosEspecificaçao = ce;
     }
 
@@ -110,7 +110,7 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.ativo = ativo;
     }
 
-    public void mudarApresentar(boolean apresentar){
+    public void mudarApresentar(boolean apresentar) {
         this.apresentar = apresentar;
     }
 
@@ -118,14 +118,14 @@ public class Catalogo implements AggregateRoot<Integer>, Serializable {
         this.nivelCriticidade = nc;
     }
 
-    public CriteriosEspecificacao obterCriteriosEspecificacao(){
+    public CriteriosEspecificacao obterCriteriosEspecificacao() {
         return criteriosEspecificaçao;
     }
 
     @Override
     public String toString() {
         return "Catalogo:\n"
-                + titulo +"\n"
+                + titulo + "\n"
                 + descricaoBreve;
     }
 

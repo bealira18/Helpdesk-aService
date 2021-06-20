@@ -73,7 +73,7 @@ public class BaseBootstrapper implements Action {
         new CatalogoBootstrapper(),
         new CriteriosEspecificacaoBootstrapper(),
         new AssociarCriteriosEspecificacaoACatalogoBootstrapper(),
-        new AssociarEquipaACriteriosEspecificacaoBootstrapper(),
+        //new AssociarEquipaACriteriosEspecificacaoBootstrapper(),
         new NivelCriticidadeBootstrapper(),
         new AssociarNivelCriticidadeACatalogoBootstrapper(),
         new ServicoBootstrapper(),
@@ -85,11 +85,13 @@ public class BaseBootstrapper implements Action {
         new TarefaAutomaticaBootstrapper(),
         new AtributoBootstrapper(),
         new FormularioBootstrapper(),
+
         new AddRascunhoBootstrapper(),
         new AddWorkflowBootstrapper(),
         new AddPedidoBootstrapper(),
         new AddHistoricoBootstrapper(),
-        new ReivindicarTarefaBootstrapper()};
+        new ReivindicarTarefaBootstrapper()
+        };
 
         registerPowerUser();
         authenticateForBootstrapping();

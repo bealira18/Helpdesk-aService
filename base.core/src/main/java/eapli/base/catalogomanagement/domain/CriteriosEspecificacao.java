@@ -1,6 +1,5 @@
 package eapli.base.catalogomanagement.domain;
 
-import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.equipamanagement.domain.Equipa;
 import eapli.framework.domain.model.AggregateRoot;
 
@@ -22,7 +21,7 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
     private List<Equipa> equipas = new ArrayList<>();
 
     public CriteriosEspecificacao() {
-        this.ativo=true;
+        this.ativo = true;
     }
 
     @Override
@@ -35,23 +34,23 @@ public class CriteriosEspecificacao implements Serializable, AggregateRoot<Integ
         return null;
     }
 
-    public int obterId(){
+    public int obterId() {
         return id;
     }
 
-    public void addEquipa(Equipa equipa){
+    public void addEquipa(Equipa equipa) {
         equipas.add(equipa);
     }
 
-    public void removerEquipa(Equipa equipa){
+    public void removerEquipa(Equipa equipa) {
         equipas.remove(equipa);
     }
 
     public List<Equipa> equipas() {
         return equipas;
     }
-    
-     public void mudarEstado(Boolean ativo){
+
+    public void mudarEstado(Boolean ativo) {
         this.ativo = ativo;
     }
 

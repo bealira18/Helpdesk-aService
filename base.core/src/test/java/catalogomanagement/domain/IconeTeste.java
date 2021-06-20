@@ -5,13 +5,13 @@ import org.junit.Test;
 
 public class IconeTeste {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void regraIcone1() {
+    @Test(expected = NullPointerException.class)
+    public void testeNomeDoIconeNaoPodeSerNull() {
         Icone icone=new Icone(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void regraIcone2() {
+    public void testeNomeDoIconeTemDeAcabarNumaExtensaoConhecida() {
         Icone icone=new Icone("icone");
     }
 

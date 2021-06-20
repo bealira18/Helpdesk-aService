@@ -42,7 +42,7 @@ public class Acronimo implements ValueObject, Serializable, Comparable<Acronimo>
     
       public boolean verificaAcronimo(String acronimo){
 
-        Pattern pattern = Pattern.compile("[A-Z]+");
+        Pattern pattern = Pattern.compile("[A-Za-z]+");
         Matcher mat = pattern.matcher(acronimo);
 
         if(mat.matches())

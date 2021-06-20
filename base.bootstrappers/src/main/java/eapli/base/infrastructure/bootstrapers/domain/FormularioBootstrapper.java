@@ -20,17 +20,30 @@ public class FormularioBootstrapper implements Action{
     @Override
     public boolean execute() {
 
-        addFormularioController.adicionarFormulario("Formulario1");
-        addFormularioController.adicionarFormulario("Formulario2");
+        addFormularioController.adicionarFormulario("Formulario_Pedido");
+        addFormularioController.adicionarFormulario("Formulario_Aprovacao");
+        addFormularioController.adicionarFormulario("Formulario_Realizacao");
 
-        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario1","CC");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Pedido","Dias");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Pedido","Ausencia");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Pedido","Justificacao");
 
-        atafc.associarTarefaAFormularioIds(1, 1);
-        atafc.associarTarefaAFormularioIds(2, 2);
-        atafc.associarTarefaAFormularioIds(1, 3);
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Aprovacao","Decisao");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Aprovacao","Fundamentacao");
 
-        afasc.associarFormularioAServicoComNome("Formulario1","cod1");
-        afasc.associarFormularioAServicoComNome("Formulario2", "cod2");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Gozados");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Gozados Periodo");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Faltas Justificadas");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Faltas Nao Justificadas no Ano");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Faltas Nao Justificadas no Periodo");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Dias Faltas Nao Justificadas Totais");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao","Comentario");
+
+        //formulario 1 pedido - tarefa 1
+        atafc.associarTarefaAFormularioIds(2, 1);
+        atafc.associarTarefaAFormularioIds(3, 3);
+
+        afasc.associarFormularioAServicoComNome("Formulario_Pedido","cod1");
 
         return true;
     }
