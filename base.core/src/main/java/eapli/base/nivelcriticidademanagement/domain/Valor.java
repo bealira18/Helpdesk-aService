@@ -34,6 +34,10 @@ public class Valor implements ValueObject, Serializable, Comparable<Valor> {
         return valor == valor1.valor;
     }
 
+    public int obterValor(){
+        return valor;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(valor);

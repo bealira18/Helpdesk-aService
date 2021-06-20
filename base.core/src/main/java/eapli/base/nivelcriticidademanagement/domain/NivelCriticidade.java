@@ -18,7 +18,7 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
     private int tempoMaximoA;
     private int tempoMedioR;
     private int tempoMaximoR;
-    private Valor valor;
+    private Valor valor; //valor de 1 a 5, em que o 1 é o mais "urgente" (?)
     private Etiqueta etiqueta;
 
     protected NivelCriticidade() {
@@ -38,6 +38,10 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
 
     public String obterObjetivo(){
         return objetivo;
+    }
+
+    public Valor obterValor(){
+        return valor;
     }
 
     @Override

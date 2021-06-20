@@ -1,5 +1,5 @@
 // Generated from C:/Users/Bea/OneDrive/Documentos/lei20_21_s4_2dc_05/base.core/src/main/java/eapli/base/antlr\validarFormulario.g4 by ANTLR 4.9.1
-package eapli.base.antlr.eapli.base.antlr;
+package eapli.base.antlr.validacaoFormulario;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -24,6 +24,13 @@ public interface validarFormularioVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrintExpr(validarFormularioParser.PrintExprContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code printCampo}
+	 * labeled alternative in {@link validarFormularioParser#stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintCampo(validarFormularioParser.PrintCampoContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code printCondicao}
 	 * labeled alternative in {@link validarFormularioParser#stat}.
 	 * @param ctx the parse tree
@@ -45,33 +52,12 @@ public interface validarFormularioVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBlank(validarFormularioParser.BlankContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code CampoNaoPreencher}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code Equals}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEquals(validarFormularioParser.EqualsContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code parens}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitParens(validarFormularioParser.ParensContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code DefinirTamanho}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MulDiv}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
@@ -86,13 +72,6 @@ public interface validarFormularioVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAddSub(validarFormularioParser.AddSubContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code CampoObrigatorio}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code MaisQualquerCoisa}
 	 * labeled alternative in {@link validarFormularioParser#expr}.
@@ -115,18 +94,47 @@ public interface validarFormularioVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInt(validarFormularioParser.IntContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code Quantidade}
-	 * labeled alternative in {@link validarFormularioParser#expr}.
+	 * Visit a parse tree produced by the {@code CampoObrigatorio}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuantidade(validarFormularioParser.QuantidadeContext ctx);
+	T visitCampoObrigatorio(validarFormularioParser.CampoObrigatorioContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link validarFormularioParser#equival}.
+	 * Visit a parse tree produced by the {@code CampoNaoPreencher}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEquival(validarFormularioParser.EquivalContext ctx);
+	T visitCampoNaoPreencher(validarFormularioParser.CampoNaoPreencherContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code DefinirTamanho}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinirTamanho(validarFormularioParser.DefinirTamanhoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ExpressaoRegular}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpressaoRegular(validarFormularioParser.ExpressaoRegularContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Equals}
+	 * labeled alternative in {@link validarFormularioParser#exprCampo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEquals(validarFormularioParser.EqualsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code nada}
+	 * labeled alternative in {@link validarFormularioParser#equival}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNada(validarFormularioParser.NadaContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code CondicaoValidacao}
 	 * labeled alternative in {@link validarFormularioParser#condicao}.
@@ -134,4 +142,25 @@ public interface validarFormularioVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCondicaoValidacao(validarFormularioParser.CondicaoValidacaoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CondicaoValidacao1}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondicaoValidacao1(validarFormularioParser.CondicaoValidacao1Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CondicaoValidacao2}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondicaoValidacao2(validarFormularioParser.CondicaoValidacao2Context ctx);
+	/**
+	 * Visit a parse tree produced by the {@code Quantidade}
+	 * labeled alternative in {@link validarFormularioParser#condicao}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQuantidade(validarFormularioParser.QuantidadeContext ctx);
 }

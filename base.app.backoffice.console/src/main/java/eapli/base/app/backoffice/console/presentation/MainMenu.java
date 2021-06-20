@@ -40,13 +40,12 @@ import eapli.base.app.backoffice.console.presentation.pedido.AddPedidoAction;
 import eapli.base.app.backoffice.console.presentation.pedido.DarFeedbackAction;
 import eapli.base.app.backoffice.console.presentation.servico.*;
 import eapli.base.app.backoffice.console.presentation.tarefa.ConsultarTarefaAction;
-import eapli.base.app.backoffice.console.presentation.tarefa.CriarTarefaAction;
+import eapli.base.app.backoffice.console.presentation.tarefa.ExecutarTarefaManualAction;
 import eapli.base.app.backoffice.console.presentation.tarefa.ReivindicarTarefaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
-//import eapli.base.appSDP2021management.HTMLOpen;
 import eapli.base.tarefamanagement.domain.ThreadPrincipal;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -134,6 +133,7 @@ public class MainMenu extends AbstractUI {
     private static final int REIVINDICAR_TAREFA_MANUAL = 1; //COLAB
     private static final int CONSULTAR_MINHAS_TAREFAS = 2; //COLAB
     private static final int CRIAR_TAREFA_MANUAL = 3;
+    private static final int EXECUTAR_TAREFA_MANUAL = 4; //COLAB
 
     //Pedido
     private static final int ADD_PEDIDO=1;
@@ -394,6 +394,7 @@ public class MainMenu extends AbstractUI {
         // menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
         menu.addItem(REIVINDICAR_TAREFA_MANUAL, "Reivindicar Tarefa", new ReivindicarTarefaAction());
         menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsultarTarefaAction());
+        menu.addItem(EXECUTAR_TAREFA_MANUAL, "Executar Tarefa Manual", new ExecutarTarefaManualAction());
 
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
