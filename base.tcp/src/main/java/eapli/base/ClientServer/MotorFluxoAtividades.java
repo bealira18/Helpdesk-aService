@@ -43,8 +43,8 @@ public class MotorFluxoAtividades {
     private static ServerSocket sock;
 
 
-    public static void main(String args[]) throws Exception {
-        Server server = Server.createTcpServer(args).start();
+    public void run() throws Exception {
+        Server server = Server.createTcpServer().start();
         int i;
 
         try { sock = new ServerSocket(32507); }

@@ -30,7 +30,7 @@ public class PortalUtilizadores{
                     "Server IPv4/IPv6 address or DNS name is required as argument");
             System.exit(1); }*/
 
-        try { serverIP = InetAddress.getByName("192.168.1.93"); }
+        try { serverIP = InetAddress.getByName("localhost"); }
         catch(UnknownHostException ex) {
             System.out.println("Invalid server: " + "192.168.1.93");
             System.exit(1); }
@@ -48,11 +48,11 @@ public class PortalUtilizadores{
         System.out.println("Connected to server");
 
         // start a thread to read incoming messages from the server
-        Thread serverConn = new Thread(new eapli.base.ClientServer.TcpChatCliConn(sock));
+        Thread serverConn = new Thread(new TcpChatCliConn(sock));
         serverConn.start();
 
 
-        for(int i = 6; i < 7; i++) { // read messages from the console and send them to the server
+        for(int i = 3; i < 4; i++) { // read messages from the console and send them to the server
 
             //falta aqui o algoritmo para ir buscar o numero do colaborador que fez log in.
 

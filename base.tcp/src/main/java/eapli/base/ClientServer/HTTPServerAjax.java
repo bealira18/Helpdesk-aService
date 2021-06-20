@@ -1,10 +1,10 @@
 package eapli.base.ClientServer;
 
-import java.io.*;
+
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class HTTPServerAjax {
 
@@ -15,7 +15,7 @@ public class HTTPServerAjax {
     private static int accessesCounter;
     private static final byte VERSION = 0;
 
-    public static void main(String args[]) throws Exception {
+    public void run() throws Exception {
         Socket cliSock;
         byte[] data = new byte[300];
 
@@ -32,36 +32,22 @@ public class HTTPServerAjax {
             candidateVotes[i] = 0;
         }*/
 
-       /* try {
+        try {
             sock = new ServerSocket(8080);
         } catch (IOException ex) {
             System.out.println("Local port number not available: 8080");
-            System.exit(1);
-        }*/
-
-        try {
-            serverIP = InetAddress.getByName("localhost");
-        } catch (UnknownHostException ex) {
-            System.out.println("Invalid server specified as localhost.");
-            System.exit(1);
-        }
-
-        try {
-            socket = new Socket(serverIP, 32507);
-        } catch (Exception ex) {
-            System.out.println("Failed to connect.");
             System.exit(1);
         }
 
         PortalUtilizadores pu = new PortalUtilizadores();
         pu.runMain();
-/*
+
         while (true) {
             cliSock = sock.accept();
             HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
             req.start();
             incAccessesCounter();
-        }*/
+        }
     }
 
     private static synchronized void incAccessesCounter(){

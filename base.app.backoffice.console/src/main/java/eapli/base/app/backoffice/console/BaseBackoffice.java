@@ -23,6 +23,8 @@
  */
 package eapli.base.app.backoffice.console;
 
+import eapli.base.ClientServer.HTTPServerAjax;
+import eapli.base.ClientServer.MotorFluxoAtividades;
 import eapli.base.app.backoffice.console.presentation.MainMenu;
 import eapli.base.app.common.console.BaseApplication;
 import eapli.base.app.common.console.presentation.authz.LoginUI;
@@ -37,8 +39,8 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 import eapli.framework.infrastructure.eventpubsub.EventDispatcher;
 
+
 /**
- *
  * @author Paulo Gandra Sousa
  */
 @SuppressWarnings("squid:S106")
@@ -51,14 +53,14 @@ public final class BaseBackoffice extends BaseApplication {
     }
 
     /**
-     * @param args
-     *            the command line arguments
+     * @param args the command line arguments
      */
     public static void main(final String[] args) {
         AuthzRegistry.configure(PersistenceContext.repositories().users(),
                 new BasePasswordPolicy(), new PlainTextEncoder());
 
         new BaseBackoffice().run(args);
+
     }
 
     @Override

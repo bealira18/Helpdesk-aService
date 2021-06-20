@@ -24,6 +24,8 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.Application;
+import eapli.base.ClientServer.ThreadClient;
+import eapli.base.ClientServer.ThreadServer;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.base.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.base.app.backoffice.console.presentation.authz.ListUsersAction;
@@ -59,6 +61,8 @@ import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
+
+import static java.lang.Thread.sleep;
 
 /**
  * TODO split this class in more specialized classes for each menu
@@ -162,14 +166,20 @@ public class MainMenu extends AbstractUI {
      */
     @Override
     public boolean doShow() {
-        final Menu menu = buildMainMenu();
-        final MenuRenderer renderer;
-        if (Application.settings().isMenuLayoutHorizontal()) {
-            renderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-        } else {
-            renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+        final Menu menu;
+        try {
+            menu = buildMainMenu();
+            final MenuRenderer renderer;
+            if (Application.settings().isMenuLayoutHorizontal()) {
+                renderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+            } else {
+                renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
+            }return renderer.render();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return renderer.render();
+
+        return false;
     }
 
     @Override
@@ -179,7 +189,7 @@ public class MainMenu extends AbstractUI {
                 .orElse("Base [ ==Anonymous== ]");
     }
 
-    private Menu buildMainMenu() {
+    private Menu buildMainMenu() throws Exception {
         final Menu mainMenu = new Menu();
 
         final Menu myUserMenu = new MyUserMenu();
@@ -191,8 +201,19 @@ public class MainMenu extends AbstractUI {
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER)) {
 
+            ThreadServer t1 = new ThreadServer();
+            t1.start();
+            try {
+                sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            ThreadClient t2  = new ThreadClient();
+            t2.start();
+
             ThreadPrincipal tp = new ThreadPrincipal();
             tp.start();
+
 
             final Menu usersMenu = buildUsersMenu();
             mainMenu.addSubMenu(USERS_OPTION, usersMenu);

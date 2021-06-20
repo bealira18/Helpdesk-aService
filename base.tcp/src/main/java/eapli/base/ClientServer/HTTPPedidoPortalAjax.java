@@ -1,7 +1,11 @@
 package eapli.base.ClientServer;
 
-import java.io.*;
-import java.net.*;
+//import eapli.base.tarefamanagement.application.TarefasTCPController;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
 
 public class HTTPPedidoPortalAjax extends Thread {
@@ -9,6 +13,7 @@ public class HTTPPedidoPortalAjax extends Thread {
     Socket sock;
     DataInputStream inS;
     DataOutputStream outS;
+    //TarefasTCPController tarefasTCPController = new TarefasTCPController();
 
     public HTTPPedidoPortalAjax(Socket s, String f) {
         baseFolder = f;
@@ -19,6 +24,7 @@ public class HTTPPedidoPortalAjax extends Thread {
         try {
             outS = new DataOutputStream(sock.getOutputStream());
             inS = new DataInputStream(sock.getInputStream());
+
         } catch (IOException ex) {
             System.out.println("Thread error on data streams creation");
         }
@@ -28,16 +34,17 @@ public class HTTPPedidoPortalAjax extends Thread {
             System.out.println("2");
             HTTPmessage response = new HTTPmessage();
             System.out.println("3");
+
             System.out.println(request.getURI());
 
             if (request.getMethod().equals("GET")) {
                 if (request.getURI().equals("/votes")) {
 
-                  //  response.setContentFromString(
-                          //  HTTPServerAjax.getVotesStandingInHTML(), "text/html");
+                    response.setContentFromString(
+                            "</ul><hr><p> Tarefas Pendentes:  gonçalo e bea </p><hr>", "text/html");
                     response.setResponseStatus("200 Ok");
                 } else {
-                    String fullname = baseFolder + "/";
+                    String fullname = System.getProperty("user.dir") + "\\base.tcp\\src\\main\\java\\eapli\\base\\ClientServer\\" + baseFolder + "/";
                     if (request.getURI().equals("/")) fullname = fullname + "index.html";
                     else fullname = fullname + request.getURI();
                     if (response.setContentFromFile(fullname)) {
