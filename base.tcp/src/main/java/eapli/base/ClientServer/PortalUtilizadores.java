@@ -225,8 +225,8 @@ class TcpChatCliConn implements Runnable {
                     if(estadoPedido == 6){
                         estado = "Concluído";
                     }
+                    System.out.println("O pedido, neste momento, encontra-se no estado " + estado + "!");
                 }
-                System.out.println("O pedido, neste momento, encontra-se no estado " + estado + "!");
             }
         } catch (IOException ex) {
             System.out.println("Client disconnected.");
