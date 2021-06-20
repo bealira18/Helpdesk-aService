@@ -123,6 +123,13 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return null;
     }
 
+    public Date obterDataSolicitacao() {
+        return dataSolicitacao;
+    }
+
+    public Date obterDataFim() {
+        return dataFim;
+    }
 
     @Override
     public String toString() {

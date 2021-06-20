@@ -53,4 +53,12 @@ public class NivelCriticidade implements AggregateRoot<Integer>, Serializable {
     public Integer identity() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "tempoMedioA=" + tempoMedioA +
+                ", tempoMaximoA=" + tempoMaximoA +
+                ", tempoMedioR=" + tempoMedioR +
+                ", tempoMaximoR=" + tempoMaximoR;
+    }
 }
