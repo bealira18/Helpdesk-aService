@@ -1,7 +1,7 @@
 package eapli.base.antlr;
 
-import eapli.base.antlr.eapli.base.antlr.validarFormularioBaseVisitor;
-import eapli.base.antlr.eapli.base.antlr.validarFormularioParser;
+import eapli.base.antlr.validacaoFormulario.validarFormularioBaseVisitor;
+import eapli.base.antlr.validacaoFormulario.validarFormularioParser;
 
 import java.util.ArrayList;
 import java.util.List;

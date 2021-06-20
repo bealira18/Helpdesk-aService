@@ -1,15 +1,10 @@
 // Generated from C:/Users/Bea/OneDrive/Documentos/lei20_21_s4_2dc_05/base.core/src/main/java/eapli/base/antlr\validarFormulario.g4 by ANTLR 4.9.1
-package eapli.base.antlr.eapli.base.antlr;
-import eapli.base.antlr.eapli.base.antlr.validarFormularioListener;
-import eapli.base.antlr.eapli.base.antlr.validarFormularioVisitor;
+package eapli.base.antlr.validacaoFormulario;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class validarFormularioParser extends Parser {
