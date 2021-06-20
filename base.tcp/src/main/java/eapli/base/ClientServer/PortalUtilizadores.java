@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 
-public class PortalUtilizadores{
+public class PortalUtilizadores {
 
 
     private static final byte VERSION = 0;
@@ -23,21 +23,22 @@ public class PortalUtilizadores{
 
     public void runMain() throws Exception {
         byte[] data = new byte[300];
-        int numeroColaborador = 5;
 
         /*if(args.length!=1) {
             System.out.println(
                     "Server IPv4/IPv6 address or DNS name is required as argument");
             System.exit(1); }*/
 
-        try { serverIP = InetAddress.getByName("localhost"); }
-        catch(UnknownHostException ex) {
-            System.out.println("Invalid server: " + "192.168.1.93");
-            System.exit(1); }
+        try {
+            serverIP = InetAddress.getByName("localhost");
+        } catch (UnknownHostException ex) {
+            System.out.println("Invalid server: localhost");
+            System.exit(1);
+        }
 
         try {
-            sock = new Socket(serverIP, 32507); }
-        catch(Exception ex) {
+            sock = new Socket(serverIP, 32507);
+        } catch (Exception ex) {
             System.out.println("Failed to connect.");
             System.exit(1);
         }
@@ -52,7 +53,7 @@ public class PortalUtilizadores{
         serverConn.start();
 
 
-        for(int i = 3; i < 4; i++) { // read messages from the console and send them to the server
+        for (int i = 3; i < 4; i++) { // read messages from the console and send them to the server
 
             //falta aqui o algoritmo para ir buscar o numero do colaborador que fez log in.
 
@@ -71,10 +72,10 @@ public class PortalUtilizadores{
 
             data[0] = VERSION;
             data[1] = (byte) i;
-            data[2] = (Byte.SIZE/8);
-            data[3] = (byte) numeroColaborador;
+            data[2] = (Byte.SIZE / 8);
+            data[3] = (byte) 8;
             sOut.write(data.length);
-            sOut.write(data,0, data.length);
+            sOut.write(data, 0, data.length);
         }
 
         serverConn.join();
@@ -82,7 +83,8 @@ public class PortalUtilizadores{
     }
 }
 
-class TcpChatCliConn implements Runnable{
+class TcpChatCliConn implements Runnable {
+    private static String fraseHtml;
     private Socket s;
     private DataInputStream sIn;
 
@@ -95,34 +97,38 @@ class TcpChatCliConn implements Runnable{
     private static final byte ACEITE = 8;
     private static final byte REJEITADO = 9;
 
-    public TcpChatCliConn(Socket tcp_s) { s=tcp_s;}
+    public TcpChatCliConn(Socket tcp_s) {
+        s = tcp_s;
+    }
+
 
     public void run() {
         byte[] data = new byte[300];
 
         try {
             sIn = new DataInputStream(s.getInputStream());
-            for(int i = 0; i < 1; i++) {
+            for (int i = 1; i < 2; i++) {
                 int data_length = sIn.read();
-                if(data_length==0) break;
-                sIn.read(data,0,data_length);
-                int opcao = data[1];
+                if (data_length == 0) break;
+                sIn.read(data, 0, data_length);
+                int opcao = NUMERO_TAREFAS_DEPOIS_PRAZO; //data[1];
 
-                if(opcao == NUMERO_TAREFAS_PENDENTES){
+                if (opcao == NUMERO_TAREFAS_PENDENTES) {
                     int numeroTarefas = data[3];
-                    System.out.printf("O número de tarefas pendentes é %d.\n", numeroTarefas);
+
+                    fraseHtml = "</ul><hr><p>O número de tarefas pendentes é" + numeroTarefas + " </p><hr>";
                 }
-                if(opcao == NUMERO_TAREFAS_DEPOIS_PRAZO){
+                if (opcao == NUMERO_TAREFAS_DEPOIS_PRAZO) {
                     int numeroTarefas = data[3];
-                    System.out.printf("O número de tarefas depois do prazo de entrega é %d.\n", numeroTarefas);
+                    fraseHtml = "Numero de tarefas depois do prazo de entrega -> " + numeroTarefas ;
                 }
-                if(opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA){
+                if (opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA) {
                     int numeroTarefas = data[3];
-                    System.out.printf("O número de tarefas cujo prazo acaba em menos de um dia é %d\n", numeroTarefas);
+                    fraseHtml = "</ul><hr><p>O número de tarefas cujo prazo acaba em menos de um dia é " + numeroTarefas + " </p><hr>";
                 }
-                if(opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE){
+                if (opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE) {
                     String listaTarefas = new String(data, 3, data[2]);
-                    System.out.printf("Os ids das tarefas ordenadas por urgência e criticidade são %s\n", listaTarefas);
+                    fraseHtml = "</ul><hr><p>Os ids das tarefas ordenadas por urgência e criticidade são " + listaTarefas + " </p><hr>";
                 }
 
                 /*frase = new String(data, 3, 1);
@@ -151,7 +157,18 @@ class TcpChatCliConn implements Runnable{
                 }
                 System.out.println("O pedido, neste momento, encontra-se no estado " + estado + "!");*/
             }
+        } catch (IOException ex) {
+            System.out.println("Client disconnected.");
         }
-        catch(IOException ex) { System.out.println("Client disconnected."); }
+
+    }
+
+    public static String infoTarefasTCp() {
+
+        return "<html><head><title>HTTP demo</title>" +
+                "<body bgcolor=#92d6cc onload=\"refreshVotes()\">" +
+                "<h1 > LAPR4 - 2D C - G5 </h1 > " +
+                "<h3 > Goncalo Corredoura 1190617 / Beatriz Meireles 1200607 / Joao Moreira 1200615 </h3 > " +
+               " </ul><hr><p>"+fraseHtml+"</p><hr> </body ></html >";
     }
 }

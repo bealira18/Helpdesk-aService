@@ -23,15 +23,15 @@ public class MotorFluxoAtividades {
     private static HashMap<Socket, DataOutputStream> cliList = new HashMap<>();
 
     public static synchronized void sendToAll(int len, byte[] data) throws Exception {
-        for(DataOutputStream cOut: cliList.values()) {
+        for (DataOutputStream cOut : cliList.values()) {
             cOut.write(len);
-            cOut.write(data,0,len);
+            cOut.write(data, 0, len);
         }
 
     }
 
     public static synchronized void addCli(Socket s) throws Exception {
-        cliList.put(s,new DataOutputStream(s.getOutputStream()));
+        cliList.put(s, new DataOutputStream(s.getOutputStream()));
     }
 
     public static synchronized void remCli(Socket s) throws Exception {
@@ -47,13 +47,15 @@ public class MotorFluxoAtividades {
         Server server = Server.createTcpServer().start();
         int i;
 
-        try { sock = new ServerSocket(32507); }
-        catch(IOException ex) {
+        try {
+            sock = new ServerSocket(32507);
+        } catch (IOException ex) {
             System.out.println("Local port number not available.");
-            System.exit(1); }
+            System.exit(1);
+        }
 
-        while(true) {
-            Socket s=sock.accept(); // wait for a new client connection request
+        while (true) {
+            Socket s = sock.accept(); // wait for a new client connection request
             addCli(s);
             Thread cli = new TcpChatSrvClient(s);
             cli.start();
@@ -78,7 +80,9 @@ class TcpChatSrvClient extends Thread {
     private PesquisarTarefaController ptc = new PesquisarTarefaController();
     private TarefasTCPController ttc = new TarefasTCPController();
 
-    public TcpChatSrvClient(Socket s) { myS=s;}
+    public TcpChatSrvClient(Socket s) {
+        myS = s;
+    }
 
     public void run() {
         int nChars;
@@ -86,28 +90,29 @@ class TcpChatSrvClient extends Thread {
 
         try {
             sIn = new DataInputStream(myS.getInputStream());
-            while(true) {
-                nChars=sIn.read();
-                if(nChars==0) break; // empty line means client wants to exit
-                sIn.read(data,0,nChars);
+            while (true) {
+                nChars = sIn.read();
+                if (nChars == 0) break; // empty line means client wants to exit
+                sIn.read(data, 0, nChars);
                 int opcao = data[1];
-                if(opcao == NUMERO_TAREFAS_PENDENTES){
+                if (opcao == NUMERO_TAREFAS_PENDENTES) {
                     int colaborador = data[3];
                     data = numeroTarefasPendentesColaborador(colaborador);
                 }
-                if(opcao == NUMERO_TAREFAS_DEPOIS_PRAZO){
+                if (opcao == NUMERO_TAREFAS_DEPOIS_PRAZO) {
                     int colaborador = data[3];
                     data = numeroTarefasDepoisPrazo(colaborador);
+
                 }
-                if(opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA){
+                if (opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA) {
                     int colaborador = data[3];
                     data = numeroTarefasEmMenosDeUmDia(colaborador);
                 }
-                if(opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE){
+                if (opcao == LISTA_TAREFAS_URGENCIA_CRITICIDADE) {
                     int colaborador = data[3];
                     data = listaTarefasUrgenciaCriticidade(colaborador);
                 }
-                if(opcao == ATUALIZAR_PEDIDO){
+                if (opcao == ATUALIZAR_PEDIDO) {
                     int idPedido = data[3];
                     data = atualizarEstadoPedido(idPedido);
                 }
@@ -124,23 +129,25 @@ class TcpChatSrvClient extends Thread {
                 data[5] = bytes[2];
                 data[6] = bytes[3];*/
 
-                MotorFluxoAtividades.sendToAll(data.length,data);
+                MotorFluxoAtividades.sendToAll(data.length, data);
+
             }
             // the client wants to exit
             MotorFluxoAtividades.remCli(myS);
+        } catch (Exception ex) {
+            System.out.println("Error");
         }
-        catch(Exception ex) { System.out.println("Error"); }
+
     }
 
 
-
-    public byte[] atualizarEstadoPedido(int idPedido){
+    public byte[] atualizarEstadoPedido(int idPedido) {
 
         byte[] data = new byte[300];
 
         Pedido pedido = pedidoRepository.ofIdentity(idPedido).get();
 
-        if(pedido == null) {
+        if (pedido == null) {
             data[0] = VERSION;
             data[1] = REJEITADO;
             data[2] = 0;
@@ -149,37 +156,37 @@ class TcpChatSrvClient extends Thread {
             data[1] = ATUALIZAR_PEDIDO;
         }
 
-        if(pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO){
+        if (pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO) {
             List<InfoTarefa> tarefas;
             tarefas = pedido.obterListaTarefas();
-            for(InfoTarefa t : tarefas){
-                if (t.obterTarefa().obterTipo()==true && t.obterEstado()== EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado()==1){
+            for (InfoTarefa t : tarefas) {
+                if (t.obterTarefa().obterTipo() == true && t.obterEstado() == EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado() == 1) {
                     pedido.mudarEstadoPedido(EstadoPedido.APROVADO);
                     int resultado = 3;
                     data[0] = VERSION;
-                    data[2] = (Byte.SIZE/8);
+                    data[2] = (Byte.SIZE / 8);
                     data[3] = (byte) resultado;
                     return data;
                 }
-                if (t.obterTarefa().obterTipo()==true && t.obterEstado()== EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado()==-1){
+                if (t.obterTarefa().obterTipo() == true && t.obterEstado() == EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado() == -1) {
                     pedido.mudarEstadoPedido(EstadoPedido.REJEITADO);
                     int resultado = 4;
                     data[0] = VERSION;
-                    data[2] = (Byte.SIZE/8);
+                    data[2] = (Byte.SIZE / 8);
                     data[3] = (byte) resultado;
                     return data;
                 }
-                if (t.obterTarefa().obterTipo()==true && (t.obterEstado()== EstadoTarefa.EM_EXECUÇAO || t.obterEstado()==EstadoTarefa.ATRIBUIDA)){
+                if (t.obterTarefa().obterTipo() == true && (t.obterEstado() == EstadoTarefa.EM_EXECUÇAO || t.obterEstado() == EstadoTarefa.ATRIBUIDA)) {
                     int resultado = 2;
                     data[0] = VERSION;
-                    data[2] = (Byte.SIZE/8);
+                    data[2] = (Byte.SIZE / 8);
                     data[3] = (byte) resultado;
                     return data;
                 }
             }
 
         }
-        if(pedido.obterEstadoPedido() == EstadoPedido.EM_RESOLUCAO) {
+        if (pedido.obterEstadoPedido() == EstadoPedido.EM_RESOLUCAO) {
             List<InfoTarefa> tarefas;
             tarefas = pedido.obterListaTarefas();
             for (InfoTarefa t : tarefas) {
@@ -187,65 +194,65 @@ class TcpChatSrvClient extends Thread {
                     pedido.mudarEstadoPedido(EstadoPedido.CONCLUIDO);
                     int resultado = 6;
                     data[0] = VERSION;
-                    data[2] = (Byte.SIZE/8);
+                    data[2] = (Byte.SIZE / 8);
                     data[3] = (byte) resultado;
                     return data;
                 }
                 if (t.obterTarefa().obterTipo() == false && (t.obterEstado() == EstadoTarefa.EM_EXECUÇAO || t.obterEstado() == EstadoTarefa.ATRIBUIDA)) {
                     int resultado = 5;
                     data[0] = VERSION;
-                    data[2] = (Byte.SIZE/8);
+                    data[2] = (Byte.SIZE / 8);
                     data[3] = (byte) resultado;
                     return data;
                 }
             }
         }
-        if(pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
+        if (pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
             int resultado = 1;
             data[0] = VERSION;
-            data[2] = (Byte.SIZE/8);
+            data[2] = (Byte.SIZE / 8);
             data[3] = (byte) resultado;
             return data;
         }
         return null;
     }
 
-    public byte[] numeroTarefasPendentesColaborador(int numeroColaborador){
+    public byte[] numeroTarefasPendentesColaborador(int numeroColaborador) {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasPendentesDoColab(numeroColaborador);
         data[0] = VERSION;
         data[1] = NUMERO_TAREFAS_PENDENTES;
-        data[2] = (Byte.SIZE/8);
+        data[2] = (Byte.SIZE / 8);
         data[3] = (byte) numeroTarefas;
         return data;
     }
 
-    public byte[] numeroTarefasDepoisPrazo(int numeroColaborador){
+    public byte[] numeroTarefasDepoisPrazo(int numeroColaborador) {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasDpsPrazo(numeroColaborador);
         data[0] = VERSION;
         data[1] = NUMERO_TAREFAS_DEPOIS_PRAZO;
-        data[2] = (Byte.SIZE/8);
+        data[2] = (Byte.SIZE / 8);
         data[3] = (byte) numeroTarefas;
         return data;
     }
 
-    public byte[] numeroTarefasEmMenosDeUmDia(int numeroColaborador){
+    public byte[] numeroTarefasEmMenosDeUmDia(int numeroColaborador) {
         byte[] data = new byte[300];
         int numeroTarefas = ttc.numTarefasTerminamEmMenos1Dia(numeroColaborador);
         data[0] = VERSION;
         data[1] = NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA;
-        data[2] = (Byte.SIZE/8);
+        data[2] = (Byte.SIZE / 8);
         data[3] = (byte) numeroTarefas;
         return data;
     }
 
-    public byte[] listaTarefasUrgenciaCriticidade(int numeroColaborador){
+    public byte[] listaTarefasUrgenciaCriticidade(int numeroColaborador) {
         byte[] data = new byte[300];
         String finalString = "";
         List<InfoTarefa> tarefas = ttc.listarTarefasPorUrgenciaECriticidade(numeroColaborador);
-        for (int i = 0; i < tarefas.size(); i++){
-            if(i != (tarefas.size()-1)) {
+        for (int i = 0; i < tarefas.size(); i++) {
+            if (i != (tarefas.size() - 1)) {
                 int id = tarefas.get(i).obterId();
                 String idString = String.valueOf(id);
                 idString += ",";
@@ -261,7 +268,7 @@ class TcpChatSrvClient extends Thread {
         data[1] = LISTA_TAREFAS_URGENCIA_CRITICIDADE;
         data[2] = (byte) tamanho;
         byte[] string = finalString.getBytes();
-        for(int i=3, j=0; j < string.length; i++, j++){
+        for (int i = 3, j = 0; j < string.length; i++, j++) {
             data[i] = string[j];
         }
         return data;

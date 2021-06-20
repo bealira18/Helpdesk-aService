@@ -24,6 +24,7 @@
 package eapli.base.app.backoffice.console.presentation;
 
 import eapli.base.Application;
+import eapli.base.ClientServer.HTTPServerAjax;
 import eapli.base.ClientServer.ThreadClient;
 import eapli.base.ClientServer.ThreadServer;
 import eapli.base.app.backoffice.console.presentation.authz.AddUserUI;
@@ -46,6 +47,7 @@ import eapli.base.app.backoffice.console.presentation.tipoEquipa.AddTipoEquipaAc
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.ListarTipoEquipaAction;
 import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEquipaAction;
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
+import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.tarefamanagement.domain.ThreadPrincipal;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
@@ -53,6 +55,7 @@ import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
+import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.ShowMessageAction;
@@ -60,6 +63,10 @@ import eapli.framework.presentation.console.menu.HorizontalMenuRenderer;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
 
 import static java.lang.Thread.sleep;
 
@@ -136,8 +143,8 @@ public class MainMenu extends AbstractUI {
     private static final int EXECUTAR_TAREFA_MANUAL = 4; //COLAB
 
     //Pedido
-    private static final int ADD_PEDIDO=1;
-    private static final int DAR_FEEDBACK=2;
+    private static final int ADD_PEDIDO = 1;
+    private static final int DAR_FEEDBACK = 2;
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
@@ -149,7 +156,7 @@ public class MainMenu extends AbstractUI {
     private static final int EQUIPA_OPTION = 7;
     private static final int TIPOEQUIPA_OPTION = 8;
     private static final int TAREFA_OPTION = 9;
-    private static final int PEDIDO_OPTION=10;
+    private static final int PEDIDO_OPTION = 10;
 
     private static final String SEPARATOR_LABEL = "--------------";
 
@@ -174,7 +181,8 @@ public class MainMenu extends AbstractUI {
                 renderer = new HorizontalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
             } else {
                 renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);
-            }return renderer.render();
+            }
+            return renderer.render();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -189,6 +197,8 @@ public class MainMenu extends AbstractUI {
                 .orElse("Base [ ==Anonymous== ]");
     }
 
+    int cont = 0;
+
     private Menu buildMainMenu() throws Exception {
         final Menu mainMenu = new Menu();
 
@@ -200,16 +210,6 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.POWER_USER)) {
-
-            ThreadServer t1 = new ThreadServer();
-            t1.start();
-            try {
-                sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            ThreadClient t2  = new ThreadClient();
-            t2.start();
 
             ThreadPrincipal tp = new ThreadPrincipal();
             tp.start();
@@ -231,8 +231,8 @@ public class MainMenu extends AbstractUI {
             mainMenu.addSubMenu(TIPOEQUIPA_OPTION, tiposEquipaMenu);
             final Menu tarefasMenu = buildTarefasMenu();
             mainMenu.addSubMenu(TAREFA_OPTION, tarefasMenu);
-            final Menu pedidoMenu=buildPedidoMenu();
-            mainMenu.addSubMenu(PEDIDO_OPTION,pedidoMenu);
+            final Menu pedidoMenu = buildPedidoMenu();
+            mainMenu.addSubMenu(PEDIDO_OPTION, pedidoMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -279,9 +279,15 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.COLABORADOR)) {
-
-            //HTMLOpen html=new HTMLOpen();
-            //html.abrirHTML();
+            if (cont == 0) {
+                Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start chrome http://localhost:8080"});
+                ThreadServer t1 = new ThreadServer();
+                t1.start();
+                sleep(5000);
+                ThreadClient t2 = new ThreadClient();
+                t2.start();
+                cont++;
+            }
 
             final Menu tarefasMenu = buildTarefasMenu();
             mainMenu.addSubMenu(2, tarefasMenu);
@@ -391,9 +397,10 @@ public class MainMenu extends AbstractUI {
     private Menu buildTarefasMenu() {
         final Menu menu = new Menu("Tarefas >");
 
+
         // menu.addItem(CRIAR_TAREFA_MANUAL, "Criar Tarefa Manual", new CriarTarefaAction());
         menu.addItem(REIVINDICAR_TAREFA_MANUAL, "Reivindicar Tarefa", new ReivindicarTarefaAction());
-        menu.addItem(CONSULTAR_MINHAS_TAREFAS,"Consultar Minhas Tarefas",new ConsultarTarefaAction());
+        menu.addItem(CONSULTAR_MINHAS_TAREFAS, "Consultar Minhas Tarefas", new ConsultarTarefaAction());
         menu.addItem(EXECUTAR_TAREFA_MANUAL, "Executar Tarefa Manual", new ExecutarTarefaManualAction());
 
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
@@ -401,11 +408,11 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
-    private Menu buildPedidoMenu(){
-        final Menu menu=new Menu("Pedido >");
-        menu.addItem(ADD_PEDIDO,"Fazer um pedido",new AddPedidoAction());
+    private Menu buildPedidoMenu() {
+        final Menu menu = new Menu("Pedido >");
+        menu.addItem(ADD_PEDIDO, "Fazer um pedido", new AddPedidoAction());
 
-        menu.addItem(DAR_FEEDBACK,"Dar feedback",new DarFeedbackAction());
+        menu.addItem(DAR_FEEDBACK, "Dar feedback", new DarFeedbackAction());
 
         return menu;
     }
@@ -423,7 +430,7 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
-    private Menu buildCatalogosEServicosMenuParaColaborador(){
+    private Menu buildCatalogosEServicosMenuParaColaborador() {
         final Menu menu = new Menu("Catálogos/Serviços >");
 
         menu.addItem(1, "Listar Catálogos e Respetivos Serviços disponíveis", new ListarCatalogosEServicoAction());

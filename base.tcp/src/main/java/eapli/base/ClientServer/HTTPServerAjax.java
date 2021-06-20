@@ -1,6 +1,8 @@
 package eapli.base.ClientServer;
 
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -18,8 +20,6 @@ public class HTTPServerAjax {
     public void run() throws Exception {
         Socket cliSock;
         byte[] data = new byte[300];
-
-        int numeroColaborador = 8;
 
         /*if(args.length!=1) {
             System.out.println("Local port number required at the command line.");
@@ -46,11 +46,9 @@ public class HTTPServerAjax {
             cliSock = sock.accept();
             HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
             req.start();
-            incAccessesCounter();
         }
     }
 
-    private static synchronized void incAccessesCounter(){
-        accessesCounter++;
-    }
+
+
 }

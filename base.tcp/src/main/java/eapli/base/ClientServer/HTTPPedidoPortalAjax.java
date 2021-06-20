@@ -1,6 +1,6 @@
 package eapli.base.ClientServer;
 
-//import eapli.base.tarefamanagement.application.TarefasTCPController;
+import eapli.base.tarefamanagement.application.TarefasTCPController;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,14 +13,16 @@ public class HTTPPedidoPortalAjax extends Thread {
     Socket sock;
     DataInputStream inS;
     DataOutputStream outS;
-    //TarefasTCPController tarefasTCPController = new TarefasTCPController();
+
 
     public HTTPPedidoPortalAjax(Socket s, String f) {
         baseFolder = f;
         sock = s;
+
     }
 
     public void run() {
+
         try {
             outS = new DataOutputStream(sock.getOutputStream());
             inS = new DataInputStream(sock.getInputStream());
@@ -41,7 +43,7 @@ public class HTTPPedidoPortalAjax extends Thread {
                 if (request.getURI().equals("/votes")) {
 
                     response.setContentFromString(
-                            "</ul><hr><p> Tarefas Pendentes:  gonçalo e bea </p><hr>", "text/html");
+                             TcpChatCliConn.infoTarefasTCp(), "text/html");
                     response.setResponseStatus("200 Ok");
                 } else {
                     String fullname = System.getProperty("user.dir") + "\\base.tcp\\src\\main\\java\\eapli\\base\\ClientServer\\" + baseFolder + "/";
