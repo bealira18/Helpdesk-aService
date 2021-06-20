@@ -1,5 +1,6 @@
 package eapli.base.ClientServer;
 
+import ch.qos.logback.core.net.ssl.SSL;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.domain.EstadoPedido;
 import eapli.base.pedidomanagement.domain.Pedido;
@@ -10,6 +11,9 @@ import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import org.h2.tools.Server;
 
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,6 +25,8 @@ import java.util.List;
 public class MotorFluxoAtividades {
 
     private static HashMap<Socket, DataOutputStream> cliList = new HashMap<>();
+    //static final String TRUSTED_STORE="server_J.jks";
+    //static final String KEYSTORE_PASS="forgotten";
 
     public static synchronized void sendToAll(int len, byte[] data) throws Exception {
         for (DataOutputStream cOut : cliList.values()) {
@@ -41,12 +47,22 @@ public class MotorFluxoAtividades {
     }
 
     private static ServerSocket sock;
+    //private static SSLServerSocket sock;
 
 
     public void run() throws Exception {
         Server server = Server.createTcpServer().start();
         int i;
 
+        // Trust these certificates provided by authorized clients
+        //System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
+        //System.setProperty("javax.net.ssl.trustStorePassword",KEYSTORE_PASS);
+
+        // Use this certificate and private key as server certificate
+        //System.setProperty("javax.net.ssl.keyStore",TRUSTED_STORE);
+        //System.setProperty("javax.net.ssl.keyStorePassword",KEYSTORE_PASS);
+
+        //SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         try {
             sock = new ServerSocket(32507);
         } catch (IOException ex) {
@@ -75,6 +91,7 @@ class TcpChatSrvClient extends Thread {
     private static final byte ATUALIZAR_PEDIDO = 7;
     private static final byte ACEITE = 8;
     private static final byte REJEITADO = 9;
+    private static final byte DASHBOARD = 10;
 
     PedidoRepository pedidoRepository = PersistenceContext.repositories().pedido();
     private PesquisarTarefaController ptc = new PesquisarTarefaController();
@@ -86,7 +103,7 @@ class TcpChatSrvClient extends Thread {
 
     public void run() {
         int nChars;
-        byte[] data = new byte[300];
+        byte[] data = new byte[500];
 
         try {
             sIn = new DataInputStream(myS.getInputStream());
@@ -116,6 +133,35 @@ class TcpChatSrvClient extends Thread {
                     int idPedido = data[3];
                     data = atualizarEstadoPedido(idPedido);
                 }
+                if(opcao == DASHBOARD){
+                    int numeroColaborador = data[3];
+                    String tarefas1 = numeroTarefasPendentesColaborador2(numeroColaborador);
+                    String tarefas2 = numeroTarefasDepoisPrazo2(numeroColaborador);
+                    String tarefas3 = numeroTarefasEmMenosDeUmDia2(numeroColaborador);
+                    String listaTarefas = listaTarefasUrgenciaCriticidade2(numeroColaborador);
+                    String tarefas4 = "Lista de tarefas: "+listaTarefas;
+                    int tamanho1 = tarefas1.length();
+                    int tamanho2 = tarefas2.length();
+                    int tamanho3 = tarefas3.length();
+                    int tamanho4 = tarefas4.length();
+                    String finalString = tarefas1+tarefas2+tarefas3+tarefas4;
+                    int tamanho = finalString.length();
+                    byte[] tamanhoB = String.valueOf(tamanho).getBytes();
+                    data[0] = VERSION;
+                    data[1] = DASHBOARD;
+                    data[2] = (byte) tamanhoB.length;
+                    data[3] = (byte) tamanho1;
+                    data[4] = (byte) tamanho2;
+                    data[5] = (byte) tamanho3;
+                    data[6] = (byte) tamanho4;
+                    for(int i=0, j=7; i<tamanhoB.length; i++, j++){
+                        data[j] = tamanhoB[i];
+                    }
+                    byte[] string = finalString.getBytes();
+                    for (int i = 7 + tamanhoB.length, j = 0; j < string.length; i++, j++) {
+                        data[i] = string[j];
+                    }
+                }
 
                 /*InfoTarefa it = ptc.procurarInfoTarefaPorID(idPedido);
                 int idTarefa = it.obteridTarefa();
@@ -130,7 +176,6 @@ class TcpChatSrvClient extends Thread {
                 data[6] = bytes[3];*/
 
                 MotorFluxoAtividades.sendToAll(data.length, data);
-
             }
             // the client wants to exit
             MotorFluxoAtividades.remCli(myS);
@@ -272,5 +317,41 @@ class TcpChatSrvClient extends Thread {
             data[i] = string[j];
         }
         return data;
+    }
+
+    public String numeroTarefasPendentesColaborador2(int numeroColaborador) {
+        int numeroTarefas = ttc.numTarefasPendentesDoColab(numeroColaborador);
+        String numeroTarefasS = "Numero tarefas pendentes: "+numeroTarefas+" ";
+        return numeroTarefasS;
+    }
+
+    public String numeroTarefasDepoisPrazo2(int numeroColaborador) {
+        int numeroTarefas = ttc.numTarefasDpsPrazo(numeroColaborador);
+        String numeroTarefasS = "Numero tarefas depois do prazo limite: "+numeroTarefas+" ";
+        return numeroTarefasS;
+    }
+
+    public String numeroTarefasEmMenosDeUmDia2(int numeroColaborador) {
+        int numeroTarefas = ttc.numTarefasTerminamEmMenos1Dia(numeroColaborador);
+        String numeroTarefasS = "Numero tarefas cujo prazo termina em menos de um dia: "+numeroTarefas+" ";
+        return numeroTarefasS;
+    }
+
+    public String listaTarefasUrgenciaCriticidade2(int numeroColaborador) {
+        String finalString = "";
+        List<InfoTarefa> tarefas = ttc.listarTarefasPorUrgenciaECriticidade(numeroColaborador);
+        for (int i = 0; i < tarefas.size(); i++) {
+            if (i != (tarefas.size() - 1)) {
+                int id = tarefas.get(i).obterId();
+                String idString = String.valueOf(id);
+                idString += ",";
+                finalString += idString;
+            } else {
+                int id = tarefas.get(i).obterId();
+                String idString = String.valueOf(id);
+                finalString += idString;
+            }
+        }
+        return finalString;
     }
 }

@@ -1,7 +1,9 @@
 package eapli.base.ClientServer;
 
+import ch.qos.logback.core.net.ssl.SSL;
 import eapli.base.tarefamanagement.application.TarefasTCPController;
 
+import javax.net.ssl.SSLSocket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.net.Socket;
 
 public class HTTPPedidoPortalAjax extends Thread {
     String baseFolder;
+    //SSLSocket sock;
     Socket sock;
     DataInputStream inS;
     DataOutputStream outS;
@@ -31,13 +34,10 @@ public class HTTPPedidoPortalAjax extends Thread {
             System.out.println("Thread error on data streams creation");
         }
         try {
-            System.out.println("1");
             HTTPmessage request = new HTTPmessage(inS);
-            System.out.println("2");
             HTTPmessage response = new HTTPmessage();
-            System.out.println("3");
 
-            System.out.println(request.getURI());
+            //System.out.println(request.getURI());
 
             if (request.getMethod().equals("GET")) {
                 if (request.getURI().equals("/votes")) {

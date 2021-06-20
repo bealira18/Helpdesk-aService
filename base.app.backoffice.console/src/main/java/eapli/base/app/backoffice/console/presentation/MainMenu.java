@@ -288,7 +288,7 @@ public class MainMenu extends AbstractUI {
                 ThreadServer t1 = new ThreadServer();
                 t1.start();
                 sleep(5000);
-                ThreadClient t2 = new ThreadClient();
+                ThreadClient t2 = new ThreadClient(1, 0);
                 t2.start();
                 cont++;
             }

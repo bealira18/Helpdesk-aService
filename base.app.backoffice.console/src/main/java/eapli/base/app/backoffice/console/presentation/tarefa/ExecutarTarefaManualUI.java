@@ -1,10 +1,13 @@
 package eapli.base.app.backoffice.console.presentation.tarefa;
 
+import eapli.base.ClientServer.ThreadClient;
+import eapli.base.ClientServer.ThreadServer;
 import eapli.base.colaboradormanagement.application.ColaboradorComUserController;
 import eapli.base.colaboradormanagement.application.ListarColaboradoresController;
 import eapli.base.colaboradormanagement.application.PesquisarColaboradorController;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.infrastructure.persistence.PersistenceContext;
+import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.tarefamanagement.application.ConsultarTarefaController;
 import eapli.base.tarefamanagement.application.CriarTarefaManualController;
 import eapli.base.tarefamanagement.application.ExecutarTarefaManualController;
@@ -19,6 +22,8 @@ import eapli.framework.presentation.console.AbstractUI;
 import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 public class ExecutarTarefaManualUI extends AbstractUI {
 
@@ -74,9 +79,19 @@ public class ExecutarTarefaManualUI extends AbstractUI {
             }
         }while(flag==0);
 
-        etmc.executarTarefaManual(numero, idTarefa);
+        Pedido pedido = etmc.executarTarefaManual(numero, idTarefa);
 
         System.out.println("A tarefa com o id "+idTarefa+" foi executada com sucesso!");
+
+        ThreadServer t1 = new ThreadServer();
+        t1.start();
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ThreadClient t2 = new ThreadClient(2, pedido.obterId());
+        t2.start();
 
         return true;
     }

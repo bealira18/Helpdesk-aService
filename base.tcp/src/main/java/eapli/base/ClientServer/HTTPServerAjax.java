@@ -1,6 +1,11 @@
 package eapli.base.ClientServer;
 
 
+import ch.qos.logback.core.net.ssl.SSL;
+
+import javax.net.ssl.SSLServerSocket;
+import javax.net.ssl.SSLServerSocketFactory;
+import javax.net.ssl.SSLSocket;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -11,13 +16,16 @@ import java.net.Socket;
 public class HTTPServerAjax {
 
     static private final String BASE_FOLDER = "www";
+    //static private SSLServerSocket sock;
     static private ServerSocket sock;
+    //static SSLSocket socket;
     static Socket socket;
     static InetAddress serverIP;
     private static int accessesCounter;
     private static final byte VERSION = 0;
 
-    public void run() throws Exception {
+    public void run(int opcao, int idPedido) throws Exception {
+        //SSLSocket cliSock;
         Socket cliSock;
         byte[] data = new byte[300];
 
@@ -33,6 +41,7 @@ public class HTTPServerAjax {
         }*/
 
         try {
+            // SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             sock = new ServerSocket(8080);
         } catch (IOException ex) {
             System.out.println("Local port number not available: 8080");
@@ -40,7 +49,7 @@ public class HTTPServerAjax {
         }
 
         PortalUtilizadores pu = new PortalUtilizadores();
-        pu.runMain();
+        pu.runMain(opcao, idPedido);
 
         while (true) {
             cliSock = sock.accept();
