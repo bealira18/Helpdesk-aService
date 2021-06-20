@@ -1,12 +1,9 @@
 package eapli.base.pedidomanagement.domain;
 
-import eapli.base.colaboradormanagement.domain.Numero;
-import eapli.base.formulariomanagement.domain.Formulario;
 import eapli.base.formulariomanagement.domain.RespostasFormulario;
 import eapli.base.servicomanagement.domain.Servico;
 import eapli.base.servicomanagement.domain.Workflow;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
-import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.framework.domain.model.AggregateRoot;
 
 import javax.persistence.*;
@@ -105,6 +102,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return estadoPedido;
     }
 
+    public int obterNumeroS() {
+        return numeroS;
+    }
+
     public void darFeedback(Feedback feedback) {
         this.feedback = feedback;
     }
@@ -120,5 +121,15 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
     @Override
     public Integer identity() {
         return null;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Id= " + id +
+                ", dataSolicitacao= " + dataSolicitacao +
+                ", urgencia= " + urgencia +
+                ", estadoPedido= " + estadoPedido +
+                ", servico= " + servico.obterTitulo();
     }
 }
