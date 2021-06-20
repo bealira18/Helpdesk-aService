@@ -37,11 +37,7 @@ public class HTTPServerAjax {
         } catch (IOException ex) {
             System.out.println("Local port number not available: 8080");
             System.exit(1);
-<<<<<<< HEAD
         }
-=======
-        }*/
->>>>>>> 8cbd4f68ff41ea889d4295e92a8f9e64432596b2
 
         PortalUtilizadores pu = new PortalUtilizadores();
         pu.runMain();
