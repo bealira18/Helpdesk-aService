@@ -6,15 +6,13 @@ import eapli.framework.actions.Action;
 public class TipoEquipaBootstrapper implements Action {
 
     private final AdicionarTipoEquipaController addController=new AdicionarTipoEquipaController();
-    //private final EditarTipoEquipaController editarController=new EditarTipoEquipaController();
 
     @Override
     public boolean execute() {
 
-        addController.adicionarTipoEquipa("tipoequipa1","descricao1","#123456");
-        addController.adicionarTipoEquipa("tipoequipa2","descricao2","#654321");
+        addController.adicionarTipoEquipa("Tipo Equipa 1","Descricao 1","#123456");
+        addController.adicionarTipoEquipa("Tipo Equipa 2","Descricao 2","#654321");
 
-        //editarController.mudarDescricao("tipoequipa1","descricao nova");
         return true;
     }
 

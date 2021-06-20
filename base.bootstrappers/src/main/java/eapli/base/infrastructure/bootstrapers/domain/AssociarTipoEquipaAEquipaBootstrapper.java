@@ -11,8 +11,8 @@ public class AssociarTipoEquipaAEquipaBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        associarController.associarTipoEquipaAEquipa("EDF","tipoequipa1");
-        associarController.associarTipoEquipaAEquipa("EDC","tipoequipa2");
+        associarController.associarTipoEquipaAEquipa("ERecursos","Tipo Equipa 1");
+        associarController.associarTipoEquipaAEquipa("EReparacoes","Tipo Equipa 2");
 
         return true;
     }

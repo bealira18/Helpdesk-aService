@@ -18,8 +18,8 @@ public class AssociarNivelCriticidadeACatalogoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.associarNivelCriticidadeACatalogo("Catalogo1", "Ser campeão");
-        controller.associarNivelCriticidadeACatalogo("Catalogo2", "Ser doutor");
+        controller.associarNivelCriticidadeACatalogo("Catalogo1", "Primeiro objetivo");
+        controller.associarNivelCriticidadeACatalogo("Catalogo2", "Segundo objetivo");
 
         return true;
     }

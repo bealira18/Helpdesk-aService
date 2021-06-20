@@ -6,21 +6,17 @@
 package eapli.base.infrastructure.bootstrapers.domain;
 
 import eapli.base.nivelcriticidademanagement.application.DefinirNivelCriticidadeController;
-import eapli.base.nivelcriticidademanagement.domain.NivelCriticidade;
-import eapli.base.infrastructure.persistence.PersistenceContext;
-import eapli.base.nivelcriticidademanagement.repository.NivelCriticidadeRepository;
 import eapli.framework.actions.Action;
 
 public class NivelCriticidadeBootstrapper implements Action {
 
-    NivelCriticidadeRepository repository = PersistenceContext.repositories().nivelCriticidade();
     DefinirNivelCriticidadeController controller = new DefinirNivelCriticidadeController();
 
     @Override
     public boolean execute() {
 
-        controller.definirNivelCriticidade("Ser campeão", 15, 35, 5, "Elevada");
-        controller.definirNivelCriticidade("Ser doutor", 10, 20, 3, "Média");
+        controller.definirNivelCriticidade("Primeiro objetivo", 15, 35, 5, "Elevada");
+        controller.definirNivelCriticidade("Segundo objetivo", 10, 20, 3, "Média");
 
         return true;
     }

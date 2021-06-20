@@ -10,8 +10,8 @@ public class CriteriosEspecificacaoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        controller.adicionarCriteriosEspecificacao("EDF");
-        controller.adicionarCriteriosEspecificacao("EDC");
+        controller.adicionarCriteriosEspecificacao("ERecursos");
+        controller.adicionarCriteriosEspecificacao("EReparacoes");
 
         return true;
     }

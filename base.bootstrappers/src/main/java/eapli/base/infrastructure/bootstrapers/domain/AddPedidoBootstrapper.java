@@ -21,11 +21,11 @@ public class AddPedidoBootstrapper implements Action {
     public boolean execute() {
 
         apc.addPedido(new Date(2021 / 5 / 18),"u",8, "cod1");
-        apc.addPedido(new Date(2021 / 9 / 3),"u",5, "cod2");
+        apc.addPedido(new Date(2021 / 9 / 3),"u",5, "cod1");
         apc.addPedido(new Date(2021 / 11 / 25),"u",36, "cod2");
 
         ctc.novaTarefa("cod1", 1);
-        ctc.novaTarefa("cod2", 2);
+        ctc.novaTarefa("cod1", 2);
         ctc.novaTarefa("cod2", 2);
 
         return true;
