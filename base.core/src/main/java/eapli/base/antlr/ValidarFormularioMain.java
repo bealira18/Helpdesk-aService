@@ -26,7 +26,6 @@ public class ValidarFormularioMain {
         FormularioVisitor visitor = new FormularioVisitor();
         visitor.visit(tree);
 
-        System.out.println(listener.getResults());
     }
 
 }
