@@ -20,9 +20,22 @@ public class AddPedidoBootstrapper implements Action {
     @Override
     public boolean execute() {
 
-        apc.addPedido(new Date(2021 / 5 / 18),"u",8, "cod1");
-        apc.addPedido(new Date(2021 / 9 / 3),"u",5, "cod1");
-        apc.addPedido(new Date(2021 / 11 / 25),"u",36, "cod2");
+        SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+        Date date1 = new Date();
+        Date date2 = new Date();
+        Date date3 = new Date();
+
+        try {
+            date1=DateFor.parse("18/05/2020");
+            date2=DateFor.parse("03/04/2021");
+            date3=DateFor.parse("25/11/2019");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        apc.addPedido(date1,"u",8, "cod1");
+        apc.addPedido(date2,"u",5, "cod1");
+        apc.addPedido(date3,"u",36, "cod2");
 
         ctc.novaTarefa("cod1", 1);
         ctc.novaTarefa("cod1", 2);

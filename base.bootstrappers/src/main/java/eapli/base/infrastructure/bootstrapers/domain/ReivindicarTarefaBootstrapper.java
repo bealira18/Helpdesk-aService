@@ -12,7 +12,7 @@ public class ReivindicarTarefaBootstrapper implements Action {
 
         reivindicarTarefa.reivindicarTarefaPendente(1, 8);
         reivindicarTarefa.reivindicarTarefaPendente(3, 5);
-        reivindicarTarefa.reivindicarTarefaPendente(5, 36);
+        reivindicarTarefa.reivindicarTarefaPendente(4, 36);
 
         return true;
     }
