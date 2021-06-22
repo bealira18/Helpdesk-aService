@@ -283,6 +283,10 @@ public class MainMenu extends AbstractUI {
         }
 
         if (authz.isAuthenticatedUserAuthorizedTo(BaseRoles.COLABORADOR)) {
+
+            ThreadPrincipal tp = new ThreadPrincipal();
+            tp.start();
+
             if (cont == 0) {
                 Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start chrome http://localhost:8080"});
                 ThreadServer t1 = new ThreadServer();
@@ -298,6 +302,9 @@ public class MainMenu extends AbstractUI {
 
             final Menu catalogosEServicosMenu = buildCatalogosEServicosMenuParaColaborador();
             mainMenu.addSubMenu(3, catalogosEServicosMenu);
+
+            final Menu pedidosMenu=buildPedidoMenu();
+            mainMenu.addSubMenu(4,pedidosMenu);
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {

@@ -11,10 +11,10 @@
     </parent>
         
     <groupId>eapli</groupId>
-    <artifactId>base.app.backoffice.console</artifactId>
+    <artifactId>base.tcp</artifactId>
     <packaging>jar</packaging>
 
-    <name>base.app.backoffice.console</name>
+    <name>base.tcp</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

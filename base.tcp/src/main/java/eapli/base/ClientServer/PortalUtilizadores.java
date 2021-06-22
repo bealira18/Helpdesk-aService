@@ -186,21 +186,26 @@ class TcpChatCliConn implements Runnable {
                     }
                     idTarefas = string4.substring(indexInicioIds);
                     String[] tarefasId = idTarefas.split(",");
-                    for(String s : tarefasId){
-                        int tarefaId = Integer.parseInt(s);
-                        InfoTarefa infoTarefa = infoTarefaRepository.ofIdentity(tarefaId).get();
-                        String aprovacao =null;
-                        if(infoTarefa.obterTarefa().obterTipo()==true){
-                            aprovacao = "Aprovacao";
-                        } else {
-                            aprovacao = "Realizacao";
+                    if(tarefasId[0]==""){
+                        String respostaNull="Nao tem tarefas pendentes!!";
+                        fraseHtml4 = respostaNull;
+                    }else {
+                        for (String s : tarefasId) {
+                            int tarefaId = Integer.parseInt(s);
+                            InfoTarefa infoTarefa = infoTarefaRepository.ofIdentity(tarefaId).get();
+                            String aprovacao = null;
+                            if (infoTarefa.obterTarefa().obterTipo() == true) {
+                                aprovacao = "Aprovacao";
+                            } else {
+                                aprovacao = "Realizacao";
+                            }
+                            String tarefaString = "Id: " + infoTarefa.obterId() + "<br>Data limite: " + infoTarefa.obterDataLimite() +
+                                    "<br>Prioridade: " + infoTarefa.obterPrioridade() + "<br>Tipo de tarefa: " + aprovacao +
+                                    "<br>Descricao: " + infoTarefa.obterTarefa().obterDescricao() + "<br> <br>";
+                            finalString4 += tarefaString;
                         }
-                        String tarefaString = "Id: "+infoTarefa.obterId()+"<br>Data limite: "+infoTarefa.obterDataLimite()+
-                                "<br>Prioridade: "+infoTarefa.obterPrioridade()+"<br>Tipo de tarefa: "+aprovacao+
-                                "<br>Descricao: "+infoTarefa.obterTarefa().obterDescricao()+"<br> <br>";
-                        finalString4 += tarefaString;
+                        fraseHtml4 = finalString4;
                     }
-                    fraseHtml4 = finalString4;
                 }
 
                 String estado = null;

@@ -60,17 +60,12 @@ public class AddPedidoUI extends AbstractUI {
                 numero=Console.readInteger("Titulo colaborador pretendido: ");
         }
 
-        Iterable<Catalogo> catalogos=controller.listarCatálogos(numero);
-
-        System.out.println("Catalogos:\n");
-
-        for(Catalogo c : catalogos)
-            System.out.println(c.toString()+"\n");
-
         Iterable<Servico> servicos=controller.listarServicosDeCatalogo(numero);
 
-        for(Servico s : servicos)
-            System.out.println(s.toString()+"\n");
+        for(Servico s : servicos) {
+            if(s.estaCompleto())
+                System.out.println(s.toString() + "\n");
+        }
 
         //escolher serviço
 
