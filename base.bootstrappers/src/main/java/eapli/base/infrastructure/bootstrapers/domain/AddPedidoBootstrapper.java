@@ -39,7 +39,7 @@ public class AddPedidoBootstrapper implements Action {
 
         ctc.novaTarefa("cod1", 1);
         ctc.novaTarefa("cod1", 2);
-        ctc.novaTarefa("cod2", 2);
+        ctc.novaTarefa("cod2", 3);
 
         return true;
     }

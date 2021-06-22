@@ -11,8 +11,8 @@ import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.Tarefa;
 import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
 import eapli.base.tarefamanagement.repository.TarefaRepository;
-import java.util.Date;
-import java.util.List;
+
+import java.util.*;
 
 public class CriarTarefaController {
 
@@ -50,19 +50,39 @@ public class CriarTarefaController {
         if(tarefas==null)
             return;
 
+        int count=0;
+
         for(Tarefa t : tarefas){
             InfoTarefa infoTarefa=new InfoTarefa(p.obterDataLimite(),prioridade);
             infoTarefa.associarTarefa(t);
             infoTarefaRepository.save(infoTarefa);
+            count++;
         }
         List<InfoTarefa> infoTarefas = (List<InfoTarefa>) infoTarefaRepository.findAll();
+        List<InfoTarefa> infoTarefasFinal=new ArrayList<>();
         for(InfoTarefa it : infoTarefas){
             for(Tarefa t : tarefas){
                 if(it.obterTarefa().obterId()==t.obterId()){
-                    p.obterListaTarefas().add(it);
+                    //p.obterListaTarefas().add(it);
+                    infoTarefasFinal.add(it);
                 }
             }
         }
+
+        Collections.sort(infoTarefasFinal, new Comparator<InfoTarefa>() {
+            @Override
+            public int compare(InfoTarefa it1, InfoTarefa it2) {
+                if(it2.obterDataInicio().getTime()>(it1.obterDataInicio().getTime()))
+                    return 1;
+                else
+                    return -1;
+            }
+        });
+
+        for(int i=0;i<count;i++){
+            p.obterListaTarefas().add(infoTarefasFinal.get(i));
+        }
+
         pedidoRepository.save(p);
     }
 
