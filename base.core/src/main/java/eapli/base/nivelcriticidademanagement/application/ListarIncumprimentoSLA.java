@@ -38,7 +38,7 @@ public class ListarIncumprimentoSLA {
 
         for(Servico s : servicoRepository.findAll()){
             for(Pedido p : pedidos) {
-                if (s.obterId() == idServico && s.estaCompleto() == true && p.obterServico()==s) {
+                if (s.obterId() == idServico && s.estaCompleto() == true && p.obterServico().compareTo(s.obterCod())==0) {
                     pedidosFinal.add(p);
                 }
             }
