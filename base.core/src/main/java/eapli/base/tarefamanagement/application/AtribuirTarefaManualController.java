@@ -27,27 +27,58 @@ public class AtribuirTarefaManualController {
     private final ColaboradorRepository colaboradorRepository=PersistenceContext.repositories().colaborador();
     private final InfoTarefaRepository infoTarefaRepository = PersistenceContext.repositories().infoTarefa();
 
-    public void atribuirTarefas1(InfoTarefa t1){
+    public boolean atribuirTarefas1(InfoTarefa t1){
         //int idTarefa = t1.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t1);
         Date dataUltimaTarefaDoColaborador = null;
         Colaborador colaboradorEscolhido = null;
+        if(colaboradoresDisponiveis.size()==0){
+            System.out.println("Não existem colaboradores disponíveis para a tarefa"+t1.obterId()+"!\n");
+            return false;
+        }
+        if(colaboradoresDisponiveis.size()==1){
+            colaboradorEscolhido = colaboradoresDisponiveis.get(0);
+            System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1, pelo facto de só haver um colaborador disponível!\n", t1.obterId());
+            guardarColaboradorEscolhido(colaboradorEscolhido, t1);
+            return true;
+        }
+
+        for(Colaborador c : colaboradoresDisponiveis){
+            List<InfoTarefa> list = c.tarefas();
+            if(list.size()==0){
+                colaboradorEscolhido = c;
+                System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1, porque o colaborador não tinha qualquer tarefa!\n", t1.obterId());
+                guardarColaboradorEscolhido(colaboradorEscolhido, t1);
+                return true;
+            }
+        }
+
+        Colaborador primeiroColaborador = null;
         for (Colaborador c : colaboradoresDisponiveis){
             List<InfoTarefa> its = c.tarefas();
             for( InfoTarefa it : its){
                 if(it.obterDataFim() != null){
-                    dataUltimaTarefaDoColaborador = it.obterDataFim();
-                    colaboradorEscolhido = c;
-                    break;
+                    if(dataUltimaTarefaDoColaborador==null){
+                        dataUltimaTarefaDoColaborador = it.obterDataFim();
+                        colaboradorEscolhido = c;
+                        primeiroColaborador = c;
+                    }
+                    if(it.obterDataFim().compareTo(dataUltimaTarefaDoColaborador)>0){
+                        dataUltimaTarefaDoColaborador = it.obterDataFim();
+                    }
                 }
             }
             if (dataUltimaTarefaDoColaborador != null && colaboradorEscolhido != null){
                 break;
             }
         }
+        if(dataUltimaTarefaDoColaborador == null && colaboradorEscolhido == null){
+            atribuirTarefas2(t1);
+            return false;
+        }
         Date dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
         for(Colaborador c : colaboradoresDisponiveis){
-            if(c!=colaboradoresDisponiveis.get(0)){
+            if(c!=primeiroColaborador){
                 List<InfoTarefa> ts = c.tarefas();
                 for( InfoTarefa it : ts) {
                     if (it.obterDataFim() != null) {
@@ -63,7 +94,7 @@ public class AtribuirTarefaManualController {
                     }
                 }
             }
-            if(colaboradoresDisponiveis.get(0)==c){
+            if(c==primeiroColaborador){
                 dataUltimaTarefaMaisAntiga = dataUltimaTarefaDoColaborador;
                 colaboradorEscolhido = c;
             }
@@ -98,6 +129,7 @@ public class AtribuirTarefaManualController {
         }
         if(contadorTarefasNaoTerminadas!=0) {
             atribuirTarefas2(t1);
+            return true;
         }
 
         /*Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
@@ -119,21 +151,45 @@ public class AtribuirTarefaManualController {
                 }
             }
         }*/
-        colaboradorEscolhido.reivindicarTarefa(t1);
-        t1.associarColaborador(colaboradorEscolhido);
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1!\n", t1.obterId());
-        t1.mudarEstado(EstadoTarefa.ATRIBUIDA);
-        colaboradorRepository.save(colaboradorEscolhido);
-        infoTarefaRepository.save(t1);
-        enviarEmail(colaboradorEscolhido);
-        System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
+        guardarColaboradorEscolhido(colaboradorEscolhido, t1);
+        return true;
     }
 
-    public void atribuirTarefas2(InfoTarefa t2){
+    public boolean atribuirTarefas2(InfoTarefa t2){
         //int idTarefa = t2.obteridTarefa();
         List<Colaborador> colaboradoresDisponiveis = obterColaboradoresDisponiveis(t2);
-        Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
-        List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
+        Colaborador colaboradorEscolhido = null;
+        List<InfoTarefa> tarefasEscolhido = new ArrayList<>();
+        if(colaboradoresDisponiveis.size()==0){
+            System.out.println("Não existem colaboradores disponíveis para a tarefa"+t2.obterId()+"!\n");
+            return true;
+        }
+        if(colaboradoresDisponiveis.size()==1){
+            colaboradorEscolhido = colaboradoresDisponiveis.get(0);
+            System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, pelo facto de só haver um colaborador disponível!\n", t2.obterId());
+            guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+        }
+
+        for(Colaborador c : colaboradoresDisponiveis){
+            int tarefasPendentes = 0;
+            List<InfoTarefa> list = c.tarefas();
+            if(list.size()==0){
+                colaboradorEscolhido = c;
+                System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, porque o colaborador não tinha qualquer tarefa!\n", t2.obterId());
+                guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+            }
+            for(InfoTarefa it : list){
+                if(it.obterEstado()==EstadoTarefa.ATRIBUIDA || it.obterEstado()==EstadoTarefa.EM_EXECUÇAO){
+                    tarefasPendentes++;
+                }
+            }
+            if(tarefasPendentes==0){
+                colaboradorEscolhido = c;
+                System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, porque o colaborador não tinha tarefas pendentes!\n", t2.obterId());
+                guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+            }
+        }
         int tempoMedioEscolhido = 0;
         for(InfoTarefa it : tarefasEscolhido){
             if (it.obterEstado()!=EstadoTarefa.TERMINADA){
@@ -153,12 +209,17 @@ public class AtribuirTarefaManualController {
                 colaboradorEscolhido = c;
             }
         }
-        colaboradorEscolhido.reivindicarTarefa(t2);
-        t2.associarColaborador(colaboradorEscolhido);
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2!\n", t2.obterId());
-        t2.mudarEstado(EstadoTarefa.ATRIBUIDA);
+        guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+        return true;
+    }
+
+    public void guardarColaboradorEscolhido(Colaborador colaboradorEscolhido, InfoTarefa infoTarefa){
+        colaboradorEscolhido.reivindicarTarefa(infoTarefa);
+        infoTarefa.associarColaborador(colaboradorEscolhido);
+        infoTarefa.mudarEstado(EstadoTarefa.ATRIBUIDA);
         colaboradorRepository.save(colaboradorEscolhido);
-        infoTarefaRepository.save(t2);
+        infoTarefaRepository.save(infoTarefa);
         enviarEmail(colaboradorEscolhido);
         System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
