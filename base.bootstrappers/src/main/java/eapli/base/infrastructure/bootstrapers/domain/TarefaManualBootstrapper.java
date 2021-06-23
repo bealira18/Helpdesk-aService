@@ -13,11 +13,15 @@ public class TarefaManualBootstrapper implements Action {
     @Override
     public boolean execute() {
 
+        //servico 1
         controller.criarTarefaManual("ausencia",true);
         controller.criarTarefaManual("vendas",true);
 
         controller.criarTarefaManual("valida_ausencia",false);
         controller.criarTarefaManual("valida_alteracoes",false);
+
+        //servico 3
+        controller.criarTarefaManual("valida_moradas",false);
 
         return true;
 

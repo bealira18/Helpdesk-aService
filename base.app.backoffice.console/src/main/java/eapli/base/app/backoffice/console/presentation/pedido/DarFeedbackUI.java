@@ -12,6 +12,8 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 
+import java.util.List;
+
 public class DarFeedbackUI extends AbstractUI {
 
     private final ColaboradorComUserController colaboradorComUserController=new ColaboradorComUserController();
@@ -43,9 +45,9 @@ public class DarFeedbackUI extends AbstractUI {
                 numero=Console.readInteger("Numero colaborador pretendido: ");
         }
 
-        Iterable<Pedido> pedidos=darFeedbackController.pedidosFinalizados(numero);
+        List<Pedido> pedidos= (List<Pedido>) darFeedbackController.pedidosFinalizados(numero);
 
-        if(pedidos==null){
+        if(pedidos.isEmpty()){
             System.out.println("\nNão tem pedidos finalizados!\n");
             return false;
         }

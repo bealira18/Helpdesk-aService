@@ -14,10 +14,12 @@ public class AddWorkflowBootstrapper implements Action {
 
         awc.adicionarWorkflow(1, 3);
         awc.adicionarWorkflow(2, 4);
+        awc.adicionarWorkflow(5, 7);
         //awc.adicionarWorkflow(3, 6);
 
         awasc.associarWorkflowAServico(1, "cod1");
         awasc.associarWorkflowAServico(2, "cod2");
+        awasc.associarWorkflowAServico(3, "cod3");
 
         return true;
     }

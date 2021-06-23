@@ -19,8 +19,8 @@ public class AssociarServicoACatalogoBootstrapper implements Action {
     public boolean execute() {
 
         ascc.associarServicoACatalogo("Catalogo1", "cod1");
-        ascc.associarServicoACatalogo("Catalogo1", "cod2");
-        ascc.associarServicoACatalogo("Catalogo2", "cod3");
+        ascc.associarServicoACatalogo("Catalogo1", "cod3");
+        ascc.associarServicoACatalogo("Catalogo2", "cod2");
         ascc.associarServicoACatalogo("Catalogo2", "cod4");
 
         return true;

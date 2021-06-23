@@ -45,6 +45,18 @@ public class FormularioBootstrapper implements Action{
 
         afasc.associarFormularioAServicoComNome("Formulario_Pedido","cod1");
 
+
+        addFormularioController.adicionarFormulario("Formulario_Pedido_Morada");
+        addFormularioController.adicionarFormulario("Formulario_Realizacao_Morada");
+
+        atafc.associarTarefaAFormularioIds(4, 5);
+        afasc.associarFormularioAServicoComNome("Formulario_Pedido_Morada","cod3");
+
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Pedido_Morada","Morada");
+        associarAtributoAFormularioController.associarAtributoAFormulario("Formulario_Realizacao_Morada","Valida_morada");
+
+
+
         return true;
     }
 

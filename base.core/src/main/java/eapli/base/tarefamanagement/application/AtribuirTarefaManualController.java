@@ -191,6 +191,8 @@ public class AtribuirTarefaManualController {
             }
         }
         int tempoMedioEscolhido = 0;
+        colaboradorEscolhido=colaboradoresDisponiveis.get(0);
+        tarefasEscolhido=colaboradorEscolhido.tarefas();
         for(InfoTarefa it : tarefasEscolhido){
             if (it.obterEstado()!=EstadoTarefa.TERMINADA){
                 tempoMedioEscolhido += it.obterTarefa().obterTempoMedio();

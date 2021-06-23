@@ -11,6 +11,7 @@ public class AssociarColaboradorAEquipaBootstrapper implements Action {
     public boolean execute() {
 
         acec.associarColaboradorAEquipa("ERecursos", 8);
+        acec.associarColaboradorAEquipa("ERecursos", 78);
         acec.associarColaboradorAEquipa("EReparacoes", 36);
         acec.associarColaboradorAEquipa("EReparacoes", 5);
         return true;

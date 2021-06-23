@@ -37,6 +37,11 @@
             <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>eapli</groupId>
+            <artifactId>base.tcp</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>
 

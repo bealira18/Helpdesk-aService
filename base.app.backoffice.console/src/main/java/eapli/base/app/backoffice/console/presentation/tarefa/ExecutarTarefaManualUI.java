@@ -11,6 +11,7 @@ import eapli.base.pedidomanagement.domain.Pedido;
 import eapli.base.tarefamanagement.application.ConsultarTarefaController;
 import eapli.base.tarefamanagement.application.CriarTarefaManualController;
 import eapli.base.tarefamanagement.application.ExecutarTarefaManualController;
+import eapli.base.tarefamanagement.domain.EstadoTarefa;
 import eapli.base.tarefamanagement.domain.InfoTarefa;
 import eapli.base.tarefamanagement.domain.TarefaManual;
 import eapli.base.usermanagement.domain.BaseRoles;
@@ -64,7 +65,8 @@ public class ExecutarTarefaManualUI extends AbstractUI {
 
 
         for(InfoTarefa it : tarefas){
-            System.out.println(it.obterId()+"\n");
+            if(it.obterEstado()!= EstadoTarefa.TERMINADA)
+                System.out.println(it.obterId()+"\n");
         }
 
         int flag = 0;

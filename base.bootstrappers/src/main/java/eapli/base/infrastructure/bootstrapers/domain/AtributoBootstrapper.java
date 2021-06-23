@@ -30,6 +30,14 @@ public class AtributoBootstrapper implements Action {
         aac.adicionarAtributo("Dias Faltas Nao Justificadas Totais","dias","Dias ja gozados no ano","[0-9]+","Integer");
         aac.adicionarAtributo("Comentario","dias","Dias ja gozados no ano","[0-9]+","Integer");
 
+        //formulario pedido servico 3
+        aac.adicionarAtributo("Morada","morada","Morada Completa","[a-zA-z]+","String");
+
+        //formulario tarefa realizacao servico 3
+        aac.adicionarAtributo("Valida_morada","morada","Valida Morada","[a-zA-z]+","String");
+
+
+
         return true;
     }
 

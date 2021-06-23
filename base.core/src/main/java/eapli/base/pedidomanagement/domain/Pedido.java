@@ -131,6 +131,10 @@ public class Pedido implements AggregateRoot<Integer>, Serializable {
         return dataFim;
     }
 
+    public void mudarDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
     @Override
     public String toString() {
         return "Id= " + id +
