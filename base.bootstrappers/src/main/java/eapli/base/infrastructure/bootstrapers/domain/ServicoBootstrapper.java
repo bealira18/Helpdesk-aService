@@ -15,7 +15,7 @@ public class ServicoBootstrapper implements Action {
         controller.adicionarServico("cod1","Ausencias", "Ausencias futuras", "Pedido de Ausência Futura", "ausencia", "ausencia.jpg");
         controller.adicionarServico("cod2","Autorizacoes", "Autorizacao Desconto", "Autorização para Aplicação de Desconto", "desconto", "desconto.png");
         controller.adicionarServico("cod3","Alteracoes", "Alteracao Residencia", "Comunicação de Alteração de Residência", "alteracao", "alteracao.png");
-        controller.adicionarServico("cod4","Cotacoes", "Cotacao para venda", "Requerer cotação para venda por grosso", "venda", "venda.png");
+        //controller.adicionarServico("cod4","Cotacoes", "Cotacao para venda", "Requerer cotação para venda por grosso", "venda", "venda.png");
 
         ativarServicoController.ativarServico("cod1");
         ativarServicoController.ativarServico("cod3");
