@@ -20,6 +20,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -227,12 +228,13 @@ class TcpChatSrvClient extends Thread {
             data[1] = ATUALIZAR_PEDIDO;
         }
 
-        if (pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO) {
+        if (pedido.obterEstadoPedido() == EstadoPedido.EM_APROVACAO || pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
             List<InfoTarefa> tarefas;
             tarefas = pedido.obterListaTarefas();
             for (InfoTarefa t : tarefas) {
                 if (t.obterTarefa().obterTipo() == true && t.obterEstado() == EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado() == 1) {
                     pedido.mudarEstadoPedido(EstadoPedido.APROVADO);
+                    pedidoRepository.save(pedido);
                     int resultado = 3;
                     data[0] = VERSION;
                     data[2] = (Byte.SIZE / 8);
@@ -241,6 +243,7 @@ class TcpChatSrvClient extends Thread {
                 }
                 if (t.obterTarefa().obterTipo() == true && t.obterEstado() == EstadoTarefa.TERMINADA && t.obterTarefa().obterAprovado() == -1) {
                     pedido.mudarEstadoPedido(EstadoPedido.REJEITADO);
+                    pedidoRepository.save(pedido);
                     int resultado = 4;
                     data[0] = VERSION;
                     data[2] = (Byte.SIZE / 8);
@@ -257,12 +260,14 @@ class TcpChatSrvClient extends Thread {
             }
 
         }
-        if (pedido.obterEstadoPedido() == EstadoPedido.EM_RESOLUCAO) {
+        if (pedido.obterEstadoPedido() == EstadoPedido.EM_RESOLUCAO || pedido.obterEstadoPedido() == EstadoPedido.APROVADO || pedido.obterEstadoPedido() == EstadoPedido.SUBMETIDO) {
             List<InfoTarefa> tarefas;
             tarefas = pedido.obterListaTarefas();
             for (InfoTarefa t : tarefas) {
                 if (t.obterTarefa().obterTipo() == false && t.obterEstado() == EstadoTarefa.TERMINADA) {
                     pedido.mudarEstadoPedido(EstadoPedido.CONCLUIDO);
+                    pedido.mudarDataFim(Calendar.getInstance().getTime());
+                    pedidoRepository.save(pedido);
                     int resultado = 6;
                     data[0] = VERSION;
                     data[2] = (Byte.SIZE / 8);

@@ -48,17 +48,7 @@ public class ExecutarTarefaManualController {
             }
         }
 
-        /*ThreadServer t1 = new ThreadServer();
-        t1.start();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ThreadClient t2 = new ThreadClient(2, pedido.obterId());
-        t2.start();*/
         return pedido;
-
     }
 
     public List<InfoTarefa> listarTarefasPendentesDoColaborador(int numeroColaborador){

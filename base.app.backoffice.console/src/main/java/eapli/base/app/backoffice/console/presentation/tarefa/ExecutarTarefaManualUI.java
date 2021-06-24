@@ -85,15 +85,8 @@ public class ExecutarTarefaManualUI extends AbstractUI {
 
         System.out.println("A tarefa com o id "+idTarefa+" foi executada com sucesso!");
 
-        /*ThreadServer t1 = new ThreadServer();
-        t1.start();
-        try {
-            sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         ThreadClient t2 = new ThreadClient(2, pedido.obterId());
-        t2.start();*/
+        t2.start();
 
         return true;
     }
