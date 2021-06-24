@@ -40,15 +40,8 @@ public class HTTPServerAjax {
             candidateVotes[i] = 0;
         }*/
 
-<<<<<<< HEAD
-        try {
-          //  SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            sock = new ServerSocket(8080);// sslF.createServerSocket(8080);
 
-        } catch (IOException ex) {
-            System.out.println("Local port number not available: 8080");
-            System.exit(1);
-=======
+
         if(opcao==1) {
 
             try {
@@ -58,19 +51,12 @@ public class HTTPServerAjax {
                 System.out.println("Local port number not available: 8080");
                 System.exit(1);
             }
->>>>>>> bb63595851c7e43aa68a678615dbbc64e8c3e216
         }
 
         PortalUtilizadores pu = new PortalUtilizadores();
         pu.runMain(opcao, idPedido);
 
-<<<<<<< HEAD
-        while (true) {
-            cliSock = sock.accept();
-            HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
-            req.start();
 
-=======
         if(opcao==1) {
 
             while (true) {
@@ -78,7 +64,6 @@ public class HTTPServerAjax {
                 HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
                 req.start();
             }
->>>>>>> bb63595851c7e43aa68a678615dbbc64e8c3e216
         }
     }
 
