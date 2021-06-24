@@ -16,10 +16,10 @@ import java.net.Socket;
 public class HTTPServerAjax {
 
     static private final String BASE_FOLDER = "www";
-    //static private SSLServerSocket sock;
     static private ServerSocket sock;
-    //static SSLSocket socket;
-    static Socket socket;
+    //static private ServerSocket sock;
+    static SSLSocket socket;
+    //static Socket socket;
     static InetAddress serverIP;
     private static int accessesCounter;
     private static final byte VERSION = 0;
@@ -41,8 +41,9 @@ public class HTTPServerAjax {
         }*/
 
         try {
-            // SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-            sock = new ServerSocket(8080);
+          //  SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+            sock = new ServerSocket(8080);// sslF.createServerSocket(8080);
+
         } catch (IOException ex) {
             System.out.println("Local port number not available: 8080");
             System.exit(1);
@@ -55,9 +56,9 @@ public class HTTPServerAjax {
             cliSock = sock.accept();
             HTTPPedidoPortalAjax req = new HTTPPedidoPortalAjax(cliSock, BASE_FOLDER);
             req.start();
+
         }
     }
-
 
 
 }

@@ -32,8 +32,8 @@ public class PortalUtilizadores {
     static InetAddress serverIP;
     //static SSLSocket sock;
     static Socket sock;
-    //static final String KEYSTORE_PASS="forgotten";
-    //static final String TRUSTED_STORE="server_J.jks";
+    static final String TRUSTED_STORE = "KEYS/portalUtilizador.jks";
+    static final String PASS = "1234567";
 
     public void runMain(int opcao, int idPedido) throws Exception {
         byte[] data = new byte[300];
@@ -45,14 +45,14 @@ public class PortalUtilizadores {
                     "Server IPv4/IPv6 address or DNS name is required as argument");
             System.exit(1); }*/
 
-        //System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
-        //System.setProperty("javax.net.ssl.trustStorePassword",KEYSTORE_PASS);
+        System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.trustStorePassword", PASS);
 
-        // Use this certificate and private key for client certificate when requested by the server
-        //System.setProperty("javax.net.ssl.keyStore", TRUSTED_STORE);
-        //System.setProperty("javax.net.ssl.keyStorePassword",KEYSTORE_PASS);
+        //Use this certificate and private key for client certificate when requested by the server
+        System.setProperty("javax.net.ssl.keyStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.keyStorePassword", PASS);
 
-        //SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
+       // SSLSocketFactory sf = (SSLSocketFactory) SSLSocketFactory.getDefault();
 
         try {
             serverIP = InetAddress.getByName("localhost");
@@ -62,9 +62,9 @@ public class PortalUtilizadores {
         }
 
         try {
-            sock = new Socket(serverIP, 32507);
+            sock = new Socket(serverIP, 32507);//sf.createSocket(serverIP, 32507);
         } catch (Exception ex) {
-            System.out.println("Failed to connect.");
+            System.out.println("Failed to connect11111.");
             System.exit(1);
         }
 
@@ -73,13 +73,13 @@ public class PortalUtilizadores {
 
         System.out.println("Connected to server");
 
-        //sock.startHandshake();
+      //  sock.startHandshake();
 
         // start a thread to read incoming messages from the server
         Thread serverConn = new Thread(new TcpChatCliConn(sock));
         serverConn.start();
 
-        if(opcao == 1){
+        if (opcao == 1) {
             data[0] = VERSION;
             data[1] = DASHBOARD;
             data[2] = (Byte.SIZE / 8);
@@ -87,7 +87,7 @@ public class PortalUtilizadores {
             sOut.write(data.length);
             sOut.write(data, 0, data.length);
         }
-        if(opcao == 2){
+        if (opcao == 2) {
             data[0] = VERSION;
             data[1] = ATUALIZAR_PEDIDO;
             data[2] = (Byte.SIZE / 8);
@@ -145,7 +145,7 @@ class TcpChatCliConn implements Runnable {
                 }
                 if (opcao == NUMERO_TAREFAS_DEPOIS_PRAZO) {
                     int numeroTarefas = data[3];
-                    fraseHtml = "Numero de tarefas depois do prazo de entrega -> " + numeroTarefas ;
+                    fraseHtml = "Numero de tarefas depois do prazo de entrega -> " + numeroTarefas;
                 }
                 if (opcao == NUMERO_TAREFAS_EM_MENOS_DE_UM_DIA) {
                     int numeroTarefas = data[3];
@@ -155,19 +155,19 @@ class TcpChatCliConn implements Runnable {
                     String listaTarefas = new String(data, 3, data[2]);
                     fraseHtml = "</ul><hr><p>Os ids das tarefas ordenadas por urgência e criticidade são " + listaTarefas + " </p><hr>";
                 }
-                if (opcao == DASHBOARD){
+                if (opcao == DASHBOARD) {
                     int tamanhoLength = data[2];
                     String tamanhoS = new String(data, 7, tamanhoLength);
                     int tamanho = Integer.parseInt(tamanhoS);
-                    String dashboard = new String(data, 7+tamanhoLength, tamanho);
+                    String dashboard = new String(data, 7 + tamanhoLength, tamanho);
                     int tamanhoString1 = data[3];
                     int tamanhoString2 = data[4];
                     int tamanhoString3 = data[5];
                     int tamanhoString4 = data[6];
-                    String string1 = new String(data, 7+tamanhoLength, tamanhoString1);
-                    String string2 = new String(data, 7+tamanhoLength+tamanhoString1, tamanhoString2);
-                    String string3 = new String(data, 7+tamanhoLength+tamanhoString1+tamanhoString2, tamanhoString3);
-                    String string4 = new String(data, 7+tamanhoLength+tamanhoString1+tamanhoString2+tamanhoString3, tamanhoString4);
+                    String string1 = new String(data, 7 + tamanhoLength, tamanhoString1);
+                    String string2 = new String(data, 7 + tamanhoLength + tamanhoString1, tamanhoString2);
+                    String string3 = new String(data, 7 + tamanhoLength + tamanhoString1 + tamanhoString2, tamanhoString3);
+                    String string4 = new String(data, 7 + tamanhoLength + tamanhoString1 + tamanhoString2 + tamanhoString3, tamanhoString4);
                     fraseHtml1 = string1;
                     fraseHtml2 = string2;
                     fraseHtml3 = string3;
@@ -176,20 +176,20 @@ class TcpChatCliConn implements Runnable {
                     string4Bytes = string4.getBytes();
                     int indexInicioIds = 0;
                     String idTarefas = null;
-                    for( i = 0; i+2<string4Bytes.length; i++){
+                    for (i = 0; i + 2 < string4Bytes.length; i++) {
                         char char1 = (char) string4Bytes[i];
-                        char char2 = (char) string4Bytes[i+1];
-                        char char3 = (char) string4Bytes[i+2];
-                        if(char1=='a' && char2=='s' && char3==':'){
-                            indexInicioIds = i+4;
+                        char char2 = (char) string4Bytes[i + 1];
+                        char char3 = (char) string4Bytes[i + 2];
+                        if (char1 == 'a' && char2 == 's' && char3 == ':') {
+                            indexInicioIds = i + 4;
                         }
                     }
                     idTarefas = string4.substring(indexInicioIds);
                     String[] tarefasId = idTarefas.split(",");
-                    if(tarefasId[0]==""){
-                        String respostaNull="Nao tem tarefas pendentes!!";
+                    if (tarefasId[0] == "") {
+                        String respostaNull = "Nao tem tarefas pendentes!!";
                         fraseHtml4 = respostaNull;
-                    }else {
+                    } else {
                         for (String s : tarefasId) {
                             int tarefaId = Integer.parseInt(s);
                             InfoTarefa infoTarefa = infoTarefaRepository.ofIdentity(tarefaId).get();
@@ -212,22 +212,22 @@ class TcpChatCliConn implements Runnable {
 
                 if (opcao == ATUALIZAR_PEDIDO) {
                     int estadoPedido = data[3];
-                    if(estadoPedido == 1){
+                    if (estadoPedido == 1) {
                         estado = "Submetido";
                     }
-                    if(estadoPedido == 2){
+                    if (estadoPedido == 2) {
                         estado = "Em aprovação";
                     }
-                    if(estadoPedido == 3){
+                    if (estadoPedido == 3) {
                         estado = "Aprovado";
                     }
-                    if(estadoPedido == 4){
+                    if (estadoPedido == 4) {
                         estado = "Rejeitado";
                     }
-                    if(estadoPedido == 5){
+                    if (estadoPedido == 5) {
                         estado = "Em resolução";
                     }
-                    if(estadoPedido == 6){
+                    if (estadoPedido == 6) {
                         estado = "Concluído";
                     }
                     System.out.println("O pedido, neste momento, encontra-se no estado " + estado + "!");
@@ -245,9 +245,9 @@ class TcpChatCliConn implements Runnable {
                 "<body bgcolor=#92d6cc onload=\"refreshVotes()\">" +
                 "<h1 > LAPR4 - 2DC - G5 </h1 > " +
                 "<h3 > Goncalo Corredoura 1190617 / Beatriz Meireles 1200607 / Joao Moreira 1200615 </h3 > " +
-                " </ul><hr><p>"+fraseHtml1+"</p><hr> </body ></html >" +
-                " </ul><hr><p>"+fraseHtml2+"</p><hr> </body ></html >" +
-                " </ul><hr><p>"+fraseHtml3+"</p><hr> </body ></html >" +
-                " </ul><hr><p>"+fraseHtml4+"</p><hr> </body ></html >";
+                " </ul><hr><p>" + fraseHtml1 + "</p><hr> </body ></html >" +
+                " </ul><hr><p>" + fraseHtml2 + "</p><hr> </body ></html >" +
+                " </ul><hr><p>" + fraseHtml3 + "</p><hr> </body ></html >" +
+                " </ul><hr><p>" + fraseHtml4 + "</p><hr> </body ></html >";
     }
 }

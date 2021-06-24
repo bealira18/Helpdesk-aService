@@ -1,6 +1,7 @@
 package eapli.base.ClientServer;
 
-import ch.qos.logback.core.net.ssl.SSL;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import eapli.base.infrastructure.persistence.PersistenceContext;
 import eapli.base.pedidomanagement.domain.EstadoPedido;
 import eapli.base.pedidomanagement.domain.Pedido;
@@ -25,8 +26,9 @@ import java.util.List;
 public class MotorFluxoAtividades {
 
     private static HashMap<Socket, DataOutputStream> cliList = new HashMap<>();
-    //static final String TRUSTED_STORE="server_J.jks";
-    //static final String KEYSTORE_PASS="forgotten";
+
+    static final String TRUSTED_STORE = "KEYS/motorFluxo.jks";
+    static final String PASS = "1234567";
 
     public static synchronized void sendToAll(int len, byte[] data) throws Exception {
         for (DataOutputStream cOut : cliList.values()) {
@@ -46,39 +48,63 @@ public class MotorFluxoAtividades {
         s.close();
     }
 
-    private static ServerSocket sock;
-    //private static SSLServerSocket sock;
+    private static ServerSocket serverSocket ;
+    private int temp=0;
 
 
     public void run() throws Exception {
         Server server = Server.createTcpServer().start();
+        Socket cliSock;
         int i;
 
-        // Trust these certificates provided by authorized clients
-        //System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
-        //System.setProperty("javax.net.ssl.trustStorePassword",KEYSTORE_PASS);
+        //Trust these certificates provided by authorized clients
+        System.setProperty("javax.net.ssl.trustStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.trustStorePassword", PASS);
 
         // Use this certificate and private key as server certificate
-        //System.setProperty("javax.net.ssl.keyStore",TRUSTED_STORE);
-        //System.setProperty("javax.net.ssl.keyStorePassword",KEYSTORE_PASS);
+        System.setProperty("javax.net.ssl.keyStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.keyStorePassword", PASS);
 
-        //SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+       // SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
         try {
-            sock = new ServerSocket(32507);
+             serverSocket = new ServerSocket(32507); //new ServerSocket(port);
+           // serverSocket.setNeedClientAuth(true);
         } catch (IOException ex) {
             System.out.println("Local port number not available.");
             System.exit(1);
         }
 
         while (true) {
-            Socket s = sock.accept(); // wait for a new client connection request
-            addCli(s);
-            Thread cli = new TcpChatSrvClient(s);
+            cliSock = serverSocket.accept(); // wait for a new client connection request
+            addCli(cliSock);
+            Thread cli = new TcpChatSrvClient(cliSock);
             cli.start();
         }
         //server.stop();
     }
+    private void listen(final int port) {
+
+        System.setProperty("javax.net.ssl.trustStore",TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.trustStorePassword", PASS);
+
+        System.setProperty("javax.net.ssl.keyStore", TRUSTED_STORE);
+        System.setProperty("javax.net.ssl.keyStorePassword", PASS);
+
+        SSLServerSocketFactory sslF = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+        try {
+            SSLServerSocket serverSocket = (SSLServerSocket) sslF.createServerSocket(port); //new ServerSocket(port);
+            serverSocket.setNeedClientAuth(true);
+
+            while (true) {
+                final SSLSocket clientSocket = (SSLSocket) serverSocket.accept();
+                new TcpChatSrvClient(clientSocket).start();
+            }
+        } catch (final IOException e) {
+            System.out.println("ERRO NO MOTOR NO LISTEN.");
+        }
+    }
 }
+
 
 class TcpChatSrvClient extends Thread {
     private Socket myS;
@@ -133,18 +159,18 @@ class TcpChatSrvClient extends Thread {
                     int idPedido = data[3];
                     data = atualizarEstadoPedido(idPedido);
                 }
-                if(opcao == DASHBOARD){
+                if (opcao == DASHBOARD) {
                     int numeroColaborador = data[3];
                     String tarefas1 = numeroTarefasPendentesColaborador2(numeroColaborador);
                     String tarefas2 = numeroTarefasDepoisPrazo2(numeroColaborador);
                     String tarefas3 = numeroTarefasEmMenosDeUmDia2(numeroColaborador);
                     String listaTarefas = listaTarefasUrgenciaCriticidade2(numeroColaborador);
-                    String tarefas4 = "Lista de tarefas: "+listaTarefas;
+                    String tarefas4 = "Lista de tarefas: " + listaTarefas;
                     int tamanho1 = tarefas1.length();
                     int tamanho2 = tarefas2.length();
                     int tamanho3 = tarefas3.length();
                     int tamanho4 = tarefas4.length();
-                    String finalString = tarefas1+tarefas2+tarefas3+tarefas4;
+                    String finalString = tarefas1 + tarefas2 + tarefas3 + tarefas4;
                     int tamanho = finalString.length();
                     byte[] tamanhoB = String.valueOf(tamanho).getBytes();
                     data[0] = VERSION;
@@ -154,7 +180,7 @@ class TcpChatSrvClient extends Thread {
                     data[4] = (byte) tamanho2;
                     data[5] = (byte) tamanho3;
                     data[6] = (byte) tamanho4;
-                    for(int i=0, j=7; i<tamanhoB.length; i++, j++){
+                    for (int i = 0, j = 7; i < tamanhoB.length; i++, j++) {
                         data[j] = tamanhoB[i];
                     }
                     byte[] string = finalString.getBytes();
@@ -321,19 +347,19 @@ class TcpChatSrvClient extends Thread {
 
     public String numeroTarefasPendentesColaborador2(int numeroColaborador) {
         int numeroTarefas = ttc.numTarefasPendentesDoColab(numeroColaborador);
-        String numeroTarefasS = "Numero tarefas pendentes: "+numeroTarefas+" ";
+        String numeroTarefasS = "Numero tarefas pendentes: " + numeroTarefas + " ";
         return numeroTarefasS;
     }
 
     public String numeroTarefasDepoisPrazo2(int numeroColaborador) {
         int numeroTarefas = ttc.numTarefasDpsPrazo(numeroColaborador);
-        String numeroTarefasS = "Numero tarefas depois do prazo limite: "+numeroTarefas+" ";
+        String numeroTarefasS = "Numero tarefas depois do prazo limite: " + numeroTarefas + " ";
         return numeroTarefasS;
     }
 
     public String numeroTarefasEmMenosDeUmDia2(int numeroColaborador) {
         int numeroTarefas = ttc.numTarefasTerminamEmMenos1Dia(numeroColaborador);
-        String numeroTarefasS = "Numero tarefas cujo prazo termina em menos de um dia: "+numeroTarefas+" ";
+        String numeroTarefasS = "Numero tarefas cujo prazo termina em menos de um dia: " + numeroTarefas + " ";
         return numeroTarefasS;
     }
 
@@ -355,3 +381,4 @@ class TcpChatSrvClient extends Thread {
         return finalString;
     }
 }
+
