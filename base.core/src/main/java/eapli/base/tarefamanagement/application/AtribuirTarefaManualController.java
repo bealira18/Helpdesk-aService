@@ -132,25 +132,6 @@ public class AtribuirTarefaManualController {
             return true;
         }
 
-        /*Colaborador colaboradorEscolhido = colaboradoresDisponiveis.get(0);
-        List<InfoTarefa> tarefasEscolhido = colaboradorEscolhido.tarefas();
-        Date dataUltimaTarefa = tarefasEscolhido.get(0).obterDataFim();
-        Date dataUltimaTarefaMaisAntiga = dataUltimaTarefa;
-        for(InfoTarefa it : tarefasEscolhido){
-            if (it.obterDataFim().compareTo(dataUltimaTarefa)>0){
-                dataUltimaTarefa = it.obterDataFim();
-            }
-        }
-        dataUltimaTarefaMaisAntiga = dataUltimaTarefa;
-        for(Colaborador c : colaboradoresDisponiveis){
-            List<InfoTarefa> tarefas = c.tarefas();
-            for(InfoTarefa it1 : tarefas){
-                if (it1.obterDataFim().compareTo(dataUltimaTarefa)>0){
-                    dataUltimaTarefa = it1.obterDataFim();
-                    colaboradorEscolhido = c;
-                }
-            }
-        }*/
         System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 1!\n", t1.obterId());
         guardarColaboradorEscolhido(colaboradorEscolhido, t1);
         return true;
@@ -169,6 +150,7 @@ public class AtribuirTarefaManualController {
             colaboradorEscolhido = colaboradoresDisponiveis.get(0);
             System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, pelo facto de só haver um colaborador disponível!\n", t2.obterId());
             guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+            return true;
         }
 
         for(Colaborador c : colaboradoresDisponiveis){
@@ -178,6 +160,7 @@ public class AtribuirTarefaManualController {
                 colaboradorEscolhido = c;
                 System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, porque o colaborador não tinha qualquer tarefa!\n", t2.obterId());
                 guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+                return true;
             }
             for(InfoTarefa it : list){
                 if(it.obterEstado()==EstadoTarefa.ATRIBUIDA || it.obterEstado()==EstadoTarefa.EM_EXECUÇAO){
@@ -188,6 +171,7 @@ public class AtribuirTarefaManualController {
                 colaboradorEscolhido = c;
                 System.out.printf("InfoTarefa com o id %d atribuída com sucesso pela forma 2, porque o colaborador não tinha tarefas pendentes!\n", t2.obterId());
                 guardarColaboradorEscolhido(colaboradorEscolhido, t2);
+                return true;
             }
         }
         int tempoMedioEscolhido = 0;
@@ -226,26 +210,6 @@ public class AtribuirTarefaManualController {
         System.out.printf("Email enviado para o colaborador %s!\n", colaboradorEscolhido.obterNomeCompleto());
     }
 
-    /*public void fcfs(){
-
-        List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
-        while(tarefasPorAtribuir.size()!=0) {
-            InfoTarefa tarefa1 = tarefasPorAtribuir.get(0);
-            for (InfoTarefa t : tarefasPorAtribuir) {
-                if (t.obterDataInicio().compareTo(tarefa1.obterDataInicio()) < 0) {
-                    tarefa1 = t;
-                }
-            }
-            if(tarefa1.obterTarefa().obterOption() == 1){
-                atribuirTarefas1(tarefa1);
-            }
-            if(tarefa1.obterTarefa().obterOption() == 2){
-                atribuirTarefas2(tarefa1);
-            }
-            tarefasPorAtribuir.remove(tarefa1);
-        }
-    }*/
-
     public List<InfoTarefa> fcfs() {
 
         List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
@@ -257,40 +221,6 @@ public class AtribuirTarefaManualController {
         });
         return tarefasPorAtribuir;
     }
-
-    /*public void fcfs(){
-
-        List<InfoTarefa> tarefasPorAtribuir = (List<InfoTarefa>) listarTarefasPendentes();
-        InfoTarefa tarefa1 = tarefasPorAtribuir.get(0);
-        for (InfoTarefa t : tarefasPorAtribuir) {
-            if (t.obterDataInicio().compareTo(tarefa1.obterDataInicio()) < 0) {
-                tarefa1 = t;
-            }
-        }
-        if(tarefa1.obterTarefa().obterOption() == 1){
-            atribuirTarefas1(tarefa1);
-        }
-        if(tarefa1.obterTarefa().obterOption() == 2){
-            atribuirTarefas2(tarefa1);
-        }
-        //tarefasPorAtribuir.remove(tarefa1); Não preciso de remover porque a próxima thread vai fazer novamente o método
-        // listarTarefasPendentes() e como esta já foi atribuída, já não vai aparecer.
-    }*/
-
-    /*public List<InfoTarefa> listarTarefasPendentes(){
-        List<TarefaManual> tarefasManuais = (List<TarefaManual>) tarefaManualRepository.findAll();
-        List<InfoTarefa> tarefas = procurarTarefasManuaisNaoAtribuidas();
-        //List<InfoTarefa> tarefas = (List<InfoTarefa>) infoTarefaRepository.findAll();
-        List<InfoTarefa> tarefasPendentes = new ArrayList<>();
-        for (InfoTarefa it : tarefas){
-            for (TarefaManual tm : tarefasManuais){
-                if(it.obteridTarefa()==tm.obterId() && it.obterEstado()== EstadoTarefa.NAO_INICIADA){
-                    tarefasPendentes.add(it);
-                }
-            }
-        }
-        return tarefasPendentes;
-    }*/
 
     public Iterable<InfoTarefa> listarTarefasPendentes(){
         return tarefaManualRepository.procurarTarefasManuaisNaoAtribuidas();
@@ -336,26 +266,5 @@ public class AtribuirTarefaManualController {
         String body = String.format("Aconselhámos que faça uma consulta as suas tarefas, umas vez que lhe foi atribuída uma nova!");
         SendEmail.sendEmail(c.obterEmail().obterEmail(), subject, body);
     }
-
-    /*public List<Colaborador> colaboradoresAtravesTarefa(int idTarefa){
-        Workflow w=colaboradorRepository.workflowAtravesTarefa(idTarefa);
-        Servico s=colaboradorRepository.servicoAtravesWorkflow(w);
-        Catalogo c=colaboradorRepository.catalogoAtravesServico(s);
-        CriteriosEspecificacao ce=colaboradorRepository.criteriosEspecificacaoAtravesCatalogo(c);
-        List<Equipa> equipas=colaboradorRepository.equipasAtravesCriteriosEspecificacao(ce);
-
-        List<Colaborador> colaboradoresFinal=new ArrayList<>();
-        List<Colaborador> colaboradores=new ArrayList<>();
-
-        for(Equipa e : equipas){
-            colaboradores=colaboradorRepository.colaboradoresAtravesEquipa(e);
-            if(!colaboradores.isEmpty()) {
-                for (Colaborador col : colaboradores) {
-                    colaboradoresFinal.add(col);
-                }
-            }
-        }
-        return colaboradoresFinal;
-    }*/
 
 }

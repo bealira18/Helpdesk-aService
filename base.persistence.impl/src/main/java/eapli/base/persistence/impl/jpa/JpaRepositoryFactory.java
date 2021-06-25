@@ -18,10 +18,7 @@ import eapli.base.pedidomanagement.repository.HistoricoRepository;
 import eapli.base.formulariomanagement.repository.AtributoRepository;
 import eapli.base.servicomanagement.repository.ServicoRepository;
 import eapli.base.servicomanagement.repository.WorkflowRepository;
-import eapli.base.tarefamanagement.repository.InfoTarefaRepository;
-import eapli.base.tarefamanagement.repository.TarefaAutomaticaRepository;
-import eapli.base.tarefamanagement.repository.TarefaManualRepository;
-import eapli.base.tarefamanagement.repository.TarefaRepository;
+import eapli.base.tarefamanagement.repository.*;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.JpaAutoTxUserRepository;
@@ -154,6 +151,9 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 	public TipoEquipaRepository tipoEquipa() {
 		return new JpaTipoEquipaRepository();
 	}
+
+	@Override
+	public ExecutorTarefasRepository executorTarefas(){ return new JpaExecutorTarefasRepository();}
 
 	@Override
 	public TransactionalContext newTransactionalContext() {

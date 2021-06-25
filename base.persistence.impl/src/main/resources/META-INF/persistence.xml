@@ -32,6 +32,7 @@
     <class>eapli.base.pedidomanagement.domain.Rascunho</class>
     <class>eapli.base.pedidomanagement.domain.Historico</class>
     <class>eapli.base.equipamanagement.domain.TipoEquipa</class>
+    <class>eapli.base.tarefamanagement.domain.ExecutorTarefas</class>
 
 
 

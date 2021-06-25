@@ -30,6 +30,9 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
     private Colaborador colaborador;
 
     @OneToOne
+    private ExecutorTarefas executorTarefas;
+
+    @OneToOne
     private Tarefa tarefa;
 
     public InfoTarefa(){}
@@ -113,5 +116,7 @@ public class InfoTarefa implements AggregateRoot<Integer>, Serializable {
         return null;
     }
 
-
+    public void associarExecutor(ExecutorTarefas et) {
+        this.executorTarefas = et;
+    }
 }

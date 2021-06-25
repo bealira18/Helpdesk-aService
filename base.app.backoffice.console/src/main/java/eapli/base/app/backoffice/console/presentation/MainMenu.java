@@ -51,6 +51,7 @@ import eapli.base.app.backoffice.console.presentation.tipoEquipa.PesquisarTipoEq
 import eapli.base.app.common.console.presentation.authz.MyUserMenu;
 import eapli.base.colaboradormanagement.domain.Colaborador;
 import eapli.base.tarefamanagement.domain.ThreadPrincipal;
+import eapli.base.tarefamanagement.domain.ThreadPrincipalAutomatica;
 import eapli.base.usermanagement.domain.BaseRoles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
@@ -217,6 +218,8 @@ public class MainMenu extends AbstractUI {
 
             ThreadPrincipal tp = new ThreadPrincipal();
             tp.start();
+            ThreadPrincipalAutomatica tpa = new ThreadPrincipalAutomatica();
+            tpa.start();
 
 
             final Menu usersMenu = buildUsersMenu();
@@ -286,6 +289,8 @@ public class MainMenu extends AbstractUI {
 
             ThreadPrincipal tp = new ThreadPrincipal();
             tp.start();
+            ThreadPrincipalAutomatica tpa = new ThreadPrincipalAutomatica();
+            tpa.start();
 
             if (cont == 0) {
                 Runtime.getRuntime().exec(new String[]{"cmd", "/c", "start chrome http://localhost:8080"});
